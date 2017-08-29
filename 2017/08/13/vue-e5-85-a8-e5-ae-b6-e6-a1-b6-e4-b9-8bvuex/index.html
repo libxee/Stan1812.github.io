@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Vue," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="如果你要使用Vue构建一个相对比较复杂的项目，Vuex在你的项目将占有非常重要的地位。 暑期留校总结系列&amp;lt;三&amp;gt;——VueXVuex是什么？老规矩，首先还是来放一波官方文档地址：地址在此 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。Vuex 也集成到 Vue 的官方调试工具 d">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VUe全家桶之VueX">
+<meta property="og:url" content="http://yoursite.com/2017/08/13/vue-e5-85-a8-e5-ae-b6-e6-a1-b6-e4-b9-8bvuex/index.html">
+<meta property="og:site_name" content="An Amazing World">
+<meta property="og:description" content="如果你要使用Vue构建一个相对比较复杂的项目，Vuex在你的项目将占有非常重要的地位。 暑期留校总结系列&amp;lt;三&amp;gt;——VueXVuex是什么？老规矩，首先还是来放一波官方文档地址：地址在此 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。Vuex 也集成到 Vue 的官方调试工具 d">
+<meta property="og:image" content="https://vuex.vuejs.org/zh-cn/images/flow.png">
+<meta property="og:image" content="https://vuex.vuejs.org/zh-cn/images/vuex.png">
+<meta property="og:updated_time" content="2017-08-29T09:14:00.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VUe全家桶之VueX">
+<meta name="twitter:description" content="如果你要使用Vue构建一个相对比较复杂的项目，Vuex在你的项目将占有非常重要的地位。 暑期留校总结系列&amp;lt;三&amp;gt;——VueXVuex是什么？老规矩，首先还是来放一波官方文档地址：地址在此 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。Vuex 也集成到 Vue 的官方调试工具 d">
+<meta name="twitter:image" content="https://vuex.vuejs.org/zh-cn/images/flow.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/13/vue-e5-85-a8-e5-ae-b6-e6-a1-b6-e4-b9-8bvuex/"/>
+
+
+
+
+
+  <title>VUe全家桶之VueX | An Amazing World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">An Amazing World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端小学生的神奇世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/13/vue-e5-85-a8-e5-ae-b6-e6-a1-b6-e4-b9-8bvuex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Libiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="An Amazing World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">VUe全家桶之VueX</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-13T00:13:52+08:00">
+                2017-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/博客/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>如果你要使用Vue构建一个相对比较复杂的项目，Vuex在你的项目将占有非常重要的地位。</p>
+<h2 id="暑期留校总结系列-lt-三-gt-——VueX"><a href="#暑期留校总结系列-lt-三-gt-——VueX" class="headerlink" title="暑期留校总结系列&lt;三&gt;——VueX"></a>暑期留校总结系列&lt;三&gt;——VueX</h2><h3 id="Vuex是什么？"><a href="#Vuex是什么？" class="headerlink" title="Vuex是什么？"></a>Vuex是什么？</h3><p>老规矩，首先还是来放一波官方文档地址：<a href="https://vuex.vuejs.org/zh-cn/intro.html" target="_blank" rel="external">地址在此</a></p>
+<p>Vuex 是一个专为 Vue.js 应用程序开发的<strong>状态管理模式</strong>。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。Vuex 也集成到 Vue 的官方调试工具 <a href="https://github.com/vuejs/vue-devtools" target="_blank" rel="external">devtools extension</a>，提供了诸如零配置的 time-travel 调试、状态快照导入导出等高级调试功能。</p>
+<p>他的设计思想应该是类似于react中的redux的，它所实现的功能也是和redux的作用是类似的，都是对应用程序总的各种状态抽离到这个系统外层来统一进行管理，放置了数据流的混乱以及状态的不可控性。我觉得Vue对于状态的管理是非常看重的，父子组件通信中数据的单项传递也是为了增强维护数据的可控性，避免你在使用的时候因为状态的混乱而崩溃。状态的管理是非常需要重视的，因为在复杂的情况下，很有可能你不找不到你的数据在哪里发生了改变，被谁改变，然后你将花上很长时间来debug，，（反正我是遇到了。。）</p>
+<p>在我的实际项目中，起初并未使用Vuex来抽离所有状态并作统一的状态管理，起初认为在父子组件之间的通信完全不需要借助第三方的工具，而同级组件之间的通信完全可以使用Event Bus来实现。但是我前期还是低估了这个项目所需要传递的数据和需要管理的状态，，（因为这个项目并不能开源，，所有，很遗憾）在前期的编写过程中还是比较可以的，但是在后来需要管理的数据越来越多，数据流越来越混乱，甚至有点想打人。然后就果断上了VUEX，之后就舒服多了。</p>
+<p>[caption id=”” align=”aligncenter” width=”548”]<img src="https://vuex.vuejs.org/zh-cn/images/flow.png" alt=""> 一般的单向数据流[/caption]</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>[caption id=”” align=”aligncenter” width=”701”]<img src="https://vuex.vuejs.org/zh-cn/images/vuex.png" alt=""> 复杂情况[/caption]</p>
+<p>&nbsp;</p>
+<p>有一句话我非常的认同，这句话也写在了官方文档的第一页：<strong>Flux 架构就像眼镜：您自会知道什么时候需要它。</strong></p>
+<h3 id="Let’s-do-it"><a href="#Let’s-do-it" class="headerlink" title="Let’s do it"></a>Let’s do it</h3><h3 id="首先安装一波"><a href="#首先安装一波" class="headerlink" title="首先安装一波"></a>首先安装一波</h3><p><code>
+</code></p>
+<h4 id="NPM"><a href="#NPM" class="headerlink" title="NPM"></a>NPM</h4><pre><code>&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; vuex --save
+`&lt;/pre&gt;
+
+### `
+`
+
+在一个模块化的打包系统中，您必须显式地通过 `Vue.use()` 来安装 Vuex：
+&lt;pre class=&quot;language-&quot;&gt;`&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Vue &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;vue&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Vuex &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;vuex&apos;&lt;/span&gt;
+
+Vue&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Vuex&lt;span class=&quot;token punctuation&quot;&gt;)
+
+&lt;/span&gt;`&lt;/pre&gt;
+
+### Vuex的组成:
+
+vuex主要是由这几部分组成
+</code></pre><ul>
+<li>State</li>
+<li>Getters</li>
+<li>Mutations</li>
+<li><p>Actions</p>
+<pre><code>* * *
+</code></pre><p>State：顾名思义，状态，Vuex 使用 <strong>单一状态树，</strong>用一个对象就包含了全部的应用层级状态。至此它便作为一个『唯一数据源(<a href="https://en.wikipedia.org/wiki/Single_source_of_truth" target="_blank" rel="external">SSOT</a>)』而存在。这也意味着，每个应用将仅仅包含一个 store 实例。单一状态树让我们能够直接地定位任一特定的状态片段，在调试的过程中也能轻易地取得整个当前应用状态的快照。具体的实例不再放出。</p>
+<hr>
+<p>Getters；同样的，get？获取东西的一个东西。</p>
+<p>有时候我们需要从 store 中的 state 中派生出一些状态，比如需要进行的一些过滤，排序，计数等。如果有多个组件需要用到，那么重复的在各个组件中使用将不是很理想，Vuex 允许我们在 store 中定义『getters』（可以认为是 store 的计算属性）。Getters 接受 state 作为其第一个参数：</p>
+<pre class="language-">`<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vuex<span class="token punctuation">.</span>Store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  state<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    todos<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> text<span class="token punctuation">:</span> <span class="token string">'...'</span><span class="token punctuation">,</span> done<span class="token punctuation">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> id<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> text<span class="token punctuation">:</span> <span class="token string">'...'</span><span class="token punctuation">,</span> done<span class="token punctuation">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  getters<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    doneTodos<span class="token punctuation">:</span> state <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> state<span class="token punctuation">.</span>todos<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>todo <span class="token operator">=</span><span class="token operator">&gt;</span> todo<span class="token punctuation">.</span>done<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+`</pre>
+Getters 会暴露为 `store.getters` 对象：
+<pre class="language-">`store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>doneTodos <span class="token comment" spellcheck="true">// -&gt; [{ id: 1, text: '...', done: true }]</span>
+`</pre>
+Getters 也可以接受其他 getters 作为第二个参数：
+<pre class="language-">`getters<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// ...</span>
+  doneTodosCount<span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> getters<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> getters<span class="token punctuation">.</span>doneTodos<span class="token punctuation">.</span>length
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+`</pre>
+<pre class="language-">`store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>doneTodosCount <span class="token comment" spellcheck="true">// -&gt; 1</span>
+`</pre>
+我们可以很容易地在任何组件中使用它：
+<pre class="language-">`computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  doneTodosCount <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$store<span class="token punctuation">.</span>getters<span class="token punctuation">.</span>doneTodosCount
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}
+</span>`</pre>
+
+<p><span style="font-family: monospace;">相比之下，可能getters用的不是非常的多？但是他非常有用，他为很多尴尬的场景提供了非常优雅的解决方案。</span></p>
+<hr>
+<p><strong>mutations和actions</strong>联系的非常的紧密：因为在Vuex中需要使用action来触发一个mutation，由mutation来触发状态的改变，也就是说，action并不能改变state，他只是发送一个更改状态的通知，然后将数据传过去，最终是由mutation来进行改变。</p>
+<p>Action 类似于 mutation，不同在于：</p>
+</li>
+<li><p>Action 提交的是 mutation，而不是直接变更状态。</p>
+</li>
+<li><p>Action 可以包含任意异步操作。<br><strong>mutation 必须同步执行</strong>？Action 就不受约束！我们可以在 action 内部执行<strong>异步</strong>操作</p>
+<p><strong>非常重要！</strong></p>
+<p>&nbsp;</p>
+<hr>
+<h3 id="实际应用："><a href="#实际应用：" class="headerlink" title="实际应用："></a>实际应用：</h3><p>Vuex 并不限制你的代码结构。但是，它规定了一些需要遵守的规则：</p>
+</li>
+</ul>
+<ol>
+<li>应用层级的状态应该集中到单个 store 对象中。</li>
+<li>提交 <strong>mutation</strong> 是更改状态的唯一方法，并且这个过程是同步的。</li>
+<li><p>异步逻辑都应该封装到 <strong>action</strong> 里面。<br>只要你遵守以上规则，如何组织代码随你便。在实际的应用中，按照你的项目大小，你可以选择使用一个单独的store.js来存放所有的state，getters，mutations，actions，当然如果你的项目足够大的话，你也可以使用模块化的方式，（对于modules。。没什么特别的体会，就是拆一拆？）将他们分别大卸八块，下面是项目结构示例：<br><pre class="language-">`├── index.html<br>├── main.js<br>├── api<br>│   └── <span class="token punctuation">..</span>. <span class="token comment" spellcheck="true"># 抽取出API请求</span><br>├── components<br>│   ├── App.vue<br>│   └── <span class="token punctuation">..</span>.<br>└── store</pre></p>
+<pre><code>├── index.js          &lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;# 我们组装模块并导出 store 的地方&lt;/span&gt;
+├── actions.js        &lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;# 根级别的 action&lt;/span&gt;
+├── mutations.js      &lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;# 根级别的 mutation&lt;/span&gt;
+└── modules
+    ├── xxx.js      
+    └── xxxx.js   &lt;span class=&quot;token comment&quot; spellcheck=&quot;true&quot;&gt;
+</code></pre><p></p>
+</li>
+</ol>
+<hr>
+<h3 id="一些总结："><a href="#一些总结：" class="headerlink" title="一些总结："></a>一些总结：</h3><p>事实上，我们可以看到，当然如果你写了的话会有更深的体会，在实际的操作中，如果你使用了vuex，相对复杂的流程使你只需更改一个true或false都要走一堆流程，虽然这是规范的操作方式，但是这确实有些不够优雅。。所以我做了一个测试，在组件中，使用同行this.$store.state.xxx=xxxx是可以直接改变state中的状态的。。但是，慎用。。除非你这个状态真的只是这么简单，还有你不怕被review你代码的boss打。（逃。。）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/11/vue-e5-85-a8-e5-ae-b6-e6-a1-b6-e4-b9-8bvue-resourse/" rel="next" title="Vue全家桶之Vue-resourse">
+                <i class="fa fa-chevron-left"></i> Vue全家桶之Vue-resourse
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/20/vue2-0-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e4-bb-a5-e5-8f-8a-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e9-92-a9-e5-ad-90-e7-9a-84-e5-bc-82/" rel="prev" title="Vue2.0生命周期以及生命周期钩子">
+                Vue2.0生命周期以及生命周期钩子 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Libiao" />
+          <p class="site-author-name" itemprop="name">Libiao</p>
+           
+              <p class="site-description motion-element" itemprop="description">for fun ,for love</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/stan1812" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:2314980309@qq.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/STAN" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://instagram.com/be_drammer" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                    
+                      Instagram
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#暑期留校总结系列-lt-三-gt-——VueX"><span class="nav-number">1.</span> <span class="nav-text">暑期留校总结系列<三>——VueX</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vuex是什么？"><span class="nav-number">1.1.</span> <span class="nav-text">Vuex是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Let’s-do-it"><span class="nav-number">1.2.</span> <span class="nav-text">Let’s do it</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首先安装一波"><span class="nav-number">1.3.</span> <span class="nav-text">首先安装一波</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NPM"><span class="nav-number">1.3.1.</span> <span class="nav-text">NPM</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际应用："><span class="nav-number">1.4.</span> <span class="nav-text">实际应用：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些总结："><span class="nav-number">1.5.</span> <span class="nav-text">一些总结：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Libiao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

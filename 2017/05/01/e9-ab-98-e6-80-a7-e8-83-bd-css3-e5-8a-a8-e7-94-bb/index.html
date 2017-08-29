@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="注：本文出自腾讯AlloyTeam的元彦，文章也可以在github上浏览。请尊重版权，转载请注明来源，多谢～～  高性能移动Web相较PC的场景需要考虑的因素也相对更多更复杂，我们总结为以下几点： 流量、功耗与流畅度。 在PC时代我们更多的是考虑体验上的流畅度，而在Mobile端本身丰富的场景下，需要额外关注对用户基站网络流量使用的情况，设备耗电量的情况。 关于流畅度，主要体现在前端动画中，在现有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高性能 CSS3 动画">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/e9-ab-98-e6-80-a7-e8-83-bd-css3-e5-8a-a8-e7-94-bb/index.html">
+<meta property="og:site_name" content="An Amazing World">
+<meta property="og:description" content="注：本文出自腾讯AlloyTeam的元彦，文章也可以在github上浏览。请尊重版权，转载请注明来源，多谢～～  高性能移动Web相较PC的场景需要考虑的因素也相对更多更复杂，我们总结为以下几点： 流量、功耗与流畅度。 在PC时代我们更多的是考虑体验上的流畅度，而在Mobile端本身丰富的场景下，需要额外关注对用户基站网络流量使用的情况，设备耗电量的情况。 关于流畅度，主要体现在前端动画中，在现有">
+<meta property="og:updated_time" content="2017-08-29T09:14:00.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高性能 CSS3 动画">
+<meta name="twitter:description" content="注：本文出自腾讯AlloyTeam的元彦，文章也可以在github上浏览。请尊重版权，转载请注明来源，多谢～～  高性能移动Web相较PC的场景需要考虑的因素也相对更多更复杂，我们总结为以下几点： 流量、功耗与流畅度。 在PC时代我们更多的是考虑体验上的流畅度，而在Mobile端本身丰富的场景下，需要额外关注对用户基站网络流量使用的情况，设备耗电量的情况。 关于流畅度，主要体现在前端动画中，在现有">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/e9-ab-98-e6-80-a7-e8-83-bd-css3-e5-8a-a8-e7-94-bb/"/>
+
+
+
+
+
+  <title>高性能 CSS3 动画 | An Amazing World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">An Amazing World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端小学生的神奇世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/e9-ab-98-e6-80-a7-e8-83-bd-css3-e5-8a-a8-e7-94-bb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Libiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="An Amazing World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高性能 CSS3 动画</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-01T11:37:45+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>注：本文出自腾讯AlloyTeam的<a href="http://weibo.com/caoyuanyan" target="_blank" rel="external">元彦</a>，文章也可以<a href="https://github.com/AlloyTeam/Mars/blob/master/high-performance-css3-animation.md" target="_blank" rel="external">在github上浏览</a>。请尊重版权，转载请注明来源，多谢～～</p>
+<hr>
+<p>高性能移动Web相较PC的场景需要考虑的因素也相对更多更复杂，我们总结为以下几点： 流量、功耗与流畅度。 在PC时代我们更多的是考虑体验上的流畅度，而在Mobile端本身丰富的场景下，需要额外关注对用户基站网络流量使用的情况，设备耗电量的情况。</p>
+<p>关于流畅度，主要体现在前端动画中，在现有的前端动画体系中，通常有两种模式：JS动画与CSS3动画。 JS动画是通过JS动态改写样式实现动画能力的一种方案，在PC端兼容低端浏览器中不失为一种推荐方案。<br>而在移动端，我们选择性能更优浏览器原生实现方案：CSS3动画。</p>
+<p>然而，CSS3动画在移动多终端设备场景下，相比PC会面对更多的性能问题，主要体现在动画的卡顿与闪烁。</p>
+<p>目前对提升移动端CSS3动画体验的主要方法有几点：</p>
+<h5 id="尽可能多的利用硬件能力，如使用3D变形来开启GPU加速"><a href="#尽可能多的利用硬件能力，如使用3D变形来开启GPU加速" class="headerlink" title="尽可能多的利用硬件能力，如使用3D变形来开启GPU加速"></a>尽可能多的利用硬件能力，如使用3D变形来开启GPU加速</h5><pre><code>&lt;span class=&quot;hljs-selector-tag&quot;&gt;-webkit-transform&lt;/span&gt;: &lt;span class=&quot;hljs-selector-tag&quot;&gt;translate3d&lt;/span&gt;(0, 0, 0);
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;-moz-transform&lt;/span&gt;: &lt;span class=&quot;hljs-selector-tag&quot;&gt;translate3d&lt;/span&gt;(0, 0, 0);
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;-ms-transform&lt;/span&gt;: &lt;span class=&quot;hljs-selector-tag&quot;&gt;translate3d&lt;/span&gt;(0, 0, 0);
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;transform&lt;/span&gt;: &lt;span class=&quot;hljs-selector-tag&quot;&gt;translate3d&lt;/span&gt;(0, 0, 0);  
+`&lt;/pre&gt;
+如动画过程有闪烁（通常发生在动画开始的时候），可以尝试下面的Hack：
+&lt;pre&gt;`&lt;span class=&quot;hljs-selector-tag&quot;&gt;-webkit-backface-visibility&lt;/span&gt;: &lt;span class=&quot;hljs-selector-tag&quot;&gt;hidden&lt;/span&gt;;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;-moz-backface-visibility&lt;/span&gt;: &lt;span class=&quot;hljs-selector-tag&quot;&gt;hidden&lt;/span&gt;;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;-ms-backface-visibility&lt;/span&gt;: &lt;span class=&quot;hljs-selector-tag&quot;&gt;hidden&lt;/span&gt;;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;backface-visibility&lt;/span&gt;: &lt;span class=&quot;hljs-selector-tag&quot;&gt;hidden&lt;/span&gt;;
+
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;-webkit-perspective&lt;/span&gt;: 1000;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;-moz-perspective&lt;/span&gt;: 1000;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;-ms-perspective&lt;/span&gt;: 1000;
+&lt;span class=&quot;hljs-selector-tag&quot;&gt;perspective&lt;/span&gt;: 1000;  
+`&lt;/pre&gt;
+如下面一个元素通过`translate3d`右移`500px`的动画流畅度会明显优于使用`left`属性：
+&lt;pre&gt;`&lt;span class=&quot;hljs-selector-id&quot;&gt;#ball-1&lt;/span&gt; {
+  &lt;span class=&quot;hljs-attribute&quot;&gt;transition&lt;/span&gt;: -webkit-transform .&lt;span class=&quot;hljs-number&quot;&gt;5s&lt;/span&gt; ease;
+  &lt;span class=&quot;hljs-attribute&quot;&gt;-webkit-transform&lt;/span&gt;: &lt;span class=&quot;hljs-built_in&quot;&gt;translate3d&lt;/span&gt;(0, 0, 0);
+}
+&lt;span class=&quot;hljs-selector-id&quot;&gt;#ball-1&lt;/span&gt;&lt;span class=&quot;hljs-selector-class&quot;&gt;.slidein&lt;/span&gt; {
+  &lt;span class=&quot;hljs-attribute&quot;&gt;-webkit-transform&lt;/span&gt;: &lt;span class=&quot;hljs-built_in&quot;&gt;translate3d&lt;/span&gt;(500px, 0, 0);
+}
+
+&lt;span class=&quot;hljs-selector-id&quot;&gt;#ball-2&lt;/span&gt; {
+  &lt;span class=&quot;hljs-attribute&quot;&gt;transition&lt;/span&gt;: left .&lt;span class=&quot;hljs-number&quot;&gt;5s&lt;/span&gt; ease;
+  &lt;span class=&quot;hljs-attribute&quot;&gt;left&lt;/span&gt;: &lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;;
+}
+&lt;span class=&quot;hljs-selector-id&quot;&gt;#ball-2&lt;/span&gt;&lt;span class=&quot;hljs-selector-class&quot;&gt;.slidein&lt;/span&gt; {
+  &lt;span class=&quot;hljs-attribute&quot;&gt;left&lt;/span&gt;: &lt;span class=&quot;hljs-number&quot;&gt;500px&lt;/span&gt;;
+}
+`&lt;/pre&gt;
+注：3D变形会消耗更多的内存与功耗，应确实有性能问题时才去使用它，兼在权衡
+
+##### 尽可能少的使用`box-shadows`与`gradients`
+
+`box-shadows`与`gradients`往往都是页面的性能杀手，尤其是在一个元素同时都使用了它们，所以拥抱扁平化设计吧。
+
+##### 尽可能的让动画元素不在文档流中，以减少重排
+
+&lt;pre&gt;`&lt;span class=&quot;hljs-attribute&quot;&gt;position&lt;/span&gt;: fixed;  
+&lt;span class=&quot;hljs-attribute&quot;&gt;position&lt;/span&gt;: absolute;  
+`&lt;/pre&gt;
+
+##### 优化 DOM layout 性能
+
+我们从实例开始描述这个主题：
+&lt;pre&gt;`&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; newWidth = aDiv.offsetWidth + &lt;span class=&quot;hljs-number&quot;&gt;10&lt;/span&gt;;  
+aDiv.style.width = newWidth + &lt;span class=&quot;hljs-string&quot;&gt;&apos;px&apos;&lt;/span&gt;;  
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; newHeight = aDiv.offsetHeight + &lt;span class=&quot;hljs-number&quot;&gt;10&lt;/span&gt;;  
+aDiv.style.height = newHeight + &lt;span class=&quot;hljs-string&quot;&gt;&apos;px&apos;&lt;/span&gt;;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; newWidth = aDiv.offsetWidth + &lt;span class=&quot;hljs-number&quot;&gt;10&lt;/span&gt;;  
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; newHeight = aDiv.offsetHeight + &lt;span class=&quot;hljs-number&quot;&gt;10&lt;/span&gt;;  
+aDiv.style.width = newWidth + &lt;span class=&quot;hljs-string&quot;&gt;&apos;px&apos;&lt;/span&gt;;  
+aDiv.style.height = newHeight + &lt;span class=&quot;hljs-string&quot;&gt;&apos;px&apos;&lt;/span&gt;;  
+`&lt;/pre&gt;
+这是两段能力上完全等同的代码，显式的差异正如我们所见，只有执行顺序的区别。但真是如此吗？下面是加了说明注释的代码版本，很好的阐述了其中的进一步差异：
+&lt;pre&gt;`&lt;span class=&quot;hljs-comment&quot;&gt;// 触发两次 layout&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; newWidth = aDiv.offsetWidth + &lt;span class=&quot;hljs-number&quot;&gt;10&lt;/span&gt;;   &lt;span class=&quot;hljs-comment&quot;&gt;// Read  &lt;/span&gt;
+aDiv.style.width = newWidth + &lt;span class=&quot;hljs-string&quot;&gt;&apos;px&apos;&lt;/span&gt;;     &lt;span class=&quot;hljs-comment&quot;&gt;// Write  &lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; newHeight = aDiv.offsetHeight + &lt;span class=&quot;hljs-number&quot;&gt;10&lt;/span&gt;; &lt;span class=&quot;hljs-comment&quot;&gt;// Read  &lt;/span&gt;
+aDiv.style.height = newHeight + &lt;span class=&quot;hljs-string&quot;&gt;&apos;px&apos;&lt;/span&gt;;   &lt;span class=&quot;hljs-comment&quot;&gt;// Write&lt;/span&gt;
+
+&lt;span class=&quot;hljs-comment&quot;&gt;// 只触发一次 layout&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; newWidth = aDiv.offsetWidth + &lt;span class=&quot;hljs-number&quot;&gt;10&lt;/span&gt;;   &lt;span class=&quot;hljs-comment&quot;&gt;// Read  &lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;var&lt;/span&gt; newHeight = aDiv.offsetHeight + &lt;span class=&quot;hljs-number&quot;&gt;10&lt;/span&gt;; &lt;span class=&quot;hljs-comment&quot;&gt;// Read  &lt;/span&gt;
+aDiv.style.width = newWidth + &lt;span class=&quot;hljs-string&quot;&gt;&apos;px&apos;&lt;/span&gt;;     &lt;span class=&quot;hljs-comment&quot;&gt;// Write  &lt;/span&gt;
+aDiv.style.height = newHeight + &lt;span class=&quot;hljs-string&quot;&gt;&apos;px&apos;&lt;/span&gt;;   &lt;span class=&quot;hljs-comment&quot;&gt;// Write  &lt;/span&gt;
+`&lt;/pre&gt;
+从注释中可找到规律，连续的读取offsetWidth/Height属性与连续的设置width/height属性，相比分别读取设置单个属性可少触发一次layout。
+
+从结论看似乎与执行队列有关，没错，这是浏览器的优化策略。所有可触发layout的操作都会被暂时放入 `layout-queue` 中，等到必须更新的时候，再计算整个队列中所有操作影响的结果，如此就可只进行一次的layout，从而提升性能。
+
+关键一，可触发`layout`的操作，哪些操作下会layout的更新（也称为`reflow`或者`relayout`）？
+
+我们从浏览器的源码实现入手，以开源[Webkit/Blink](https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/)为例， 对layout的更新，Webkit 主要通过 [Document::updateLayout](https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/dom/Document.cpp&amp;amp;q=updateLayout%20package:%5Echromium$%20file:%5Esrc/third_party/WebKit/Source/core/&amp;amp;dr=CSs&amp;amp;l=1715) 与 [Document::updateLayoutIgnorePendingStylesheets](https://code.google.com/p/chromium/codesearch#chromium/src/third_party/WebKit/Source/core/dom/Document.cpp&amp;amp;q=updateLayout%20package:%5Echromium$%20file:%5Esrc/third_party/WebKit/Source/core/&amp;amp;dr=CSs&amp;amp;l=1750) 两个方法：
+&lt;pre&gt;`&lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt; Document::updateLayout()  
+{
+    ASSERT(isMainThread());
+
+    FrameView* frameView = view();
+    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (frameView &amp;amp;&amp;amp; frameView-&amp;gt;isInLayout()) {
+        ASSERT_NOT_REACHED();
+        return;
+    }
+
+    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (Element* oe = ownerElement())
+        oe-&amp;gt;document()-&amp;gt;updateLayout();
+
+    updateStyleIfNeeded();
+
+    StackStats::LayoutCheckPoint layoutCheckPoint;
+
+    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (frameView &amp;amp;&amp;amp; renderer() &amp;amp;&amp;amp; (frameView-&amp;gt;layoutPending() || renderer()-&amp;gt;needsLayout()))
+        frameView-&amp;gt;layout();
+
+    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (m_focusedNode &amp;amp;&amp;amp; !m_didPostCheckFocusedNodeTask) {
+        postTask(CheckFocusedNodeTask::create());
+        m_didPostCheckFocusedNodeTask = &lt;span class=&quot;hljs-literal&quot;&gt;true&lt;/span&gt;;
+    }
+}
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt; Document::updateLayoutIgnorePendingStylesheets()  
+{
+    &lt;span class=&quot;hljs-keyword&quot;&gt;bool&lt;/span&gt; oldIgnore = m_ignorePendingStylesheets;
+
+    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (!haveStylesheetsLoaded()) {
+        m_ignorePendingStylesheets = &lt;span class=&quot;hljs-literal&quot;&gt;true&lt;/span&gt;;
+
+        HTMLElement* bodyElement = body();
+        &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (bodyElement &amp;amp;&amp;amp; !bodyElement-&amp;gt;renderer() &amp;amp;&amp;amp; m_pendingSheetLayout == NoLayoutWithPendingSheets) {
+            m_pendingSheetLayout = DidLayoutWithPendingSheets;
+            styleResolverChanged(RecalcStyleImmediately);
+        } &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (m_hasNodesWithPlaceholderStyle)
+            recalcStyle(Force);
+    }
+
+    updateLayout();
+
+    m_ignorePendingStylesheets = oldIgnore;
+}
+</code></pre><p>从 <code>updateLayoutIgnorePendingStylesheets</code> 方法的内部实现可知，其也是对 <code>updateLayout</code> 方法的扩展，并且在现有的 layout 更新模式中，大部分场景都是调用 updateLayoutIgnorePendingStylesheets 来进行layout的更新。</p>
+<p>搜索 Webkit 实现中调用 <a href="https://code.google.com/p/chromium/codesearch#search/&amp;q=updateLayoutIgnorePendingStylesheets&amp;sq=package:chromium&amp;type=cs" target="_blank" rel="external">updateLayoutIgnorePendingStylesheets</a> 方法的代码, 得到以下可导致触发 layout 的操作：</p>
+<ul>
+<li><code>Element</code>: clientHeight, clientLeft, clientTop, clientWidth, focus(), getBoundingClientRect(), getClientRects(), innerText, offsetHeight, offsetLeft, offsetParent, offsetTop, offsetWidth, outerText, scrollByLines(), scrollByPages(), scrollHeight, scrollIntoView(), scrollIntoViewIfNeeded(), scrollLeft, scrollTop, scrollWidth</li>
+<li><code>Frame, HTMLImageElement</code>: height, width</li>
+<li><code>Range</code>: getBoundingClientRect(), getClientRects()</li>
+<li><code>SVGLocatable</code>: computeCTM(), getBBox()</li>
+<li><code>SVGTextContent</code>: getCharNumAtPosition(), getComputedTextLength(), getEndPositionOfChar(), getExtentOfChar(), getNumberOfChars(), getRotationOfChar(), getStartPositionOfChar(), getSubStringLength(), selectSubString()</li>
+<li><code>SVGUse</code>: instanceRoot</li>
+<li><code>window</code>: getComputedStyle(), scrollBy(), scrollTo(), scrollX, scrollY, webkitConvertPointFromNodeToPage(), webkitConvertPointFromPageToNode()<br>进一步深入Layout，那上文中必须更新的必要条件是什么？ 在 Stoyan Stefanov 的 <a href="http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/" target="_blank" rel="external">Rendering: repaint, reflow/relayout, restyle</a> 一文中已做比较详细的解答，可移步了解~</li>
+</ul>
+<h5 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h5><ul>
+<li><a href="http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/" target="_blank" rel="external">Rendering: repaint, reflow/relayout, restyle</a></li>
+<li><a href="http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html" target="_blank" rel="external">How (not) to trigger a layout in WebKit</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/e6-b5-8f-e8-a7-88-e5-99-a8-e5-86-85-e9-83-a8-e5-b7-a5-e4-bd-9c-e5-8e-9f-e7-90-86/" rel="next" title="浏览器内部工作原理">
+                <i class="fa fa-chevron-left"></i> 浏览器内部工作原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/03/json-e7-9a-84-e4-b8-80-e4-ba-9b-e6-80-bb-e7-bb-93/" rel="prev" title="Json的一些总结">
+                Json的一些总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Libiao" />
+          <p class="site-author-name" itemprop="name">Libiao</p>
+           
+              <p class="site-description motion-element" itemprop="description">for fun ,for love</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/stan1812" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:2314980309@qq.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/STAN" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://instagram.com/be_drammer" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                    
+                      Instagram
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#尽可能多的利用硬件能力，如使用3D变形来开启GPU加速"><span class="nav-number">1.</span> <span class="nav-text">尽可能多的利用硬件能力，如使用3D变形来开启GPU加速</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#相关阅读"><span class="nav-number">2.</span> <span class="nav-text">相关阅读</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Libiao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

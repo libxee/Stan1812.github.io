@@ -95,16 +95,16 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="动画库animate.css阅读//先说一些题外话，下午敲了一个下午的代码外加看文档熟悉了json的使用，然后写了几个动画，用线性渐变做了些有有意思的东西，灵感来自于《CSS揭秘》。昨天晚上尝试ajax并不顺利，搞到晚上一点多也没有搞好，目前还在继续在看MDN的文档中。现在感觉有些累，正好很久没有写博客了，现在就写篇博客来放松一下（主要是前几天刚买了一个青轴的机械键盘，简直美滋滋，好的装备确实能C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2017/08/29/hello-world/index.html">
+<meta property="og:title" content="animate.css源码阅读小结">
+<meta property="og:url" content="http://yoursite.com/2017/04/30/animate-css-e6-ba-90-e7-a0-81-e9-98-85-e8-af-bb-e7-ac-94-e8-ae-b0/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta property="og:updated_time" content="2017-08-29T06:28:27.107Z">
+<meta property="og:description" content="动画库animate.css阅读//先说一些题外话，下午敲了一个下午的代码外加看文档熟悉了json的使用，然后写了几个动画，用线性渐变做了些有有意思的东西，灵感来自于《CSS揭秘》。昨天晚上尝试ajax并不顺利，搞到晚上一点多也没有搞好，目前还在继续在看MDN的文档中。现在感觉有些累，正好很久没有写博客了，现在就写篇博客来放松一下（主要是前几天刚买了一个青轴的机械键盘，简直美滋滋，好的装备确实能C">
+<meta property="og:updated_time" content="2017-08-29T09:14:00.218Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="animate.css源码阅读小结">
+<meta name="twitter:description" content="动画库animate.css阅读//先说一些题外话，下午敲了一个下午的代码外加看文档熟悉了json的使用，然后写了几个动画，用线性渐变做了些有有意思的东西，灵感来自于《CSS揭秘》。昨天晚上尝试ajax并不顺利，搞到晚上一点多也没有搞好，目前还在继续在看MDN的文档中。现在感觉有些累，正好很久没有写博客了，现在就写篇博客来放松一下（主要是前几天刚买了一个青轴的机械键盘，简直美滋滋，好的装备确实能C">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/29/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/30/animate-css-e6-ba-90-e7-a0-81-e9-98-85-e8-af-bb-e7-ac-94-e8-ae-b0/"/>
 
 
 
 
 
-  <title>Hello World | An Amazing World</title>
+  <title>animate.css源码阅读小结 | An Amazing World</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/29/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/animate-css-e6-ba-90-e7-a0-81-e9-98-85-e8-af-bb-e7-ac-94-e8-ae-b0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Libiao">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">animate.css源码阅读小结</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-29T14:28:27+08:00">
-                2017-08-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-30T21:26:52+08:00">
+                2017-04-30
               </time>
             
 
@@ -306,6 +306,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -334,15 +367,38 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h3 id="动画库animate-css阅读"><a href="#动画库animate-css阅读" class="headerlink" title="动画库animate.css阅读"></a>动画库animate.css阅读</h3><p>//先说一些题外话，下午敲了一个下午的代码外加看文档熟悉了json的使用，然后写了几个动画，用线性渐变做了些有有意思的东西，灵感来自于《CSS揭秘》。昨天晚上尝试ajax并不顺利，搞到晚上一点多也没有搞好，目前还在继续在看MDN的文档中。现在感觉有些累，正好很久没有写博客了，现在就写篇博客来放松一下（主要是前几天刚买了一个青轴的机械键盘，简直美滋滋，好的装备确实能Coding的幸福感翻倍。）</p>
+<p>这周在看《CSS揭秘》的时候发现了一个动画库：animate.css于是就去他的<a href="https://daneden.github.io/animate.css/" target="_blank" rel="external">官网</a>去看了一下，然后就把源码下下来看一上看。</p>
+<p>其实我觉得这个库并没有什么令人特别惊艳的地方，效果也都只是一些基本的效果，应该说是给真-懒人用的了。。。不过看源码还是很有用的.能学到不少东西。在看他的官网的时候发现了“animate”这几个字母是有线性渐变的，并且能实现流光的效果，一想我之前也写过啊，习惯性的看源码，发现实现手法更简单：下面来上源码：</p>
+<pre><code>color: #f35626;
+background-image: -webkit-linear-gradient(0deg,#f35626,#feab3a);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;/*从字体开始裁剪并把字体色设为透明这是必须的写法*/
+-webkit-animation: hue 1s infinite linear;
+
+@-webkit-keyframes hue {
+ from {
+ -webkit-filter: hue-rotate(0deg);
+ }
+
+ to {
+ -webkit-filter: hue-rotate(-360deg);
+ }
+}
+</code></pre><p>我们注意到它使用了一个filter函数：hue-rotate</p>
+<p><table class="reference"></table></p>
+<p><tbody></tbody></p>
+<p><tr></tr></p>
+<p><td>hue-rotate(<em>deg</em>)</td></p>
+<td>
+
+<h5 id="给图像应用色相旋转。“angle”一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。"><a href="#给图像应用色相旋转。“angle”一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。" class="headerlink" title="给图像应用色相旋转。“angle”一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。"></a>给图像应用色相旋转。“angle”一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。</h5><p></p></td><br><br><br><br>之前没有听说过，于是赶忙MDN查文档<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter</a>顺便复习下filter<p></p>
+<p>在阅读源码的时候，发现一个特点那就是不要吝啬帧的使用，因为在动画的运行过程中，只有更多的帧才能有更加出色的仿真效果，当然这一点跟性能有悖，不过我认为这些动画相比于体验来说还是值得的（记得前几天看过一篇关于高性能动画的文章，等下转载一下）。</p>
+<p>另外对于动画的缓动效果给动画加上缓动效果可以让动画显得更加的真实。我们知道平时在写动画的时候会用到ease-in ease-out等几个常用的内置的缓动曲线，在此我们可使用animation-timing-function 属性，利用贝塞尔（Cubic Bezier）函数来生成速度曲线是非常精确的。当然可以用一些其他的软件来处理贝塞尔函数，而且chrome的开发人员工具也可调，但是前者太过麻烦，后者不是很方便。推荐一个在线工具：<a href="http://cubic-bezier.com" target="_blank" rel="external">cubic-bezier.com</a>非常的方便。</p>
+<p>在使用的过程中，我们可以发现两个锚点的y坐标可以为负，这就可以搞点事了，在少写很多关键帧的情况下回弹，来回的效果都可以轻松实现，我相信不只有这些用途，一定会由更加有趣的应用，只不过我现在还没有想起来  ==但我相信一定会有的。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
       
     </div>
@@ -367,8 +423,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/25/e5-a4-a7-e4-b8-80-e4-b8-80-e5-b9-b4/" rel="next" title="大一一年">
-                <i class="fa fa-chevron-left"></i> 大一一年
+              <a href="/2017/04/23/e4-b8-80-e5-91-a8-e6-80-bb-e7-bb-93/" rel="next" title="一周总结">
+                <i class="fa fa-chevron-left"></i> 一周总结
               </a>
             
           </div>
@@ -376,6 +432,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/e6-b5-8f-e8-a7-88-e5-99-a8-e5-86-85-e9-83-a8-e5-b7-a5-e4-bd-9c-e5-8e-9f-e7-90-86/" rel="prev" title="浏览器内部工作原理">
+                浏览器内部工作原理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -557,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#动画库animate-css阅读"><span class="nav-number">1.</span> <span class="nav-text">动画库animate.css阅读</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#给图像应用色相旋转。“angle”一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。"><span class="nav-number">1.0.1.</span> <span class="nav-text">给图像应用色相旋转。“angle”一值设定图像会被调整的色环角度值。值为0deg，则图像无变化。若值未设置，默认值是0deg。该值虽然没有最大值，超过360deg的值相当于又绕一圈。</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

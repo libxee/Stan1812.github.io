@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="嗯，很久没写东西了，是的，我们考完了试，这个辣鸡小项目基本上也算是完成了，按照惯例，对于这个垃圾小项目来总结点东西。 项目的 Github 地址在这里 ，在线预览地址在这里 因为在学习Canvas就想做些有意思的东西 这是一个类似于网上流传的很多的那种输入汉字然后自动生成表情包的小东西，然后就想要来试一下 最终将实现的功能：最终实现的功能大概有这些：  用户可以自由上传图片，自由编辑文字内容，并选">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Generate an image by canvas">
+<meta property="og:url" content="http://yoursite.com/2017/06/19/generate-an-image-by-canvas/index.html">
+<meta property="og:site_name" content="An Amazing World">
+<meta property="og:description" content="嗯，很久没写东西了，是的，我们考完了试，这个辣鸡小项目基本上也算是完成了，按照惯例，对于这个垃圾小项目来总结点东西。 项目的 Github 地址在这里 ，在线预览地址在这里 因为在学习Canvas就想做些有意思的东西 这是一个类似于网上流传的很多的那种输入汉字然后自动生成表情包的小东西，然后就想要来试一下 最终将实现的功能：最终实现的功能大概有这些：  用户可以自由上传图片，自由编辑文字内容，并选">
+<meta property="og:updated_time" content="2017-08-29T09:14:00.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Generate an image by canvas">
+<meta name="twitter:description" content="嗯，很久没写东西了，是的，我们考完了试，这个辣鸡小项目基本上也算是完成了，按照惯例，对于这个垃圾小项目来总结点东西。 项目的 Github 地址在这里 ，在线预览地址在这里 因为在学习Canvas就想做些有意思的东西 这是一个类似于网上流传的很多的那种输入汉字然后自动生成表情包的小东西，然后就想要来试一下 最终将实现的功能：最终实现的功能大概有这些：  用户可以自由上传图片，自由编辑文字内容，并选">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/19/generate-an-image-by-canvas/"/>
+
+
+
+
+
+  <title>Generate an image by canvas | An Amazing World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">An Amazing World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端小学生的神奇世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/19/generate-an-image-by-canvas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Libiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="An Amazing World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Generate an image by canvas</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-19T14:42:49+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js相关/" itemprop="url" rel="index">
+                    <span itemprop="name">js相关</span>
+                  </a>
+                </span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js相关/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>嗯，很久没写东西了，是的，我们考完了试，这个辣鸡小项目基本上也算是完成了，按照惯例，对于这个垃圾小项目来总结点东西。</p>
+<p>项目的 Github 地址在<a href="https://github.com/Stan1812/Generate-an-image-by-canvas" target="_blank" rel="external">这里</a> ，在线预览地址在<a href="https://stan1812.github.io/Generate-an-image-by-canvas/" target="_blank" rel="external">这里</a></p>
+<p>因为在学习Canvas就想做些有意思的东西</p>
+<p>这是一个类似于网上流传的很多的那种输入汉字然后自动生成表情包的小东西，然后就想要来试一下</p>
+<h3 id="最终将实现的功能："><a href="#最终将实现的功能：" class="headerlink" title="最终将实现的功能："></a><a href="https://github.com/Stan1812/Generate-an-image-by-canvas#最终将实现的功能" target="_blank" rel="external"></a>最终将实现的功能：</h3><p>最终实现的功能大概有这些：</p>
+<ul>
+<li>用户可以自由上传图片，自由编辑文字内容，并选择插入文字的位置</li>
+<li>下载生成的图片</li>
+<li>原笔迹的书写</li>
+<li>图片下载寒酸的裁剪功能</li>
+<li>几种图片滤镜：黑白，负片以及更多</li>
+</ul>
+<hr>
+<h4 id="上传图片"><a href="#上传图片" class="headerlink" title="上传图片"></a>上传图片</h4><p>上传图片在这里使用的是HTML5中的filereader来实现的，将图片以DataURL的形式读入页面，在上传前通过输入缩放倍数来选择大小 后期考虑引入滑块式的调整各种参数，直接输入的方法真的是。。</p>
+<p>具体的代码实现如下：</p>
+<pre><code>function readAsDataURL(){
+
+        if (!document.getElementById(&apos;read_pic_but&apos;).className) 
+            {document.getElementById(&apos;read_pic_but&apos;).className+=&apos;button&apos;;}
+        else{document.getElementById(&apos;read_pic_but&apos;).className=&quot;&quot;}
+        console.log(document.getElementById(&apos;read_pic_but&apos;).className)
+
+        //检验是否为图像文件
+        var file = document.getElementById(&quot;uppic&quot;).files[0];
+        if(!/image\/\w+/.test(file.type)){
+                alert(&apos;仅支持上传图片&apos;);
+                return false;
+        }
+        var reader = new FileReader();
+        //将文件以Data URL形式读入页面
+        reader.readAsDataURL(file);
+        reader.onload=function(e){
+                var picture=this.result;
+                var pic=new Image();
+                pic.src=picture;
+                //调整图片的大小
+                var scal_control=document.getElementById(&apos;_scale&apos;).value; 
+
+                if (scal_control!=&quot;&quot;) 
+                { ctx.scale(scal_control,scal_control);}
+            if (scal_control=&quot;&quot;)
+            {
+                    scal_control= 1;
+                    ctx.scale(scal_control,scal_control);             
+                };
+
+                console.log(scal_control);
+                ctx.drawImage(pic,0,0)
+                return pic;
+
+        }
+}
+`&lt;/pre&gt;
+代码写的有点烂，以后再看一下有没有重构的价值，如果有时间的话还是希望把代码重构一下
+
+#### [](https://github.com/Stan1812/Generate-an-image-by-canvas#下载图片)下载图片
+
+下载图片时是可以选择保存图片的格式的，但是考虑到在使用时的繁琐，就直接设置为了jpg格式。 在canvas中保存图片是使用的toDataURL来做的。在保存的时候比较关键的一个就是要将MIME类型改为image/object-stream。得到的图片data:image/png;base64需要更改一下
+&lt;pre&gt;`var fixtype = function (type) {
+      type = type.toLocaleLowerCase().replace(/jpg/i, &apos;jpeg&apos;);
+        var r = type.match(/png|jpeg|bmp|gif/)[0];
+        return &apos;image/&apos; + r;
+        }
+  imgdata = imgdata.replace(fixtype(type), &apos;image/octet-stream&apos;)
+`&lt;/pre&gt;
+
+#### [](https://github.com/Stan1812/Generate-an-image-by-canvas#图片处理)图片处理
+
+说是图片处理，我都不好意思了hhh
+</code></pre><ul>
+<li>添加文字：使用是canvas中自有的渲染文字的方法，可以选择字体颜色 取色器使用getImageData做，得到的数据是一个数组，每四位分别表示一个像素点的RGBA数据。取到该像素点的数据，简单的字符处理就可得到可用的颜色数据。 这里就只是把取色部分的代码写一下吧：<pre class="pure-highlightjs">`function pick(event) {
+    var x = event.offsetX;
+    var y = event.offsetY;
+    var pixel = ctx2.getImageData(x, y, 1, 1);
+    var data = pixel.data;
+    var rgba = 'rgba(' + data[0] + ',' + data[1] + ',' + data[2] + ',' + (data[3] / 255) + ')';
+    color.style.background = rgba;
+    color.textContent = rgba;
+    console.log(rgba,x,y)
+    ctx.fillStyle=rgba;
+    ctx.strokeStyle=rgba;
+}`</pre></li>
+<li><p>原笔迹书写：监听鼠标的move up down 使用了line_X,line_Y,line_N三个数组分别储存的轨迹的X Y坐标，和鼠标是否按下的标志信息，当鼠标按下并移动时分别向数组X，Y ，N push该点坐标及标识位信息，然后整个遍历一次数组，标志位为1时lineTo（X，Y），标志位为0时移动坐标，进行下一笔画的渲染。突然发现这样遍历成本很高，回头改改.代码在这里：</p>
+<pre class="pure-highlightjs">`var linex = new Array();     var liney = new Array();     var linen = new Array();     var lastX = -1;     var lastY = -1;     var flag = 0;    function line_drawer() {
+canvas.addEventListener('mousemove', onMouseMove, false);     canvas.addEventListener('mousedown', onMouseDown, false);     canvas.addEventListener('mouseup', onMouseUp, false);     function onMouseMove(evt) {            if (flag == 1) {                 linex.push(evt.layerX);                 liney.push(evt.layerY);                 linen.push(1);                 ctx.beginPath();                 ctx.lineWidth = 1 + Math.random() * 5;                 for (var i=1;i&lt;linex.length;i++) {                             lastX = linex[i];                             lastY = liney[i];                             if (linen[i] == 0) {                                    ctx.moveTo(lastX,lastY);                             } else {                                    ctx.lineTo(lastX,lastY);                             }                 }                 ctx.stroke();
+        }     }     function onMouseDown(evt) {            flag = 1;            linex.push(evt.layerX);            liney.push(evt.layerY);            linen.push(0);     }     function onMouseUp(evt) {            flag = 0;             linex.push(evt.layerX);             liney.push(evt.layerY);            linen.push(0);     }    }`</pre>
+
+<h4 id="几种辣鸡滤镜"><a href="#几种辣鸡滤镜" class="headerlink" title="几种辣鸡滤镜"></a><a href="https://github.com/Stan1812/Generate-an-image-by-canvas#几种辣鸡滤镜" target="_blank" rel="external"></a>几种辣鸡滤镜</h4><p>很简单的滤镜功能：</p>
+</li>
+<li><p>负片：取到图片的数据，循环一次数组，分别将R位 G位 B位数据被255减即可。代码：</p>
+<pre class="pure-highlightjs">`function negative(){
+        for(var j=0;j&lt;data_length;j+=4){
+            data0[j]=255-data0[j];
+            data0[j+1]=255-data0[j+1];
+            data0[j+2]=255-data0[j+2];
+        }
+        ctx.putImageData(imageData0, 0, 0);
+        console.log(imageData0);
+    }`</pre></li>
+<li><p>黑白：同样拿到数据，步阶为4，将r、g、b位求平均值，然后rgb均等该改平均值即可。 代码：<br><pre class="pure-highlightjs">`function grayscale(id)  {</pre></p>
+<pre><code>    for (var i = 0; i &amp;lt; data_length; i += 4) {
+     var avg = (data0[i] + data0[i + 1] + data0[i + 2]) / 3;
+        data0[i]     = avg; // red
+        data0[i + 1] = avg; // green
+        data0[i + 2] = avg; // blue
+    }
+    ctx.putImageData(imageData0, 0, 0);
+    console.log(imageData0);
+};
+</code></pre><p>&nbsp;</p>
+</li>
+<li>高斯模糊：这里引入了一个StackBlur.js，自己写有点应付不来。。 大概就是这些吧。</li>
+</ul>
+<h2 id="学到了什么？"><a href="#学到了什么？" class="headerlink" title="学到了什么？"></a><a href="https://github.com/Stan1812/Generate-an-image-by-canvas#学到了什么" target="_blank" rel="external"></a>学到了什么？</h2><p>技术方面的不再说，说一些软的东西吧。 一个完整项目中的一些命名规则，变量的处理，包括全局和私有变量选择，函数的处理，如何解决函数间的通信等 另外，在整个项目开始之前的大概的规划，就算是练手的小项目，大致要做成什么样子也要有一个底。不然在写的时候很容易越写越乱。 另外，代码规范！这个东西并未严格的按照家园的前端代码规范来写，因为觉得只是练手吧，直到现在开始接触Vue 工作室要求使用EAlint来规范代码，真的很难受。。这个东西还是从开始就养好习惯比较好。不要因为追求速度而忽视了这些‘软实力’。 就这些吧~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/01/e4-b8-80-e4-bb-a3-e5-ae-97-e5-b8-88/" rel="next" title="一代宗师">
+                <i class="fa fa-chevron-left"></i> 一代宗师
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/11/e5-88-9d-e6-8e-a2vue/" rel="prev" title="初探Vue">
+                初探Vue <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Libiao" />
+          <p class="site-author-name" itemprop="name">Libiao</p>
+           
+              <p class="site-description motion-element" itemprop="description">for fun ,for love</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives">
+            
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/stan1812" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:2314980309@qq.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/STAN" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://instagram.com/be_drammer" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                    
+                      Instagram
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#最终将实现的功能："><span class="nav-number">1.</span> <span class="nav-text">最终将实现的功能：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#上传图片"><span class="nav-number">1.1.</span> <span class="nav-text">上传图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#几种辣鸡滤镜"><span class="nav-number">1.2.</span> <span class="nav-text">几种辣鸡滤镜</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学到了什么？"><span class="nav-number"></span> <span class="nav-text">学到了什么？</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Libiao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
