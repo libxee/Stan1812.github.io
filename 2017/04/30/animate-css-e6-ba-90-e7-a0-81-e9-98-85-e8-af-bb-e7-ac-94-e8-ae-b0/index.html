@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -101,6 +101,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/30/animate-css-e6-ba-90-e7-a0-81-e9-98-85-e8-af-bb-e7-ac-94-e8-ae-b0/index.html">
 <meta property="og:site_name" content="An Amazing World">
 <meta property="og:description" content="动画库animate.css阅读//先说一些题外话，下午敲了一个下午的代码外加看文档熟悉了json的使用，然后写了几个动画，用线性渐变做了些有有意思的东西，灵感来自于《CSS揭秘》。昨天晚上尝试ajax并不顺利，搞到晚上一点多也没有搞好，目前还在继续在看MDN的文档中。现在感觉有些累，正好很久没有写博客了，现在就写篇博客来放松一下（主要是前几天刚买了一个青轴的机械键盘，简直美滋滋，好的装备确实能C">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-08-29T09:14:00.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="animate.css源码阅读小结">
@@ -112,7 +113,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Gemini',
     version: '5.1.2',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -120,7 +121,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -152,7 +153,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -200,7 +201,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            首页
           </a>
         </li>
       
@@ -210,27 +211,17 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            About
+            关于
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            Sitemap
+            归档
           </a>
         </li>
       
@@ -270,9 +261,9 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/animate-css-e6-ba-90-e7-a0-81-e9-98-85-e8-af-bb-e7-ac-94-e8-ae-b0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Libiao">
+      <meta itemprop="name" content="Shady">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/../../imgs/album.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -294,9 +285,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-30T21:26:52+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T21:26:52+08:00">
                 2017-04-30
               </time>
             
@@ -315,7 +306,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -326,7 +317,7 @@
 
                 
                 
-                  , 
+                  ， 
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -489,10 +480,10 @@ background-image: -webkit-linear-gradient(0deg,#f35626,#feab3a);
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            Table of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            Overview
+            站点概览
           </li>
         </ul>
       
@@ -500,11 +491,11 @@ background-image: -webkit-linear-gradient(0deg,#f35626,#feab3a);
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="Libiao" />
-          <p class="site-author-name" itemprop="name">Libiao</p>
+               src="/../../imgs/album.jpg"
+               alt="Shady" />
+          <p class="site-author-name" itemprop="name">Shady</p>
            
-              <p class="site-description motion-element" itemprop="description">for fun ,for love</p>
+              <p class="site-description motion-element" itemprop="description">For fun ，For love</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -512,10 +503,10 @@ background-image: -webkit-linear-gradient(0deg,#f35626,#feab3a);
           
             <div class="site-state-item site-state-posts">
             
-              <a href="/archives">
+              <a href="/archives/ || archive">
             
                 <span class="site-state-item-count">24</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
@@ -526,7 +517,7 @@ background-image: -webkit-linear-gradient(0deg,#f35626,#feab3a);
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-name">分类</span>
               
             </div>
           
@@ -537,7 +528,7 @@ background-image: -webkit-linear-gradient(0deg,#f35626,#feab3a);
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">标签</span>
               
             </div>
           
@@ -644,17 +635,17 @@ background-image: -webkit-linear-gradient(0deg,#f35626,#feab3a);
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Libiao</span>
+  <span class="author" itemprop="copyrightHolder">Shady</span>
 
   
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
   <span class="post-meta-divider">|</span>
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
 
 
         
@@ -737,6 +728,13 @@ background-image: -webkit-linear-gradient(0deg,#f35626,#feab3a);
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
 
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
