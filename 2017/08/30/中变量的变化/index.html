@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="原生JS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/imgs/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="原生JS监听变量的变化今天在刷知乎的时候遇到了这样的一个问题:如何侦听JS中变量的变化首先想到的是在Vue中的数据绑定，但是上车时间不长，是直接拿来用的。。并不知道实现原理，想了又想，没有好的解决方案。看到有大佬的答案后依然很迷，遂google一番，总结一下。 几种解决方案：ES5的getter与setter主要使用的是：Object.defineProperty(obj, prop, descr">
+<meta name="keywords" content="原生JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何监听js中变量的变化">
+<meta property="og:url" content="http://yoursite.com/2017/08/30/中变量的变化/index.html">
+<meta property="og:site_name" content="An Amazing World">
+<meta property="og:description" content="原生JS监听变量的变化今天在刷知乎的时候遇到了这样的一个问题:如何侦听JS中变量的变化首先想到的是在Vue中的数据绑定，但是上车时间不长，是直接拿来用的。。并不知道实现原理，想了又想，没有好的解决方案。看到有大佬的答案后依然很迷，遂google一番，总结一下。 几种解决方案：ES5的getter与setter主要使用的是：Object.defineProperty(obj, prop, descr">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-30T11:39:19.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何监听js中变量的变化">
+<meta name="twitter:description" content="原生JS监听变量的变化今天在刷知乎的时候遇到了这样的一个问题:如何侦听JS中变量的变化首先想到的是在Vue中的数据绑定，但是上车时间不长，是直接拿来用的。。并不知道实现原理，想了又想，没有好的解决方案。看到有大佬的答案后依然很迷，遂google一番，总结一下。 几种解决方案：ES5的getter与setter主要使用的是：Object.defineProperty(obj, prop, descr">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/30/中变量的变化/"/>
+
+
+
+
+
+  <title>如何监听js中变量的变化 | An Amazing World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">An Amazing World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端小学生的神奇世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/中变量的变化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shady">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/../../imgs/album.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="An Amazing World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何监听js中变量的变化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T18:08:00+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="原生JS监听变量的变化"><a href="#原生JS监听变量的变化" class="headerlink" title="原生JS监听变量的变化"></a>原生JS监听变量的变化</h2><p>今天在刷知乎的时候遇到了这样的一个问题:<a href="https://www.zhihu.com/question/44724640?sort=created" target="_blank" rel="external">如何侦听JS中变量的变化</a>首先想到的是在Vue中的数据绑定，但是上车时间不长，是直接拿来用的。。并不知道实现原理，想了又想，没有好的解决方案。看到有大佬的答案后依然很迷，遂google一番，总结一下。</p>
+<h2 id="几种解决方案："><a href="#几种解决方案：" class="headerlink" title="几种解决方案："></a>几种解决方案：</h2><h3 id="ES5的getter与setter"><a href="#ES5的getter与setter" class="headerlink" title="ES5的getter与setter"></a>ES5的getter与setter</h3><p>主要使用的是：<code>Object.defineProperty(obj, prop, descriptor)</code></p>
+<p> <strong>参数</strong> ：</p>
+<ul>
+<li>obj 需要被操作的目标对象</li>
+<li>prop 目标对象需要定义或修改的属性的名称。</li>
+<li>descriptor 将被定义或修改的属性的描述符。</li>
+</ul>
+<p><strong>返回值</strong> :</p>
+<ul>
+<li>被传递给函数的对象</li>
+</ul>
+<p>以下是MDN的相关定义：</p>
+<blockquote>
+<p>该方法允许精确添加或修改对象的属性。一般情况下，我们为对象添加属性是通过赋值来创建并显示在属性枚举中（for…in 或 Object.keys 方法）， 但这种方式添加的属性值可以被改变，也可以被删除。而使用 Object.defineProperty() 则允许改变这些额外细节的默认设置。例如，默认情况下，使用  Object.defineProperty() 增加的属性值是不可改变的。</p>
+<p>对象里目前存在的属性描述符有两种主要形式：数据描述符和存取描述符。数据描述符是一个拥有可写或不可写值的属性。存取描述符是由一对 getter-setter 函数功能来描述的属性。描述符必须是两种形式之一；不能同时是两者。</p>
+<p>数据描述符和存取描述符均具有以下可选键值：</p>
+<blockquote>
+<ul>
+<li>configurable<br>当且仅当该属性的 configurable 为 true 时，该属性描述符才能够被改变，同时该属性也能从对应的对象上被删除。默认为 false。</li>
+<li>enumerable<br>当且仅当该属性的 enumerable 为 true 时，该属性才能够出现在对象的枚举属性中。默认为 false。</li>
+</ul>
+</blockquote>
+<p>数据描述符同时具有以下可选键值：</p>
+<blockquote>
+<p>value<br>该属性对应的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。默认为 undefined。<br>writable<br>当且仅当该属性的 writable 为 true 时，该属性才能被赋值运算符改变。默认为 false。</p>
+</blockquote>
+<p>存取描述符同时具有以下可选键值：</p>
+<blockquote>
+<ul>
+<li>get:<br>一个给属性提供 getter 的方法，如果没有 getter 则为 undefined。该方法返回值被用作属性值。默认为 undefined。</li>
+<li>set<br>一个给属性提供 setter 的方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。默认为 undefined。</li>
+</ul>
+</blockquote>
+</blockquote>
+<p>定义看起来感觉有点复杂，而如果深入的讨论的话更加复杂，完全当手册用了，我们在此只关注基本的setter和getter</p>
+<p>下面的例子说明了如何实现自我存档的对象。当 temperature 属性设置时，archive 数组会得到一个 log<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Archiver</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> temperature = <span class="literal">null</span>;</div><div class="line">  <span class="keyword">var</span> archive = [];</div><div class="line"></div><div class="line">  <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, <span class="string">'temperature'</span>, &#123;</div><div class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'get!'</span>);</div><div class="line">      <span class="keyword">return</span> temperature;</div><div class="line">    &#125;,</div><div class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">      temperature = value;</div><div class="line">      archive.push(&#123; <span class="attr">val</span>: temperature &#125;);</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">this</span>.getArchive = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> archive; &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> arc = <span class="keyword">new</span> Archiver();</div><div class="line">arc.temperature; <span class="comment">// 'get!'</span></div><div class="line">arc.temperature = <span class="number">11</span>;</div><div class="line">arc.temperature = <span class="number">13</span>;</div><div class="line">arc.getArchive(); <span class="comment">// [&#123; val: 11 &#125;, &#123; val: 13 &#125;]</span></div></pre></td></tr></table></figure></p>
+<p>另一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> pattern = &#123;</div><div class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'I alway return this string,whatever you have assigned'</span>;</div><div class="line">    &#125;,</div><div class="line">    set: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.myname = <span class="string">'this is my name string'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">TestDefineSetAndGet</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">Object</span>.defineProperty(<span class="keyword">this</span>, <span class="string">'myproperty'</span>, pattern);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> TestDefineSetAndGet();</div><div class="line">instance.myproperty = <span class="string">'test'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 'I alway return this string,whatever you have assigned'</span></div><div class="line"><span class="built_in">console</span>.log(instance.myproperty);</div><div class="line"><span class="comment">// 'this is my name string'</span></div><div class="line"><span class="built_in">console</span>.log(instance.myname);</div></pre></td></tr></table></figure>
+<p>这两个例子很好。</p>
+<p>另外：IE8及更低版本IE是无法使用的，而且这个特性是没有polyfill的，无法在不支持的平台实现。</p>
+<h3 id="Object-observe"><a href="#Object-observe" class="headerlink" title="Object.observe()"></a>Object.observe()</h3><p>Object.observe() 方法用于异步地监视一个对象的修改。当对象属性被修改时，方法的回调函数会提供一个有序的修改流。然而，这个接口已经被废弃并从各浏览器中移除。但是在我看了这几种解决方案之后，反而觉得这是种很好的解决方案。。</p>
+<p>简单的介绍一下</p>
+<p><code>Object.observe(obj, callback[, acceptList])</code></p>
+<ul>
+<li>obj 被监控的对象.</li>
+<li><p>callback 当对象被修改时触发的回调函数，其参数为: </p>
+<ul>
+<li><p>changes 一个数组，其中包含的每一个对象代表一个修改行为。每个修改行为的对象包含: </p>
+<ul>
+<li>name: 被修改的属性名称。</li>
+<li>object: 修改后该对象的值。</li>
+<li>type: 表示对该对象做了何种类型的修改，可能的值为”add”, “update”, or “delete”。</li>
+<li>oldValue: 对象修改前的值。该值只在”update”与”delete”有效。</li>
+</ul>
+</li>
+<li><p>acceptList 在给定对象上给定回调中要监视的变化类型列表。如果省略， [“add”, “update”, “delete”, “reconfigure”, “setPrototype”, “preventExtensions”] 将会被使用。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>数据绑定的示例：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 一个数据模型</span></div><div class="line"><span class="keyword">var</span> user = &#123;</div><div class="line">  id: <span class="number">0</span>,</div><div class="line">  name: <span class="string">'Brendan Eich'</span>,</div><div class="line">  title: <span class="string">'Mr.'</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 创建用户的greeting</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateGreeting</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  user.greeting = <span class="string">'Hello, '</span> + user.title + <span class="string">' '</span> + user.name + <span class="string">'!'</span>;</div><div class="line">&#125;</div><div class="line">updateGreeting();</div><div class="line"></div><div class="line"><span class="built_in">Object</span>.observe(user, <span class="function"><span class="keyword">function</span>(<span class="params">changes</span>) </span>&#123;</div><div class="line">  changes.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">change</span>) </span>&#123;</div><div class="line">    <span class="comment">// 当name或title属性改变时, 更新greeting</span></div><div class="line">    <span class="keyword">if</span> (change.name === <span class="string">'name'</span> || change.name === <span class="string">'title'</span>) &#123;</div><div class="line">      updateGreeting();</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="使用ES6中的proxy"><a href="#使用ES6中的proxy" class="headerlink" title="使用ES6中的proxy"></a>使用ES6中的proxy</h3><p>proxy可以说是一个比较庞大的东西了，他可以做的事情有很多</p>
+<p><code>let p = new Proxy(target, handler);</code></p>
+<p><strong>参数</strong>: </p>
+<ul>
+<li>target 一个目标对象(可以是任何类型的对象，包括本机数组，函数，甚至另一个代理)用Proxy来包装。</li>
+<li>handler  一个对象，其属性是当执行一个操作时定义代理的行为的函数。 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">通过代理，你可以轻松地验证向一个对象的传值。</div><div class="line"></div><div class="line">以下例子使用了 set 处理器（set handler）。</div><div class="line"></div><div class="line"><span class="keyword">let</span> validator = &#123;</div><div class="line">  set: <span class="function"><span class="keyword">function</span>(<span class="params">obj, prop, value</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (prop === <span class="string">'age'</span>) &#123;</div><div class="line">      <span class="keyword">if</span> (!<span class="built_in">Number</span>.isInteger(value)) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'The age is not an integer'</span>);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span> (value &gt; <span class="number">200</span>) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">RangeError</span>(<span class="string">'The age seems invalid'</span>);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// The default behavior to store the value</span></div><div class="line">    obj[prop] = value;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, validator);</div><div class="line"></div><div class="line">person.age = <span class="number">100</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(person.age); </div><div class="line"><span class="comment">// 100</span></div><div class="line"></div><div class="line">person.age = <span class="string">'young'</span>; </div><div class="line"><span class="comment">// 抛出异常: Uncaught TypeError: The age is not an integer</span></div><div class="line"></div><div class="line">person.age = <span class="number">300</span>; </div><div class="line"><span class="comment">// 抛出异常: Uncaught RangeError: The age seems invalid</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这是一个在官方文档上的实例：它使用了set handler，监听了数据的改变。</p>
+<p>暂时就这些吧</p>
+<p>参考文章：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/44724640?sort=created" target="_blank" rel="external">如何侦听JS中变量的变化</a>中<a href="https://www.zhihu.com/people/daraw/answers" target="_blank" rel="external">@月迷津渡</a>的回答</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" target="_blank" rel="external"> MDN Object.defineProperty()</a></p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/observe" target="_blank" rel="external">MDN Object.observe()</a></p>
+</li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy" target="_blank" rel="external">MDN Proxy</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/原生JS/" rel="tag"># 原生JS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/29/hello-world/" rel="next" title="Hello Hexo">
+                <i class="fa fa-chevron-left"></i> Hello Hexo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/../../imgs/album.jpg"
+               alt="Shady" />
+          <p class="site-author-name" itemprop="name">Shady</p>
+           
+              <p class="site-description motion-element" itemprop="description">For fun ，For love</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/ || archive">
+            
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/stan1812" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:2314980309@qq.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/2314980309_stan" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://instagram.com/be_drammer" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                    
+                      Instagram
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原生JS监听变量的变化"><span class="nav-number">1.</span> <span class="nav-text">原生JS监听变量的变化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几种解决方案："><span class="nav-number">2.</span> <span class="nav-text">几种解决方案：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ES5的getter与setter"><span class="nav-number">2.1.</span> <span class="nav-text">ES5的getter与setter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-observe"><span class="nav-number">2.2.</span> <span class="nav-text">Object.observe()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用ES6中的proxy"><span class="nav-number">2.3.</span> <span class="nav-text">使用ES6中的proxy</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shady</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
