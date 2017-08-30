@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="An Amazing World">
 <meta property="og:description" content="20个loading动画先说一点题外话吧，，最近好几天都没有在写博客/虽然我还是一直在学习css，嗯。/主要原因是什么呢？因为前几天我发现我暗恋的一个小女生有男朋友啦哈哈哈哈，绝望吧，就看着她跟她男票走那么近，然后我迎面走过，脸上应该还是一副很潇洒的样子吧。哈哈哈，心酸不。总之最近心情都不是很好，但是没人说啊，唉，我可能真的需要一个女朋友啦。突然都想把这篇文设为私密了，但是一想也没几个人看，那就不">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-29T09:14:00.233Z">
+<meta property="og:updated_time" content="2017-08-30T08:22:20.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="20个loading小动画&#x2F;&#x2F;二">
 <meta name="twitter:description" content="20个loading动画先说一点题外话吧，，最近好几天都没有在写博客/虽然我还是一直在学习css，嗯。/主要原因是什么呢？因为前几天我发现我暗恋的一个小女生有男朋友啦哈哈哈哈，绝望吧，就看着她跟她男票走那么近，然后我迎面走过，脸上应该还是一副很潇洒的样子吧。哈哈哈，心酸不。总之最近心情都不是很好，但是没人说啊，唉，我可能真的需要一个女朋友啦。突然都想把这篇文设为私密了，但是一想也没几个人看，那就不">
@@ -373,160 +373,12 @@
 <p>3：原作者@<u><span style="color: #0066cc;">Ben Sinca  来自codepen  <a href="https://codepen.io/arcticben/pen/yMomZg" target="_blank" rel="external"> https://codepen.io/arcticben/pen/yMomZg</a></span></u></p>
 <p>效果图懒得做了，想看的话就到原文看一看吧。</p>
 <p>分析一下效果：背景使用了渐变色，很漂亮的绿，嗯。主体就是一个定宽定高的大盒子，里面有三根线，上下两根上下移动，还有一根沿着长方形滑动的短线，短线穿过三根长线之间的空隙，当短线穿过，空隙变大，短线的长度在运动时长短发生变化。右上角有一个大圆和一个小圆，小圆围着大圆转。</p>
-<p>首先markup，</p>
-<pre><code>&amp;lt;div class=&quot;nav&quot;&amp;gt;
-     &amp;lt;div class=&quot;line top&quot;&amp;gt;&amp;lt;/div&amp;gt;
-     &amp;lt;div class=&quot;line middle&quot;&amp;gt;&amp;lt;/div&amp;gt;
-     &amp;lt;div class=&quot;line bottom&quot;&amp;gt;&amp;lt;/div&amp;gt;
-     &amp;lt;div class=&quot;run&quot;&amp;gt;&amp;lt;/div&amp;gt;
-     &amp;lt;div class=&quot;circle&quot;&amp;gt;&amp;lt;/div&amp;gt;/*小圆将使用after*/
-&amp;lt;/div&amp;gt;`&lt;/pre&gt;
-来将大概的背景定一下；
-&lt;pre class=&quot;pure-highlightjs&quot;&gt;`html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-body {
-  background: #50C9C3;
-  background: linear-gradient(to left, #50C9C3, #96DEDA);
-}`&lt;/pre&gt;
-主体部分的布局：
-&lt;pre class=&quot;pure-highlightjs&quot;&gt;`.nav {
-  height: 100px;
-  width: 90px;
-  position: absolute;
-  margin: 0 auto;
-  right: 0;
-  left: 0;
-  top: 45%;
-  cursor: pointer;
-}
-.nav .line{
-    position: relative;/*尽量不要使用absolute，在这里relative更灵活*/
-    width: 100%;
-    height: 3px;
-    background-color:#fff;
-    margin: 20px auto;
-}
-.nav .top{
-    top: 0;
-    animation:toprun 3s infinite;
-    animation-timing-function: cubic-bezier(0.51, 0.55, 0.27, 0.7);
-}
-.nav .bottom{
-        bottom：0；
-    animation: botrun 3s infinite;
-    animation-timing-function: cubic-bezier(0.51, 0.55, 0.27, 0.7);
-}
-.nav .circle{
-    position: absolute;
-    right:-30px;
-    top: -38px;
-    height: 30px;
-    width: 30px;
-    border-radius:100%;
-    border: 2px dotted #fff;
-    animation: circlerun 3s  ease-in infinite;
-}
-.circle::after{
-    position: absolute;
-    content: &apos;&apos;;
-    width: 10px;
-    height: 10px;
-    border: 2px dotted #fff;
-    border-radius:100%;
-    top:-10px;
-    right: -10px;
-}
-.nav .run{
-    position: absolute;
-    width: 23px;
-    height: 2px;
-    background-color:#fff;
-    top: 30px;
-    left: -10px;
-    animation: run 3s  ease-in infinite;
-    animation-timing-function: cubic-bezier(0.51, 0.55, 0.27, 0.7);
-}
-`&lt;/pre&gt;
-现在可以看到页面已将完成了，然后就是动画了：/*动画已在上面写过，所以直接来定义：
-&lt;pre class=&quot;pure-highlightjs&quot;&gt;`/*顶部线的运动*/
-@keyframes toprun {
-    0%{
-        top: -10px;
-    }
-    50%{
-        top:10px;
-    }
-    100%{
-        top: -10px;
-    }
-}
-/*底部线的运动*/
-}@keyframes botrun {
-    0%{
-        top: -10px;
-    }
-    50%{
-        top:10px;
-    }
-    100%{
-        top: -10px;
-    }
-}
-@keyframes circlerun{
-    0%{
-        transform: rotate(0deg);
-    }
-    100%{
-        transform: rotate(360deg);
-    }
-}
-.nav .run{
-    position: absolute;
-    width: 23px;
-    height: 2px;
-    background-color:#fff;
-    top: 30px;
-    left: -10px;
-    animation: run 3s  ease-in infinite;
-    animation-timing-function: cubic-bezier(0.51, 0.55, 0.27, 0.7);
-}
-/*圆圈的运动，注意这个动画是直接在circle上面定义的而非他的after*/
-@keyframes run{
-          0% {
-            left: -30px;
-            opacity: 1;
-          }
-          30% {
-            left: 100px;
-            top: 32px;
-            opacity: 1;
-          }
-          50% {
-            top: 60px;
-            left: 100px;
-          }
-          60% {
-            top: 60px;
-            left: 100px;
-          }
-          70% {
-            left: -30px;
-            opacity: 1;
-            top: 60px;
-          }
-          100% {
-            left: -30px;
-            opacity: 1;
-            top: 32px;
-          }
-}
-</code></pre><p>嗯就做完了，，，</p>
-<p>2017/4/1/14：31</p>
-<hr>
-<p>&nbsp;</p>
+<p>首先markup，<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"nav"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"line top"</span>&gt;</span>&amp;lt;/div&gt;</div><div class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"line middle"</span>&gt;</span>&amp;lt;/div&gt;</div><div class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"line bottom"</span>&gt;</span>&amp;lt;/div&gt;</div><div class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"run"</span>&gt;</span>&amp;lt;/div&gt;</div><div class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"circle"</span>&gt;</span>&amp;lt;/div&gt;/*小圆将使用after*/</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>来将大概的背景定一下；<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-tag">body</span> &#123;</div><div class="line">    <span class="attribute">background</span>: <span class="number">#50C9C3</span>;</div><div class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(to left, #50C9C3, #96DEDA);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>主体部分的布局：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.nav</span> &#123;</div><div class="line">    <span class="attribute">height</span>: <span class="number">100px</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">90px</span>;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">margin</span>: <span class="number">0</span> auto;</div><div class="line">    <span class="attribute">right</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">top</span>: <span class="number">45%</span>;</div><div class="line">    <span class="attribute">cursor</span>: pointer;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.nav</span> <span class="selector-class">.line</span>&#123;</div><div class="line">  	<span class="attribute">position</span>: relative;<span class="comment">/*尽量不要使用absolute，在这里relative更灵活*/</span></div><div class="line">  	<span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">  	<span class="attribute">height</span>: <span class="number">3px</span>;</div><div class="line">  	<span class="attribute">background-color</span>:<span class="number">#fff</span>;</div><div class="line">  	<span class="attribute">margin</span>: <span class="number">20px</span> auto;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.nav</span> <span class="selector-class">.top</span>&#123;</div><div class="line">  	<span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">  	<span class="attribute">animation</span>:toprun <span class="number">3s</span> infinite;</div><div class="line">  	<span class="attribute">animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.51, 0.55, 0.27, 0.7);</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.nav</span> <span class="selector-class">.bottom</span>&#123;</div><div class="line">          bottom：0；</div><div class="line">  	<span class="selector-tag">animation</span>: <span class="selector-tag">botrun</span> 3<span class="selector-tag">s</span> <span class="selector-tag">infinite</span>;</div><div class="line">  	<span class="selector-tag">animation-timing-function</span>: <span class="selector-tag">cubic-bezier</span>(0<span class="selector-class">.51</span>, 0<span class="selector-class">.55</span>, 0<span class="selector-class">.27</span>, 0<span class="selector-class">.7</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.nav</span> <span class="selector-class">.circle</span>&#123;</div><div class="line">  	<span class="attribute">position</span>: absolute;</div><div class="line">  	<span class="attribute">right</span>:-<span class="number">30px</span>;</div><div class="line">  	<span class="attribute">top</span>: -<span class="number">38px</span>;</div><div class="line">  	<span class="attribute">height</span>: <span class="number">30px</span>;</div><div class="line">  	<span class="attribute">width</span>: <span class="number">30px</span>;</div><div class="line">  	<span class="attribute">border-radius</span>:<span class="number">100%</span>;</div><div class="line">  	<span class="attribute">border</span>: <span class="number">2px</span> dotted <span class="number">#fff</span>;</div><div class="line">  	<span class="attribute">animation</span>: circlerun <span class="number">3s</span>  ease-in infinite;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.circle</span><span class="selector-pseudo">::after</span>&#123;</div><div class="line">  	<span class="attribute">position</span>: absolute;</div><div class="line">  	<span class="attribute">content</span>: <span class="string">''</span>;</div><div class="line">  	<span class="attribute">width</span>: <span class="number">10px</span>;</div><div class="line">  	<span class="attribute">height</span>: <span class="number">10px</span>;</div><div class="line">  	<span class="attribute">border</span>: <span class="number">2px</span> dotted <span class="number">#fff</span>;</div><div class="line">  	<span class="attribute">border-radius</span>:<span class="number">100%</span>;</div><div class="line">  	<span class="attribute">top</span>:-<span class="number">10px</span>;</div><div class="line">  	<span class="attribute">right</span>: -<span class="number">10px</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.nav</span> <span class="selector-class">.run</span>&#123;</div><div class="line">  	<span class="attribute">position</span>: absolute;</div><div class="line">  	<span class="attribute">width</span>: <span class="number">23px</span>;</div><div class="line">  	<span class="attribute">height</span>: <span class="number">2px</span>;</div><div class="line">  	<span class="attribute">background-color</span>:<span class="number">#fff</span>;</div><div class="line">  	<span class="attribute">top</span>: <span class="number">30px</span>;</div><div class="line">  	<span class="attribute">left</span>: -<span class="number">10px</span>;</div><div class="line">  	<span class="attribute">animation</span>: run <span class="number">3s</span>  ease-in infinite;</div><div class="line">  	<span class="attribute">animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.51, 0.55, 0.27, 0.7);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<pre><code>现在可以看到页面已将完成了，然后就是动画了：/*动画已在上面写过，所以直接来定义：
+</code></pre><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*顶部线的运动*/</span></div><div class="line">  @<span class="keyword">keyframes</span> toprun &#123;</div><div class="line">  	0%&#123;</div><div class="line">  		<span class="attribute">top</span>: -<span class="number">10px</span>;</div><div class="line">  	&#125;</div><div class="line">  	50%&#123;</div><div class="line">  		<span class="attribute">top</span>:<span class="number">10px</span>;</div><div class="line">  	&#125;</div><div class="line">  	100%&#123;</div><div class="line">  		<span class="attribute">top</span>: -<span class="number">10px</span>;</div><div class="line">  	&#125;</div><div class="line">  &#125;</div><div class="line">  <span class="comment">/*底部线的运动*/</span></div><div class="line">  &#125;@<span class="keyword">keyframes</span> botrun &#123;</div><div class="line">  	0%&#123;</div><div class="line">  		<span class="attribute">top</span>: -<span class="number">10px</span>;</div><div class="line">  	&#125;</div><div class="line">  	50%&#123;</div><div class="line">  		<span class="attribute">top</span>:<span class="number">10px</span>;</div><div class="line">  	&#125;</div><div class="line">  	100%&#123;</div><div class="line">  		<span class="attribute">top</span>: -<span class="number">10px</span>;</div><div class="line">  	&#125;</div><div class="line">  &#125;</div><div class="line">  @<span class="keyword">keyframes</span> circlerun&#123;</div><div class="line">  	0%&#123;</div><div class="line">  		<span class="attribute">transform</span>: <span class="built_in">rotate</span>(0deg);</div><div class="line">  	&#125;</div><div class="line">  	100%&#123;</div><div class="line">  		<span class="attribute">transform</span>: <span class="built_in">rotate</span>(360deg);</div><div class="line">  	&#125;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.nav</span> <span class="selector-class">.run</span>&#123;</div><div class="line">  	<span class="attribute">position</span>: absolute;</div><div class="line">  	<span class="attribute">width</span>: <span class="number">23px</span>;</div><div class="line">  	<span class="attribute">height</span>: <span class="number">2px</span>;</div><div class="line">  	<span class="attribute">background-color</span>:<span class="number">#fff</span>;</div><div class="line">  	<span class="attribute">top</span>: <span class="number">30px</span>;</div><div class="line">  	<span class="attribute">left</span>: -<span class="number">10px</span>;</div><div class="line">  	<span class="attribute">animation</span>: run <span class="number">3s</span>  ease-in infinite;</div><div class="line">  	<span class="attribute">animation-timing-function</span>: <span class="built_in">cubic-bezier</span>(0.51, 0.55, 0.27, 0.7);</div><div class="line">  &#125;</div><div class="line">  <span class="comment">/*圆圈的运动，注意这个动画是直接在circle上面定义的而非他的after*/</span></div><div class="line">  @<span class="keyword">keyframes</span> run&#123;</div><div class="line">  		  0% &#123;</div><div class="line">  		    <span class="attribute">left</span>: -<span class="number">30px</span>;</div><div class="line">  		    <span class="attribute">opacity</span>: <span class="number">1</span>;</div><div class="line">  		  &#125;</div><div class="line">  		  30% &#123;</div><div class="line">  		    <span class="attribute">left</span>: <span class="number">100px</span>;</div><div class="line">  		    <span class="attribute">top</span>: <span class="number">32px</span>;</div><div class="line">  		    <span class="attribute">opacity</span>: <span class="number">1</span>;</div><div class="line">  		  &#125;</div><div class="line">  		  50% &#123;</div><div class="line">  		    <span class="attribute">top</span>: <span class="number">60px</span>;</div><div class="line">  		    <span class="attribute">left</span>: <span class="number">100px</span>;</div><div class="line">  		  &#125;</div><div class="line">  		  60% &#123;</div><div class="line">  		    <span class="attribute">top</span>: <span class="number">60px</span>;</div><div class="line">  		    <span class="attribute">left</span>: <span class="number">100px</span>;</div><div class="line">  		  &#125;</div><div class="line">  		  70% &#123;</div><div class="line">  		    <span class="attribute">left</span>: -<span class="number">30px</span>;</div><div class="line">  		    <span class="attribute">opacity</span>: <span class="number">1</span>;</div><div class="line">  		    <span class="attribute">top</span>: <span class="number">60px</span>;</div><div class="line">  		  &#125;</div><div class="line">  		  100% &#123;</div><div class="line">  		    <span class="attribute">left</span>: -<span class="number">30px</span>;</div><div class="line">  		    <span class="attribute">opacity</span>: <span class="number">1</span>;</div><div class="line">  		    <span class="attribute">top</span>: <span class="number">32px</span>;</div><div class="line">  		  &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h2 id="嗯就做完了，，，"><a href="#嗯就做完了，，，" class="headerlink" title="嗯就做完了，，，"></a>嗯就做完了，，，</h2><p>2017/4/1/14：31</p>
 
       
     </div>
@@ -664,7 +516,7 @@ body {
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -700,7 +552,7 @@ body {
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/STAN" target="_blank" title="Twitter">
+                <a href="https://twitter.com/2314980309_stan" target="_blank" title="Twitter">
                   
                     <i class="fa fa-fw fa-twitter"></i>
                   
@@ -745,7 +597,7 @@ body {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#20个loading动画"><span class="nav-number">1.</span> <span class="nav-text">20个loading动画</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#20个loading动画"><span class="nav-number">1.</span> <span class="nav-text">20个loading动画</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嗯就做完了，，，"><span class="nav-number"></span> <span class="nav-text">嗯就做完了，，，</span></a></div>
             
 
           </div>

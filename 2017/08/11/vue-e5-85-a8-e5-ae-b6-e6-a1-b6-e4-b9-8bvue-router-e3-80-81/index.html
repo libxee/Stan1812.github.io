@@ -95,18 +95,18 @@
 
 
 
-<meta name="description" content="我认为现在的webapp之所以能成为app除了其日益丰富的功能之外，强大的路由功能也是极其重要的一个组成部分。 暑期留校总结&amp;lt;二&amp;gt;——Vue-router开始自然还是从官方文档开始上车了~文档地址在此 和Vue一样，Vue-router也可直接引入CDN即可使用，但是这显然并不是真正开发中的使用场景。 当然还是需要使用我们的老伙计npm来安装一波： npm install vue-ro">
+<meta name="description" content="我认为现在的webapp之所以能成为app除了其日益丰富的功能之外，强大的路由功能也是极其重要的一个组成部分。 暑期留校总结&amp;lt;二&amp;gt;——Vue-router开始自然还是从官方文档开始上车了~文档地址在此 和Vue一样，Vue-router也可直接引入CDN即可使用，但是这显然并不是真正开发中的使用场景。 当然还是需要使用我们的老伙计npm来安装一波：    npm install vue">
 <meta name="keywords" content="Vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue全家桶之Vue-router">
 <meta property="og:url" content="http://yoursite.com/2017/08/11/vue-e5-85-a8-e5-ae-b6-e6-a1-b6-e4-b9-8bvue-router-e3-80-81/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="我认为现在的webapp之所以能成为app除了其日益丰富的功能之外，强大的路由功能也是极其重要的一个组成部分。 暑期留校总结&amp;lt;二&amp;gt;——Vue-router开始自然还是从官方文档开始上车了~文档地址在此 和Vue一样，Vue-router也可直接引入CDN即可使用，但是这显然并不是真正开发中的使用场景。 当然还是需要使用我们的老伙计npm来安装一波： npm install vue-ro">
+<meta property="og:description" content="我认为现在的webapp之所以能成为app除了其日益丰富的功能之外，强大的路由功能也是极其重要的一个组成部分。 暑期留校总结&amp;lt;二&amp;gt;——Vue-router开始自然还是从官方文档开始上车了~文档地址在此 和Vue一样，Vue-router也可直接引入CDN即可使用，但是这显然并不是真正开发中的使用场景。 当然还是需要使用我们的老伙计npm来安装一波：    npm install vue">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-29T09:14:00.233Z">
+<meta property="og:updated_time" content="2017-08-30T07:22:07.734Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue全家桶之Vue-router">
-<meta name="twitter:description" content="我认为现在的webapp之所以能成为app除了其日益丰富的功能之外，强大的路由功能也是极其重要的一个组成部分。 暑期留校总结&amp;lt;二&amp;gt;——Vue-router开始自然还是从官方文档开始上车了~文档地址在此 和Vue一样，Vue-router也可直接引入CDN即可使用，但是这显然并不是真正开发中的使用场景。 当然还是需要使用我们的老伙计npm来安装一波： npm install vue-ro">
+<meta name="twitter:description" content="我认为现在的webapp之所以能成为app除了其日益丰富的功能之外，强大的路由功能也是极其重要的一个组成部分。 暑期留校总结&amp;lt;二&amp;gt;——Vue-router开始自然还是从官方文档开始上车了~文档地址在此 和Vue一样，Vue-router也可直接引入CDN即可使用，但是这显然并不是真正开发中的使用场景。 当然还是需要使用我们的老伙计npm来安装一波：    npm install vue">
 
 
 
@@ -372,161 +372,44 @@
         <p>我认为现在的webapp之所以能成为app除了其日益丰富的功能之外，强大的路由功能也是极其重要的一个组成部分。</p>
 <h2 id="暑期留校总结-lt-二-gt-——Vue-router"><a href="#暑期留校总结-lt-二-gt-——Vue-router" class="headerlink" title="暑期留校总结&lt;二&gt;——Vue-router"></a>暑期留校总结&lt;二&gt;——Vue-router</h2><p>开始自然还是从官方文档开始上车了~文档地址<a href="https://router.vuejs.org/zh-cn/" target="_blank" rel="external">在此</a></p>
 <p>和Vue一样，Vue-router也可直接引入CDN即可使用，但是这显然并不是真正开发中的使用场景。</p>
-<p>当然还是需要使用我们的老伙计npm来安装一波：</p>
-<pre><code>npm install vue-router
-`&lt;/pre&gt;
-如果在一个模块化工程中使用它，必须要通过 `Vue.use()` 明确地安装路由功能：
-&lt;pre&gt;`&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Vue &lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&apos;vue&apos;&lt;/span&gt;
-&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; VueRouter &lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&apos;vue-router&apos;&lt;/span&gt;
-
-Vue.use(VueRouter)
-`&lt;/pre&gt;
-如果使用全局的 script 标签，则无须如此（手动安装）。
-
-用 Vue.js + vue-router 创建单页应用，是非常简单的。使用 Vue.js ，我们已经可以通过组合组件来组成应用程序，当你要把 vue-router 添加进来，我们需要做的是，将组件(components)映射到路由(routes)，然后告诉 vue-router 在哪里渲染它们
-&lt;pre class=&quot;pure-highlightjs&quot;&gt;`
-&amp;lt;div id=&quot;app&quot;&amp;gt;
-  &amp;lt;h1&amp;gt;Hello App!&amp;lt;/h1&amp;gt;
-  &amp;lt;p&amp;gt;
-    &amp;lt;router-link to=&quot;/foo&quot;&amp;gt;Go to Foo&amp;lt;/router-link&amp;gt;
-    &amp;lt;router-link to=&quot;/bar&quot;&amp;gt;Go to Bar&amp;lt;/router-link&amp;gt;
-  &amp;lt;/p&amp;gt;
-  &amp;lt;router-view&amp;gt;&amp;lt;/router-view&amp;gt;
-&amp;lt;/div&amp;gt;`&lt;/pre&gt;
-vue中 使用 router-link 组件来导航. 通过传入 `to` 属性指定链接.  &amp;lt;router-link&amp;gt; 默认会被渲染成一个 `&amp;lt;a&amp;gt;` 标签 ，当然你也可以自定义tag属性为span，div等
-
-router-view则是 路由的出口 路由匹配到的组件将渲染在这里
-
-对应的js是这样编写的：
-&lt;pre class=&quot;pure-highlightjs&quot;&gt;`
-const Foo = { template: &apos;&amp;lt;div&amp;gt;foo&amp;lt;/div&amp;gt;&apos; }
-const Bar = { template: &apos;&amp;lt;div&amp;gt;bar&amp;lt;/div&amp;gt;&apos; }
-
-const routes = [
-  { path: &apos;/foo&apos;, component: Foo },
-  { path: &apos;/bar&apos;, component: Bar }
-]
-
-const router = new VueRouter({
-  routes // （缩写）相当于 routes: routes
-})
-
-const app = new Vue({
-  router
-}).$mount(&apos;#app&apos;)
-
-`&lt;/pre&gt;
-0\. 如果使用模块化机制编程，導入Vue和VueRouter，要调用 Vue.use(VueRouter)
-
-1\. 定义（路由）组件。 可以从其他文件 import 进来
-
-2\. 定义路由 // 每个路由应该映射一个组件。 其中&quot;component&quot; 可以是 通过 Vue.extend() 创建的组件构造器，  或者，只是一个组件配置对象。
-
-3\. 创建 router 实例，然后传 `routes` 配置
-
-4\. 创建和挂载根实例。 // 记得要通过 router 配置参数注入路由， 从而让整个应用都有路由功能
-
-现在，应用已经启动了！
-
-### 嵌套路由：
-
-对于嵌套路由：vue1.0和2.0的写法是不同的，其实我觉得相比只下1.0的甚至比2.0要简单一些，也可能并不是。。。
-
-router-view中是可以嵌套router-view的，这也就构成了嵌套
-
-我们来看一下2.0中嵌套路由的写法
-&lt;pre class=&quot;pure-highlightjs&quot;&gt;`  { path: &apos;/user&apos;, component: User,
-      children: [
-        {
-          path: &apos;profile&apos;,
-          component: UserProfile
-        },
-        {
-          path: &apos;posts&apos;,
-          component: UserPosts
-        }
-      ]
-    }`&lt;/pre&gt;
-
-###  编程式导航：
-
-说实话，编程式导航，我用的并不多，，也就是使用router.go()
-
-在这里也系统的复习一下：
-&gt; 除了使用 `&amp;lt;router-link&amp;gt;` 创建 a 标签来定义导航链接，我们还可以借助 router 的实例方法，通过编写代码来实现。
-</code></pre><blockquote>
-<pre><code>#### `router.push(location)`
-
-想要导航到不同的 URL，则使用 `router.push` 方法。这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。
-
-当你点击 `&amp;lt;router-link&amp;gt;` 时，这个方法会在内部调用，所以说，点击 `&amp;lt;router-link :to=&quot;...&quot;&amp;gt;` 等同于调用 `router.push(...)`。
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;声明式&lt;/th&gt;
-&lt;th&gt;编程式&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;`&amp;lt;router-link :to=&quot;...&quot;&amp;gt;`&lt;/td&gt;
-&lt;td&gt;`router.push(...)`&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-该方法的参数可以是一个字符串路径，或者一个描述地址的对象。例如：
-&lt;pre&gt;`&lt;span class=&quot;hljs-comment&quot;&gt;// 字符串&lt;/span&gt;
-router.push(&lt;span class=&quot;hljs-string&quot;&gt;&apos;home&apos;&lt;/span&gt;)
+<p>当然还是需要使用我们的老伙计npm来安装一波：<br>    npm install vue-router</p>
+<p>如果在一个模块化工程中使用它，必须要通过 <code>Vue.use()</code> 明确地安装路由功能：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span> <span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">'vue-router'</span></div><div class="line">Vue.use(VueRouter)</div></pre></td></tr></table></figure></p>
+<p>如果使用全局的 script 标签，则无须如此（手动安装）。</p>
+<pre><code>用 Vue.js + vue-router 创建单页应用，是非常简单的。使用 Vue.js ，我们已经可以通过组合组件来组成应用程序，当你要把 vue-router 添加进来，我们需要做的是，将组件(components)映射到路由(routes)，然后告诉 vue-router 在哪里渲染它们
+</code></pre><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello App!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>;</div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>;</div><div class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/foo"</span>&gt;</span>;Go to Foo<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span>;</div><div class="line">    <span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/bar"</span>&gt;</span>;Go to Bar<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span>;</div><div class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span>;</div><div class="line">  <span class="tag">&lt;<span class="name">router-view</span>&gt;</span>;<span class="tag">&lt;/<span class="name">router-view</span>&gt;</span>;</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span>;</div></pre></td></tr></table></figure>
+<p>vue中 使用 router-link 组件来导航. 通过传入 <code>to</code> 属性指定链接.  &lt;router-link&gt;; 默认会被渲染成一个 <code>&amp;lt;a&amp;gt;</code> 标签 ，当然你也可以自定义tag属性为span，div等</p>
+<p>router-view则是 路由的出口 路由匹配到的组件将渲染在这里</p>
+<p>对应的js是这样编写的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> Foo = &#123; <span class="attr">template</span>: <span class="string">'&amp;lt;div&amp;gt;foo&amp;lt;/div&amp;gt;'</span> &#125;</div><div class="line"><span class="keyword">const</span> Bar = &#123; <span class="attr">template</span>: <span class="string">'&amp;lt;div&amp;gt;bar&amp;lt;/div&amp;gt;'</span> &#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> routes = [</div><div class="line">  &#123; <span class="attr">path</span>: <span class="string">'/foo'</span>, <span class="attr">component</span>: Foo &#125;,</div><div class="line">  &#123; <span class="attr">path</span>: <span class="string">'/bar'</span>, <span class="attr">component</span>: Bar &#125;</div><div class="line">]</div><div class="line"></div><div class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</div><div class="line">  routes <span class="comment">// （缩写）相当于 routes: routes</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">  router</div><div class="line">&#125;).$mount(<span class="string">'#app'</span>)</div></pre></td></tr></table></figure></p>
+<p>0. 如果使用模块化机制编程，導入Vue和VueRouter，要调用 Vue.use(VueRouter)</p>
+<p>1. 定义（路由）组件。 可以从其他文件 import 进来</p>
+<p> 2. 定义路由 // 每个路由应该映射一个组件。 其中”component” 可以是 通过 Vue.extend() 创建的组件构造器，  或者，只是一个组件配置对象。</p>
+<p> 3. 创建 router 实例，然后传 <code>routes</code> 配置</p>
+<p>4. 创建和挂载根实例。 // 记得要通过 router 配置参数注入路由， 从而让整个应用都有路由功能</p>
+<p>现在，应用已经启动了！</p>
+<h3 id="嵌套路由："><a href="#嵌套路由：" class="headerlink" title="嵌套路由："></a>嵌套路由：</h3><p>对于嵌套路由：vue1.0和2.0的写法是不同的，其实我觉得相比只下1.0的甚至比2.0要简单一些，也可能并不是。。。</p>
+<p>router-view中是可以嵌套router-view的，这也就构成了嵌套</p>
+<p>我们来看一下2.0中嵌套路由的写法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="attr">path</span>: <span class="string">'/user'</span>, <span class="attr">component</span>: User,</div><div class="line">          children: [</div><div class="line">            &#123;</div><div class="line">              path: <span class="string">'profile'</span>,</div><div class="line">              component: UserProfile</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">              path: <span class="string">'posts'</span>,</div><div class="line">              component: UserPosts</div><div class="line">            &#125;</div><div class="line">          ]</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="编程式导航："><a href="#编程式导航：" class="headerlink" title="编程式导航："></a>编程式导航：</h3><p>说实话，编程式导航，我用的并不多，，也就是使用router.go()</p>
+<p>在这里也系统的复习一下：<br>除了使用 <code>&lt;router-link&gt;&lt;/router-link&gt;</code> 创建 a 标签来定义导航链接，我们还可以借助 router 的实例方法，通过编写代码来实现。</p>
+<h4 id="router-push-location"><a href="#router-push-location" class="headerlink" title="router.push(location)"></a><code>router.push(location)</code></h4><p>想要导航到不同的 URL，则使用 <code>router.push</code> 方法。这个方法会向 history 栈添加一个新的记录，所以，当用户点击浏览器后退按钮时，则回到之前的 URL。</p>
+<p>当你点击 <code>&amp;lt;router-link&amp;gt;</code> 时，这个方法会在内部调用，所以说，点击 <code>&amp;lt;router-link :to=&quot;...&quot;&amp;gt;</code> 等同于调用 <code>router.push(...)</code>。</p>
+<table><br><thead><br><tr><br><th>声明式</th><br><th>编程式</th><br></tr><br></thead><br><tbody><br><tr><br><td><code>&amp;lt;router-link :to=&quot;...&quot;&amp;gt;</code></td><br><td><code>router.push(...)</code></td><br></tr><br></tbody><br></table><br>该方法的参数可以是一个字符串路径，或者一个描述地址的对象。例如：<br><pre><code>&lt;span class=&quot;hljs-comment&quot;&gt;// 字符串&lt;/span&gt;
+router.push(&lt;span class=&quot;hljs-string&quot;&gt;&#39;home&#39;&lt;/span&gt;)
 
 &lt;span class=&quot;hljs-comment&quot;&gt;// 对象&lt;/span&gt;
-router.push({ path: &lt;span class=&quot;hljs-string&quot;&gt;&apos;home&apos;&lt;/span&gt; })
+router.push({ path: &lt;span class=&quot;hljs-string&quot;&gt;&#39;home&#39;&lt;/span})
 
 &lt;span class=&quot;hljs-comment&quot;&gt;// 命名的路由&lt;/span&gt;
-router.push({ name: &lt;span class=&quot;hljs-string&quot;&gt;&apos;user&apos;&lt;/span&gt;, params: { userId: &lt;span class=&quot;hljs-number&quot;&gt;123&lt;/span&gt; }})
+router.push({ name: &lt;span class=&quot;hljs-string&quot;&gt;&#39;user&#39;&lt;/span&gt;, params: { userId: &lt;span class=&quot;hljs-number&quot;&gt;123&lt;/span}})
 
 &lt;span class=&quot;hljs-comment&quot;&gt;// 带查询参数，变成 /register?plan=private&lt;/span&gt;
-router.push({ path: &lt;span class=&quot;hljs-string&quot;&gt;&apos;register&apos;&lt;/span&gt;, query: { plan: &lt;span class=&quot;hljs-string&quot;&gt;&apos;private&apos;&lt;/span&gt; }})
-`&lt;/pre&gt;
+router.push({ path: &lt;span class=&quot;hljs-string&quot;&gt;&#39;register&#39;&lt;/span&gt;, query: { plan: &lt;span class=&quot;hljs-string&quot;&gt;&#39;private&#39;&lt;/span}})</code></pre><br><br>#### <code>router.replace(location)</code><br><br>跟 <code>router.push</code> 很像，唯一的不同就是，它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。<br><table><br><thead><br><tr><br><th>声明式</th><br><th>编程式</th><br></tr><br></thead><br><tbody><br><tr><br><td><code>&amp;lt;router-link :to=&quot;...&quot; replace&amp;gt;</code></td><br><td><code>router.replace(...)</code></td><br></tr><br></tbody><br></table>
 
-#### `router.replace(location)`
-
-跟 `router.push` 很像，唯一的不同就是，它不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录。
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;声明式&lt;/th&gt;
-&lt;th&gt;编程式&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;`&amp;lt;router-link :to=&quot;...&quot; replace&amp;gt;`&lt;/td&gt;
-&lt;td&gt;`router.replace(...)`&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-#### `router.go(n)`
-
-这个方法的参数是一个整数，意思是在 history 记录中向前或者后退多少步，类似 `window.history.go(n)`。
-
-例子
-&lt;pre&gt;`&lt;span class=&quot;hljs-comment&quot;&gt;// 在浏览器记录中前进一步，等同于 history.forward()&lt;/span&gt;
-router.go(&lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;)
-
-&lt;span class=&quot;hljs-comment&quot;&gt;// 后退一步记录，等同于 history.back()&lt;/span&gt;
-router.go(&lt;span class=&quot;hljs-number&quot;&gt;-1&lt;/span&gt;)
-
-&lt;span class=&quot;hljs-comment&quot;&gt;// 前进 3 步记录&lt;/span&gt;
-router.go(&lt;span class=&quot;hljs-number&quot;&gt;3&lt;/span&gt;)
-
-&lt;span class=&quot;hljs-comment&quot;&gt;// 如果 history 记录不够用，那就默默地失败呗&lt;/span&gt;
-router.go(&lt;span class=&quot;hljs-number&quot;&gt;-100&lt;/span&gt;)
-router.go(&lt;span class=&quot;hljs-number&quot;&gt;100&lt;/span&gt;)
-</code></pre><h4 id="操作-History"><a href="#操作-History" class="headerlink" title="操作 History"></a>操作 History</h4><p>你也许注意到 <code>router.push</code>、 <code>router.replace</code> 和 <code>router.go</code> 跟 <a href="https://developer.mozilla.org/en-US/docs/Web/API/History" target="_blank" rel="external"><code>window.history.pushState</code>、 <code>window.history.replaceState</code> 和 <code>window.history.go</code></a>好像， 实际上它们确实是效仿 <code>window.history</code> API 的。</p>
+<h4 id="router-go-n"><a href="#router-go-n" class="headerlink" title="router.go(n)"></a><code>router.go(n)</code></h4><p>  这个方法的参数是一个整数，意思是在 history 记录中向前或者后退多少步，类似 <code>window.history.go(n)</code>。</p>
+<p>  例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 在浏览器记录中前进一步，等同于 history.forward()&lt;/span&gt;</span></div><div class="line">  router.go(<span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="comment">// 后退一步记录，等同于 history.back()</span></div><div class="line">  router.go(<span class="number">-1</span>)</div><div class="line"></div><div class="line"><span class="comment">// 前进 3 步记录</span></div><div class="line">  router.go(<span class="number">3</span>)</div><div class="line"></div><div class="line"><span class="comment">// 如果 history 记录不够用，那就默默地失败呗</span></div><div class="line">  router.go(<span class="number">-100</span>)</div><div class="line">  router.go(<span class="number">100</span>)</div></pre></td></tr></table></figure></p>
+<h4 id="操作-History"><a href="#操作-History" class="headerlink" title="操作 History"></a>操作 History</h4><p>你也许注意到 <code>router.push</code>、 <code>router.replace</code> 和 <code>router.go</code> 跟 <a href="https://developer.mozilla.org/en-US/docs/Web/API/History" target="_blank" rel="external"><code>window.history.pushState</code>、 <code>window.history.replaceState</code> 和 <code>window.history.go</code></a>好像， 实际上它们确实是效仿 <code>window.history</code> API 的。</p>
 <p>因此，如果你已经熟悉 <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API" target="_blank" rel="external">Browser History APIs</a>，那么在 vue-router 中操作 history 就是超级简单的。</p>
 <p>还有值得提及的，vue-router 的导航方法 （<code>push</code>、 <code>replace</code>、 <code>go</code>） 在各类路由模式（<code>history</code>、 <code>hash</code> 和 <code>abstract</code>）下表现一致。</p>
-</blockquote>
 <h3 id="数据的加载："><a href="#数据的加载：" class="headerlink" title="数据的加载："></a>数据的加载：</h3><p>既然我们用路由来实现不同页面之间的跳转，不同页面的数据自然又一个加载的过程，这个过程有两种处理方案：</p>
 <ul>
 <li><strong>导航完成之后获取</strong>：先完成导航，然后在接下来的组件生命周期钩子中获取数据。在数据获取期间显示『加载中』之类的指示。</li>
@@ -675,7 +558,7 @@ router.go(&lt;span class=&quot;hljs-number&quot;&gt;100&lt;/span&gt;)
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -711,7 +594,7 @@ router.go(&lt;span class=&quot;hljs-number&quot;&gt;100&lt;/span&gt;)
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/STAN" target="_blank" title="Twitter">
+                <a href="https://twitter.com/2314980309_stan" target="_blank" title="Twitter">
                   
                     <i class="fa fa-fw fa-twitter"></i>
                   
@@ -756,7 +639,7 @@ router.go(&lt;span class=&quot;hljs-number&quot;&gt;100&lt;/span&gt;)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#暑期留校总结-lt-二-gt-——Vue-router"><span class="nav-number">1.</span> <span class="nav-text">暑期留校总结<二>——Vue-router</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#操作-History"><span class="nav-number">1.0.1.</span> <span class="nav-text">操作 History</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的加载："><span class="nav-number">1.1.</span> <span class="nav-text">数据的加载：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#暑期留校总结-lt-二-gt-——Vue-router"><span class="nav-number">1.</span> <span class="nav-text">暑期留校总结<二>——Vue-router</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌套路由："><span class="nav-number">1.1.</span> <span class="nav-text">嵌套路由：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编程式导航："><span class="nav-number">1.2.</span> <span class="nav-text">编程式导航：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#router-push-location"><span class="nav-number">1.2.1.</span> <span class="nav-text">router.push(location)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#router-go-n"><span class="nav-number">1.2.2.</span> <span class="nav-text">router.go(n)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作-History"><span class="nav-number">1.2.3.</span> <span class="nav-text">操作 History</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的加载："><span class="nav-number">1.3.</span> <span class="nav-text">数据的加载：</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -104,7 +104,7 @@
 <meta property="og:description" content="Vue-resourse是vue的一个AJAX工具，在使用时为开发者带来了很大的方便，相比axios，vue-resourse已经停止维护，官方推荐的也是axios，但是我还没有用过。他们两个的具体区别我并不知道。。这里不做评价。 暑期留校总结&amp;lt;三&amp;gt;—— Vue-resourse因为在做的小项目中使用的是Vue-resourse，所以在这里对Vue-resourse来进行一下总结。 最">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/341820/201607/341820-20160710080109342-1842115136.png">
-<meta property="og:updated_time" content="2017-08-29T09:14:00.233Z">
+<meta property="og:updated_time" content="2017-08-30T07:36:07.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue全家桶之Vue-resourse">
 <meta name="twitter:description" content="Vue-resourse是vue的一个AJAX工具，在使用时为开发者带来了很大的方便，相比axios，vue-resourse已经停止维护，官方推荐的也是axios，但是我还没有用过。他们两个的具体区别我并不知道。。这里不做评价。 暑期留校总结&amp;lt;三&amp;gt;—— Vue-resourse因为在做的小项目中使用的是Vue-resourse，所以在这里对Vue-resourse来进行一下总结。 最">
@@ -383,31 +383,13 @@
 <p>Promise是ES6的特性，Promise的中文含义为“先知”，Promise对象用于异步计算。<br>URI Templates表示URI模板，有些类似于ASP.NET MVC的路由模板。</p>
 <p><strong>4. 支持拦截器</strong></p>
 <p>拦截器是全局的，拦截器可以在请求发送前和发送请求后做一些处理。<br>拦截器在一些场景下会非常有用，比如请求发送前在headers中设置access_token，或者在请求失败时，提供共通的处理方式。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>当然还是老伙计npm ：npm install Vue-resourse,</p>
-<p>ES6 中引入：</p>
-<p><div></div></p>
-<pre>import VueResource from 'vue-resource'
-Vue.use(VueResource)</pre>
-先来看一下官方给的最简单的demo：
-
-    {
-      // GET /someUrl
-      this.$http.get('/someUrl').then(response =&gt; {
-
-        // get body data
-        this.someData = response.body;
-
-      }, response =&gt; {
-        // error callback
-      });
-    }`
-
-<pre><code>### 基本使用：
-
-Vue-resourse，有两种使用方法：
-</code></pre><ul>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>当然还是老伙计npm ：<code>npm install Vue-resourse</code>,</p>
+<p>ES6 中引入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> VueResource <span class="keyword">from</span> <span class="string">'vue-resource'</span></div><div class="line">Vue.use(VueResource)</div><div class="line">先来看一下官方给的最简单的demo：</div><div class="line">&#123;</div><div class="line">  <span class="comment">// GET /someUrl</span></div><div class="line">  <span class="keyword">this</span>.$http.get(<span class="string">'/someUrl'</span>).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line"><span class="comment">// get body data</span></div><div class="line"><span class="keyword">this</span>.someData = response.body;</div><div class="line">  &#125;, (response) =&gt; &#123;</div><div class="line"><span class="comment">// error callback</span></div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="基本使用："><a href="#基本使用：" class="headerlink" title="基本使用："></a>基本使用：</h3><p>Vue-resourse，有两种使用方法：</p>
+<ul>
 <li>使用Vue.http或this.$http</li>
-<li><p>使用Vue.resource或this.$resource<br>实际上，第二种方法的实现也是基于第一种方法来实现的，所以我们在这里只讨论第一种方法</p>
+<li>使用Vue.resource或this.$resource<br>实际上，第二种方法的实现也是基于第一种方法来实现的，所以我们在这里只讨论第一种方法</li>
+</ul>
 <p></p>
 <pre class="javascript hljs "><span class="hljs-comment">// 基于全局Vue对象使用http</span>
 Vue.http.get(<span class="hljs-string">'/someUrl'</span>, [options]).then(successCallback, errorCallback);
@@ -419,26 +401,26 @@ Vue.http.post(<span class="hljs-string">'/someUrl'</span>, [body], [options]).th
 而在回掉函数中，我们推荐使用ES6的写法（代码会简洁很多）：
 <pre class="javascript hljs ">.then(
   (response) =&gt; {
-    <span class="hljs-comment">// 响应成功回调</span>
+<span class="hljs-comment">// 响应成功回调</span>
   }, 
    (response) =&gt; {
-    <span class="hljs-comment">// 响应错误回调</span>
+<span class="hljs-comment">// 响应错误回调</span>
   }
 );</pre>
 
 <p>通常我们还是需要写一个catch来包住错误。</p>
 <h3 id="请求："><a href="#请求：" class="headerlink" title="请求："></a>请求：</h3><p>Vue-resourse提供了一下七种请求：</p>
-</li>
-<li><p><code>get(url, [options])</code></p>
-</li>
+<ul>
+<li><code>get(url, [options])</code></li>
 <li><code>head(url, [options])</code></li>
 <li><code>delete(url, [options])</code></li>
 <li><code>jsonp(url, [options])</code></li>
 <li><code>post(url, [body], [options])</code></li>
 <li><code>put(url, [body], [options])</code></li>
-<li><p><code>patch(url, [body], [options])</code><br>发送请求时的options选项对象包含以下属性：</p>
-<table class="post-table"><br><thead><br><tr><br><th width="134">参数</th><br><th width="212">类型</th><br><th width="628">描述</th><br></tr><br></thead><br><tbody><br><tr><br><td width="134">url</td><br><td width="212"><code>string</code></td><br><td width="628">请求的URL</td><br></tr><br><tr><br><td width="134">method</td><br><td width="212"><code>string</code></td><br><td width="628">请求的HTTP方法，例如：’GET’, ‘POST’或其他HTTP方法</td><br></tr><br><tr><br><td width="134">body</td><br><td width="212"><code>Object</code>, <code>FormData</code> <code>string</code></td><br><td width="628">request body</td><br></tr><br><tr><br><td width="134">params</td><br><td width="212"><code>Object</code></td><br><td width="628">请求的URL参数对象</td><br></tr><br><tr><br><td width="134">headers</td><br><td width="212"><code>Object</code></td><br><td width="628">request header</td><br></tr><br><tr><br><td width="134">timeout</td><br><td width="212"><code>number</code></td><br><td width="628">单位为毫秒的请求超时时间 (<code>0</code> 表示无超时时间)</td><br></tr><br><tr><br><td width="134">before</td><br><td width="212"><code>function(request)</code></td><br><td width="628">请求发送前的处理函数，类似于jQuery的beforeSend函数</td><br></tr><br><tr><br><td width="134">progress</td><br><td width="212"><code>function(event)</code></td><br><td width="628"><a href="https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent" target="_blank" rel="external">ProgressEvent</a>回调处理函数</td><br></tr><br><tr><br><td width="134">credentials</td><br><td width="212"><code>boolean</code></td><br><td width="628">表示跨域请求时是否需要使用凭证</td><br></tr><br><tr><br><td width="134">emulateHTTP</td><br><td width="212"><code>boolean</code></td><br><td width="628">发送PUT, PATCH, DELETE请求时以HTTP POST的方式发送，并设置请求头的<code>X-HTTP-Method-Override</code></td><br></tr><br><tr><br><td width="134">emulateJSON</td><br><td width="212"><code>boolean</code></td><br><td width="628">将request body以<code>application/x-www-form-urlencoded</code> content type发送</td><br></tr><br></tbody><br></table>
+<li><code>patch(url, [body], [options])</code><br>发送请求时的options选项对象包含以下属性：<table class="post-table"><br><thead><br><tr><br><th width="134">参数</th><br><th width="212">类型</th><br><th width="628">描述</th><br></tr><br></thead><br><tbody><br><tr><br><td width="134">url</td><br><td width="212"><code>string</code></td><br><td width="628">请求的URL</td><br></tr><br><tr><br><td width="134">method</td><br><td width="212"><code>string</code></td><br><td width="628">请求的HTTP方法，例如：’GET’, ‘POST’或其他HTTP方法</td><br></tr><br><tr><br><td width="134">body</td><br><td width="212"><code>Object</code>, <code>FormData</code> <code>string</code></td><br><td width="628">request body</td><br></tr><br><tr><br><td width="134">params</td><br><td width="212"><code>Object</code></td><br><td width="628">请求的URL参数对象</td><br></tr><br><tr><br><td width="134">headers</td><br><td width="212"><code>Object</code></td><br><td width="628">request header</td><br></tr><br><tr><br><td width="134">timeout</td><br><td width="212"><code>number</code></td><br><td width="628">单位为毫秒的请求超时时间 (<code>0</code> 表示无超时时间)</td><br></tr><br><tr><br><td width="134">before</td><br><td width="212"><code>function(request)</code></td><br><td width="628">请求发送前的处理函数，类似于jQuery的beforeSend函数</td><br></tr><br><tr><br><td width="134">progress</td><br><td width="212"><code>function(event)</code></td><br><td width="628"><a href="https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent" target="_blank" rel="external">ProgressEvent</a>回调处理函数</td><br></tr><br><tr><br><td width="134">credentials</td><br><td width="212"><code>boolean</code></td><br><td width="628">表示跨域请求时是否需要使用凭证</td><br></tr><br><tr><br><td width="134">emulateHTTP</td><br><td width="212"><code>boolean</code></td><br><td width="628">发送PUT, PATCH, DELETE请求时以HTTP POST的方式发送，并设置请求头的<code>X-HTTP-Method-Override</code></td><br></tr><br><tr><br><td width="134">emulateJSON</td><br><td width="212"><code>boolean</code></td><br><td width="628">将request body以<code>application/x-www-form-urlencoded</code> content type发送</td><br></tr><br></tbody><br></table>
 
+</li>
+</ul>
 <h4 id="emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）"><a href="#emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）" class="headerlink" title="emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）"></a>emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）</h4><p>背一段书：</p>
 <p>如果Web服务器无法处理PUT, PATCH和DELETE这种REST风格的请求，你可以启用enulateHTTP现象。启用该选项后，请求会以普通的POST方法发出，并且HTTP头信息的<code>X-HTTP-Method-Override</code>属性会设置为实际的HTTP方法。</p>
 <pre class="javascript hljs ">Vue.http.options.emulateHTTP = <span class="hljs-literal">true</span>;</pre>
@@ -453,29 +435,10 @@ Vue.http.post(<span class="hljs-string">'/someUrl'</span>, [body], [options]).th
 <p>在这里手写一个POST请求：</p>
 <p>（不写了。。。）</p>
 <h3 id="Vue-resourse中的重头戏：inteceptor"><a href="#Vue-resourse中的重头戏：inteceptor" class="headerlink" title="Vue-resourse中的重头戏：inteceptor"></a>Vue-resourse中的重头戏：<strong>inteceptor</strong></h3><p><img src="http://images2015.cnblogs.com/blog/341820/201607/341820-20160710080109342-1842115136.png" alt=""></p>
-<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p><pre class="javascript hljs ">Vue.http.interceptors.push((request, next) =&gt; {</pre></p>
-<pre><code>    &lt;span class=&quot;hljs-comment&quot;&gt;// ...&lt;/span&gt;
-    &lt;span class=&quot;hljs-comment&quot;&gt;// 请求发送前的处理逻辑&lt;/span&gt;
-    &lt;span class=&quot;hljs-comment&quot;&gt;// ...&lt;/span&gt;
-next((response) =&amp;gt; {
-    &lt;span class=&quot;hljs-comment&quot;&gt;// ...&lt;/span&gt;
-    &lt;span class=&quot;hljs-comment&quot;&gt;// 请求发送后的处理逻辑&lt;/span&gt;
-    &lt;span class=&quot;hljs-comment&quot;&gt;// ...&lt;/span&gt;
-    &lt;span class=&quot;hljs-comment&quot;&gt;// 根据请求的状态，response参数会返回给successCallback或errorCallback&lt;/span&gt;
-    &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt; response
-})
-</code></pre><p>})<br><br>在response返回给successCallback或errorCallback之前，你可以修改response中的内容，或做一些处理。<br>例如，响应的状态码如果是404，你可以显示友好的404界面。</p>
+<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p><pre class="javascript hljs ">Vue.http.interceptors.push((request, next) =&gt; {<br><span class="hljs-comment">// …</span><br><span class="hljs-comment">// 请求发送前的处理逻辑</span><br><span class="hljs-comment">// …</span><br>next((response) =&gt; {<br><span class="hljs-comment">// …</span><br><span class="hljs-comment">// 请求发送后的处理逻辑</span><br><span class="hljs-comment">// …</span><br><span class="hljs-comment">// 根据请求的状态，response参数会返回给successCallback或errorCallback</span><br><span class="hljs-keyword">return</span> response<br>})<br>})<br></pre><br>在response返回给successCallback或errorCallback之前，你可以修改response中的内容，或做一些处理。<br>例如，响应的状态码如果是404，你可以显示友好的404界面。</p>
 <p>实例：</p>
 <p>使用拦截器，我们可以非常容易地实现loading动画的转场，</p>
-<p>比如：（这里只给出关键代码）<br><pre class="pure-highlightjs">`Vue.http.interceptors.push((request, next) =&gt; {</pre></p>
-<pre><code>loading.show = true
-next((response) =&amp;gt; {
-    loading.show = false
-    return response
-});
-</code></pre><p>});</p>
-</li>
-</ul>
+<p>比如：（这里只给出关键代码）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Vue.http.interceptors.push((request, next) =&gt; &#123;</div><div class="line">loading.show = true</div><div class="line">next((response) =&gt; &#123;</div><div class="line">loading.show = false</div><div class="line">return response</div><div class="line">&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>Vue-resourse是非常好用的一个处理请求的工具，虽然已经停止维护，但是依然可以作为一个选择。前几天看到了一篇文章<a href="https://zhuanlan.zhihu.com/p/28396592?utm_source=qq&amp;utm_medium=social" target="_blank" rel="external">《 【源码拾遗】axios —— 极简封装的艺术》</a>讲的是axios的源码是如何的优美，我看了一点代码，但是完全看不到他的优美的地方，甚至有很多地方看不懂。。。可能我还是太垃圾，等到再学一段时间再来啃吧。</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -622,7 +585,7 @@ next((response) =&amp;gt; {
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -658,7 +621,7 @@ next((response) =&amp;gt; {
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/STAN" target="_blank" title="Twitter">
+                <a href="https://twitter.com/2314980309_stan" target="_blank" title="Twitter">
                   
                     <i class="fa fa-fw fa-twitter"></i>
                   
@@ -703,7 +666,7 @@ next((response) =&amp;gt; {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#暑期留校总结-lt-三-gt-——-Vue-resourse"><span class="nav-number">1.</span> <span class="nav-text">暑期留校总结<三>—— Vue-resourse</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">1.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求："><span class="nav-number">1.3.</span> <span class="nav-text">请求：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）"><span class="nav-number">1.3.1.</span> <span class="nav-text">emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#emulateJSON的作用"><span class="nav-number">1.3.2.</span> <span class="nav-text">emulateJSON的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回：response对象"><span class="nav-number">1.4.</span> <span class="nav-text">返回：response对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例："><span class="nav-number">1.5.</span> <span class="nav-text">实例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-resourse中的重头戏：inteceptor"><span class="nav-number">1.6.</span> <span class="nav-text">Vue-resourse中的重头戏：inteceptor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本用法"><span class="nav-number">1.6.1.</span> <span class="nav-text">基本用法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结："><span class="nav-number">1.7.</span> <span class="nav-text">总结：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#暑期留校总结-lt-三-gt-——-Vue-resourse"><span class="nav-number">1.</span> <span class="nav-text">暑期留校总结<三>—— Vue-resourse</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">1.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本使用："><span class="nav-number">1.3.</span> <span class="nav-text">基本使用：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求："><span class="nav-number">1.4.</span> <span class="nav-text">请求：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）"><span class="nav-number">1.4.1.</span> <span class="nav-text">emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#emulateJSON的作用"><span class="nav-number">1.4.2.</span> <span class="nav-text">emulateJSON的作用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回：response对象"><span class="nav-number">1.5.</span> <span class="nav-text">返回：response对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例："><span class="nav-number">1.6.</span> <span class="nav-text">实例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-resourse中的重头戏：inteceptor"><span class="nav-number">1.7.</span> <span class="nav-text">Vue-resourse中的重头戏：inteceptor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本用法"><span class="nav-number">1.7.1.</span> <span class="nav-text">基本用法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结："><span class="nav-number">1.8.</span> <span class="nav-text">总结：</span></a></li></ol></li></ol></div>
             
 
           </div>

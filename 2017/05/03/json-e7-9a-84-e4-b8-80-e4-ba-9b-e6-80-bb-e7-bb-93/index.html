@@ -95,17 +95,17 @@
 
 
 
-<meta name="description" content="Json，son，on，n前几天五一没什么事就终于开始学习ajax了，然而现在还只是停留在文档的阶段，没有实际的应用。然后就是在看JSON的文档和一些博客，感觉自己应该是学到了一些东西，所以现在来总结一下。  这是MDN上对json的描述**JSON** 是一种语法用来序列化对象、数组、数值、字符串、布尔值和NULL。 它基于 JavaScript 语法，但与之不同：**一些JavaScript不">
+<meta name="description" content="Json，son，on，n前几天五一没什么事就终于开始学习ajax了，然而现在还只是停留在文档的阶段，没有实际的应用。然后就是在看JSON的文档和一些博客，感觉自己应该是学到了一些东西，所以现在来总结一下。  这是MDN上对json的描述JSON 是一种语法用来序列化对象、数组、数值、字符串、布尔值和NULL。它基于 JavaScript 语法，但与之不同：一些JavaScript不是JSON，一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Json的一些总结">
 <meta property="og:url" content="http://yoursite.com/2017/05/03/json-e7-9a-84-e4-b8-80-e4-ba-9b-e6-80-bb-e7-bb-93/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="Json，son，on，n前几天五一没什么事就终于开始学习ajax了，然而现在还只是停留在文档的阶段，没有实际的应用。然后就是在看JSON的文档和一些博客，感觉自己应该是学到了一些东西，所以现在来总结一下。  这是MDN上对json的描述**JSON** 是一种语法用来序列化对象、数组、数值、字符串、布尔值和NULL。 它基于 JavaScript 语法，但与之不同：**一些JavaScript不">
+<meta property="og:description" content="Json，son，on，n前几天五一没什么事就终于开始学习ajax了，然而现在还只是停留在文档的阶段，没有实际的应用。然后就是在看JSON的文档和一些博客，感觉自己应该是学到了一些东西，所以现在来总结一下。  这是MDN上对json的描述JSON 是一种语法用来序列化对象、数组、数值、字符串、布尔值和NULL。它基于 JavaScript 语法，但与之不同：一些JavaScript不是JSON，一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-29T09:14:00.233Z">
+<meta property="og:updated_time" content="2017-08-30T07:39:50.141Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Json的一些总结">
-<meta name="twitter:description" content="Json，son，on，n前几天五一没什么事就终于开始学习ajax了，然而现在还只是停留在文档的阶段，没有实际的应用。然后就是在看JSON的文档和一些博客，感觉自己应该是学到了一些东西，所以现在来总结一下。  这是MDN上对json的描述**JSON** 是一种语法用来序列化对象、数组、数值、字符串、布尔值和NULL。 它基于 JavaScript 语法，但与之不同：**一些JavaScript不">
+<meta name="twitter:description" content="Json，son，on，n前几天五一没什么事就终于开始学习ajax了，然而现在还只是停留在文档的阶段，没有实际的应用。然后就是在看JSON的文档和一些博客，感觉自己应该是学到了一些东西，所以现在来总结一下。  这是MDN上对json的描述JSON 是一种语法用来序列化对象、数组、数值、字符串、布尔值和NULL。它基于 JavaScript 语法，但与之不同：一些JavaScript不是JSON，一">
 
 
 
@@ -370,34 +370,27 @@
       
         <h3 id="Json，son，on，n"><a href="#Json，son，on，n" class="headerlink" title="Json，son，on，n"></a>Json，son，on，n</h3><p>前几天五一没什么事就终于开始学习ajax了，然而现在还只是停留在文档的阶段，没有实际的应用。然后就是在看JSON的文档和一些博客，感觉自己应该是学到了一些东西，所以现在来总结一下。</p>
 <hr>
-<h4 id="这是MDN上对json的描述"><a href="#这是MDN上对json的描述" class="headerlink" title="这是MDN上对json的描述"></a>这是MDN上对json的描述</h4><pre>**JSON** 是一种语法用来序列化对象、数组、数值、字符串、布尔值和NULL。
-它基于 JavaScript 语法，但与之不同：**一些JavaScript不是JSON，一些JSON不是JavaScript**。</pre>
-所以说，首先，json是一种数据的格式，基于文本，相比于XML更加轻量。易于阅读、编写和机器解析，而因为jSON有着这些特点，所以json被广泛的应用于数据交换。
-
-以ajax的post请求来举个栗子：
-
-1.  前端构造一个jS对象，用于包装要传递的数据，然后将JS对象转换为json字符串，将请求发送到后端；
-2.  后端（以PHP为例）接受到这个json字符串，将其解析为php对象，然后处理请求。
-可知：JSON在整个过程中会有3种形式：前端的JS对象，传输中的JSON字符串。
-
-* * *
-
-#### json和js对象的关系：
-
-我觉得这个跟java和javascript有着异曲同工之妙。。。JSON的全名是：Javascript Object Notation，他的语法是基于JS的。但只是一种格式。这里有一篇文章：[JSON: The JavaScript subset that isn't](http://timelessrepo.com/json-isnt-a-javascript-subset).
-
-接下来又是mdn的东西：
-<table><caption>JavaScript 与 JSON 的区别</caption>
-<thead>
-<tr>
-<th scope="col">
+<h4 id="这是MDN上对json的描述"><a href="#这是MDN上对json的描述" class="headerlink" title="这是MDN上对json的描述"></a>这是MDN上对json的描述</h4><p><strong>JSON</strong> 是一种语法用来序列化对象、数组、数值、字符串、布尔值和NULL。<br>它基于 JavaScript 语法，但与之不同：<strong>一些JavaScript不是JSON，一些JSON不是JavaScript</strong></p>
+<p>所以说，首先，json是一种数据的格式，基于文本，相比于XML更加轻量。易于阅读、编写和机器解析，而因为jSON有着这些特点，所以json被广泛的应用于数据交换。</p>
+<p>以ajax的post请求来举个栗子：</p>
+<ol>
+<li>前端构造一个jS对象，用于包装要传递的数据，然后将JS对象转换为json字符串，将请求发送到后端；</li>
+<li>后端（以PHP为例）接受到这个json字符串，将其解析为php对象，然后处理请求。<br>可知：JSON在整个过程中会有3种形式：前端的JS对象，传输中的JSON字符串。</li>
+</ol>
+<hr>
+<h4 id="json和js对象的关系："><a href="#json和js对象的关系：" class="headerlink" title="json和js对象的关系："></a>json和js对象的关系：</h4><p>我觉得这个跟java和javascript有着异曲同工之妙。。。JSON的全名是：Javascript Object Notation，他的语法是基于JS的。但只是一种格式。这里有一篇文章：<a href="http://timelessrepo.com/json-isnt-a-javascript-subset" target="_blank" rel="external">JSON: The JavaScript subset that isn’t</a>.</p>
+<p>接下来又是mdn的东西：</p>
+<p><table><caption>JavaScript 与 JSON 的区别</caption></table></p>
+<p><thead></thead></p>
+<p><tr></tr></p>
+<p><th scope="col"></th></p>
 <pre>JavaScript类型</pre>
-</th>
+
 <th scope="col">
 <pre>JSON 区别</pre>
 </th>
-</tr>
-</thead>
+
+
 <tbody>
 <tr>
 <td>对象和数组</td>
@@ -415,41 +408,22 @@
 
 请参见以下示例，其中 [`JSON.parse()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse "JSON.parse() 方法解析一个JSON字符串，构造由字符串描述的JavaScript值或对象。可以提供可选的reviver函数以在返回之前对所得到的对象执行变换。") 能够正常解析，但把它当作JavaScript解析时会抛出 [`SyntaxError`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError "SyntaxError 对象代表尝试解析语法上不合法的代码的错误。") 错误:
 
-    <span class="token keyword">let</span> code <span class="token operator">=</span> <span class="token string">'"\u2028\u2029"'</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> code <span class="token operator">=</span> <span class="token string">'"\u2028\u2029"'</span><span class="token punctuation">;</span>
 
-    JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-    <span class="token comment" spellcheck="true">// 工作正常</span>
+JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 工作正常</span>
 
-    <span class="token function">eval</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-    <span class="token comment" spellcheck="true">// 失败</span>`
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    来几个例子（这个是copy的懒得打了。。）：
-    <pre class="pure-highlightjs">`var obj1 = {}; // 这只是 JS 对象
+<span class="token function">eval</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 失败</span>`
+</td>
+</tr>
+</tbody>
 
-    // 可把这个称做：JSON 格式的 JavaScript 对象 
-    var obj2 = {"width":100,"height":200,"name":"rose"};
+来几个例子（这个是copy的懒得打了。。）：
 
-    // 可把这个称做：JSON 格式的字符串
-    var str1 = '{"width":100,"height":200,"name":"rose"}';
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">var</span> obj1 = &#123;&#125;; <span class="comment">// 这只是 JS 对象</span></div><div class="line"></div><div class="line"><span class="comment">// 可把这个称做：JSON 格式的 JavaScript 对象 </span></div><div class="line"><span class="keyword">var</span> obj2 = &#123;<span class="string">"width"</span>:<span class="number">100</span>,<span class="string">"height"</span>:<span class="number">200</span>,<span class="string">"name"</span>:<span class="string">"rose"</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 可把这个称做：JSON 格式的字符串</span></div><div class="line"><span class="keyword">var</span> str1 = <span class="string">'&#123;"width":100,"height":200,"name":"rose"&#125;'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 这个可叫 JSON 格式的数组，是 JSON 的稍复杂一点的形式</span></div><div class="line"><span class="keyword">var</span> arr = [  </div><div class="line">&#123;<span class="string">"width"</span>:<span class="number">100</span>,<span class="string">"height"</span>:<span class="number">200</span>,<span class="string">"name"</span>:<span class="string">"rose"</span>&#125;,</div><div class="line">&#123;<span class="string">"width"</span>:<span class="number">100</span>,<span class="string">"height"</span>:<span class="number">200</span>,<span class="string">"name"</span>:<span class="string">"rose"</span>&#125;,</div><div class="line">&#123;<span class="string">"width"</span>:<span class="number">100</span>,<span class="string">"height"</span>:<span class="number">200</span>,<span class="string">"name"</span>:<span class="string">"rose"</span>&#125;,</div><div class="line">];</div><div class="line"></div><div class="line"><span class="comment">// 这个可叫稍复杂一点的 JSON 格式的字符串 </span></div><div class="line"><span class="keyword">var</span> str2=<span class="string">'['</span>+  </div><div class="line"><span class="string">'&#123;"width":100,"height":200,"name":"rose"&#125;,'</span>+</div><div class="line"><span class="string">'&#123;"width":100,"height":200,"name":"rose"&#125;,'</span>+</div><div class="line"><span class="string">'&#123;"width":100,"height":200,"name":"rose"&#125;,'</span>+</div><div class="line"><span class="string">']'</span>;</div></pre></td></tr></table></figure>
 
-    // 这个可叫 JSON 格式的数组，是 JSON 的稍复杂一点的形式
-    var arr = [  
-        {"width":100,"height":200,"name":"rose"},
-        {"width":100,"height":200,"name":"rose"},
-        {"width":100,"height":200,"name":"rose"},
-    ];
-
-    // 这个可叫稍复杂一点的 JSON 格式的字符串     
-    var str2='['+  
-        '{"width":100,"height":200,"name":"rose"},'+
-        '{"width":100,"height":200,"name":"rose"},'+
-        '{"width":100,"height":200,"name":"rose"},'+
-    ']';  `</pre>
-
-<pre><code>#### JS中关于json的两个函数：JSON.parse()     JSON.stringify()
+#### JS中关于json的两个函数：JSON.parse()     JSON.stringify()
 
 json.parse()和json.stringify()可以说是对应的两种函数，但是又不完全相对。。前者对格式的要求极高错一点都不行，错一点就会让你一直debug。而后者就很聪明了，只要你写的是一个JS对象他就能把你序列化出来，惊不惊喜，意不意外？
 
@@ -457,30 +431,33 @@ json.parse()和json.stringify()可以说是对应的两种函数，但是又不�
 
 下面来详细的说一下两个函数：
 
-&lt;del&gt;json.parse()&lt;/del&gt;...还是先说JSON.stringify()吧比较合适：//`**JSON.stringify()**` 方法将一个JavaScript值转换为一个JSON字符串，如果指定了一个replacer函数，则可以替换值，或者如果指定了一个replacer数组，可选地仅包括指定的属性。语法为：
-&lt;pre class=&quot;syntaxbox&quot;&gt;`JSON.stringify(_value_[, _replacer_ [, _space_]])`&lt;/pre&gt;
+<del>json.parse()</del>...还是先说JSON.stringify()吧比较合适：//`**JSON.stringify()**` 方法将一个JavaScript值转换为一个JSON字符串，如果指定了一个replacer函数，则可以替换值，或者如果指定了一个replacer数组，可选地仅包括指定的属性。语法为：
+<pre class="syntaxbox">`JSON.stringify(_value_[, _replacer_ [, _space_]])`</pre>
 虽然一般使用的时间只会传入一个JSON格式的value但是还有另外两个参数；
 
 ##### 参数：
 
-&lt;dl&gt;
-     &lt;dt&gt;`value`&lt;/dt&gt;
-     &lt;dd&gt;将要序列化成 一个JSON 字符串的值。&lt;/dd&gt;
-     &lt;dt&gt;`replacer` &lt;span class=&quot;inlineIndicator optional optionalInline&quot;&gt;可选&lt;/span&gt;&lt;/dt&gt;
-     &lt;dd&gt;如果该参数是一个函数，则在序列化过程中，被序列化的值的每个属性都会经过该函数的转换和处理；如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的 JSON 字符串中；如果该参数为null或者未提供，则对象所有的属性都会被序列化；关于该参数更详细的解释和示例，请参考[使用原生的 JSON 对象](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Using_native_JSON#The_replacer_parameter)一文。&lt;/dd&gt;
-     &lt;dt&gt;`space` &lt;span class=&quot;inlineIndicator optional optionalInline&quot;&gt;可选&lt;/span&gt;&lt;/dt&gt;
-     &lt;dd&gt;指定缩进用的空白字符串，用于美化输出（pretty-print）；如果参数是个数字，它代表有多少的空格；上限为10。改值若小于1，则意味着没有空格；如果该参数为字符串(字符串的前十个字母)，该字符串将被作为空格；如果该参数没有提供（或者为null）将没有空格&lt;/dd&gt;
-&lt;/dl&gt;
+<dl>
+     <dt>`value`</dt>
+     <dd>将要序列化成 一个JSON 字符串的值。</dd>
+     <dt>`replacer` <span class="inlineIndicator optional optionalInline">可选</span></dt>
+     <dd>如果该参数是一个函数，则在序列化过程中，被序列化的值的每个属性都会经过该函数的转换和处理；如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的 JSON 字符串中；如果该参数为null或者未提供，则对象所有的属性都会被序列化；关于该参数更详细的解释和示例，请参考[使用原生的 JSON 对象](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Using_native_JSON#The_replacer_parameter)一文。</dd>
+     <dt>`space` <span class="inlineIndicator optional optionalInline">可选</span></dt>
+     <dd>指定缩进用的空白字符串，用于美化输出（pretty-print）；如果参数是个数字，它代表有多少的空格；上限为10。改值若小于1，则意味着没有空格；如果该参数为字符串(字符串的前十个字母)，该字符串将被作为空格；如果该参数没有提供（或者为null）将没有空格</dd>
+</dl>
 对于序列化还有以下这些注意点：
-</code></pre><ul>
-<li>非数组对象的属性不能保证以特定的顺序出现在序列化后的字符串中。</li>
-<li>布尔值、数字、字符串的包装对象在序列化过程中会自动转换成对应的原始值。</li>
-<li><code>undefined、</code>任意的函数以及 symbol 值，在序列化过程中会被忽略（出现在非数组对象的属性值中时）或者被转换成 <code>null</code>（出现在数组中时）。</li>
-<li>所有以 symbol 为属性键的属性都会被完全忽略掉，即便 <code>replacer</code> 参数中强制指定包含了它们。</li>
-<li><p>不可枚举的属性会被忽略</p>
-<hr>
-<p>接下来是jSON.parse()</p>
-<p>语法：</p>
+
+*   非数组对象的属性不能保证以特定的顺序出现在序列化后的字符串中。
+*   布尔值、数字、字符串的包装对象在序列化过程中会自动转换成对应的原始值。
+*   `undefined、`任意的函数以及 symbol 值，在序列化过程中会被忽略（出现在非数组对象的属性值中时）或者被转换成 `null`（出现在数组中时）。
+*   所有以 symbol 为属性键的属性都会被完全忽略掉，即便 `replacer` 参数中强制指定包含了它们。
+*   不可枚举的属性会被忽略
+
+* * *
+
+接下来是jSON.parse()
+
+语法：
 <pre class="syntaxbox">JSON.parse(_text_[, _reviver_])</pre>
 
 <h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><dl><br>     <dt><code>text</code></dt><br>     <dd>要被解析成JavaScript值的字符串。</dd><br>     <dt><code>reviver</code> <span class="inlineIndicator optional optionalInline">可选</span></dt><br>     <dd>如果是一个函数，则规定了原始值在被返回之前如何被解析改造。</dd><br></dl>
@@ -488,8 +465,6 @@ json.parse()和json.stringify()可以说是对应的两种函数，但是又不�
 <h5 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h5><p><code>Object</code>对应给定的JSON文本。</p>
 <h5 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h5><p>若被解析的 JSON 字符串是非法的，则会抛出 一个<code>语法错误</code>异常</p>
 <h5 id="JSON-parse-不允许用逗号作为结尾："><a href="#JSON-parse-不允许用逗号作为结尾：" class="headerlink" title="JSON.parse() 不允许用逗号作为结尾："></a><code>JSON.parse()</code> 不允许用逗号作为结尾：</h5><p><pre class="example-bad brush: js line-numbers language-js">`<span class="token comment" spellcheck="true">// 都将抛出 SyntaxError</span><br>JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">“[1, 2, 3, 4, ]”</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">‘{“foo” : 1, }’</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></p>
-</li>
-</ul>
 <hr>
 <p>嗯，感觉大概就想这么多吧。以后再加~这里要立一个flag，下周周末前要把AJAX搞会！！</p>
 <p>Done~</p>
@@ -631,7 +606,7 @@ json.parse()和json.stringify()可以说是对应的两种函数，但是又不�
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -667,7 +642,7 @@ json.parse()和json.stringify()可以说是对应的两种函数，但是又不�
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/STAN" target="_blank" title="Twitter">
+                <a href="https://twitter.com/2314980309_stan" target="_blank" title="Twitter">
                   
                     <i class="fa fa-fw fa-twitter"></i>
                   
@@ -712,7 +687,7 @@ json.parse()和json.stringify()可以说是对应的两种函数，但是又不�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Json，son，on，n"><span class="nav-number">1.</span> <span class="nav-text">Json，son，on，n</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#这是MDN上对json的描述"><span class="nav-number">1.1.</span> <span class="nav-text">这是MDN上对json的描述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参数"><span class="nav-number">1.1.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回值"><span class="nav-number">1.1.2.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#异常"><span class="nav-number">1.1.3.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSON-parse-不允许用逗号作为结尾："><span class="nav-number">1.1.4.</span> <span class="nav-text">JSON.parse() 不允许用逗号作为结尾：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Json，son，on，n"><span class="nav-number">1.</span> <span class="nav-text">Json，son，on，n</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#这是MDN上对json的描述"><span class="nav-number">1.1.</span> <span class="nav-text">这是MDN上对json的描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#json和js对象的关系："><span class="nav-number">1.2.</span> <span class="nav-text">json和js对象的关系：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参数"><span class="nav-number">1.2.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回值"><span class="nav-number">1.2.2.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#异常"><span class="nav-number">1.2.3.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSON-parse-不允许用逗号作为结尾："><span class="nav-number">1.2.4.</span> <span class="nav-text">JSON.parse() 不允许用逗号作为结尾：</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
