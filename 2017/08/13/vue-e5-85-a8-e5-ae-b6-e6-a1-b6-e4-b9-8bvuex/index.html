@@ -10,7 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+<meta name="theme-color" content="#7e868b">
 
 
 
@@ -119,7 +119,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.2',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
@@ -307,7 +307,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-30T15:31:29+08:00">
+                2017-08-30
+              </time>
             
           </span>
 
@@ -375,7 +387,7 @@
 <h3 id="Let’s-do-it"><a href="#Let’s-do-it" class="headerlink" title="Let’s do it"></a>Let’s do it</h3><h3 id="首先安装一波"><a href="#首先安装一波" class="headerlink" title="首先安装一波"></a>首先安装一波</h3><p><code>
 </code></p>
 <h4 id="NPM"><a href="#NPM" class="headerlink" title="NPM"></a>NPM</h4><p><code>npm install vuex --save</code></p>
-<p>在一个模块化的打包系统中，您必须显式地通过 <code>Vue.use()</code> 来安装 Vuex：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></div><div class="line">Vue.use(Vuex)</div></pre></td></tr></table></figure></p>
+<p>在一个模块化的打包系统中，您必须显式地通过 <code>Vue.use()</code> 来安装 Vuex：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></div><div class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></div><div class="line">Vue.use(Vuex)</div></pre></td></tr></table></figure></p>
 <h3 id="Vuex的组成"><a href="#Vuex的组成" class="headerlink" title="Vuex的组成:"></a>Vuex的组成:</h3><p>vuex主要是由这几部分组成</p>
 <ul>
 <li>State</li>
@@ -387,10 +399,10 @@
 <p>State：顾名思义，状态，Vuex 使用 <strong>单一状态树，</strong>用一个对象就包含了全部的应用层级状态。至此它便作为一个『唯一数据源(<a href="https://en.wikipedia.org/wiki/Single_source_of_truth" target="_blank" rel="external">SSOT</a>)』而存在。这也意味着，每个应用将仅仅包含一个 store 实例。单一状态树让我们能够直接地定位任一特定的状态片段，在调试的过程中也能轻易地取得整个当前应用状态的快照。具体的实例不再放出。</p>
 <hr>
 <p>Getters；同样的，get？获取东西的一个东西。</p>
-<p>有时候我们需要从 store 中的 state 中派生出一些状态，比如需要进行的一些过滤，排序，计数等。如果有多个组件需要用到，那么重复的在各个组件中使用将不是很理想，Vuex 允许我们在 store 中定义『getters』（可以认为是 store 的计算属性）。Getters 接受 state 作为其第一个参数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</div><div class="line">  state: &#123;</div><div class="line">    todos: [</div><div class="line">      &#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>:<span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>:<span class="literal">false</span> &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  getters: &#123;</div><div class="line">    doneTodos: state  &#123;</div><div class="line">      <span class="keyword">return</span> state.todos.filter(todo  todo.done)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<p>Getters 会暴露为 <code>store.getters</code> 对象：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">store.getters.doneTodos[&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;]</div></pre></td></tr></table></figure></p>
-<p>Getters 也可以接受其他 getters 作为第二个参数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">getters: &#123;</div><div class="line">  doneTodosCount: (state, getters)</div><div class="line">  &#123;</div><div class="line">    <span class="keyword">return</span> getters.doneTodos.length</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">store.getters.doneTodosCount1</div></pre></td></tr></table></figure></p>
-<p>我们可以很容易地在任何组件中使用它：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">computed: &#123;</div><div class="line">  doneTodosCount () &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.$store.getters.doneTodosCount</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>有时候我们需要从 store 中的 state 中派生出一些状态，比如需要进行的一些过滤，排序，计数等。如果有多个组件需要用到，那么重复的在各个组件中使用将不是很理想，Vuex 允许我们在 store 中定义『getters』（可以认为是 store 的计算属性）。Getters 接受 state 作为其第一个参数：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</div><div class="line">  state: &#123;</div><div class="line">    todos: [</div><div class="line">      &#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>:<span class="literal">true</span> &#125;,</div><div class="line">      &#123; <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>:<span class="literal">false</span> &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  getters: &#123;</div><div class="line">    doneTodos: state  &#123;</div><div class="line">      <span class="keyword">return</span> state.todos.filter(todo  todo.done)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>Getters 会暴露为 <code>store.getters</code> 对象：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">store.getters.doneTodos[&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">'...'</span>, <span class="attr">done</span>: <span class="literal">true</span> &#125;]</div></pre></td></tr></table></figure></p>
+<p>Getters 也可以接受其他 getters 作为第二个参数：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">getters: &#123;</div><div class="line">  doneTodosCount: (state, getters)</div><div class="line">  &#123;</div><div class="line">    <span class="keyword">return</span> getters.doneTodos.length</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">store.getters.doneTodosCount1</div></pre></td></tr></table></figure></p>
+<p>我们可以很容易地在任何组件中使用它：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">computed: &#123;</div><div class="line">  doneTodosCount () &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.$store.getters.doneTodosCount</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>相比之下，可能getters用的不是非常的多？但是他非常有用，他为很多尴尬的场景提供了非常优雅的解决方案。</p>
 <hr>
 <p><strong>mutations和actions</strong>联系的非常的紧密：因为在Vuex中需要使用action来触发一个mutation，由mutation来触发状态的改变，也就是说，action并不能改变state，他只是发送一个更改状态的通知，然后将数据传过去，最终是由mutation来进行改变。</p>
@@ -407,7 +419,7 @@
 <ol>
 <li>应用层级的状态应该集中到单个 store 对象中。</li>
 <li>提交 <strong>mutation</strong> 是更改状态的唯一方法，并且这个过程是同步的。</li>
-<li>异步逻辑都应该封装到 <strong>action</strong> 里面。<br>只要你遵守以上规则，如何组织代码随你便。在实际的应用中，按照你的项目大小，你可以选择使用一个单独的store.js来存放所有的state，getters，mutations，actions，当然如果你的项目足够大的话，你也可以使用模块化的方式，（对于modules。。没什么特别的体会，就是拆一拆？）将他们分别大卸八块，下面是项目结构示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">├── index.html</div><div class="line">├── main.js</div><div class="line">├── api</div><div class="line">│   └── ...  抽取出API请求</div><div class="line">├── components</div><div class="line">│   ├── App.vue</div><div class="line">│   └── ...</div><div class="line">└── store</div><div class="line">    ├── index.js           我们组装模块并导出 store 的地方</div><div class="line">    ├── actions.js 根级别的 action</div><div class="line">    ├── mutations.js   根级别的 mutation</div><div class="line">    └── modules</div><div class="line">        ├── xxx.js      </div><div class="line">        └── xxxx.js</div></pre></td></tr></table></figure>
+<li>异步逻辑都应该封装到 <strong>action</strong> 里面。<br>只要你遵守以上规则，如何组织代码随你便。在实际的应用中，按照你的项目大小，你可以选择使用一个单独的store.js来存放所有的state，getters，mutations，actions，当然如果你的项目足够大的话，你也可以使用模块化的方式，（对于modules。。没什么特别的体会，就是拆一拆？）将他们分别大卸八块，下面是项目结构示例：<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">├── index.html</div><div class="line">├── main.js</div><div class="line">├── api</div><div class="line">│   └── ...  抽取出API请求</div><div class="line">├── components</div><div class="line">│   ├── App.vue</div><div class="line">│   └── ...</div><div class="line">└── store</div><div class="line">    ├── index<span class="selector-class">.js</span>           我们组装模块并导出 store 的地方</div><div class="line">    ├── actions<span class="selector-class">.js</span> 根级别的 action</div><div class="line">    ├── mutations<span class="selector-class">.js</span>   根级别的 mutation</div><div class="line">    └── modules</div><div class="line">        ├── xxx<span class="selector-class">.js</span>      </div><div class="line">        └── xxxx.js</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <hr>
@@ -645,6 +657,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -688,11 +707,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
   </div>

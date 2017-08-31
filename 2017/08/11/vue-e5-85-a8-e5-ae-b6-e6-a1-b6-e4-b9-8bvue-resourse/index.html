@@ -10,7 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+<meta name="theme-color" content="#7e868b">
 
 
 
@@ -118,7 +118,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.2',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
@@ -306,7 +306,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-30T16:32:44+08:00">
+                2017-08-30
+              </time>
             
           </span>
 
@@ -384,7 +396,7 @@
 <p><strong>4. 支持拦截器</strong></p>
 <p>拦截器是全局的，拦截器可以在请求发送前和发送请求后做一些处理。<br>拦截器在一些场景下会非常有用，比如请求发送前在headers中设置access_token，或者在请求失败时，提供共通的处理方式。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>当然还是老伙计npm ：<code>npm install Vue-resource</code>,</p>
-<p>ES6 中引入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> VueResource <span class="keyword">from</span> <span class="string">'vue-resource'</span></div><div class="line">Vue.use(VueResource)</div><div class="line">先来看一下官方给的最简单的demo：</div><div class="line">&#123;</div><div class="line">  <span class="comment">// GET /someUrl</span></div><div class="line">  <span class="keyword">this</span>.$http.get(<span class="string">'/someUrl'</span>).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line"><span class="comment">// get body data</span></div><div class="line"><span class="keyword">this</span>.someData = response.body;</div><div class="line">  &#125;, (response) =&gt; &#123;</div><div class="line"><span class="comment">// error callback</span></div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>ES6 中引入：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> VueResource <span class="keyword">from</span> <span class="string">'vue-resource'</span></div><div class="line">Vue.use(VueResource)</div><div class="line">先来看一下官方给的最简单的demo：</div><div class="line">&#123;</div><div class="line">  <span class="comment">// GET /someUrl</span></div><div class="line">  <span class="keyword">this</span>.$http.get(<span class="string">'/someUrl'</span>).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line"><span class="comment">// get body data</span></div><div class="line"><span class="keyword">this</span>.someData = response.body;</div><div class="line">  &#125;, (response) =&gt; &#123;</div><div class="line"><span class="comment">// error callback</span></div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="基本使用："><a href="#基本使用：" class="headerlink" title="基本使用："></a>基本使用：</h3><p>Vue-resource，有两种使用方法：</p>
 <ul>
 <li>使用Vue.http或this.$http</li>
@@ -406,8 +418,8 @@
 </li>
 </ul>
 <h4 id="emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）"><a href="#emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）" class="headerlink" title="emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）"></a>emulateHTTP的作用：（虽然我还没有用过，不过看起来好像很有用的样子）</h4><p>背一段书：</p>
-<p>如果Web服务器无法处理PUT, PATCH和DELETE这种REST风格的请求，你可以启用enulateHTTP现象。启用该选项后，请求会以普通的POST方法发出，并且HTTP头信息的<code>X-HTTP-Method-Override</code>属性会设置为实际的HTTP方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Vue.http.options.emulateHTTP = <span class="literal">true</span></div></pre></td></tr></table></figure></p>
-<h4 id="emulateJSON的作用"><a href="#emulateJSON的作用" class="headerlink" title="emulateJSON的作用"></a>emulateJSON的作用</h4><p>如果Web服务器无法处理编码为application/json的请求，你可以启用emulateJSON选项。启用该选项后，请求会以<code>application/x-www-form-urlencoded</code>作为MIME type，就像普通的HTML表单一样。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Vue.http.options.emulateJSON = <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>如果Web服务器无法处理PUT, PATCH和DELETE这种REST风格的请求，你可以启用enulateHTTP现象。启用该选项后，请求会以普通的POST方法发出，并且HTTP头信息的<code>X-HTTP-Method-Override</code>属性会设置为实际的HTTP方法。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">Vue.http.options.emulateHTTP = <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<h4 id="emulateJSON的作用"><a href="#emulateJSON的作用" class="headerlink" title="emulateJSON的作用"></a>emulateJSON的作用</h4><p>如果Web服务器无法处理编码为application/json的请求，你可以启用emulateJSON选项。启用该选项后，请求会以<code>application/x-www-form-urlencoded</code>作为MIME type，就像普通的HTML表单一样。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">Vue.http.options.emulateJSON = <span class="literal">true</span></div></pre></td></tr></table></figure></p>
 <h3 id="返回：response对象"><a href="#返回：response对象" class="headerlink" title="返回：response对象"></a>返回：response对象</h3><p>response对象包含以下属性：</p>
 <table class="post-table"><br><thead><br><tr><br><th>方法</th><br><th>类型</th><br><th>描述</th><br></tr><br></thead><br><tbody><br><tr><br><td>text()</td><br><td><code>string</code></td><br><td>以string形式返回response body</td><br></tr><br><tr><br><td>json()</td><br><td><code>Object</code></td><br><td>以JSON对象形式返回response body</td><br></tr><br><tr><br><td>blob()</td><br><td><code>Blob</code></td><br><td>以二进制形式返回response body</td><br></tr><br><tr><br><td><strong>属性</strong></td><br><td><strong>类型</strong></td><br><td><strong>描述</strong></td><br></tr><br><tr><br><td>ok</td><br><td><code>boolean</code></td><br><td>响应的HTTP状态码在200~299之间时，该属性为true</td><br></tr><br><tr><br><td>status</td><br><td><code>number</code></td><br><td>响应的HTTP状态码</td><br></tr><br><tr><br><td>statusText</td><br><td><code>string</code></td><br><td>响应的状态文本</td><br></tr><br><tr><br><td>headers</td><br><td><code>Object</code></td><br><td>响应头</td><br></tr><br></tbody><br></table>
 
@@ -418,7 +430,7 @@
 <h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>Vue.http.interceptors.push((request, next) =&gt; {<br><span class="hljs-comment">// …</span><br><span class="hljs-comment">// 请求发送前的处理逻辑</span><br><span class="hljs-comment">// …</span><br>next((response) =&gt; {<br><span class="hljs-comment">// …</span><br><span class="hljs-comment">// 请求发送后的处理逻辑</span><br><span class="hljs-comment">// …</span><br><span class="hljs-comment">// 根据请求的状态，response参数会返回给successCallback或errorCallback</span><br><span class="hljs-keyword">return</span> response<br>})<br>})<br><br>在response返回给successCallback或errorCallback之前，你可以修改response中的内容，或做一些处理。<br>例如，响应的状态码如果是404，你可以显示友好的404界面。</p>
 <p>实例：</p>
 <p>使用拦截器，我们可以非常容易地实现loading动画的转场，</p>
-<p>比如：（这里只给出关键代码）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Vue.http.interceptors.push(<span class="function">(<span class="params">request, next</span>) =&gt;</span> &#123;</div><div class="line">loading.show = <span class="literal">true</span></div><div class="line">next(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">loading.show = <span class="literal">false</span></div><div class="line"><span class="keyword">return</span> response</div><div class="line">&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>比如：（这里只给出关键代码）<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">Vue.http.interceptors.push(<span class="function">(<span class="params">request, next</span>) =&gt;</span> &#123;</div><div class="line">loading.show = <span class="literal">true</span></div><div class="line">next(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">loading.show = <span class="literal">false</span></div><div class="line"><span class="keyword">return</span> response</div><div class="line">&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>Vue-resource是非常好用的一个处理请求的工具，虽然已经停止维护，但是依然可以作为一个选择。前几天看到了一篇文章<a href="https://zhuanlan.zhihu.com/p/28396592?utm_source=qq&amp;utm_medium=social" target="_blank" rel="external">《 【源码拾遗】axios —— 极简封装的艺术》</a>讲的是axios的源码是如何的优美，我看了一点代码，但是完全看不到他的优美的地方，甚至有很多地方看不懂。。。可能我还是太垃圾，等到再学一段时间再来啃吧。</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -655,6 +667,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -698,11 +717,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
   </div>
