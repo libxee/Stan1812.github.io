@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Canvas," />
 
 
 
@@ -96,13 +96,14 @@
 
 
 <meta name="description" content="save和restore的使用最近在学习Canvas，先是看了MDN上面关于Canvas的文档，然后写了一些小练习，画了一些基本的图形，然后画了一个地月太阳的小动画，在画的过程中对于save和restore有些一些更加准确的认识，现在就来写一写总结一下。 当我们在 HTML5 Canvas 上使用其 2D 上下文进行图形绘制的时候，可以通过操作 2D 上下文的属性来绘制不同风格的图形，通常情况下，">
+<meta name="keywords" content="Canvas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Canvas学习：save &amp; restore">
 <meta property="og:url" content="http://yoursite.com/2017/05/12/canvas-e5-ad-a6-e4-b9-a0-ef-bc-9asave-restore/index.html">
 <meta property="og:site_name" content="An Amazing World">
 <meta property="og:description" content="save和restore的使用最近在学习Canvas，先是看了MDN上面关于Canvas的文档，然后写了一些小练习，画了一些基本的图形，然后画了一个地月太阳的小动画，在画的过程中对于save和restore有些一些更加准确的认识，现在就来写一写总结一下。 当我们在 HTML5 Canvas 上使用其 2D 上下文进行图形绘制的时候，可以通过操作 2D 上下文的属性来绘制不同风格的图形，通常情况下，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-30T08:17:38.558Z">
+<meta property="og:updated_time" content="2017-08-31T07:12:43.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Canvas学习：save &amp; restore">
 <meta name="twitter:description" content="save和restore的使用最近在学习Canvas，先是看了MDN上面关于Canvas的文档，然后写了一些小练习，画了一些基本的图形，然后画了一个地月太阳的小动画，在画的过程中对于save和restore有些一些更加准确的认识，现在就来写一写总结一下。 当我们在 HTML5 Canvas 上使用其 2D 上下文进行图形绘制的时候，可以通过操作 2D 上下文的属性来绘制不同风格的图形，通常情况下，">
@@ -216,6 +217,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -313,8 +334,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-30T16:17:38+08:00">
-                2017-08-30
+              <time title="更新于" itemprop="dateModified" datetime="2017-08-31T15:12:43+08:00">
+                2017-08-31
               </time>
             
           </span>
@@ -332,18 +353,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js相关/" itemprop="url" rel="index">
-                    <span itemprop="name">js相关</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js相关/技术/" itemprop="url" rel="index">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
                     <span itemprop="name">技术</span>
                   </a>
                 </span>
@@ -401,6 +411,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Canvas/" rel="tag"># Canvas</a>
+          
+        </div>
+      
 
       
       
@@ -410,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/03/json-e7-9a-84-e4-b8-80-e4-ba-9b-e6-80-bb-e7-bb-93/" rel="next" title="Json的一些总结">
-                <i class="fa fa-chevron-left"></i> Json的一些总结
+              <a href="/2017/05/03/hello-world/" rel="next" title="Hello Hexo">
+                <i class="fa fa-chevron-left"></i> Hello Hexo
               </a>
             
           </div>
@@ -511,10 +527,10 @@
             
             
             <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">11</span>
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -522,10 +538,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">5</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
