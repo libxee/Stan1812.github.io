@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Vue," />
+  <meta name="keywords" content="-- JS," />
 
 
 
@@ -95,20 +95,18 @@
 
 
 
-<meta name="description" content="Vue2.0生命周期以及生命周期钩子的一点理解实例的生命周期在Vue里面可以说是很重要的了，如果不能理解生命周期的话，那么可能出现最多的报错便是‘ XXX is not defined ’,尤其是当涉及到数据传递的时候，更容易出现一些让人摸不著头脑的报错，而这些报错可能会很难比较难以找到错误的根源。在我上车的过程中就遇到过这样的问题，所以有必要写一篇博客来总结一下。  每个 Vue 实例在被创建之">
-<meta name="keywords" content="Vue">
+<meta name="description" content="对JS中很多不是很理解的问题来做一下各个突破">
+<meta name="keywords" content="-- JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vue2.0生命周期以及生命周期钩子">
-<meta property="og:url" content="http://yoursite.com/2017/08/20/vue2-0-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e4-bb-a5-e5-8f-8a-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e9-92-a9-e5-ad-90-e7-9a-84-e5-bc-82/index.html">
+<meta property="og:title" content="JS-depth1">
+<meta property="og:url" content="http://yoursite.com/2017/09/04/JS-depth1/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="Vue2.0生命周期以及生命周期钩子的一点理解实例的生命周期在Vue里面可以说是很重要的了，如果不能理解生命周期的话，那么可能出现最多的报错便是‘ XXX is not defined ’,尤其是当涉及到数据传递的时候，更容易出现一些让人摸不著头脑的报错，而这些报错可能会很难比较难以找到错误的根源。在我上车的过程中就遇到过这样的问题，所以有必要写一篇博客来总结一下。  每个 Vue 实例在被创建之">
+<meta property="og:description" content="对JS中很多不是很理解的问题来做一下各个突破">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://119.29.235.55/wp-content/uploads/2017/08/lifecycle.png">
-<meta property="og:updated_time" content="2017-08-31T07:09:21.740Z">
+<meta property="og:updated_time" content="2017-09-04T14:11:58.478Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vue2.0生命周期以及生命周期钩子">
-<meta name="twitter:description" content="Vue2.0生命周期以及生命周期钩子的一点理解实例的生命周期在Vue里面可以说是很重要的了，如果不能理解生命周期的话，那么可能出现最多的报错便是‘ XXX is not defined ’,尤其是当涉及到数据传递的时候，更容易出现一些让人摸不著头脑的报错，而这些报错可能会很难比较难以找到错误的根源。在我上车的过程中就遇到过这样的问题，所以有必要写一篇博客来总结一下。  每个 Vue 实例在被创建之">
-<meta name="twitter:image" content="http://119.29.235.55/wp-content/uploads/2017/08/lifecycle.png">
+<meta name="twitter:title" content="JS-depth1">
+<meta name="twitter:description" content="对JS中很多不是很理解的问题来做一下各个突破">
 
 
 
@@ -138,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/20/vue2-0-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e4-bb-a5-e5-8f-8a-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e9-92-a9-e5-ad-90-e7-9a-84-e5-bc-82/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/04/JS-depth1/"/>
 
 
 
 
 
-  <title>Vue2.0生命周期以及生命周期钩子 | An Amazing World</title>
+  <title>JS-depth1 | An Amazing World</title>
   
 
 
@@ -300,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/20/vue2-0-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e4-bb-a5-e5-8f-8a-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e9-92-a9-e5-ad-90-e7-9a-84-e5-bc-82/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/04/JS-depth1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shady">
@@ -317,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Vue2.0生命周期以及生命周期钩子</h1>
+          <h1 class="post-title" itemprop="name headline">JS-depth1</h1>
         
 
         <div class="post-meta">
@@ -329,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-20T22:04:00+08:00">
-                2017-08-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T22:07:53+08:00">
+                2017-09-04
               </time>
             
 
@@ -361,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  878
+                  21
                 </span>
               
 
@@ -377,7 +375,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  1
                 </span>
               
             </div>
@@ -398,44 +396,7 @@
       
 
       
-        <h2 id="Vue2-0生命周期以及生命周期钩子的一点理解"><a href="#Vue2-0生命周期以及生命周期钩子的一点理解" class="headerlink" title="Vue2.0生命周期以及生命周期钩子的一点理解"></a>Vue2.0生命周期以及生命周期钩子的一点理解</h2><p>实例的生命周期在Vue里面可以说是很重要的了，如果不能理解生命周期的话，那么可能出现最多的报错便是‘ XXX is not defined ’,尤其是当涉及到数据传递的时候，更容易出现一些让人摸不著头脑的报错，而这些报错可能会很难比较难以找到错误的根源。在我上车的过程中就遇到过这样的问题，所以有必要写一篇博客来总结一下。</p>
-<blockquote>
-<p>每个 Vue 实例在被创建之前都要经过一系列的初始化过程。例如，实例需要配置数据观测(data observer)、编译模版、挂载实例到 DOM ，然后在数据变化时更新 DOM 。在这个过程中，实例也会调用一些 <strong>生命周期钩子</strong> ，这就给我们提供了执行自定义逻辑的机会。<br>以上是官网给出的Vue实例生命周期的比较准确的定义，具体要理解的话当然要结合生命周期的最经典的示例图：</p>
-</blockquote>
-<p><a href="http://119.29.235.55/wp-content/uploads/2017/08/lifecycle.png" target="_blank" rel="external"><img src="http://119.29.235.55/wp-content/uploads/2017/08/lifecycle.png" alt=""></a></p>
-<h3 id="beforeCreate"><a href="#beforeCreate" class="headerlink" title="beforeCreate"></a>beforeCreate</h3><ul>
-<li>在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。即：<strong>el 和 data 并未初始化</strong><br>此时$el、data 的值都为undefined</li>
-</ul>
-<h3 id="created"><a href="#created" class="headerlink" title="created"></a>created</h3><ul>
-<li>实例已经创建完成之后被调用。在这一步，实例完成数据观测(data observer)，属性和方法的运算， watch/event 事件回调。挂载阶段还没开始，<code>$el</code> 属性目前不可见。<strong>即：完成了 data 数据的初始化</strong></li>
-</ul>
-<h3 id="beforeMount"><a href="#beforeMount" class="headerlink" title="beforeMount"></a>beforeMount</h3><ul>
-<li>在挂载开始之前被调用：相关的 <code>render</code> 函数首次被调用。<strong>即：完成了 el 和 data 初始化，$el的值为“虚拟”的元素节点</strong></li>
-</ul>
-<h3 id="mounted"><a href="#mounted" class="headerlink" title="mounted"></a>mounted</h3><ul>
-<li><code>el</code> 被新创建的 <code>vm.$el</code> 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 <code>mounted</code> 被调用时 <code>vm.$el</code> 也在文档内 。<strong>即：完成挂载</strong></li>
-<li><strong>mount之后，mounted之前，“虚拟”的dom节点被真实的dom节点替换，并将其插入到dom树中，于是在触发**</strong>mounted时，可以获取到$el为真实的dom元素**</li>
-</ul>
-<h3 id="beforeUpdate"><a href="#beforeUpdate" class="headerlink" title="beforeUpdate"></a>beforeUpdate</h3><ul>
-<li>数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。</li>
-</ul>
-<h3 id="updated"><a href="#updated" class="headerlink" title="updated"></a>updated</h3><ul>
-<li><p>由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用<a href="https://cn.vuejs.org/v2/api/#computed" target="_blank" rel="external">计算属性</a>或 <a href="https://cn.vuejs.org/v2/api/#watch" target="_blank" rel="external">watcher</a> 取而代之。</p>
-<p>在我实际的使用过程中遇到了在updated中改变状态，结果导致了无限循环（把浏览器给卡死了，逃。。），很容易理解，因为在updated之后，状态update，update后又会触发updated，然后就GG了。</p>
-</li>
-</ul>
-<h3 id="activated"><a href="#activated" class="headerlink" title="activated"></a>activated</h3><ul>
-<li>keep-alive 组件激活时调用。</li>
-</ul>
-<h3 id="deactivated"><a href="#deactivated" class="headerlink" title="deactivated"></a>deactivated</h3><ul>
-<li>keep-alive 组件停用时调用。</li>
-</ul>
-<h3 id="beforeDestroy"><a href="#beforeDestroy" class="headerlink" title="beforeDestroy"></a>beforeDestroy</h3><ul>
-<li>实例销毁之前调用。在这一步，实例仍然完全可用</li>
-</ul>
-<h3 id="destroyed"><a href="#destroyed" class="headerlink" title="destroyed"></a>destroyed</h3><ul>
-<li>Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。<br>&nbsp;</li>
-</ul>
+        <p>对JS中很多不是很理解的问题来做一下各个突破</p>
 
       
     </div>
@@ -453,7 +414,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Vue/" rel="tag"># Vue</a>
+            <a href="/tags/JS/" rel="tag"># -- JS</a>
           
         </div>
       
@@ -466,8 +427,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/13/vue-e5-85-a8-e5-ae-b6-e6-a1-b6-e4-b9-8bvuex/" rel="next" title="VUe全家桶之VueX">
-                <i class="fa fa-chevron-left"></i> VUe全家桶之VueX
+              <a href="/2017/08/30/中变量的变化/" rel="next" title="如何监听js中变量的变化">
+                <i class="fa fa-chevron-left"></i> 如何监听js中变量的变化
               </a>
             
           </div>
@@ -475,10 +436,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/25/e5-a4-a7-e4-b8-80-e4-b8-80-e5-b9-b4/" rel="prev" title="大一一年">
-                大一一年 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -530,17 +487,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/../../imgs/album.jpg"
@@ -652,22 +600,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue2-0生命周期以及生命周期钩子的一点理解"><span class="nav-number">1.</span> <span class="nav-text">Vue2.0生命周期以及生命周期钩子的一点理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeCreate"><span class="nav-number">1.1.</span> <span class="nav-text">beforeCreate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#created"><span class="nav-number">1.2.</span> <span class="nav-text">created</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeMount"><span class="nav-number">1.3.</span> <span class="nav-text">beforeMount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mounted"><span class="nav-number">1.4.</span> <span class="nav-text">mounted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeUpdate"><span class="nav-number">1.5.</span> <span class="nav-text">beforeUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#updated"><span class="nav-number">1.6.</span> <span class="nav-text">updated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activated"><span class="nav-number">1.7.</span> <span class="nav-text">activated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deactivated"><span class="nav-number">1.8.</span> <span class="nav-text">deactivated</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beforeDestroy"><span class="nav-number">1.9.</span> <span class="nav-text">beforeDestroy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#destroyed"><span class="nav-number">1.10.</span> <span class="nav-text">destroyed</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
