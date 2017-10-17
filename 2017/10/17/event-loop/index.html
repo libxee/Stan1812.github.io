@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#7e868b">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/imgs/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前言最近在学习Node.JS，而node实用的是单线程模型，对于所有的I/O都使用了异步式的请求方式。并使用事件驱动+异步式I/O来带来可观的性能提升。node大量使用了异步的处理方式，所以想了解下具体的原理，看了很多相关的博客以及文档，现在来总结一下。 从同步与异步说起学过JS的估计都知道了，JS的执行环境是单线程。所谓”单线程”，就是一次只能完成一件任务。如果有多个任务，就必须排队，前面一个任">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript事件循环机制">
+<meta property="og:url" content="http://yoursite.com/2017/10/17/event-loop/index.html">
+<meta property="og:site_name" content="An Amazing World">
+<meta property="og:description" content="前言最近在学习Node.JS，而node实用的是单线程模型，对于所有的I/O都使用了异步式的请求方式。并使用事件驱动+异步式I/O来带来可观的性能提升。node大量使用了异步的处理方式，所以想了解下具体的原理，看了很多相关的博客以及文档，现在来总结一下。 从同步与异步说起学过JS的估计都知道了，JS的执行环境是单线程。所谓”单线程”，就是一次只能完成一件任务。如果有多个任务，就必须排队，前面一个任">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-e902447823cf13e5a547214363233858_r.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-9e5a3e686df7e84068575121c1ec9fcd_b.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-1a9a6a95c4a7d3dc45facb5b2545640d_b.png">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-4a8c8a73009cc73d5efdb833fdf81b03_b.png">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-37a7df54154dd521ced4dae2e3470c22_b.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-800d6abf4bcdef9a354c9d60f2882a26_b.png">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-e804f07a0d9b0436941e3e48550349b9_b.png">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-c3c2686ecfa45b21ff3bc99b0252b90b_b.png">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-f78ad9009fd2622c139f2da66f61d19b_b.png">
+<meta property="og:updated_time" content="2017-10-17T08:32:15.261Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript事件循环机制">
+<meta name="twitter:description" content="前言最近在学习Node.JS，而node实用的是单线程模型，对于所有的I/O都使用了异步式的请求方式。并使用事件驱动+异步式I/O来带来可观的性能提升。node大量使用了异步的处理方式，所以想了解下具体的原理，看了很多相关的博客以及文档，现在来总结一下。 从同步与异步说起学过JS的估计都知道了，JS的执行环境是单线程。所谓”单线程”，就是一次只能完成一件任务。如果有多个任务，就必须排队，前面一个任">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-e902447823cf13e5a547214363233858_r.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":20,"offset_float":20,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/17/event-loop/"/>
+
+
+
+
+
+  <title>Javascript事件循环机制 | An Amazing World</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?025f21eff557784535f6b192c5c1265a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">An Amazing World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端小学生的神奇世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/event-loop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shady">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/../../imgs/album.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="An Amazing World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Javascript事件循环机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T14:48:39+08:00">
+                2017-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,200
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在学习Node.JS，而node实用的是单线程模型，对于所有的I/O都使用了异步式的请求方式。并使用事件驱动+异步式I/O来带来可观的性能提升。node大量使用了异步的处理方式，所以想了解下具体的原理，看了很多相关的博客以及文档，现在来总结一下。</p>
+<h3 id="从同步与异步说起"><a href="#从同步与异步说起" class="headerlink" title="从同步与异步说起"></a>从同步与异步说起</h3><p>学过JS的估计都知道了，JS的执行环境是单线程。所谓”单线程”，就是一次只能完成一件任务。如果有多个任务，就必须排队，前面一个任务完成，再执行后面一个任务，以此类推。这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，如果排队是因为计算量大，CPU忙不过来，倒也算了，但是很多时候CPU是闲着的，因为IO设备（输入输出设备）很慢（比如Ajax操作从网络读取数据），不得不等着结果出来，再往下执行。</p>
+<p>JavaScript语言的设计者意识到，这时主线程完全可以不管IO设备，挂起处于等待中的任务，先运行排在后面的任务。等到IO设备返回了结果，再回过头，把挂起的任务继续执行下去.</p>
+<ul>
+<li>“同步任务（synchronous）”：后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；</li>
+<li>“异步任务（asynchronous）”：则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</li>
+</ul>
+<p>而异步编程的主要方式基本有这几种：</p>
+<ol>
+<li>改写回调函数</li>
+<li>事件监听</li>
+<li>发布/订阅（这种不了解。。好像跟设计模式有点关系，以后再去了解）</li>
+<li>Promises对象</li>
+<li>ES7中的await和async</li>
+</ol>
+<h3 id="函数调用栈与任务队列"><a href="#函数调用栈与任务队列" class="headerlink" title="函数调用栈与任务队列"></a>函数调用栈与任务队列</h3><p>主要有以下两个解释：</p>
+<h4 id="解释一"><a href="#解释一" class="headerlink" title="解释一"></a>解释一</h4><ol>
+<li>Javascript有一个main thread 主进程和call-stack（一个调用堆栈），在对一个调用堆栈中的task处理的时候，其他的都要等着。当在执行过程中遇到一些类似于setTimeout等异步操作的时候，会交给浏览器的其他模块(以webkit为例，是webcore模块)进行处理，当到达setTimeout指定的延时执行的时间之后，task(回调函数)会放入到任务队列之中。一般不同的异步任务的回调函数会放入不同的任务队列之中。等到调用栈中所有task执行完毕之后，接着去执行任务队列之中的task(回调函数)。</li>
+</ol>
+<p><img src="https://pic1.zhimg.com/v2-e902447823cf13e5a547214363233858_r.jpg" alt=""></p>
+<p>在上图中，调用栈中遇到DOM操作、ajax请求以及setTimeout等WebAPIs的时候就会交给浏览器内核的其他模块进行处理，webkit内核在Javasctipt执行引擎之外，有一个重要的模块是webcore模块。对于图中WebAPIs提到的三种API，webcore分别提供了DOM Binding、network、timer模块来处理底层实现。等到这些模块处理完这些操作的时候将回调函数放入任务队列中，之后等栈中的task执行完之后再去执行任务队列之中的回调函数。<br>(内容来自<a href="https://www.zhihu.com/people/xia-yan-luo-47/activities" target="_blank" rel="external">@柳兮</a>)</p>
+<h4 id="解释二"><a href="#解释二" class="headerlink" title="解释二"></a>解释二</h4><ol>
+<li>所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。(stack的第二种含义是“调用栈”（call stack），表示函数或子例程像堆积木一样存放，以实现层层调用。)</li>
+<li>主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。</li>
+<li>一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。</li>
+<li>主线程不断重复上面的第三步。<br>（内容来自<a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="external">@阮一峰</a>）</li>
+</ol>
+<p>以上是网上比较典型的两种说法。对此我有一个不理解的地方就是:”当到达setTimeout指定的延时执行的时间之后，task(回调函数)会放入到任务队列之中。”and “等到调用栈中所有task执行完毕之后，接着去执行任务队列之中的task(回调函数)” 这两种说法看起来好像是矛盾的，如何确定到达set的时间内调用栈内的任务执行完成呢？<br>事实证明：setTimeout和setInterval的运行机制是，将指定的代码移出本次执行，等到下一轮Event Loop时，再检查是否到了指定时间。如果到了，就执行对应的代码；如果不到，就等到再下一轮Event Loop时重新判断。这意味着，setTimeout指定的代码，必须等到本次执行的所有代码都执行完，才会执行。<br>每一轮Event Loop时，都会将“任务队列”中需要执行的任务，一次执行完。setTimeout和setInterval都是把任务添加到“任务队列”的尾部。因此，它们实际上要等到当前脚本的所有同步任务执行完，然后再等到本次Event Loop的“任务队列”的所有任务执行完，才会开始执行。由于前面的任务到底需要多少时间执行完，是不确定的，所以没有办法保证，setTimeout和setInterval指定的任务，一定会按照预定时间执行。(之前听说过settimeout的时间可能会不完全准确，现在终于知道其中的原因了)<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">setTimeout(someTask,<span class="number">100</span>);</div><div class="line">veryLongTask();</div></pre></td></tr></table></figure></p>
+<p>上面代码的setTimeout，指定100毫秒以后运行一个任务。但是，如果后面立即运行的任务（当前脚本的同步任务））非常耗时，过了100毫秒还无法结束，那么被推迟运行的someTask就只有等着，等到前面的veryLongTask运行结束，才轮到它执行。</p>
+<p>所以说这两种说法是并不矛盾的。</p>
+<h3 id="同步与异步运行机制"><a href="#同步与异步运行机制" class="headerlink" title="同步与异步运行机制"></a>同步与异步运行机制</h3><p>目前比较浅显的解释是:”Javascript的事件分为同步任务和异步任务，遇到同步任务就放在执行栈中执行，而碰到异步任务就放到任务队列之中，等到执行栈执行完毕之后再去执行任务队列之中的事件。”<br>以上对于函数调用栈亿级任务队列的解释已经很详细了，现在来结合实例来具体的解释一下</p>
+<p>以settimeout为例：</p>
+<p>首先main()函数的执行上下文入栈</p>
+<p><img src="https://pic2.zhimg.com/v2-9e5a3e686df7e84068575121c1ec9fcd_b.jpg" alt=""></p>
+<p>代码接着执行，遇到console.log(‘Hi’),此时log(‘Hi’)入栈，console.log方法只是一个webkit内核支持的普通的方法，所以log(‘Hi’)方法立即被执行。此时输出’Hi’。</p>
+<p><img src="https://pic2.zhimg.com/v2-1a9a6a95c4a7d3dc45facb5b2545640d_b.png" alt=""></p>
+<p>当遇到setTimeout的时候，执行引擎将其添加到栈中。</p>
+<p><img src="https://pic4.zhimg.com/v2-4a8c8a73009cc73d5efdb833fdf81b03_b.png" alt=""></p>
+<p>调用栈发现setTimeout是之前提到的WebAPIs中的API，因此将其出栈之后将延时执行的函数交给浏览器的timer模块进行处理。</p>
+<p><img src="https://pic3.zhimg.com/v2-37a7df54154dd521ced4dae2e3470c22_b.jpg" alt=""></p>
+<p>timer模块去处理延时执行的函数，此时执行引擎接着执行将log(‘SJS’)添加到栈中，此时输出’SJS’。</p>
+<p><img src="https://pic3.zhimg.com/v2-800d6abf4bcdef9a354c9d60f2882a26_b.png" alt=""></p>
+<p>当timer模块中延时方法规定的时间到了之后就将其放入到任务队列之中，此时调用栈中的task已经全部执行完毕。</p>
+<p><img src="https://pic2.zhimg.com/v2-e804f07a0d9b0436941e3e48550349b9_b.png" alt=""></p>
+<p>调用栈中的task执行完毕之后，执行引擎会接着看执行任务队列中是否有需要执行的回调函数。这里的cb函数被执行引擎添加到调用栈中，接着执行里面的代码，输出’there’。等到执行结束之后再出栈。</p>
+<p><img src="https://pic4.zhimg.com/v2-c3c2686ecfa45b21ff3bc99b0252b90b_b.png" alt=""></p>
+<p><img src="https://pic4.zhimg.com/v2-f78ad9009fd2622c139f2da66f61d19b_b.png" alt=""></p>
+<p>内容来自<a href="https://vimeo.com/96425312" target="_blank" rel="external">Philip Roberts: Help, I’m stuck in an event-loop.</a></p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><h4 id="实例一"><a href="#实例一" class="headerlink" title="实例一"></a>实例一</h4><p>网上有很多关于这个的面试题，其中有一道很经典的面试题：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>, i);</div><div class="line">    &#125;, <span class="number">1000</span>);</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>, i);</div></pre></td></tr></table></figure></p>
+<p>问题不大问题不大。</p>
+<p>先来分析一下：<br>i=0时，满足条件，执行栈执行循环体里面的代码，发现是setTimeout，将其出栈之后把延时执行的函数交给Timer模块进行处理。</p>
+<p>当i=1,2,3,4时，均满足条件，情况和i=0时相同，因此timer模块里面有5个相同的延时执行的函数。</p>
+<p>当i=5的时候，不满足条件，for循环结束,console.log(new Date, i)入栈，此时的i已经变成了5。输出5。</p>
+<p>此时1s已经过去，timer模块将5个回调函数按照注册的顺序返回给任务队列。</p>
+<p>执行引擎去执行任务队列中的函数，5个function依次入栈执行之后再出栈，此时的i已经变成了5。因此几乎同时输出5个5。</p>
+<p>因此等待的1s的时间其实只有输出第一个5之后需要等待1s，这1s的时间是timer模块需要等到的规定的1s时间之后才将回调函数交给任务队列。等执行栈执行完毕之后再去执行任务对列中的5个回调函数。这期间是不需要等待1s的。因此输出的状态就是：5 -&gt; 5,5,5,5,5，即第1个 5 直接输出，1s之后，输出 5个5；</p>
+<p>来控制台跑一下：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>, i);</div><div class="line">    &#125;, <span class="number">1000</span>);</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>, i);</div><div class="line"></div><div class="line">raven.b7b3066ebc21a63ef339.js:<span class="number">1</span> Tue Oct <span class="number">17</span> <span class="number">2017</span> <span class="number">16</span>:<span class="number">12</span>:<span class="number">39</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></div><div class="line"><span class="literal">undefined</span></div><div class="line">raven.b7b3066ebc21a63ef339.js:<span class="number">1</span> Tue Oct <span class="number">17</span> <span class="number">2017</span> <span class="number">16</span>:<span class="number">12</span>:<span class="number">40</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></div><div class="line">raven.b7b3066ebc21a63ef339.js:<span class="number">1</span> Tue Oct <span class="number">17</span> <span class="number">2017</span> <span class="number">16</span>:<span class="number">12</span>:<span class="number">40</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></div><div class="line">raven.b7b3066ebc21a63ef339.js:<span class="number">1</span> Tue Oct <span class="number">17</span> <span class="number">2017</span> <span class="number">16</span>:<span class="number">12</span>:<span class="number">40</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></div><div class="line">raven.b7b3066ebc21a63ef339.js:<span class="number">1</span> Tue Oct <span class="number">17</span> <span class="number">2017</span> <span class="number">16</span>:<span class="number">12</span>:<span class="number">40</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></div><div class="line">raven.b7b3066ebc21a63ef339.js:<span class="number">1</span> Tue Oct <span class="number">17</span> <span class="number">2017</span> <span class="number">16</span>:<span class="number">12</span>:<span class="number">40</span> GMT+<span class="number">0800</span> (中国标准时间) <span class="number">5</span></div></pre></td></tr></table></figure></p>
+<p>well~</p>
+<h4 id="实例二（更加深入）"><a href="#实例二（更加深入）" class="headerlink" title="实例二（更加深入）"></a>实例二（更加深入）</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="number">4</span>)&#125;, <span class="number">0</span>);</div><div class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> <span class="title">executor</span>(<span class="params">resolve</span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">        <span class="keyword">for</span>( <span class="keyword">var</span> i=<span class="number">0</span> ; i&lt;<span class="number">10000</span> ; i++ ) &#123;</div><div class="line">            i == <span class="number">9999</span> &amp;&amp; resolve();</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">2</span>);</div><div class="line">    &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="number">5</span>);</div><div class="line">    &#125;);</div><div class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>);</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+<p>promise的task会放在不同的任务队列里面，那么setTimeout的任务队列和promise的任务队列的执行顺序又是怎么的呢？</p>
+<p>这里先把结论放出来：<br>一个线程中，事件循环是唯一的，但是任务队列可以拥有多个。</p>
+<ol>
+<li><p>任务队列又分为macro-task（宏任务）与micro-task（微任务），在最新标准中，它们被分别称为task与jobs。</p>
+</li>
+<li><p>macro-task大概包括：script(整体代码), setTimeout, setInterval, setImmediate, I/O, UI rendering。</p>
+</li>
+<li><p>micro-task大概包括: process.nextTick, Promise, Object.observe(已废弃), MutationObserver(html5新特性)</p>
+</li>
+<li><p>setTimeout/Promise等我们称之为任务源。而进入任务队列的是他们指定的具体执行任务。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">// setTimeout中的回调函数才是进入任务队列的任务</span></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'xxxx'</span>);</div><div class="line">&#125;)</div><div class="line"><span class="comment">// setTimeout作为一个任务分发器，这个函数会立即执行，而它所要分发的任务，也就是它的第一个参数，才是延迟执行</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>来自不同任务源的任务会进入到不同的任务队列。其中setTimeout与setInterval是同源的。</p>
+</li>
+<li><p>事件循环的顺序，决定了JavaScript代码的执行顺序。它从script(整体代码)开始第一次循环。之后全局上下文进入函数调用栈。直到调用栈清空(只剩全局)，然后执行所有的micro-task。当所有可执行的micro-task执行完毕之后。循环再次从macro-task开始，找到其中一个任务队列执行完毕，然后再执行所有的micro-task，这样一直循环下去。</p>
+</li>
+<li><p>其中每一个任务的执行，无论是macro-task还是micro-task，都是借助函数调用栈来完成。</p>
+</li>
+</ol>
+<p>这是一个挺复杂的东西了。。写的有点累了，先放一篇好文<a href="http://www.jianshu.com/p/12b9f73c5a4f" target="_blank" rel="external">深入核心，详解事件循环机制</a>，回头再来继续。</p>
+<p>参考文章：</p>
+<ul>
+<li><a href="http://www.alloyteam.com/2015/10/turning-to-javascript-series-from-settimeout-said-the-event-loop-model/" target="_blank" rel="external">从setTimeout说事件循环模型</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html" target="_blank" rel="external">JavaScript 运行机制详解：再谈Event Loop</a></li>
+<li><a href="https://vimeo.com/96425312" target="_blank" rel="external">Philip Roberts: Help, I’m stuck in an event-loop</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26229293" target="_blank" rel="external">深入浅出Javascript事件循环机制(上)</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26238030" target="_blank" rel="external">深入浅出Javascript事件循环机制(下)</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"># JS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/24/someFeelings/" rel="next" title="有点不爽">
+                <i class="fa fa-chevron-left"></i> 有点不爽
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/../../imgs/album.jpg"
+               alt="Shady" />
+          <p class="site-author-name" itemprop="name">Shady</p>
+           
+              <p class="site-description motion-element" itemprop="description">For fun ，For love</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/ || archive">
+            
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/stan1812" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:2314980309@qq.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/2314980309_stan" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://instagram.com/be_drammer" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                    
+                      Instagram
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=86 height=86 src="http://music.163.com/outchain/player?type=2&id=29734857&auto=0&height=66"></iframe>
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从同步与异步说起"><span class="nav-number">2.</span> <span class="nav-text">从同步与异步说起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数调用栈与任务队列"><span class="nav-number">3.</span> <span class="nav-text">函数调用栈与任务队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解释一"><span class="nav-number">3.1.</span> <span class="nav-text">解释一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解释二"><span class="nav-number">3.2.</span> <span class="nav-text">解释二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步与异步运行机制"><span class="nav-number">4.</span> <span class="nav-text">同步与异步运行机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例一"><span class="nav-number">5.1.</span> <span class="nav-text">实例一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例二（更加深入）"><span class="nav-number">5.2.</span> <span class="nav-text">实例二（更加深入）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+
+   
+  </aside>
+ 
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shady</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
