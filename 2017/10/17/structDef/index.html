@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="An Amazing World">
 <meta property="og:description" content="先留坑，空下来来写 typedef是什么typedef为C语言的关键字，作用是为一种数据类型定义一个新名字。这里的数据类型包括内部数据类型（int,char等）和自定义的数据类型（struct等）。 在编程中使用typedef目的一般有两个，一个是给变量一个易记且意义明确的新名字，另一个是简化一些比较复杂的类型声明。 使用struct结构声明struct person &amp;#123;int age;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-18T03:25:07.430Z">
+<meta property="og:updated_time" content="2017-10-18T03:43:49.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅析struct">
 <meta name="twitter:description" content="先留坑，空下来来写 typedef是什么typedef为C语言的关键字，作用是为一种数据类型定义一个新名字。这里的数据类型包括内部数据类型（int,char等）和自定义的数据类型（struct等）。 在编程中使用typedef目的一般有两个，一个是给变量一个易记且意义明确的新名字，另一个是简化一些比较复杂的类型声明。 使用struct结构声明struct person &amp;#123;int age;">
@@ -443,7 +443,7 @@
 <p>也就是说aaa,bbb,ccc三者都是结构体类型。声明变量时用任何一个都可以,在c++中也是如此。但是你要注意的是这个在c++中如果无typedef关键字，那么aaa，bbb，ccc将是截然不同的三个对象。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>(这个问答是在CSDN看到的，<a href="http://blog.csdn.net/haiou0/article/details/6877718" target="_blank" rel="external">链接在此</a>因为对C和C++学习的并不深入，所以直接拿来了~)<br>Q：用struct和typedef struct 定义一个结构体有什么区别？为什么会有两种方式呢？<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> </span></div><div class="line"><span class="class">&#123;</span> </div><div class="line"><span class="keyword">int</span> a; </div><div class="line">&#125; stu;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Student2</span> </span></div><div class="line"><span class="class">&#123;</span> </div><div class="line"><span class="keyword">int</span> a; </div><div class="line">&#125;stu2;</div></pre></td></tr></table></figure></p>
 <p>A：</p>
-<p>事实上，这个东西是从C语言中遗留过来的，typedef可以定义新的复合类型或给现有类型起一个别名，在C语言中，如果你使用<br>struct xxx<br>{<br>}; 的方法，使用时就必须用 struct xxx var 来声明变量，而使用<br>typedef struct<br>{<br>}的方法 就可以写为 xxx var;<br>不过在C++中已经没有这回事了，无论你用哪一种写法都可以使用第二种方式声明变量，这个应该算是C语言的糟粕。</p>
+<p>事实上，这个东西是从C语言中遗留过来的，typedef可以定义新的复合类型或给现有类型起一个别名，在C语言中，如果你使用 <code>struct xxx {...};</code> 的方法，使用时就必须用<code>struct xxx var</code> 来声明变量，而使用 <code>typedef struct {...}</code>的方法 就可以写为<code>xxx var</code>;<br>不过在C++中已经没有这回事了，无论你用哪一种写法都可以使用第二种方式声明变量，这个应该算是C语言的糟粕。</p>
 
       
     </div>
