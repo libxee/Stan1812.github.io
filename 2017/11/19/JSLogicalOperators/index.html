@@ -95,18 +95,18 @@
 
 
 
-<meta name="description" content="在见到一些JS中关于逻辑运算符的骚操作之后，发现原来逻辑表达式还能这么玩，于是查了一些文档，对逻辑表达式来稍微深入探讨一下。  JS基本知识补充       JS表达式中的类型转换 不得不谈了   JS逻辑运算符的一些“奇淫巧技”">
+<meta name="description" content="之前真的是小瞧了JS的运算符，再看《JS高级程序设计》的时候，甚至都没有深入的了解JS的逻辑运算符，只是走马观花的边跳边看。。今天晚上闲着没事，不想写代码，就想看看一些小框架的源码学习学习。看到了大量的关于运算符骚操作之后，发现原来逻辑表达式还能这么玩，羞愧不已，于是重新搬出红宝书，又查了一些文档，对逻辑表达式来稍微深入探讨一下。因为涉及了很多类型转换，所以对类型转换也来总结一下。（虽然一个===">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入一点JS逻辑运算符">
+<meta property="og:title" content="JS运算符和类型转换">
 <meta property="og:url" content="http://yoursite.com/2017/11/19/JSLogicalOperators/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="在见到一些JS中关于逻辑运算符的骚操作之后，发现原来逻辑表达式还能这么玩，于是查了一些文档，对逻辑表达式来稍微深入探讨一下。  JS基本知识补充       JS表达式中的类型转换 不得不谈了   JS逻辑运算符的一些“奇淫巧技”">
+<meta property="og:description" content="之前真的是小瞧了JS的运算符，再看《JS高级程序设计》的时候，甚至都没有深入的了解JS的逻辑运算符，只是走马观花的边跳边看。。今天晚上闲着没事，不想写代码，就想看看一些小框架的源码学习学习。看到了大量的关于运算符骚操作之后，发现原来逻辑表达式还能这么玩，羞愧不已，于是重新搬出红宝书，又查了一些文档，对逻辑表达式来稍微深入探讨一下。因为涉及了很多类型转换，所以对类型转换也来总结一下。（虽然一个===">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-18T16:56:17.817Z">
+<meta property="og:updated_time" content="2017-11-18T17:25:22.731Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入一点JS逻辑运算符">
-<meta name="twitter:description" content="在见到一些JS中关于逻辑运算符的骚操作之后，发现原来逻辑表达式还能这么玩，于是查了一些文档，对逻辑表达式来稍微深入探讨一下。  JS基本知识补充       JS表达式中的类型转换 不得不谈了   JS逻辑运算符的一些“奇淫巧技”">
+<meta name="twitter:title" content="JS运算符和类型转换">
+<meta name="twitter:description" content="之前真的是小瞧了JS的运算符，再看《JS高级程序设计》的时候，甚至都没有深入的了解JS的逻辑运算符，只是走马观花的边跳边看。。今天晚上闲着没事，不想写代码，就想看看一些小框架的源码学习学习。看到了大量的关于运算符骚操作之后，发现原来逻辑表达式还能这么玩，羞愧不已，于是重新搬出红宝书，又查了一些文档，对逻辑表达式来稍微深入探讨一下。因为涉及了很多类型转换，所以对类型转换也来总结一下。（虽然一个===">
 
 
 
@@ -142,7 +142,7 @@
 
 
 
-  <title>深入一点JS逻辑运算符 | An Amazing World</title>
+  <title>JS运算符和类型转换 | An Amazing World</title>
   
 
 
@@ -315,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入一点JS逻辑运算符</h1>
+          <h1 class="post-title" itemprop="name headline">JS运算符和类型转换</h1>
         
 
         <div class="post-meta">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  92
+                  229
                 </span>
               
 
@@ -418,7 +418,7 @@
       
 
       
-        <p>在见到一些JS中关于逻辑运算符的骚操作之后，发现原来逻辑表达式还能这么玩，于是查了一些文档，对逻辑表达式来稍微深入探讨一下。</p>
+        <p>之前真的是小瞧了JS的运算符，再看《JS高级程序设计》的时候，甚至都没有深入的了解JS的逻辑运算符，只是走马观花的边跳边看。。今天晚上闲着没事，不想写代码，就想看看一些小框架的源码学习学习。看到了大量的关于运算符骚操作之后，发现原来逻辑表达式还能这么玩，羞愧不已，于是重新搬出红宝书，又查了一些文档，对逻辑表达式来稍微深入探讨一下。因为涉及了很多类型转换，所以对类型转换也来总结一下。（虽然一个===可以解决几乎所有问题。。但还是要了解一下的~）</p>
 <hr>
 <h3 id="JS基本知识补充"><a href="#JS基本知识补充" class="headerlink" title="JS基本知识补充"></a>JS基本知识补充</h3><ul>
 <li></li>
