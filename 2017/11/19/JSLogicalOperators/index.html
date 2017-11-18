@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JS," />
 
 
 
@@ -95,16 +95,18 @@
 
 
 
-<meta name="description" content="For fun ，For love">
-<meta property="og:type" content="website">
-<meta property="og:title" content="An Amazing World">
-<meta property="og:url" content="http://yoursite.com/tags/Think/index.html">
+<meta name="description" content="在见到一些JS中关于逻辑运算符的骚操作之后，发现原来逻辑表达式还能这么玩，于是查了一些文档，对逻辑表达式来稍微深入探讨一下。  JS基本知识补充       JS表达式中的类型转换 不得不谈了   JS逻辑运算符的一些“奇淫巧技”">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入一点JS逻辑运算符">
+<meta property="og:url" content="http://yoursite.com/2017/11/19/JSLogicalOperators/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="For fun ，For love">
+<meta property="og:description" content="在见到一些JS中关于逻辑运算符的骚操作之后，发现原来逻辑表达式还能这么玩，于是查了一些文档，对逻辑表达式来稍微深入探讨一下。  JS基本知识补充       JS表达式中的类型转换 不得不谈了   JS逻辑运算符的一些“奇淫巧技”">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-18T16:56:17.817Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="An Amazing World">
-<meta name="twitter:description" content="For fun ，For love">
+<meta name="twitter:title" content="深入一点JS逻辑运算符">
+<meta name="twitter:description" content="在见到一些JS中关于逻辑运算符的骚操作之后，发现原来逻辑表达式还能这么玩，于是查了一些文档，对逻辑表达式来稍微深入探讨一下。  JS基本知识补充       JS表达式中的类型转换 不得不谈了   JS逻辑运算符的一些“奇淫巧技”">
 
 
 
@@ -134,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Think/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/19/JSLogicalOperators/"/>
 
 
 
 
 
-  <title>标签: Think | An Amazing World</title>
+  <title>深入一点JS逻辑运算符 | An Amazing World</title>
   
 
 
@@ -169,7 +171,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -282,194 +284,212 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Think<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/19/JSLogicalOperators/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shady">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/../../imgs/album.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="An Amazing World">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/09/24/someFeelings/" itemprop="url">
-              
-                <span itemprop="name">有点不爽</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">深入一点JS逻辑运算符</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-09-24T21:51:49+08:00"
-              content="2017-09-24" >
-          09-24
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-19T00:49:58+08:00">
+                2017-11-19
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  92
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/25/e5-a4-a7-e4-b8-80-e4-b8-80-e5-b9-b4/" itemprop="url">
-              
-                <span itemprop="name">大一一年</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-25T16:33:42+08:00"
-              content="2017-08-25" >
-          08-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/20/e8-bf-91-e6-9c-9f-e6-80-bb-e7-bb-93/" itemprop="url">
-              
-                <span itemprop="name">近期总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-20T23:46:34+08:00"
-              content="2017-05-20" >
-          05-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/23/e4-b8-80-e5-91-a8-e6-80-bb-e7-bb-93/" itemprop="url">
-              
-                <span itemprop="name">一周总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-23T21:46:55+08:00"
-              content="2017-04-23" >
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/12/e8-bf-91-e6-9c-9f-e5-ad-a6-e4-b9-a0-e7-9a-84-e8-8b-a5-e5-b9-b2-e5-8f-8d-e6-80-9d/" itemprop="url">
-              
-                <span itemprop="name">近期学习的若干反思</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-12T13:26:47+08:00"
-              content="2017-04-12" >
-          04-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/24/e5-89-8d-e7-ab-af-e5-85-a5-e9-97-a8-e7-9a-84-e4-b8-80-e4-ba-9b-e4-bd-93-e4-bc-9a/" itemprop="url">
-              
-                <span itemprop="name">初学前端的一些体会</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-24T16:59:43+08:00"
-              content="2017-03-24" >
-          03-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+        <p>在见到一些JS中关于逻辑运算符的骚操作之后，发现原来逻辑表达式还能这么玩，于是查了一些文档，对逻辑表达式来稍微深入探讨一下。</p>
+<hr>
+<h3 id="JS基本知识补充"><a href="#JS基本知识补充" class="headerlink" title="JS基本知识补充"></a>JS基本知识补充</h3><ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<hr>
+<h3 id="JS表达式中的类型转换"><a href="#JS表达式中的类型转换" class="headerlink" title="JS表达式中的类型转换"></a>JS表达式中的类型转换</h3><blockquote>
+<p>不得不谈了</p>
+</blockquote>
+<hr>
+<h3 id="JS逻辑运算符的一些“奇淫巧技”"><a href="#JS逻辑运算符的一些“奇淫巧技”" class="headerlink" title="JS逻辑运算符的一些“奇淫巧技”"></a>JS逻辑运算符的一些“奇淫巧技”</h3>
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"># JS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/06/JSOO/" rel="next" title="JS中的各种继承">
+                <i class="fa fa-chevron-left"></i> JS中的各种继承
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -477,6 +497,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -497,8 +521,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/../../imgs/album.jpg"
@@ -609,6 +642,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS基本知识补充"><span class="nav-number">1.</span> <span class="nav-text">JS基本知识补充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS表达式中的类型转换"><span class="nav-number">2.</span> <span class="nav-text">JS表达式中的类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS逻辑运算符的一些“奇淫巧技”"><span class="nav-number">3.</span> <span class="nav-text">JS逻辑运算符的一些“奇淫巧技”</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -741,6 +790,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
 
   
 
