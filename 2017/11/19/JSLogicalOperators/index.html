@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="An Amazing World">
 <meta property="og:description" content="之前真的是小瞧了JS的运算符，再看《JS高级程序设计》的时候，甚至都没有深入的了解JS的逻辑运算符，只是走马观花的边跳边看。。今天晚上闲着没事，不想写代码，就想看看一些小框架的源码学习学习。看到了大量的关于运算符骚操作之后，发现原来逻辑表达式还能这么玩，羞愧不已，于是重新搬出红宝书，又查了一些文档，对逻辑表达式来稍微深入探讨一下。因为涉及了很多类型转换，所以对类型转换也来总结一下。（虽然一个===">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-19T05:57:50.930Z">
+<meta property="og:updated_time" content="2017-11-19T06:35:27.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS运算符和类型转换">
 <meta name="twitter:description" content="之前真的是小瞧了JS的运算符，再看《JS高级程序设计》的时候，甚至都没有深入的了解JS的逻辑运算符，只是走马观花的边跳边看。。今天晚上闲着没事，不想写代码，就想看看一些小框架的源码学习学习。看到了大量的关于运算符骚操作之后，发现原来逻辑表达式还能这么玩，羞愧不已，于是重新搬出红宝书，又查了一些文档，对逻辑表达式来稍微深入探讨一下。因为涉及了很多类型转换，所以对类型转换也来总结一下。（虽然一个===">
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,106
+                  3,087
                 </span>
               
 
@@ -522,8 +522,6 @@
 <p>这里的 Strict Equality Comparison 算法很关键，假设要计算的是 x === y，则过程如下</p>
 <ol>
 <li>如果 Type(x) 和 Type(y) 不同，返回 false</li>
-<li>如果 Type(x) 为 Undefined，返回 true</li>
-<li>如果 Type(x) 为 Null，返回 true</li>
 <li>如果 Type(x) 为 Number，则进入下面的判断逻辑<ol>
 <li>如果 x 为 NaN，返回 false</li>
 <li>如果 y 为 NaN，返回 false</li>
@@ -543,7 +541,8 @@
 <li>计算出表达式 a 的结果，并存入 lref 变量</li>
 <li>将 GetValue(lref) 的结果存入 lval 变量</li>
 <li>计算出表达式 b 的结果，并存入 rref 变量</li>
-<li>将 GetValue(rref) 的结果存入 rval 变量执行 Abstract Equality Comparison 算法判断 rval == lval 并将结果直接返回</li>
+<li>将 GetValue(rref) 的结果存入 rval 变量</li>
+<li>执行 Abstract Equality Comparison 算法判断 rval == lval 并将结果直接返回</li>
 </ol>
 <p>注意，其中的前 4 个步骤是和 === 完全相同的。唯独 5 不同。对于 === 来说，调用的是 Strict Equality Comparison 算法，但是 == 则调用的是 Abstract Equality Comparison 算法。虽然仅一词之差，但是却有质的不同，我们下面就来看看到底它是怎么实现的</p>
 <p>假设要计算的是 x == y，Abstract Equality Comparison 计算的过程如下（很冗长，但是每个步骤都很简单）</p>
@@ -575,8 +574,9 @@
 <li>如果 Type(x) 为 Boolean，以 ToNumber(x) == y 的比较结果作为返回值</li>
 <li>如果 Type(y) 为 Boolean，以 x == ToNumber(y) 的比较结果作为返回值</li>
 <li>如果 Type(x) 为 String 或 Number 且 Type(y) 为 Object，以 x == ToPrimitive(y) 的比较结果作为返回值</li>
-<li>如果 Type(x) 为 Object 且 Type(y) 为 String 或 Number，以 ToPrimitive(x) == y 的比较结果作为返回值10. 返回 false<br>从上面的算法流程可以看出，a ===  b 是最简单的。如果 a 和 b 的类型不同，那么一定会返回 false。而 a == b 则要灵活得多。JavaScript 会尝试调整 a 和 b 的类型，例如若 a 为字符串 b 为数字，则将字符串先转化为数字再与 b 比较，等等。这在很多时候简化了程序员的代码量。</li>
+<li>如果 Type(x) 为 Object 且 Type(y) 为 String 或 Number，以 ToPrimitive(x) == y 的比较结果作为返回值10. 返回 false</li>
 </ol>
+<p>从上面的算法流程可以看出，a ===  b 是最简单的。如果 a 和 b 的类型不同，那么一定会返回 false。而 a == b 则要灵活得多。JavaScript 会尝试调整 a 和 b 的类型，例如若 a 为字符串 b 为数字，则将字符串先转化为数字再与 b 比较，等等。这在很多时候简化了程序员的代码量。</p>
 <p>还有一篇:<a href="https://segmentfault.com/a/1190000006012804" target="_blank" rel="external">https://segmentfault.com/a/1190000006012804</a></p>
 <h2 id="JS逻辑运算符的一些骚操作"><a href="#JS逻辑运算符的一些骚操作" class="headerlink" title="JS逻辑运算符的一些骚操作"></a>JS逻辑运算符的一些骚操作</h2><p>其实也不骚hhh，很实用的操作<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">//判断类型</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">type</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> obj == <span class="literal">null</span> ? <span class="built_in">String</span>(obj) :</div><div class="line">    [<span class="built_in">String</span>.prototype.toString.call(obj)] || <span class="string">"object"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 判断是否是 window对象（注意，w为小写）指当前的浏览器窗口，window对象的window属性指向自身。</span></div><div class="line"><span class="comment">// 即 window.window === window</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isWindow</span>(<span class="params">obj</span>)</span></div><div class="line"><span class="function"></span>&#123; <span class="keyword">return</span> obj != <span class="literal">null</span> &amp;&amp; obj == obj.window &#125;</div><div class="line"> <span class="comment">// 判断是否是数组或者对象数组</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">likeArray</span>(<span class="params">obj</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> length = !!obj &amp;&amp; <span class="string">'length'</span> <span class="keyword">in</span> obj &amp;&amp; obj.length,</div><div class="line">    type = $.type(obj)</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="string">'function'</span> != type &amp;&amp; !isWindow(obj) &amp;&amp; (</div><div class="line">    <span class="string">'array'</span> == type || length === <span class="number">0</span> ||</div><div class="line">      (<span class="keyword">typeof</span> length == <span class="string">'number'</span> &amp;&amp; length &gt; <span class="number">0</span> &amp;&amp; (length - <span class="number">1</span>) <span class="keyword">in</span> obj)</div><div class="line">  )</div><div class="line">&#125;</div><div class="line"><span class="comment">//有没有要看晕了。。我也要晕了，，实际工程里要这样写的话，会被打死吧。。</span></div></pre></td></tr></table></figure>
