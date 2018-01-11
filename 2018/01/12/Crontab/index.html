@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Think," />
+  <meta name="keywords" content="Linux,技术," />
 
 
 
@@ -95,20 +95,18 @@
 
 
 
-<meta name="description" content="“愿中国青年都摆脱冷气，只是向上走，不必听自暴自弃者流的话。能做事的做事，能发声的发声。有一分热，发一分光，就令萤火一般，也可以在黑暗里发一点光，不必等候炬火。此后如竟没有炬火：我便是唯一的光。” 这是我现在最喜欢的一句话。 今天是8月25号，已经在家躺尸了20天，再有一周就要结束这个暑假，回到学校，正式成为大二的了。想要写点东西。  高考考爆炸之后，来了南昌大学，江西，一个跟河南一样被国家遗忘的">
-<meta name="keywords" content="Think">
+<meta name="description" content="Crond &amp;amp;&amp;amp;　Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务">
+<meta name="keywords" content="Linux,技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大一一年">
-<meta property="og:url" content="http://yoursite.com/2017/08/25/e5-a4-a7-e4-b8-80-e4-b8-80-e5-b9-b4/index.html">
+<meta property="og:title" content="Crontab略解🎉">
+<meta property="og:url" content="http://yoursite.com/2018/01/12/Crontab/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="“愿中国青年都摆脱冷气，只是向上走，不必听自暴自弃者流的话。能做事的做事，能发声的发声。有一分热，发一分光，就令萤火一般，也可以在黑暗里发一点光，不必等候炬火。此后如竟没有炬火：我便是唯一的光。” 这是我现在最喜欢的一句话。 今天是8月25号，已经在家躺尸了20天，再有一周就要结束这个暑假，回到学校，正式成为大二的了。想要写点东西。  高考考爆炸之后，来了南昌大学，江西，一个跟河南一样被国家遗忘的">
+<meta property="og:description" content="Crond &amp;amp;&amp;amp;　Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://119.29.235.55/wp-content/uploads/2017/07/Quotefancy-84354-3840x2160.jpg">
-<meta property="og:updated_time" content="2017-08-31T07:11:28.943Z">
+<meta property="og:updated_time" content="2018-01-11T16:59:27.037Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大一一年">
-<meta name="twitter:description" content="“愿中国青年都摆脱冷气，只是向上走，不必听自暴自弃者流的话。能做事的做事，能发声的发声。有一分热，发一分光，就令萤火一般，也可以在黑暗里发一点光，不必等候炬火。此后如竟没有炬火：我便是唯一的光。” 这是我现在最喜欢的一句话。 今天是8月25号，已经在家躺尸了20天，再有一周就要结束这个暑假，回到学校，正式成为大二的了。想要写点东西。  高考考爆炸之后，来了南昌大学，江西，一个跟河南一样被国家遗忘的">
-<meta name="twitter:image" content="http://119.29.235.55/wp-content/uploads/2017/07/Quotefancy-84354-3840x2160.jpg">
+<meta name="twitter:title" content="Crontab略解🎉">
+<meta name="twitter:description" content="Crond &amp;amp;&amp;amp;　Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务">
 
 
 
@@ -138,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/25/e5-a4-a7-e4-b8-80-e4-b8-80-e5-b9-b4/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/12/Crontab/"/>
 
 
 
 
 
-  <title>大一一年 | An Amazing World</title>
+  <title>Crontab略解🎉 | An Amazing World</title>
   
 
 
@@ -300,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/25/e5-a4-a7-e4-b8-80-e4-b8-80-e5-b9-b4/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/Crontab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shady">
@@ -317,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">大一一年</h1>
+          <h1 class="post-title" itemprop="name headline">Crontab略解🎉</h1>
         
 
         <div class="post-meta">
@@ -329,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T16:33:42+08:00">
-                2017-08-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T00:22:06+08:00">
+                2018-01-12
               </time>
             
 
@@ -352,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/感悟/" itemprop="url" rel="index">
-                    <span itemprop="name">感悟</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -383,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,440
+                  1,013
                 </span>
               
 
@@ -399,7 +397,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  4
                 </span>
               
             </div>
@@ -420,21 +418,55 @@
       
 
       
-        <p>“愿中国青年都摆脱冷气，只是向上走，不必听自暴自弃者流的话。能做事的做事，能发声的发声。有一分热，发一分光，就令萤火一般，也可以在黑暗里发一点光，不必等候炬火。此后如竟没有炬火：我便是唯一的光。”</p>
-<p>这是我现在最喜欢的一句话。</p>
-<p>今天是8月25号，已经在家躺尸了20天，再有一周就要结束这个暑假，回到学校，正式成为大二的了。想要写点东西。</p>
-<p><a href="http://119.29.235.55/wp-content/uploads/2017/07/Quotefancy-84354-3840x2160.jpg" target="_blank" rel="external"><img src="http://119.29.235.55/wp-content/uploads/2017/07/Quotefancy-84354-3840x2160.jpg" alt=""></a></p>
-<p>高考考爆炸之后，来了南昌大学，江西，一个跟河南一样被国家遗忘的地方。学了计算机专业，曾经想要成为一个伟大科研人员为人类造福的梦想就此正式破灭，想着成为一个程序员造福自己和家人也是很好。梦想的专业是航空航天相关，现在想起来，还好高考考得爆炸，不然学了这些，以后怕是只能当个科研民工，兢兢业业，默默无闻，在智商为王道的科研领域，我绝对是被碾压的角色。不如当个码农，沉浸在代码里，编织自己的世界。</p>
-<p>大学的生活读过大学的人都心知肚明，在高考之后的暑假，不少祖国的花朵都踌躇满志，立志成为大学霸，图书馆的雕塑，自习室的幽灵，不沉迷寝室，健身或者旅游，每天按时作息。今年在学校的新生群里更是见证了一大批这样的祖国栋梁。然而，事实上，祖国的栋梁们来到了学校，经过短暂的挣扎和内心的煎熬，有的如愿以偿，成为冉冉升起的学霸，更多的则成为了寝室的幽灵，床上的雕塑。今夜如此，夜夜皆然。</p>
-<p>突然失去了人生前20年或许最清晰的目标：高考，并且没有同样清晰且够大的目标替代，可能这是一个原因吧。</p>
-<p>我在前半学期做了什么？ 现在真要我认真的说一说，我可能会说，我把《使命召唤·现代战争》三部曲给打完了，还有黑色行动前两部，黑色行动12玩不了，电脑带不动。这可能是大一上学期我做的最有意义的一件事了，因为这是我高中的愿望，而在大学的第一个学期，我实现了。其余的？看了很多的电影，看了不少的杂书，把马尔克斯的书看了好多，悬疑推理的书看了好多，以前想要看但是没有看的书看了好多。大一上的课程大多无趣且水，C和C++放在一起讲也是很牛逼，其实我们只是学了一点C，然后我们的C++就也结课了，面向对象甚至没有提，老师说，这是系里的安排大二你们会学面向对象的JAVA的。嗯，你说的都对。</p>
-<p>加入了学生会当了班委，参加了很多无意义且浪费时间的学校、学院举办的各种针对新生的活动，并浪费了大量的时间和精力，不过客观的说，这也让看清这些活动，凡是学校学院举办的活动的意义到底在哪里，大家心知肚明。这不是给我们举办的活动，而是给领导举办的活动。并且得出了一个适用度很高的结论：以点赞数为参考的比赛都是辣鸡比赛，无一例外。有人总结大学听到最多且最令人厌烦的是话是‘收到回复，帮忙点赞’，很到位。</p>
-<p>在学生会里的一个与行政关系不大的部门是我的幸运，网维部，听起来还以为是搞运维的，但是其实不是，是搞运营的（学姐很多，咳咳，但这并不是重点）学姐们都很好，教会了我很多东西，不管是公众号的运营还是其他的一些东西。她们其实也挺理想化，想要通过学院公众号做些自己喜欢，同学真正喜欢的优质内容。但是制度的落后是硬伤，终究是学生会的一个下属部门限制还是很大的，运营的方式也还是刀耕火种，完全不是现在现代化的互联网运营方式，做运营最基本的材料库，用户画像，数据分析，这些都没有，理念的落后是很可怕的。</p>
-<p>扯远了。</p>
-<p>上学期很快就过去了，我们还什么都没有做。</p>
-<p>第二个学期最有意义的一件事应该就是开始学习前端，自学了一个月，成功的进入了学校的家园工作室（在此要再次感谢@钟伟杰老哥）之后的事情基本上就很容易概括了，大多数时间，都在写代码。顺利的成为整天窝在寝室的宅男。。。写代码成为最大的乐趣。这半年学了很多的东西，花了不少的时间，从什么都写不了到现在能写点东西也是不容易。最重要的事是知道了自己到底喜欢什么，并且愿意为之努力，这是很开心的事情。</p>
-<p>大一最大的遗憾可能就是有很多事自己并没有真正的努力去做。没有做最大的尝试以使大多数事情称心如意。这是遗憾。</p>
-<p>这一年，很快，大学还有三年，希望能找个女朋友，嗯。</p>
+        <h3 id="Crond-amp-amp-Crontab"><a href="#Crond-amp-amp-Crontab" class="headerlink" title="Crond &amp;&amp;　Crontab"></a>Crond &amp;&amp;　Crontab</h3><blockquote>
+<p>crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
+<p>Linux下的任务调度分为两类，系统任务调度和用户任务调度。</p>
+<p>系统任务调度：系统周期性所要执行的工作，比如写缓存数据到硬盘、日志清理等。在/etc目录下有一个crontab文件，这个就是系统任务调度的配置文件。</p>
+<p>用户任务调度：用户定期要执行的工作，比如用户数据备份、定时邮件提醒等。用户可以使用 crontab 工具来定制自己的计划任务。所有用户定义的crontab 文件都被保存在 /var/spool/cron目录中。其文件名与用户名一致</p>
+<h3 id="Crontab-格式："><a href="#Crontab-格式：" class="headerlink" title="Crontab 格式："></a>Crontab 格式：</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">分</th>
+<th style="text-align:left">时</th>
+<th style="text-align:left">日</th>
+<th style="text-align:left">月</th>
+<th style="text-align:left">周</th>
+<th style="text-align:left">命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">minute</td>
+<td style="text-align:left">hour</td>
+<td style="text-align:left">day</td>
+<td style="text-align:left">month</td>
+<td style="text-align:left">week</td>
+<td style="text-align:left">command</td>
+</tr>
+<tr>
+<td style="text-align:left">0~59</td>
+<td style="text-align:left">0~23</td>
+<td style="text-align:left">0~31</td>
+<td style="text-align:left">0~12</td>
+<td style="text-align:left">0~7</td>
+<td style="text-align:left">系统命令/脚本文件 </td>
+</tr>
+</tbody>
+</table>
+<p>且均为整数<br>command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。</p>
+</blockquote>
+<p>在以上各个字段中，还可以使用以下特殊字符：</p>
+<p>星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。</p>
+<p>逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”</p>
+<p>中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</p>
+<p>正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="crond"><a href="#crond" class="headerlink" title="crond"></a>crond</h4><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">安装crontab：</div><div class="line"></div><div class="line">yum install crontabs</div><div class="line"></div><div class="line"></div><div class="line">/sbin/service crond start //启动服务</div><div class="line"></div><div class="line">/sbin/service crond stop //关闭服务</div><div class="line"></div><div class="line">/sbin/service crond restart //重启服务</div><div class="line"></div><div class="line">/sbin/service crond reload //重新载入配置</div><div class="line"></div><div class="line">查看crontab服务状态：</div><div class="line"></div><div class="line">service crond status</div><div class="line"></div><div class="line">手动启动crontab服务：</div><div class="line"></div><div class="line">service crond start</div><div class="line"></div><div class="line">查看crontab服务是否已设置为开机启动，执行命令：</div><div class="line"></div><div class="line">ntsysv</div><div class="line"></div><div class="line">加入开机自动启动：</div><div class="line"></div><div class="line">chkconfig –level 35 crond on</div></pre></td></tr></table></figure>
+<h4 id="Crontab"><a href="#Crontab" class="headerlink" title="Crontab"></a>Crontab</h4><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">crontab [-u user] file</div><div class="line"></div><div class="line">crontab [-u user] [ -e | -l | -r ]</div></pre></td></tr></table></figure>
+<p>2．命令功能：</p>
+<p>通过crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常设合周期性的日志分析或数据备份等工作。</p>
+<p>3．命令参数：<br>| 参数 | means|<br>|:—–|:—–|<br>| -u user | 用来设定某个用户的crontab服务，例如，“-u ixdba”表示设定ixdba用户的crontab服务，此参数一般有root用户来运行。|<br>|file | file是命令文件的名字,表示将file做为crontab的任务列表文件并载入crontab。如果在命令行中没有指定这个文件，crontab命令将接受标准输入（键盘）上键入的命令，并将它们载入crontab。<br>-e | 编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件。<br>-l | 显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容。<br>-r | 从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。<br>-i | 在删除用户的crontab文件时给确认提示。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">比如每天定时启动一个Node的爬虫（结果展示了部分数据）</div><div class="line">[root@VM_56_194_centos ~]<span class="comment">#  crontab -l</span></div><div class="line">2 0 * * * /root/.nvm/versions/node/v8.8.0/bin/node /home/art-spider/Daily-article-spider/today.js</div></pre></td></tr></table></figure>
+<p>最后推荐一个非常好用的帮助你写crontab命令的网站：<a href="https://crontab.guru/#1_0_*_*_*" target="_blank" rel="external">https://crontab.guru/#1<em>0</em><em>_</em>_*</a></p>
 
       
     </div>
@@ -452,7 +484,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Think/" rel="tag"># Think</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
           
         </div>
       
@@ -465,8 +499,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/20/vue2-0-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e4-bb-a5-e5-8f-8a-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e9-92-a9-e5-ad-90-e7-9a-84-e5-bc-82/" rel="next" title="Vue2.0生命周期以及生命周期钩子">
-                <i class="fa fa-chevron-left"></i> Vue2.0生命周期以及生命周期钩子
+              <a href="/2018/01/02/各种排序/" rel="next" title="几种排序">
+                <i class="fa fa-chevron-left"></i> 几种排序
               </a>
             
           </div>
@@ -474,10 +508,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/30/中变量的变化/" rel="prev" title="如何监听js中变量的变化">
-                如何监听js中变量的变化 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -529,8 +559,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/../../imgs/album.jpg"
@@ -641,6 +680,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Crond-amp-amp-Crontab"><span class="nav-number">1.</span> <span class="nav-text">Crond &&　Crontab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crontab-格式："><span class="nav-number">2.</span> <span class="nav-text">Crontab 格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#crond"><span class="nav-number">3.1.</span> <span class="nav-text">crond</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Crontab"><span class="nav-number">3.2.</span> <span class="nav-text">Crontab</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
