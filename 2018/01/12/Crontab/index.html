@@ -95,18 +95,18 @@
 
 
 
-<meta name="description" content="Crond &amp;amp;&amp;amp;　Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务">
+<meta name="description" content="Crond &amp;amp;&amp;amp; Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务">
 <meta name="keywords" content="Linux,技术">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Crontab略解🎉">
 <meta property="og:url" content="http://yoursite.com/2018/01/12/Crontab/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="Crond &amp;amp;&amp;amp;　Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务">
+<meta property="og:description" content="Crond &amp;amp;&amp;amp; Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-11T16:59:27.037Z">
+<meta property="og:updated_time" content="2018-01-12T08:05:34.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crontab略解🎉">
-<meta name="twitter:description" content="Crond &amp;amp;&amp;amp;　Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务">
+<meta name="twitter:description" content="Crond &amp;amp;&amp;amp; Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务">
 
 
 
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,013
+                  1,010
                 </span>
               
 
@@ -418,7 +418,7 @@
       
 
       
-        <h3 id="Crond-amp-amp-Crontab"><a href="#Crond-amp-amp-Crontab" class="headerlink" title="Crond &amp;&amp;　Crontab"></a>Crond &amp;&amp;　Crontab</h3><blockquote>
+        <h3 id="Crond-amp-amp-Crontab"><a href="#Crond-amp-amp-Crontab" class="headerlink" title="Crond &amp;&amp; Crontab"></a>Crond &amp;&amp; Crontab</h3><blockquote>
 <p>crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
 <p>Linux下的任务调度分为两类，系统任务调度和用户任务调度。</p>
 <p>系统任务调度：系统周期性所要执行的工作，比如写缓存数据到硬盘、日志清理等。在/etc目录下有一个crontab文件，这个就是系统任务调度的配置文件。</p>
@@ -464,7 +464,15 @@
 <h4 id="Crontab"><a href="#Crontab" class="headerlink" title="Crontab"></a>Crontab</h4><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">crontab [-u user] file</div><div class="line"></div><div class="line">crontab [-u user] [ -e | -l | -r ]</div></pre></td></tr></table></figure>
 <p>2．命令功能：</p>
 <p>通过crontab 命令，我们可以在固定的间隔时间执行指定的系统指令或 shell script脚本。时间间隔的单位可以是分钟、小时、日、月、周及以上的任意组合。这个命令非常设合周期性的日志分析或数据备份等工作。</p>
-<p>3．命令参数：<br>| 参数 | means|<br>|:—–|:—–|<br>| -u user | 用来设定某个用户的crontab服务，例如，“-u ixdba”表示设定ixdba用户的crontab服务，此参数一般有root用户来运行。|<br>|file | file是命令文件的名字,表示将file做为crontab的任务列表文件并载入crontab。如果在命令行中没有指定这个文件，crontab命令将接受标准输入（键盘）上键入的命令，并将它们载入crontab。<br>-e | 编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件。<br>-l | 显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容。<br>-r | 从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。<br>-i | 在删除用户的crontab文件时给确认提示。</p>
+<p>3．命令参数：</p>
+<ul>
+<li>-u user : 用来设定某个用户的crontab服务，例如，“-u xxx”表示设定xxx用户的crontab服务，此参数一般有root用户来运行.</li>
+<li>file : file是命令文件的名字,表示将file做为crontab的任务列表文件并载入crontab。如果在命令行中没有指定这个文件，crontab命令将接受标准输入（键盘）上键入的命令，并将它们载入crontab。</li>
+<li>-e : 编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件。</li>
+<li>-l : 显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容。</li>
+<li>-r : 从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。</li>
+<li>-i : 在删除用户的crontab文件时给确认提示。</li>
+</ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">比如每天定时启动一个Node的爬虫（结果展示了部分数据）</div><div class="line">[root@VM_56_194_centos ~]<span class="comment">#  crontab -l</span></div><div class="line">2 0 * * * /root/.nvm/versions/node/v8.8.0/bin/node /home/art-spider/Daily-article-spider/today.js</div></pre></td></tr></table></figure>
 <p>最后推荐一个非常好用的帮助你写crontab命令的网站：<a href="https://crontab.guru/#1_0_*_*_*" target="_blank" rel="external">https://crontab.guru/#1<em>0</em><em>_</em>_*</a></p>
 
@@ -690,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Crond-amp-amp-Crontab"><span class="nav-number">1.</span> <span class="nav-text">Crond &&　Crontab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crontab-格式："><span class="nav-number">2.</span> <span class="nav-text">Crontab 格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#crond"><span class="nav-number">3.1.</span> <span class="nav-text">crond</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Crontab"><span class="nav-number">3.2.</span> <span class="nav-text">Crontab</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Crond-amp-amp-Crontab"><span class="nav-number">1.</span> <span class="nav-text">Crond && Crontab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Crontab-格式："><span class="nav-number">2.</span> <span class="nav-text">Crontab 格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#crond"><span class="nav-number">3.1.</span> <span class="nav-text">crond</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Crontab"><span class="nav-number">3.2.</span> <span class="nav-text">Crontab</span></a></li></ol></li></ol></div>
             
 
           </div>
