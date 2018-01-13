@@ -95,18 +95,18 @@
 
 
 
-<meta name="description" content="Crond&amp;amp;&amp;amp;Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务调度">
+<meta name="description" content="Crond&amp;amp;&amp;amp;Crontab先说下他俩是干啥么的。  crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 然后，Linux下的任务调度分两类，系统任务调度和用户任务调度。 系统任务调度：系统">
 <meta name="keywords" content="Linux,技术">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Crontab略解🎉">
 <meta property="og:url" content="http://yoursite.com/2018/01/12/Crontab/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="Crond&amp;amp;&amp;amp;Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务调度">
+<meta property="og:description" content="Crond&amp;amp;&amp;amp;Crontab先说下他俩是干啥么的。  crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 然后，Linux下的任务调度分两类，系统任务调度和用户任务调度。 系统任务调度：系统">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-13T09:33:04.655Z">
+<meta property="og:updated_time" content="2018-01-13T10:35:48.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crontab略解🎉">
-<meta name="twitter:description" content="Crond&amp;amp;&amp;amp;Crontab crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 Linux下的任务调度分为两类，系统任务调度和用户任务调度。 系统任务调度">
+<meta name="twitter:description" content="Crond&amp;amp;&amp;amp;Crontab先说下他俩是干啥么的。  crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。 然后，Linux下的任务调度分两类，系统任务调度和用户任务调度。 系统任务调度：系统">
 
 
 
@@ -381,7 +381,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,010
+                  1,011
                 </span>
               
 
@@ -418,9 +418,10 @@
       
 
       
-        <h3 id="Crond-amp-amp-Crontab"><a href="#Crond-amp-amp-Crontab" class="headerlink" title="Crond&amp;&amp;Crontab"></a>Crond&amp;&amp;Crontab</h3><blockquote>
-<p>crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
-<p>Linux下的任务调度分为两类，系统任务调度和用户任务调度。</p>
+        <h3 id="Crond-amp-amp-Crontab"><a href="#Crond-amp-amp-Crontab" class="headerlink" title="Crond&amp;&amp;Crontab"></a>Crond&amp;&amp;Crontab</h3><p>先说下他俩是干啥么的。</p>
+<blockquote>
+<p>crond是linux下用来周期性的执行某种任务或等待处理某些事件的一个守护进程，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
+<p>然后，Linux下的任务调度分两类，系统任务调度和用户任务调度。</p>
 <p>系统任务调度：系统周期性所要执行的工作，比如写缓存数据到硬盘、日志清理等。在/etc目录下有一个crontab文件，这个就是系统任务调度的配置文件。</p>
 <p>用户任务调度：用户定期要执行的工作，比如用户数据备份、定时邮件提醒等。用户可以使用 crontab 工具来定制自己的计划任务。所有用户定义的crontab 文件都被保存在 /var/spool/cron目录中。其文件名与用户名一致</p>
 <h3 id="Crontab-格式："><a href="#Crontab-格式：" class="headerlink" title="Crontab 格式："></a>Crontab 格式：</h3><table>
