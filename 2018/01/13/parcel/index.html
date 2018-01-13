@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="An Amazing World">
 <meta property="og:description" content="在期末复习的一个难受的下午，也就是现在，我突然想起了之前看到的号称零配置且最快的前端打包神器：Parcel，于是我放下数字逻辑。准备看看这货到底什么样。github地址：https://github.com/parcel-bundler/parcel 首先想要吐槽一下。。这个图标确实是有点丑。一个纸箱子。。不过可以说是自己接了当的展示出了他的功能。打包嘛。 简介：先来官网瞅一瞅（说的确实挺厉害的）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-13T10:25:38.621Z">
+<meta property="og:updated_time" content="2018-01-13T10:29:03.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初探parcel📦">
 <meta name="twitter:description" content="在期末复习的一个难受的下午，也就是现在，我突然想起了之前看到的号称零配置且最快的前端打包神器：Parcel，于是我放下数字逻辑。准备看看这货到底什么样。github地址：https://github.com/parcel-bundler/parcel 首先想要吐槽一下。。这个图标确实是有点丑。一个纸箱子。。不过可以说是自己接了当的展示出了他的功能。打包嘛。 简介：先来官网瞅一瞅（说的确实挺厉害的）">
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  897
+                  908
                 </span>
               
 
@@ -407,8 +407,9 @@
 <p>🔥 热模块替换<br>Parcel 无需配置，在开发环境的时候会自动在浏览器内随着你的代码更改而去更新模块。</p>
 <p>🚨 友好的错误日志</p>
 <h2 id="当遇到错误时，Parcel-会输出-语法高亮的代码片段，帮助你定位问题"><a href="#当遇到错误时，Parcel-会输出-语法高亮的代码片段，帮助你定位问题" class="headerlink" title="当遇到错误时，Parcel 会输出 语法高亮的代码片段，帮助你定位问题"></a>当遇到错误时，Parcel 会输出 语法高亮的代码片段，帮助你定位问题</h2><p>官网还提供了这样一个比较<br>|打包工具 |    时间|<br>|—|—|<br>|browserify |    22.98s |<br>|webpack |    20.71s|<br>|parcel | 9.98s|<br>|parcel - with cache    |2.64s|</p>
+<p>基于一个合理大小的应用，包含1726个模块， 6.5M 未压缩大小. 在一台有4个物理 CPU 的 2016 MacBook Pro 上构建。</p>
 </blockquote>
-<p>基于一个合理大小的应用，包含1726个模块， 6.5M 未压缩大小. 在一台有4个物理 CPU 的 2016 MacBook Pro 上构建。<br>相比的话，确实是相当的快</p>
+<p>相比的话，确实是相当的快，而且二次打包简直要起飞。。</p>
 <h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">先安装（当然你也可以使用cnpm）</div><div class="line">mkdir parceltest &amp;&amp; <span class="built_in">cd</span> parceltest &amp;&amp; npm install parcel-bundler --save</div></pre></td></tr></table></figure>
 <p>文档中说的是Parcel 可以使用任何类型的文件作为入口，但是最好还是使用 HTML 或 JavaScript 文件。如果在 HTML 中使用相对路径引入主要的 JavaScript 文件，Parcel 也将会对它进行处理将其替换为相对于输出文件的 URL 地址。</p>
 <p>然后，创建一个 index.html 和 index.js 文件。<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">touch index.html &amp;&amp; touch index.js</div></pre></td></tr></table></figure></p>
