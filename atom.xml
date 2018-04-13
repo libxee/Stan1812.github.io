@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://stan1812.github.io/"/>
-  <updated>2018-04-13T16:13:00.990Z</updated>
+  <updated>2018-04-13T16:48:53.387Z</updated>
   <id>http://stan1812.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JAVA 枚举类型的一些理解</title>
+    <link href="http://stan1812.github.io/2018/04/14/javaEnum/"/>
+    <id>http://stan1812.github.io/2018/04/14/javaEnum/</id>
+    <published>2018-04-13T16:15:20.000Z</published>
+    <updated>2018-04-13T16:48:53.387Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="说点废话"><a href="#说点废话" class="headerlink" title="说点废话"></a>说点废话</h3><p>  在开始学习JAVA之后，写习惯了Javascript的我，首先意识到的是好复杂，比如在接触JAVA中的枚举类型之后，这在JS中想要实现重写一些方法，以及其他一些类似的效果其实从语法上来讲要简单的不少，虽然Javascript最初是JS之父用了10多天写出了的，甚至有一一部分直接抄的JAVA比如Date类，（虽然抄来的Date一直被吐槽不好用，好像打算要重写？）</p><p>  甚至连起名字都是为了蹭一波JAVA的名气。并且面向对象的实现方式也截然不同，一个是纯正的基于对象的继承，另一个是基于原型链的继承。甚至有人调侃真的OOP和假的OOP。。</p><p>  不过虽然实现方式不一样，但是一些设计思想感觉还是类似的，之前总有人说JAVA和Javascript的区别就是斑马和斑马线的区别，现在来想一想其实这两种语言还是类似的地方的，尤其是在ES6中的Class出现之后，Class ，extends 等等语法糖的出现，给人感觉更像了///可能JS作为一个一开始并不被看好的语言随着应用范围越来越广，使用JS、构建的项目也越来越大，想要变得更牛逼似乎有一种更适合于工程化的东西出现了吧。</p><h3 id="JAVA的枚举类型"><a href="#JAVA的枚举类型" class="headerlink" title="JAVA的枚举类型"></a>JAVA的枚举类型</h3><p>先来举个最常用的栗子🎂 ：<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Colors &#123;</div><div class="line">  RED,BLUE,BLACK,YELLOW,GREEN;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 简单调用：Colors.RED</span></div></pre></td></tr></table></figure></p><p>这是最基本的使用方法。但是其实并没有展现出JAVA的枚举类型的用途，有点人才埋没。</p><p>再举一个目前我用的比较多的一种使用方式：</p><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Tips &#123;</div><div class="line">  WIN(<span class="string">"you win"</span>),LOSE(<span class="string">"you lose"</span>);</div><div class="line">  <span class="keyword">private</span> String tip;</div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Tips</span><span class="params">(tip)</span></span>&#123;</div><div class="line">    <span class="keyword">this</span>.tip = tip;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.tip;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">System.out.println(Tips.WIN)</div><div class="line"><span class="comment">// you win</span></div></pre></td></tr></table></figure><h2 id="在这段代码中，我们简单的保存了一些基本的提示信息"><a href="#在这段代码中，我们简单的保存了一些基本的提示信息" class="headerlink" title="在这段代码中，我们简单的保存了一些基本的提示信息,"></a>在这段代码中，我们简单的保存了一些基本的提示信息,</h2><p>先睡觉了。。<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;说点废话&quot;&gt;&lt;a href=&quot;#说点废话&quot; class=&quot;headerlink&quot; title=&quot;说点废话&quot;&gt;&lt;/a&gt;说点废话&lt;/h3&gt;&lt;p&gt;  在开始学习JAVA之后，写习惯了Javascript的我，首先意识到的是好复杂，比如在接触JAVA中的枚举类型之后，这在
+      
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="http://stan1812.github.io/tags/JAVA/"/>
+    
+  </entry>
   
   <entry>
     <title>聊一聊前端各种宽高左右</title>
@@ -492,29 +515,6 @@
     
     
       <category term="Think" scheme="http://stan1812.github.io/tags/Think/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue2.0生命周期以及生命周期钩子</title>
-    <link href="http://stan1812.github.io/2017/08/20/vue2-0-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e4-bb-a5-e5-8f-8a-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e9-92-a9-e5-ad-90-e7-9a-84-e5-bc-82/"/>
-    <id>http://stan1812.github.io/2017/08/20/vue2-0-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e4-bb-a5-e5-8f-8a-e7-94-9f-e5-91-bd-e5-91-a8-e6-9c-9f-e9-92-a9-e5-ad-90-e7-9a-84-e5-bc-82/</id>
-    <published>2017-08-20T14:04:00.000Z</published>
-    <updated>2017-08-31T07:09:21.741Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Vue2-0生命周期以及生命周期钩子的一点理解"><a href="#Vue2-0生命周期以及生命周期钩子的一点理解" class="headerlink" title="Vue2.0生命周期以及生命周期钩子的一点理解"></a>Vue2.0生命周期以及生命周期钩子的一点理解</h2><p>实例的生命周期在Vue里面可以说是很重要的了，如果不能理解生命周期的话，那么可能出现最多的报错便是‘ XXX is not defined ’,尤其是当涉及到数据传递的时候，更容易出现一些让人摸不著头脑的报错，而这些报错可能会很难比较难以找到错误的根源。在我上车的过程中就遇到过这样的问题，所以有必要写一篇博客来总结一下。</p><blockquote><p>每个 Vue 实例在被创建之前都要经过一系列的初始化过程。例如，实例需要配置数据观测(data observer)、编译模版、挂载实例到 DOM ，然后在数据变化时更新 DOM 。在这个过程中，实例也会调用一些 <strong>生命周期钩子</strong> ，这就给我们提供了执行自定义逻辑的机会。<br>以上是官网给出的Vue实例生命周期的比较准确的定义，具体要理解的话当然要结合生命周期的最经典的示例图：</p></blockquote><p><a href="http://119.29.235.55/wp-content/uploads/2017/08/lifecycle.png" target="_blank" rel="external"><img src="http://119.29.235.55/wp-content/uploads/2017/08/lifecycle.png" alt=""></a></p><h3 id="beforeCreate"><a href="#beforeCreate" class="headerlink" title="beforeCreate"></a>beforeCreate</h3><ul><li>在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。即：<strong>el 和 data 并未初始化</strong><br>此时$el、data 的值都为undefined</li></ul><h3 id="created"><a href="#created" class="headerlink" title="created"></a>created</h3><ul><li>实例已经创建完成之后被调用。在这一步，实例完成数据观测(data observer)，属性和方法的运算， watch/event 事件回调。挂载阶段还没开始，<code>$el</code> 属性目前不可见。<strong>即：完成了 data 数据的初始化</strong></li></ul><h3 id="beforeMount"><a href="#beforeMount" class="headerlink" title="beforeMount"></a>beforeMount</h3><ul><li>在挂载开始之前被调用：相关的 <code>render</code> 函数首次被调用。<strong>即：完成了 el 和 data 初始化，$el的值为“虚拟”的元素节点</strong></li></ul><h3 id="mounted"><a href="#mounted" class="headerlink" title="mounted"></a>mounted</h3><ul><li><code>el</code> 被新创建的 <code>vm.$el</code> 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 <code>mounted</code> 被调用时 <code>vm.$el</code> 也在文档内 。<strong>即：完成挂载</strong></li><li><strong>mount之后，mounted之前，“虚拟”的dom节点被真实的dom节点替换，并将其插入到dom树中，于是在触发**</strong>mounted时，可以获取到$el为真实的dom元素**</li></ul><h3 id="beforeUpdate"><a href="#beforeUpdate" class="headerlink" title="beforeUpdate"></a>beforeUpdate</h3><ul><li>数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。</li></ul><h3 id="updated"><a href="#updated" class="headerlink" title="updated"></a>updated</h3><ul><li><p>由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。当这个钩子被调用时，组件 DOM 已经更新，所以你现在可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态。如果要相应状态改变，通常最好使用<a href="https://cn.vuejs.org/v2/api/#computed" target="_blank" rel="external">计算属性</a>或 <a href="https://cn.vuejs.org/v2/api/#watch" target="_blank" rel="external">watcher</a> 取而代之。</p><p>在我实际的使用过程中遇到了在updated中改变状态，结果导致了无限循环（把浏览器给卡死了，逃。。），很容易理解，因为在updated之后，状态update，update后又会触发updated，然后就GG了。</p></li></ul><h3 id="activated"><a href="#activated" class="headerlink" title="activated"></a>activated</h3><ul><li>keep-alive 组件激活时调用。</li></ul><h3 id="deactivated"><a href="#deactivated" class="headerlink" title="deactivated"></a>deactivated</h3><ul><li>keep-alive 组件停用时调用。</li></ul><h3 id="beforeDestroy"><a href="#beforeDestroy" class="headerlink" title="beforeDestroy"></a>beforeDestroy</h3><ul><li>实例销毁之前调用。在这一步，实例仍然完全可用</li></ul><h3 id="destroyed"><a href="#destroyed" class="headerlink" title="destroyed"></a>destroyed</h3><ul><li>Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。<br>&nbsp;</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;Vue2-0生命周期以及生命周期钩子的一点理解&quot;&gt;&lt;a href=&quot;#Vue2-0生命周期以及生命周期钩子的一点理解&quot; class=&quot;headerlink&quot; title=&quot;Vue2.0生命周期以及生命周期钩子的一点理解&quot;&gt;&lt;/a&gt;Vue2.0生命周期以及生命周期钩
-      
-    
-    </summary>
-    
-    
-      <category term="Vue" scheme="http://stan1812.github.io/tags/Vue/"/>
     
   </entry>
   
