@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="An Amazing World">
 <meta property="og:description" content="说点废话  在开始学习JAVA之后，写习惯了Javascript的我，首先意识到的是好繁琐，比如在接触JAVA中的枚举类型之后，这在JS中想要实现重写一些方法，以及其他一些类似的效果其实从语法上来讲要简单的不少，虽然Javascript最初是JS之父用了10多天写出了的，甚至有一一部分直接抄的JAVA比如Date类，（虽然抄来的Date一直被吐槽不好用，好像打算要重写？）   甚至连起名字都是为了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T09:25:33.914Z">
+<meta property="og:updated_time" content="2018-04-14T09:27:03.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JAVA 枚举类型的一些理解">
 <meta name="twitter:description" content="说点废话  在开始学习JAVA之后，写习惯了Javascript的我，首先意识到的是好繁琐，比如在接触JAVA中的枚举类型之后，这在JS中想要实现重写一些方法，以及其他一些类似的效果其实从语法上来讲要简单的不少，虽然Javascript最初是JS之父用了10多天写出了的，甚至有一一部分直接抄的JAVA比如Date类，（虽然抄来的Date一直被吐槽不好用，好像打算要重写？）   甚至连起名字都是为了">
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,373
+                  1,374
                 </span>
               
 
@@ -411,7 +411,7 @@
 <p>由于WIN（以WIN为例）实质上是Tips类的一个static的对象，为全局共有,当然可以给其创建封装新的接口，比如，<br>比如：<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getTip</span> <span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.tip;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>需要注意的一点是，这个getTip方法是属于实例的还是属于class的？也就是说他是类方法还是实例方法？<br>再来反编译一下：<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">➜  src javap Tips.class</div><div class="line">Compiled from <span class="string">"Tips.java"</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Tips</span> <span class="keyword">extends</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">Enum</span>&lt;<span class="title">Tips</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Tips WIN;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Tips LOSE;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Tips[] values();</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Tips <span class="title">valueOf</span><span class="params">(java.lang.String)</span></span>;</div><div class="line">  <span class="keyword">public</span> java.lang.<span class="function">String <span class="title">toString</span><span class="params">()</span></span>;</div><div class="line">  <span class="keyword">public</span> java.lang.<span class="function">String <span class="title">getTip</span><span class="params">()</span></span>;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(java.lang.String[])</span></span>;</div><div class="line">  <span class="keyword">static</span> &#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>因为在JS里构造函数中所写的方法，是属于实例的，即每初始化一个实例对象就会重新声明一个属于该对象的重名方法。浪费了内存。想要使其共享，就要将函数写到prototype上，所以在这里想了一下，不过在查了一些东西之后发现，这里的方法，即使并未写在构造函数里面，只要是非静态方法其就是实例方法。。似乎在JS和JAVA中，构造函数的概念及作用并不完全相同。与JS中使用工厂模式初始化的对象相比，JAVA中的类与JS的构造函数来对比更为合适一些。</p>
-<h3 id="常用公共基本类"><a href="#常用公共基本类" class="headerlink" title="常用公共基本类"></a>常用公共基本类</h3><table>
+<h3 id="Enum抽象类常见方法"><a href="#Enum抽象类常见方法" class="headerlink" title="Enum抽象类常见方法"></a>Enum抽象类常见方法</h3><table>
 <thead>
 <tr>
 <th style="text-align:left">方法</th>
@@ -681,7 +681,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#说点废话"><span class="nav-number">1.</span> <span class="nav-text">说点废话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA的枚举类型"><span class="nav-number">2.</span> <span class="nav-text">JAVA的枚举类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用公共基本类"><span class="nav-number">3.</span> <span class="nav-text">常用公共基本类</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#说点废话"><span class="nav-number">1.</span> <span class="nav-text">说点废话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA的枚举类型"><span class="nav-number">2.</span> <span class="nav-text">JAVA的枚举类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enum抽象类常见方法"><span class="nav-number">3.</span> <span class="nav-text">Enum抽象类常见方法</span></a></li></ol></div>
             
 
           </div>
