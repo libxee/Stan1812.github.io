@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://stan1812.github.io/"/>
-  <updated>2018-04-23T06:06:34.359Z</updated>
+  <updated>2018-04-23T06:19:05.187Z</updated>
   <id>http://stan1812.github.io/</id>
   
   <author>
@@ -21,17 +21,23 @@
     <link href="http://stan1812.github.io/2018/04/23/seriouslyJavascript/"/>
     <id>http://stan1812.github.io/2018/04/23/seriouslyJavascript/</id>
     <published>2018-04-23T05:43:08.000Z</published>
-    <updated>2018-04-23T06:06:34.359Z</updated>
+    <updated>2018-04-23T06:19:05.187Z</updated>
     
-    <content type="html"><![CDATA[<p>总所周知，JavaScript是一门非常严谨的语言。</p><p>比如：</p><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="number">0</span> == <span class="string">"0"</span> <span class="comment">// true</span></div><div class="line"><span class="number">0</span> == []  <span class="comment">// true</span></div><div class="line"><span class="comment">//so =&gt;</span></div><div class="line"><span class="string">"0"</span> == [] <span class="comment">// ?</span></div><div class="line"><span class="comment">// false</span></div></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">parseInt</span>(<span class="number">0.000001</span>)  <span class="comment">// # =&gt; 0</span></div><div class="line"><span class="built_in">parseInt</span>(<span class="number">0.0000001</span>) <span class="comment">// # =&gt; 1</span></div></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">console</span>.log([<span class="number">1</span>] + [<span class="number">1</span>]) <span class="comment">//11</span></div><div class="line"><span class="built_in">console</span>.log([<span class="number">1</span>] + [<span class="number">1</span>] - [<span class="number">1</span>]) <span class="comment">//10</span></div></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> bool = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>)</div><div class="line"><span class="keyword">if</span>(bool)</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">"JS is amazing"</span>)</div><div class="line">  <span class="comment">// JS is amazing</span></div></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>总所周知，JavaScript是一门非常严谨的语言。</p><p>比如：<br><!-- ```javascript0 == "0" // true0 == []  // true//so =>"0" == [] // ?// false``` --></p><p><img src="/imgs/seriousJS/carbon.png" alt=""></p><!-- ```javascriptparseInt(0.000001)  // # => 0parseInt(0.0000001) // # => 1``` --><p><img src="/imgs/seriousJS/carbon1.png" alt=""></p><!-- ```javascriptconsole.log([1] + [1]) //11console.log([1] + [1] - [1]) //10``` --><p><img src="/imgs/seriousJS/carbon2.png" alt=""><br><!-- ```javascriptlet bool = new Boolean(false)if(bool)  console.log("JS is amazing")  // JS is amazing``` --><br><img src="/imgs/seriousJS/carbon3.png" alt=""></p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;总所周知，JavaScript是一门非常严谨的语言。&lt;/p&gt;
-&lt;p&gt;比如：&lt;/p&gt;
-&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span c
+&lt;p&gt;比如：&lt;br&gt;&lt;!-- 
+```javascript
+0 == &quot;0&quot; // true
+0 == []  // true
+//so =&gt;
+&quot;0&quot; == [] // ?
+// false
+``` --&gt;&lt;/p
       
     
     </summary>
