@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://stan1812.github.io/"/>
-  <updated>2018-04-23T06:19:05.187Z</updated>
+  <updated>2018-04-23T06:22:15.551Z</updated>
   <id>http://stan1812.github.io/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="http://stan1812.github.io/2018/04/23/seriouslyJavascript/"/>
     <id>http://stan1812.github.io/2018/04/23/seriouslyJavascript/</id>
     <published>2018-04-23T05:43:08.000Z</published>
-    <updated>2018-04-23T06:19:05.187Z</updated>
+    <updated>2018-04-23T06:22:15.551Z</updated>
     
-    <content type="html"><![CDATA[<p>总所周知，JavaScript是一门非常严谨的语言。</p><p>比如：<br><!-- ```javascript0 == "0" // true0 == []  // true//so =>"0" == [] // ?// false``` --></p><p><img src="/imgs/seriousJS/carbon.png" alt=""></p><!-- ```javascriptparseInt(0.000001)  // # => 0parseInt(0.0000001) // # => 1``` --><p><img src="/imgs/seriousJS/carbon1.png" alt=""></p><!-- ```javascriptconsole.log([1] + [1]) //11console.log([1] + [1] - [1]) //10``` --><p><img src="/imgs/seriousJS/carbon2.png" alt=""><br><!-- ```javascriptlet bool = new Boolean(false)if(bool)  console.log("JS is amazing")  // JS is amazing``` --><br><img src="/imgs/seriousJS/carbon3.png" alt=""></p>]]></content>
+    <content type="html"><![CDATA[<p>众所周知，JavaScript是一门非常严谨的语言。</p><p>比如：<br><!-- ```javascript0 == "0" // true0 == []  // true//so =>"0" == [] // ?// false``` --></p><p><img src="/imgs/seriousJS/carbon.png" alt=""></p><!-- ```javascriptparseInt(0.000001)  // # => 0parseInt(0.0000001) // # => 1``` --><p><img src="/imgs/seriousJS/carbon1.png" alt=""></p><!-- ```javascriptconsole.log([1] + [1]) //11console.log([1] + [1] - [1]) //10``` --><p><img src="/imgs/seriousJS/carbon2.png" alt=""></p><!-- ```javascriptlet bool = new Boolean(false)if(bool)  console.log("JS is amazing")  // JS is amazing``` --><p><img src="/imgs/seriousJS/carbon3.png" alt=""></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;总所周知，JavaScript是一门非常严谨的语言。&lt;/p&gt;
+        &lt;p&gt;众所周知，JavaScript是一门非常严谨的语言。&lt;/p&gt;
 &lt;p&gt;比如：&lt;br&gt;&lt;!-- 
 ```javascript
 0 == &quot;0&quot; // true
@@ -43,7 +43,7 @@
     </summary>
     
     
-      <category term="-JS" scheme="http://stan1812.github.io/tags/JS/"/>
+      <category term="JS" scheme="http://stan1812.github.io/tags/JS/"/>
     
   </entry>
   
