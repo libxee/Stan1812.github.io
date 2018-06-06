@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="技术,工具," />
+  <meta name="keywords" content="JS," />
 
 
 
@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="在期末复习的一个难受的下午，也就是现在，我突然想起了之前看到的号称零配置且最快的前端打包神器：Parcel，于是我放下数字逻辑。准备看看这货到底什么样。 github地址：https://github.com/parcel-bundler/parcel 首先想要吐槽一下。。Parcel图标确实是不怎么好看哈哈。一个纸箱子。。不过可以说是直接了当的展示出了他的功能。打包嘛。 简介：先来官网瞅一瞅（说">
-<meta name="keywords" content="技术,工具">
+<meta name="description" content="JS中的内存模型JS基本类型与栈JS基本类型已经很清楚了：null、undefined、String、Number、Boolean JS中的这些基础类型，有固定的大小，一般会保存在栈中（闭包除外），由系统自动分配内存空间，基础数据类型都是按值访问。 JS引用类型与堆其他语言不同，JS的引用数据类型，比如数组Array，它们值的大小是不固定的。引用数据类型的值是保存在堆内存中的对象。JS不允许直接访">
+<meta name="keywords" content="JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初探parcel📦">
-<meta property="og:url" content="http://stan1812.github.io/2018/01/13/parcel/index.html">
+<meta property="og:title" content="JS的内存管理">
+<meta property="og:url" content="http://stan1812.github.io/2018/06/06/JS-memary-mannager/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="在期末复习的一个难受的下午，也就是现在，我突然想起了之前看到的号称零配置且最快的前端打包神器：Parcel，于是我放下数字逻辑。准备看看这货到底什么样。 github地址：https://github.com/parcel-bundler/parcel 首先想要吐槽一下。。Parcel图标确实是不怎么好看哈哈。一个纸箱子。。不过可以说是直接了当的展示出了他的功能。打包嘛。 简介：先来官网瞅一瞅（说">
+<meta property="og:description" content="JS中的内存模型JS基本类型与栈JS基本类型已经很清楚了：null、undefined、String、Number、Boolean JS中的这些基础类型，有固定的大小，一般会保存在栈中（闭包除外），由系统自动分配内存空间，基础数据类型都是按值访问。 JS引用类型与堆其他语言不同，JS的引用数据类型，比如数组Array，它们值的大小是不固定的。引用数据类型的值是保存在堆内存中的对象。JS不允许直接访">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-23T06:24:48.917Z">
+<meta property="og:updated_time" content="2018-06-06T05:02:47.014Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初探parcel📦">
-<meta name="twitter:description" content="在期末复习的一个难受的下午，也就是现在，我突然想起了之前看到的号称零配置且最快的前端打包神器：Parcel，于是我放下数字逻辑。准备看看这货到底什么样。 github地址：https://github.com/parcel-bundler/parcel 首先想要吐槽一下。。Parcel图标确实是不怎么好看哈哈。一个纸箱子。。不过可以说是直接了当的展示出了他的功能。打包嘛。 简介：先来官网瞅一瞅（说">
+<meta name="twitter:title" content="JS的内存管理">
+<meta name="twitter:description" content="JS中的内存模型JS基本类型与栈JS基本类型已经很清楚了：null、undefined、String、Number、Boolean JS中的这些基础类型，有固定的大小，一般会保存在栈中（闭包除外），由系统自动分配内存空间，基础数据类型都是按值访问。 JS引用类型与堆其他语言不同，JS的引用数据类型，比如数组Array，它们值的大小是不固定的。引用数据类型的值是保存在堆内存中的对象。JS不允许直接访">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://stan1812.github.io/2018/01/13/parcel/"/>
+  <link rel="canonical" href="http://stan1812.github.io/2018/06/06/JS-memary-mannager/"/>
 
 
 
 
 
-  <title>初探parcel📦 | An Amazing World</title>
+  <title>JS的内存管理 | An Amazing World</title>
   
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stan1812.github.io/2018/01/13/parcel/">
+    <link itemprop="mainEntityOfPage" href="http://stan1812.github.io/2018/06/06/JS-memary-mannager/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shady">
@@ -317,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">初探parcel📦</h1>
+          <h1 class="post-title" itemprop="name headline">JS的内存管理</h1>
         
 
         <div class="post-meta">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-13T17:32:37+08:00">
-                2018-01-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T12:10:57+08:00">
+                2018-06-06
               </time>
             
 
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  903
+                  1,474
                 </span>
               
 
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  5
                 </span>
               
             </div>
@@ -398,60 +398,29 @@
       
 
       
-        <p>在期末复习的一个难受的下午，也就是现在，我突然想起了之前看到的号称零配置且最快的前端打包神器：Parcel，于是我放下数字逻辑。准备看看这货到底什么样。</p>
-<p>github地址：<a href="https://github.com/parcel-bundler/parcel" target="_blank" rel="external">https://github.com/parcel-bundler/parcel</a></p>
-<p>首先想要吐槽一下。。Parcel图标确实是不怎么好看哈哈。一个纸箱子。。不过可以说是直接了当的展示出了他的功能。打包嘛。</p>
-<h3 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h3><p>先来官网瞅一瞅（说的确实挺厉害的）</p>
-<blockquote>
-<p>🚀 极速打包时间<br>Parcel 使用 worker 进程去启用多核编译。同时有文件系统缓存，即使在重启构建后也能快速再编译。</p>
-<p>📦 将你所有的资源打包<br>Parcel 具备开箱即用的对 JS, CSS, HTML, 文件 及更多的支持，而且不需要插件。</p>
-<p>🐠 自动转换<br>如若有需要，Babel, PostCSS, 和PostHTML甚至 node_modules 包会被用于自动转换代码.</p>
-<p>✂️ 零配置代码分拆<br>使用动态 import() 语法, Parcel 将你的输出文件束(bundles)分拆，因此你只需要在初次加载时加载你所需要的代码。</p>
-<p>🔥 热模块替换<br>Parcel 无需配置，在开发环境的时候会自动在浏览器内随着你的代码更改而去更新模块。</p>
-<p>🚨 友好的错误日志<br>当遇到错误时，Parcel 会输出 语法高亮的代码片段，帮助你定位问题</p>
-</blockquote>
-<p>官网还提供了这样一个比较</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">打包工具</th>
-<th style="text-align:left">时间</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">browserify</td>
-<td style="text-align:left">22.98s</td>
-</tr>
-<tr>
-<td style="text-align:left">webpack</td>
-<td style="text-align:left">20.71s</td>
-</tr>
-<tr>
-<td style="text-align:left">parcel</td>
-<td style="text-align:left">9.98s</td>
-</tr>
-<tr>
-<td style="text-align:left">parcel - with cache</td>
-<td style="text-align:left">2.64s</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>基于一个合理大小的应用，包含1726个模块， 6.5M 未压缩大小. 在一台有4个物理 CPU 的 2016 MacBook Pro 上构建。</p>
-</blockquote>
-<p>相比的话，确实是相当的快，而且二次打包简直要起飞。。</p>
-<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">先安装（当然你也可以使用yarn）</div><div class="line">mkdir parceltest &amp;&amp; <span class="built_in">cd</span> parceltest &amp;&amp; npm install parcel-bundler --save</div></pre></td></tr></table></figure>
-<p>文档中说的是Parcel 可以使用任何类型的文件作为入口，但是最好还是使用 HTML 或 JavaScript 文件。如果在 HTML 中使用相对路径引入主要的 JavaScript 文件，Parcel 也将会对它进行处理将其替换为相对于输出文件的 URL 地址。</p>
-<p>然后，创建一个 index.html 和 index.js 文件。<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">touch index.html &amp;&amp; touch index.js</div></pre></td></tr></table></figure></p>
-<p>index.html<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>index.js<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">"hello parcel"</span>);</div></pre></td></tr></table></figure></p>
-<p>Parcel 内置了一个当你改变文件时能够自动重新构建应用的开发服务器，而且为了实现快速开发，该开发服务器支持热模块替换。在package.json指出即可：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="string">"scripts"</span>:&#123;</div><div class="line">  <span class="string">"start"</span>:<span class="string">"parcel index.html"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后，npm start<br>现在在浏览器中打开 <a href="http://localhost:1234/。也可以使用" target="_blank" rel="external">http://localhost:1234/。也可以使用</a> -p <port number=""> 选项覆盖默认的端口。<br>确实很快。<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">built <span class="keyword">in</span> 16ms</div></pre></td></tr></table></figure></port></p>
-<p>此外支持零配置代码拆分，也是挺舒服的。</p>
-<p>至于sass，babel什么的，文档说的看起来于是相当的易于安装，基本无配置。支持TS，貌似还支持vue的组件和react的组件。</p>
-<p>不过目前就看了这么多，边看文档，边简单的测试，边写这个小体验。只是接触了最基础的东西，总体给人的感觉是很轻，很快。很友好。不过据说webpack 4.0也要加入默认配置（可怜我webapck 3.0都不怎么会用。。）不知道parcel能不能真的火起来。不过一些小项目尝尝鲜还是没有问题的叭。</p>
-<p>复习实在无聊，来看下这个东西还是很解闷的。。就先这么多吧，，复习要紧复习要紧。。</p>
+        <h3 id="JS中的内存模型"><a href="#JS中的内存模型" class="headerlink" title="JS中的内存模型"></a>JS中的内存模型</h3><h4 id="JS基本类型与栈"><a href="#JS基本类型与栈" class="headerlink" title="JS基本类型与栈"></a>JS基本类型与栈</h4><p>JS基本类型已经很清楚了：null、undefined、String、Number、Boolean</p>
+<p>JS中的这些基础类型，有固定的大小，一般会保存在栈中（闭包除外），由系统自动分配内存空间，基础数据类型都是按值访问。</p>
+<h4 id="JS引用类型与堆"><a href="#JS引用类型与堆" class="headerlink" title="JS引用类型与堆"></a>JS引用类型与堆</h4><p>其他语言不同，JS的引用数据类型，比如数组Array，它们值的大小是不固定的。引用数据类型的值是保存在堆内存中的对象。JS不允许直接访问堆内存中的位置，因此我们不能直接操作对象的堆内存空间。在操作对象时，实际上是在操作对象的引用而不是实际的对象。因此，引用类型的值都是按引用访问的。这里的引用，我们可以粗浅地理解为保存在栈内存中的一个地址，该地址与堆内存的实际值相关联。</p>
+<h3 id="内存的生命周期"><a href="#内存的生命周期" class="headerlink" title="内存的生命周期"></a>内存的生命周期</h3><p> JS环境中分配的内存一般有如下生命周期：</p>
+<ul>
+<li>内存分配：当我们申明变量、函数、对象的时候，系统会自动为他们分配内存</li>
+<li>内存使用：即读写内存，也就是使用变量、函数等</li>
+<li>内存回收：使用完毕，由垃圾回收自动回收不再使用的内存</li>
+</ul>
+<p>在所有语言中第一和第二部分都很清晰。最后一步在底层语言中很清晰，但是在像JavaScript 等上层语言中，这一步是隐藏的、透明的。</p>
+<p>分配和内存使用部分不再说了</p>
+<h4 id="内存的回收"><a href="#内存的回收" class="headerlink" title="内存的回收"></a>内存的回收</h4><p>大多数内存管理的问题都在这个阶段。在这里最艰难的任务是找到“所分配的内存确实已经不再需要了”。它往往要求开发人员来确定在程序中哪一块内存不再需要并且释放它。</p>
+<p>高级语言解释器嵌入了“垃圾回收器”，来跟踪内存的分配和使用，当分配的内存不再使用时，自动释放它。但是这只能是一个近似的过程，因为要知道是否仍然需要某块内存是无法判定的（无法通过某种算法解决）</p>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><p>JS中目前有两种垃圾回收的比较通用的算法</p>
+<h4 id="引用计数垃圾收集"><a href="#引用计数垃圾收集" class="headerlink" title="引用计数垃圾收集"></a>引用计数垃圾收集</h4><p>这是最简单的垃圾收集算法。此算法把“对象是否不再需要”简化定义为“对象有没有其他对象引用到它”。如果没有引用指向该对象（零引用），对象将被垃圾回收机制回收。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123; </div><div class="line">  a: &#123;</div><div class="line">    b:<span class="number">2</span></div><div class="line">  &#125;</div><div class="line">&#125;; </div><div class="line"><span class="comment">// 两个对象被创建，一个作为另一个的属性被引用，另一个被分配给变量o</span></div><div class="line"><span class="comment">// 很显然，没有一个可以被垃圾收集</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> o2 = o; <span class="comment">// o2变量是第二个对“这个对象”的引用</span></div><div class="line"></div><div class="line">o = <span class="number">1</span>;      <span class="comment">// 现在，“这个对象”的原始引用o被o2替换了</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> oa = o2.a; <span class="comment">// 引用“这个对象”的a属性</span></div><div class="line"><span class="comment">// 现在，“这个对象”有两个引用了，一个是o2，一个是oa</span></div><div class="line"></div><div class="line">o2 = <span class="string">"yo"</span>; <span class="comment">// 最初的对象现在已经是零引用了</span></div><div class="line">           <span class="comment">// 他可以被垃圾回收了</span></div><div class="line">           <span class="comment">// 然而它的属性a的对象还在被oa引用，所以还不能回收</span></div><div class="line"></div><div class="line">oa = <span class="literal">null</span>; <span class="comment">// a属性的那个对象现在也是零引用了</span></div><div class="line">           <span class="comment">// 它可以被垃圾回收了</span></div></pre></td></tr></table></figure></p>
+<p>限制：循环引用</p>
+<p>该算法有个限制：无法处理循环引用。在下面的例子中，两个对象被创建，并互相引用，形成了一个循环。它们被调用之后不会离开函数作用域，所以它们已经没有用了，可以被回收了。然而，引用计数算法考虑到它们互相都有至少一次引用，所以它们不会被回收<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> o = &#123;&#125;;</div><div class="line">  <span class="keyword">var</span> o2 = &#123;&#125;;</div><div class="line">  o.a = o2; <span class="comment">// o 引用 o2</span></div><div class="line">  o2.a = o; <span class="comment">// o2 引用 o</span></div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="string">"boom!"</span>;</div><div class="line">&#125;</div><div class="line">f();</div></pre></td></tr></table></figure></p>
+<h5 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h5><p>IE 6, 7 使用引用计数方式对 DOM 对象进行垃圾回收。该方式常常造成对象被循环引用时内存发生泄漏：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> div;</div><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  div = <span class="built_in">document</span>.getElementById(<span class="string">"myDivElement"</span>);</div><div class="line">  div.circularReference = div;</div><div class="line">  div.lotsOfData = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10000</span>).join(<span class="string">"*"</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>在上面的例子里，myDivElement 这个 DOM 元素里的 circularReference 属性引用了 myDivElement，造成了循环引用。如果该属性没有显示移除或者设为 null，引用计数式垃圾收集器将总是且至少有一个引用，并将一直保持在内存里的 DOM 元素，即使其从DOM 树中删去了。如果这个 DOM 元素拥有大量的数据 (如上的 lotsOfData 属性)，而这个数据占用的内存将永远不会被释放。</p>
+<h4 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h4><p>现代的浏览器已经不再使用引用计数算法了。现代浏览器通用的大多是基于标记清除算法的某些改进算法，总体思想都是一致的。</p>
+<p>标记清除算法将“不再使用的对象”定义为“无法达到的对象”。简单来说，就是从根部（在JS中就是全局对象）出发定时扫描内存中的对象。凡是能从根部到达的对象，都是还需要使用的。那些无法由根部出发触及到的对象被标记为不再使用，稍后进行回收。</p>
+<p>从这个概念可以看出，无法触及的对象包含了没有引用的对象这个概念（没有任何引用的对象也是无法触及的对象）。但反之未必成立。</p>
+<p>根据这个概念，上面的例子可以正确被垃圾回收处理了。当div与其时间处理函数不能再从全局对象出发触及的时候，垃圾回收器就会标记并回收这两个对象。</p>
 
       
     </div>
@@ -469,9 +438,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/技术/" rel="tag"># 技术</a>
-          
-            <a href="/tags/工具/" rel="tag"># 工具</a>
+            <a href="/tags/JS/" rel="tag"># JS</a>
           
         </div>
       
@@ -484,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/12/Crontab/" rel="next" title="Crontab略解🎉">
-                <i class="fa fa-chevron-left"></i> Crontab略解🎉
+              <a href="/2018/04/23/seriouslyJavascript/" rel="next" title="Serious JavaScript">
+                <i class="fa fa-chevron-left"></i> Serious JavaScript
               </a>
             
           </div>
@@ -493,10 +460,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/24/wechatapp/" rel="prev" title="微信小程序之不完全胡乱指东西南北">
-                微信小程序之不完全胡乱指东西南北 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -686,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介："><span class="nav-number">1.</span> <span class="nav-text">简介：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS中的内存模型"><span class="nav-number">1.</span> <span class="nav-text">JS中的内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS基本类型与栈"><span class="nav-number">1.1.</span> <span class="nav-text">JS基本类型与栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS引用类型与堆"><span class="nav-number">1.2.</span> <span class="nav-text">JS引用类型与堆</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存的生命周期"><span class="nav-number">2.</span> <span class="nav-text">内存的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存的回收"><span class="nav-number">2.1.</span> <span class="nav-text">内存的回收</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收"><span class="nav-number">3.</span> <span class="nav-text">垃圾回收</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用计数垃圾收集"><span class="nav-number">3.1.</span> <span class="nav-text">引用计数垃圾收集</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例："><span class="nav-number">3.1.1.</span> <span class="nav-text">实例：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标记清除算法"><span class="nav-number">3.2.</span> <span class="nav-text">标记清除算法</span></a></li></ol></li></ol></div>
             
 
           </div>
