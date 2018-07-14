@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="上篇梳理了作用域的相关基础知识，要理解闭包，作用域是相当重要的一环。闭包一直以来总是一个会出现些怪异问题的，之所以怪异是因为自己还是没有理解透彻，这次就来梳理一下闭包的相关问题。">
+<meta name="description" content="上篇梳理了作用域的相关基础知识，要理解闭包，作用域是相当重要的一环。闭包一直以来总是一个会出现些怪异问题的东西，之所以怪异是因为自己还是没有理解透彻，这次就来梳理一下闭包的相关问题。 闭包在JS中的地位可以说是相当重要的了，总是会在各种论坛博客上面看到各种前辈们所写的关于闭包的解析，自己也是似懂非懂，总以为自己懂了，然后偶然间突然想起来要问问自己却又说不出个所以然。所以现在就来系统的阐述一下。 何">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我不知道的Javascript&lt;二&gt;：闭包">
 <meta property="og:url" content="http://stan1812.github.io/2018/07/13/dont-konw-JS2/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="上篇梳理了作用域的相关基础知识，要理解闭包，作用域是相当重要的一环。闭包一直以来总是一个会出现些怪异问题的，之所以怪异是因为自己还是没有理解透彻，这次就来梳理一下闭包的相关问题。">
+<meta property="og:description" content="上篇梳理了作用域的相关基础知识，要理解闭包，作用域是相当重要的一环。闭包一直以来总是一个会出现些怪异问题的东西，之所以怪异是因为自己还是没有理解透彻，这次就来梳理一下闭包的相关问题。 闭包在JS中的地位可以说是相当重要的了，总是会在各种论坛博客上面看到各种前辈们所写的关于闭包的解析，自己也是似懂非懂，总以为自己懂了，然后偶然间突然想起来要问问自己却又说不出个所以然。所以现在就来系统的阐述一下。 何">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-13T08:12:13.404Z">
+<meta property="og:updated_time" content="2018-07-14T14:16:17.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我不知道的Javascript&lt;二&gt;：闭包">
-<meta name="twitter:description" content="上篇梳理了作用域的相关基础知识，要理解闭包，作用域是相当重要的一环。闭包一直以来总是一个会出现些怪异问题的，之所以怪异是因为自己还是没有理解透彻，这次就来梳理一下闭包的相关问题。">
+<meta name="twitter:description" content="上篇梳理了作用域的相关基础知识，要理解闭包，作用域是相当重要的一环。闭包一直以来总是一个会出现些怪异问题的东西，之所以怪异是因为自己还是没有理解透彻，这次就来梳理一下闭包的相关问题。 闭包在JS中的地位可以说是相当重要的了，总是会在各种论坛博客上面看到各种前辈们所写的关于闭包的解析，自己也是似懂非懂，总以为自己懂了，然后偶然间突然想起来要问问自己却又说不出个所以然。所以现在就来系统的阐述一下。 何">
 
 
 
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  83
+                  1,417
                 </span>
               
 
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -398,7 +398,36 @@
       
 
       
-        <p>上篇梳理了作用域的相关基础知识，要理解闭包，作用域是相当重要的一环。闭包一直以来总是一个会出现些怪异问题的，之所以怪异是因为自己还是没有理解透彻，这次就来梳理一下闭包的相关问题。</p>
+        <p>上篇梳理了作用域的相关基础知识，要理解闭包，作用域是相当重要的一环。闭包一直以来总是一个会出现些怪异问题的东西，之所以怪异是因为自己还是没有理解透彻，这次就来梳理一下闭包的相关问题。</p>
+<p>闭包在JS中的地位可以说是相当重要的了，总是会在各种论坛博客上面看到各种前辈们所写的关于闭包的解析，自己也是似懂非懂，总以为自己懂了，然后偶然间突然想起来要问问自己却又说不出个所以然。所以现在就来系统的阐述一下。</p>
+<h3 id="何为闭包"><a href="#何为闭包" class="headerlink" title="何为闭包"></a>何为闭包</h3><p>我们从前辈的总结中得到这样一个定义：当函数可以记住并且访问所在的词法作用域时，就产生了闭包，即使函数是在当前作用域之外执行。</p>
+<p>先来看一个例子：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a) <span class="comment">//2</span></div><div class="line">  &#125;</div><div class="line">  bar()</div><div class="line">&#125; </div><div class="line">foo()</div></pre></td></tr></table></figure></p>
+<p>这是一个闭包吗？</p>
+<p>这段代码和之前嵌套作用域所使用的代码很类似，bar访问上级作用域并找到a，但是这和上面的定义似乎不是很完全贴合，有人说这属于一种闭包，有人说这并不算严格的闭包，这里我觉得，我们所关心的是闭包所带来的作用，而非是作为标准委员会来制作标准，所以这里不再争论。</p>
+<p>再看下一个例子：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> a = <span class="number">1</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> bar</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> baz = foo();</div><div class="line">baz() <span class="comment">//2</span></div></pre></td></tr></table></figure></p>
+<p>这其实就是一个非常典型的闭包了。<br>来分析一下这段简单的代码的执行过程：<br>很显然，函数bar能够访问foo的内部作用域，然后foo将bar本身传递了出去，即bar函数作为返回值，中间的调用执行我们不再关注，需要注意的是，函数foo执行完毕后，其作用域是否有销毁？观察运行结果，我们发现是没有的，函数baz(其实也就是bar)在执行的时候并非在其定义时所在的词法作用域，但是他依然保留了foo内部作用域的引用，而这个引用，就叫做闭包。</p>
+<p>这个函数在定义时词法作用域以外的地方被调用，闭包使得函数可以继续访问定义的词法作用域。且无论通过何手段将内部函数传递到其所在词法作用域以外，他都会保留对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包/</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>事实上，在实际写代码的时候我们可以发现闭包在代码中并不是一个陌生的东西，来看一个例子：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span>(<span class="params">message</span>)</span>&#123;</div><div class="line">  settimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span>(<span class="params"></span>)</span>&#123;message&#125;,<span class="number">1000</span>)</div><div class="line">&#125;</div><div class="line">wait(<span class="string">"hello"</span>)</div></pre></td></tr></table></figure></p>
+<p>将一个内部函数timer传递给settimeout，timer具有涵盖wait(…)作用域的闭包，因此还保留有对变量message的引用<br>在wait执行1000ms后，他的内部作用于并不会消失，timer依然保留着wait作用域的闭包。<br>更深入的来说，从settimeout的异步运行机制我们可以知道，他会被送入macortask等待执行，settimeout会持有一个对参数的引用，也就是timer，函数会调用这个函数，也就是timer函数，词法作用域保持完整。</p>
+<p>事实上，只要使用了回调函数，那么就在使用闭包。</p>
+<h4 id="IIFE"><a href="#IIFE" class="headerlink" title="IIFE"></a>IIFE</h4><p>一般认为立即执行函数是典型的闭包例子，但是若以之前试图解释的定义来看，这似乎并非是一个无异议的闭包实例<br>举个🎂；<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">2</span></div><div class="line">(<span class="function"><span class="keyword">function</span> <span class="title">IIFE</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(a)&#125;)()</div></pre></td></tr></table></figure></p>
+<p>我们其实可以这样理解，首先，函数并非是在所定义的词法作用域之外执行，其次我们可以理解为函数在执行时向上级作用域（这里也是全局作用域）找到了a，只是通过了普通的词法作用域查找而非闭包中找到的。</p>
+<p>但是正像之前所说的那样有不同的概念，他确实可以说是创建了闭包。因为他保存了自身的状态。</p>
+<h4 id="闭包与循环"><a href="#闭包与循环" class="headerlink" title="闭包与循环"></a>闭包与循环</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">counter</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</div><div class="line">    settimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(i)&#125;,<span class="number">1000</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>依然是之前就提到过的一个问题，虽然之前已经解释过这里还是再放一下：<br>现在若要使用闭包解决：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">counter</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</div><div class="line">   (<span class="function">(<span class="params">i</span>)=&gt;</span> settimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(i),<span class="number">1000</span>))(i)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="闭包与模块设计"><a href="#闭包与模块设计" class="headerlink" title="闭包与模块设计"></a>闭包与模块设计</h4><p>在ES6的import export诞生之前，可以说模块的设计可能会直接接触最最典型的闭包应用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Moudle</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> something = <span class="string">"something"</span>;</div><div class="line">  <span class="keyword">var</span> somethingElse = <span class="string">"sometingElse"</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">saySomething</span> (<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(something)</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">saySomethingElse</span> (<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(somethingElse)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    saySomething:saySomething,</div><div class="line">    somethingElse:somethingElse</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这是一个在之前可能会写的代码，他很直观地体现了闭包的作用。</p>
+<p>当然这只是一个方便理解的demo，实际的使用中，这样是肯定不能用的。</p>
+<p>但我们可以以此归纳出：</p>
+<ol>
+<li>为创建内部作用域而调用了一个包装函数</li>
+<li>包装函数返回值必须至少包括一个对内部函数的引用，这样就会创建包含整个包装函数内部作用域的闭包。<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3></li>
+</ol>
+<p>我们现在来简要的总结一下：<br>可以说：当函数能够记住并访问所在的词法作用域时，即使函数在他的词法作用域之外执行，这事就产生了闭包。</p>
+<hr>
+<p>下篇来梳理下this</p>
 
       
     </div>
@@ -489,8 +518,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/../../imgs/album.jpg"
@@ -608,6 +646,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#何为闭包"><span class="nav-number">1.</span> <span class="nav-text">何为闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">2.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IIFE"><span class="nav-number">2.1.</span> <span class="nav-text">IIFE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包与循环"><span class="nav-number">2.2.</span> <span class="nav-text">闭包与循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包与模块设计"><span class="nav-number">2.3.</span> <span class="nav-text">闭包与模块设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
