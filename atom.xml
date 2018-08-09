@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://stan1812.github.io/"/>
-  <updated>2018-07-19T12:35:07.830Z</updated>
+  <updated>2018-08-05T14:39:02.789Z</updated>
   <id>http://stan1812.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>理解Vue数据绑定</title>
+    <link href="http://stan1812.github.io/2018/08/05/esayMVVM/"/>
+    <id>http://stan1812.github.io/2018/08/05/esayMVVM/</id>
+    <published>2018-08-05T13:44:26.000Z</published>
+    <updated>2018-08-05T14:39:02.789Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>Vue实现数据绑定的方法是采用数据劫持解和发布者-订阅者的方法，通过Objec.defineProperty()来劫持各个属性的setter和getter在数据变动的时候，触发相应的监听回调。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol><li>实现一个监听器Observer，对数据对象的所有属性进行监听，如有变动拿到新值并且通知订阅者</li><li>实现一个指令解析器，对各个元素节点的指令进行扫描解析，根据指令模板替换数据，以及绑定相应函数</li><li>实现一个Watcher连接Observer和Compile的桥梁，订阅并受到每个属性变动的通知，执行绑定的相应回调函数，更新视图</li><li>mvvm入口函数</li></ol><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h3><p>这里通过Object.defineProperty()来给属性添加getter和setter（其实这里可以使用proxy来实现）<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> data = &#123;<span class="attr">name</span>:<span class="string">"xiaoming"</span>&#125;</div><div class="line">observe(data)</div><div class="line">data.name = <span class="string">"faker"</span> <span class="comment">// </span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">observe</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">  <span class="keyword">if</span>(!data||<span class="keyword">typeof</span> data!==<span class="string">'object'</span>)&#123;<span class="keyword">return</span>;&#125;</div><div class="line">  <span class="built_in">Object</span>.keys(data).forEach(</div><div class="line">    (key)=&gt;&#123;defineReactive(data,key,data[key])&#125;</div><div class="line">  )</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data,key,val</span>)</span>&#123;</div><div class="line">  object(val);</div><div class="line">  <span class="built_in">Object</span>.defineProperty(data,key,&#123;</div><div class="line">    enumerable:<span class="literal">true</span>,</div><div class="line">    configurable:<span class="literal">false</span>,</div><div class="line">    get:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;<span class="keyword">return</span> val&#125;,</div><div class="line">    set:<span class="function"><span class="keyword">function</span> (<span class="params">newVal</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;val&#125;</span>----&gt;<span class="subst">$&#123;newVal&#125;</span>`</span>)</div><div class="line">      val = newVal</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>现在已经实现了监听数据变化，之后便是如何通知订阅者，接下来要实现一个消息订阅器，我们这里维护一个数组来收集订阅者，数据变动触发notify，再调用订阅者的update方法：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data,key,val</span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> dep = <span class="keyword">new</span> Dep()</div><div class="line">  object(val);</div><div class="line">  <span class="built_in">Object</span>.defineProperty(data,key,&#123;</div><div class="line">    enumerable:<span class="literal">true</span>,</div><div class="line">    configurable:<span class="literal">false</span>,</div><div class="line">    get:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;<span class="keyword">return</span> val&#125;,</div><div class="line">    set:<span class="function"><span class="keyword">function</span> (<span class="params">newVal</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;val&#125;</span>----&gt;<span class="subst">$&#123;newVal&#125;</span>`</span>)</div><div class="line">      val = newVal</div><div class="line">      dep.notify()</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dep</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.subs = []</div><div class="line">&#125;</div><div class="line">Dep.prototype.addSub = <span class="function"><span class="keyword">function</span> (<span class="params">sub</span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.subs.push(sub)</div><div class="line">&#125;</div><div class="line">Dep.prototype.notify = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.subs.foreach(<span class="function">(<span class="params">sub</span>)=&gt;</span>&#123;sub.update()&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>接下来就是怎么向订阅器添加订阅者，上面的思路整理中我们已经明确订阅者应该是Watcher, 而且var dep = new Dep();是在 defineReactive方法内部定义的，所以想通过dep添加订阅者，就必须要在闭包内操作，所以我们可以在    getter里面动手脚：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">Object</span>.defineProperty(data,key,&#123;</div><div class="line">    get:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="comment">// 由于需要在闭包内添加watcher，所以通过Dep定义一个全局target属性，暂存watcher, 添加完移除</span></div><div class="line">      Dep.target&amp;&amp;dep.addDep(Dep.target)</div><div class="line">      <span class="keyword">return</span> val</div><div class="line">    &#125;,    </div><div class="line">  &#125;)</div><div class="line">  </div><div class="line">  <span class="comment">// watcher.js</span></div><div class="line">  Watcher.prototype=&#123;</div><div class="line">    get:<span class="function"><span class="keyword">function</span>(<span class="params">key</span>)</span>&#123;</div><div class="line">      Dep.target = <span class="keyword">this</span></div><div class="line">      <span class="keyword">this</span>.value = data[key]</div><div class="line">      Dep.target = <span class="literal">null</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;基本原理&quot;&gt;&lt;a href=&quot;#基本原理&quot; class=&quot;headerlink&quot; title=&quot;基本原理&quot;&gt;&lt;/a&gt;基本原理&lt;/h2&gt;&lt;p&gt;Vue实现数据绑定的方法是采用数据劫持解和发布者-订阅者的方法，通过Objec.defineProperty()来劫持各个属
+      
+    
+    </summary>
+    
+    
+      <category term="-JS -Vue" scheme="http://stan1812.github.io/tags/JS-Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>我不知道的JavaScript&lt;四&gt;：原型</title>
@@ -279,9 +302,9 @@
     </summary>
     
     
-      <category term="技术" scheme="http://stan1812.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
-    
       <category term="JS" scheme="http://stan1812.github.io/tags/JS/"/>
+    
+      <category term="技术" scheme="http://stan1812.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
     
   </entry>
   
@@ -486,32 +509,6 @@
     
     
       <category term="JS" scheme="http://stan1812.github.io/tags/JS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅析struct</title>
-    <link href="http://stan1812.github.io/2017/10/17/structDef/"/>
-    <id>http://stan1812.github.io/2017/10/17/structDef/</id>
-    <published>2017-10-17T08:47:35.000Z</published>
-    <updated>2017-10-18T03:43:49.470Z</updated>
-    
-    <content type="html"><![CDATA[<p>先留坑，空下来来写</p><h3 id="typedef是什么"><a href="#typedef是什么" class="headerlink" title="typedef是什么"></a>typedef是什么</h3><p>typedef为C语言的关键字，作用是为一种数据类型定义一个新名字。这里的数据类型包括内部数据类型（int,char等）和自定义的数据类型（struct等）。</p><p>在编程中使用typedef目的一般有两个，一个是给变量一个易记且意义明确的新名字，另一个是简化一些比较复杂的类型声明。</p><h3 id="使用struct"><a href="#使用struct" class="headerlink" title="使用struct"></a>使用struct</h3><h4 id="结构声明"><a href="#结构声明" class="headerlink" title="结构声明"></a>结构声明</h4><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></div><div class="line"><span class="keyword">int</span> age;</div><div class="line"><span class="keyword">int</span> height;</div><div class="line">&#125;;</div></pre></td></tr></table></figure><p>该声明描述了一个由两个整形所组成的结构，但并未创建实际的数据对象，只是描述了该对象由什么组成（可称之为“模板”，因为他勾勒出该结构是如何存数数据的，突然想起js的构造函数。。）</p><p>下面来分析一下细节：<br>首先：关键字struct，它表明跟在后面的是一个结构，后面是一个可选的标记“S1”，稍后程序中可以使用该标记引用该结构，例如：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> <span class="title">me</span>;</span></div></pre></td></tr></table></figure></p><p>这把<code>me</code>声明为一个使用<code>person</code>结构的结构变量</p><h4 id="定义结构变量"><a href="#定义结构变量" class="headerlink" title="定义结构变量"></a>定义结构变量</h4><p>结构有两层含义：一是结构布局，结构布局告诉编译器如何表示数据，但是并未让编译器为数据分配空间。 之后就是需要创建一个结构变量，即是另外一个含义。<br>在<code>struct person me;</code>中，<code>struct person</code>所起的作用就是相当于一般声明中的int float<br>可以定义两个<code>struct person</code>类型的变量，甚至是一个指向<code>struct person</code>类型结构的指针。<br><code>struct person me, xiaoming ,*xiaohong;</code></p><p>就计算机而言：<code>struct person me</code>是以下声明的简化：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></div><div class="line"><span class="keyword">int</span> age;</div><div class="line"><span class="keyword">int</span> height;</div><div class="line">&#125; me;</div></pre></td></tr></table></figure></p><h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>以上，可知，声明结构的过程和定义结构变量的过程可以组合长一个步骤<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line"><span class="keyword">int</span> age;</div><div class="line"><span class="keyword">int</span> height;</div><div class="line">&#125; me;</div></pre></td></tr></table></figure></p><p>然而，如果需要多次使用，就必须使用带标记的形式，或者使用接下来要介绍的<code>typedef</code></p><p>ps：这只是定义结构变量，并未初始化结构变量</p><h3 id="使用typedef"><a href="#使用typedef" class="headerlink" title="使用typedef"></a>使用typedef</h3><h4 id="typedef与结构结合使用"><a href="#typedef与结构结合使用" class="headerlink" title="typedef与结构结合使用"></a>typedef与结构结合使用</h4><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tagMyStruct</span></span></div><div class="line"><span class="class">&#123;</span> </div><div class="line">　<span class="keyword">int</span> iNum;</div><div class="line">　<span class="keyword">long</span> lLength;</div><div class="line">&#125; MyStruct;</div></pre></td></tr></table></figure><p>这语句实际上完成两个操作：</p><p>1) 定义一个新的结构类型<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tagMyStruct</span></span></div><div class="line"><span class="class">&#123;</span> </div><div class="line">　<span class="keyword">int</span> iNum; </div><div class="line">　<span class="keyword">long</span> lLength; </div><div class="line">&#125;;</div></pre></td></tr></table></figure></p><p>分析：tagMyStruct称为“tag”，即“标签”，实际上是一个临时名字，struct 关键字和tagMyStruct一起，构成了这个结构类型，不论是否有typedef，这个结构都存在。</p><p>我们可以用struct tagMyStruct varName来定义变量，但要注意，使用tagMyStruct varName来定义变量是不对的，因为struct 和tagMyStruct合在一起才能表示一个结构类型。</p><p>2) typedef为这个新的结构起了一个名字，叫MyStruct。</p><p>  <code>typedef struct tagMyStruct MyStruct;</code></p><p>因此，MyStruct实际上相当于struct tagMyStruct，我们可以使用MyStruct varName来定义变量</p><h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">x1</span> &#123;</span> ...&#125;x1; </div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">x2</span>&#123;</span> ...&#125; x2;</div><div class="line">``` </div><div class="line">有什么不同？ </div><div class="line">其实, 前者是定义了类`_x1`和`_x1`的对象实例`x1`, 后者是定义了类`_x2`和`_x2`的类别名`x2`</div><div class="line"></div><div class="line">所以它们在使用过程中是有区别的</div><div class="line">实例：</div><div class="line">```C++</div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line"><span class="keyword">int</span> num;</div><div class="line"><span class="keyword">int</span> age;</div><div class="line">&#125;aaa,bbb,ccc;</div></pre></td></tr></table></figure><p>这算什么呢？<br>这相当于<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line"><span class="keyword">int</span> num;</div><div class="line"><span class="keyword">int</span> age;</div><div class="line">&#125;aaa；</div><div class="line"><span class="keyword">typedef</span> aaa bbb;</div><div class="line"><span class="keyword">typedef</span> aaa ccc;</div></pre></td></tr></table></figure></p><p>也就是说aaa,bbb,ccc三者都是结构体类型。声明变量时用任何一个都可以,在c++中也是如此。但是你要注意的是这个在c++中如果无typedef关键字，那么aaa，bbb，ccc将是截然不同的三个对象。</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>(这个问答是在CSDN看到的，<a href="http://blog.csdn.net/haiou0/article/details/6877718" target="_blank" rel="external">链接在此</a>因为对C和C++学习的并不深入，所以直接拿来了~)<br>Q：用struct和typedef struct 定义一个结构体有什么区别？为什么会有两种方式呢？<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> </span></div><div class="line"><span class="class">&#123;</span> </div><div class="line"><span class="keyword">int</span> a; </div><div class="line">&#125; stu;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Student2</span> </span></div><div class="line"><span class="class">&#123;</span> </div><div class="line"><span class="keyword">int</span> a; </div><div class="line">&#125;stu2;</div></pre></td></tr></table></figure></p><p>A：</p><p>事实上，这个东西是从C语言中遗留过来的，typedef可以定义新的复合类型或给现有类型起一个别名，在C语言中，如果你使用 <code>struct xxx {...};</code> 的方法，使用时就必须用<code>struct xxx var</code> 来声明变量，而使用 <code>typedef struct {...}</code>的方法 就可以写为<code>xxx var</code>;<br>不过在C++中已经没有这回事了，无论你用哪一种写法都可以使用第二种方式声明变量，这个应该算是C语言的糟粕。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;先留坑，空下来来写&lt;/p&gt;
-&lt;h3 id=&quot;typedef是什么&quot;&gt;&lt;a href=&quot;#typedef是什么&quot; class=&quot;headerlink&quot; title=&quot;typedef是什么&quot;&gt;&lt;/a&gt;typedef是什么&lt;/h3&gt;&lt;p&gt;typedef为C语言的关键字，作用是为一
-      
-    
-    </summary>
-    
-      <category term="技术" scheme="http://stan1812.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="数据结构" scheme="http://stan1812.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   

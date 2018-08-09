@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JAVA," />
+  <meta name="keywords" content="-JS -Vue," />
 
 
 
@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="说点废话  在开始学习JAVA之后，写习惯了Javascript的我，首先意识到的是好繁琐，比如在接触JAVA中的枚举类型之后，这在JS中想要实现重写一些方法，以及其他一些类似的效果其实从语法上来讲要简单的不少，虽然Javascript最初是JS之父用了10多天写出了的，甚至有一一部分直接抄的JAVA比如Date类，（虽然抄来的Date一直被吐槽不好用，好像打算要重写？）   甚至连起名字都是为了">
-<meta name="keywords" content="JAVA">
+<meta name="description" content="基本原理Vue实现数据绑定的方法是采用数据劫持解和发布者-订阅者的方法，通过Objec.defineProperty()来劫持各个属性的setter和getter在数据变动的时候，触发相应的监听回调。 思路 实现一个监听器Observer，对数据对象的所有属性进行监听，如有变动拿到新值并且通知订阅者 实现一个指令解析器，对各个元素节点的指令进行扫描解析，根据指令模板替换数据，以及绑定相应函数 实现">
+<meta name="keywords" content="-JS -Vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JAVA 枚举类型的一些理解">
-<meta property="og:url" content="http://stan1812.github.io/2018/04/14/javaEnum/index.html">
+<meta property="og:title" content="理解Vue数据绑定">
+<meta property="og:url" content="http://stan1812.github.io/2018/08/05/esayMVVM/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="说点废话  在开始学习JAVA之后，写习惯了Javascript的我，首先意识到的是好繁琐，比如在接触JAVA中的枚举类型之后，这在JS中想要实现重写一些方法，以及其他一些类似的效果其实从语法上来讲要简单的不少，虽然Javascript最初是JS之父用了10多天写出了的，甚至有一一部分直接抄的JAVA比如Date类，（虽然抄来的Date一直被吐槽不好用，好像打算要重写？）   甚至连起名字都是为了">
+<meta property="og:description" content="基本原理Vue实现数据绑定的方法是采用数据劫持解和发布者-订阅者的方法，通过Objec.defineProperty()来劫持各个属性的setter和getter在数据变动的时候，触发相应的监听回调。 思路 实现一个监听器Observer，对数据对象的所有属性进行监听，如有变动拿到新值并且通知订阅者 实现一个指令解析器，对各个元素节点的指令进行扫描解析，根据指令模板替换数据，以及绑定相应函数 实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-14T09:28:26.701Z">
+<meta property="og:updated_time" content="2018-08-05T14:39:02.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JAVA 枚举类型的一些理解">
-<meta name="twitter:description" content="说点废话  在开始学习JAVA之后，写习惯了Javascript的我，首先意识到的是好繁琐，比如在接触JAVA中的枚举类型之后，这在JS中想要实现重写一些方法，以及其他一些类似的效果其实从语法上来讲要简单的不少，虽然Javascript最初是JS之父用了10多天写出了的，甚至有一一部分直接抄的JAVA比如Date类，（虽然抄来的Date一直被吐槽不好用，好像打算要重写？）   甚至连起名字都是为了">
+<meta name="twitter:title" content="理解Vue数据绑定">
+<meta name="twitter:description" content="基本原理Vue实现数据绑定的方法是采用数据劫持解和发布者-订阅者的方法，通过Objec.defineProperty()来劫持各个属性的setter和getter在数据变动的时候，触发相应的监听回调。 思路 实现一个监听器Observer，对数据对象的所有属性进行监听，如有变动拿到新值并且通知订阅者 实现一个指令解析器，对各个元素节点的指令进行扫描解析，根据指令模板替换数据，以及绑定相应函数 实现">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://stan1812.github.io/2018/04/14/javaEnum/"/>
+  <link rel="canonical" href="http://stan1812.github.io/2018/08/05/esayMVVM/"/>
 
 
 
 
 
-  <title>JAVA 枚举类型的一些理解 | An Amazing World</title>
+  <title>理解Vue数据绑定 | An Amazing World</title>
   
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stan1812.github.io/2018/04/14/javaEnum/">
+    <link itemprop="mainEntityOfPage" href="http://stan1812.github.io/2018/08/05/esayMVVM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shady">
@@ -317,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JAVA 枚举类型的一些理解</h1>
+          <h1 class="post-title" itemprop="name headline">理解Vue数据绑定</h1>
         
 
         <div class="post-meta">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-14T00:15:20+08:00">
-                2018-04-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-05T21:44:26+08:00">
+                2018-08-05
               </time>
             
 
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,375
+                  556
                 </span>
               
 
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  2
                 </span>
               
             </div>
@@ -398,61 +398,16 @@
       
 
       
-        <h3 id="说点废话"><a href="#说点废话" class="headerlink" title="说点废话"></a>说点废话</h3><p>  在开始学习JAVA之后，写习惯了Javascript的我，首先意识到的是好繁琐，比如在接触JAVA中的枚举类型之后，这在JS中想要实现重写一些方法，以及其他一些类似的效果其实从语法上来讲要简单的不少，虽然Javascript最初是JS之父用了10多天写出了的，甚至有一一部分直接抄的JAVA比如Date类，（虽然抄来的Date一直被吐槽不好用，好像打算要重写？）</p>
-<p>  甚至连起名字都是为了蹭一波JAVA的名气。并且面向对象的实现方式也截然不同，一个是纯正的基于对象的继承，另一个是基于原型链的继承。甚至有人调侃真的OOP和假的OOP。。</p>
-<p>  不过虽然实现方式不一样，但是一些设计思想感觉还是类似的，之前总有人说JAVA和Javascript的区别就是斑马和斑马线的区别，现在来想一想其实这两种语言还是类似的地方的，尤其是在ES6中的Class出现之后，Class ，extends 等等语法糖的出现，给人感觉更像了///可能JS作为一个一开始并不被看好的语言随着应用范围越来越广，使用JS、构建的项目也越来越大，想要变得更牛逼似乎有一种更适合于工程化的东西出现了吧。</p>
-<h3 id="JAVA的枚举类型"><a href="#JAVA的枚举类型" class="headerlink" title="JAVA的枚举类型"></a>JAVA的枚举类型</h3><p>先来举个最常用的栗子🎂 ：<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Colors &#123;</div><div class="line">  RED,BLUE,BLACK,YELLOW,GREEN;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 简单调用：Colors.RED</span></div></pre></td></tr></table></figure></p>
-<p>这是最基本的使用方法。但是其实并没有展现出JAVA的枚举类型的用途，有点人才埋没。</p>
-<p>再举一个目前用的比较多的一种使用方式：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Tips &#123;</div><div class="line">  WIN(<span class="string">"you win"</span>),LOSE(<span class="string">"you lose"</span>);</div><div class="line">  <span class="keyword">private</span> String tip;</div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="title">Tips</span><span class="params">(String tip)</span></span>&#123;</div><div class="line">    <span class="keyword">this</span>.tip = tip;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.tip;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">System.out.println(Tips.WIN)</div><div class="line"><span class="comment">// you win</span></div></pre></td></tr></table></figure>
-<p>在这段代码中，我们简单的保存了一些基本的提示信息,重写tostring方法,这在JS里面其实可以说是很常见了，不同的是修改的原型链上的方法，不禁感到非常亲切。</p>
-<p>在看到这种用法之后，很疑惑，WIN和LOSE，看起来很像是一个函数，但是很不理解在初始化的时候到底是怎么操作的，以至于认为在调用的时候是调用的一个名为WIN的方法，于是就反编译了编译生成的class文件：<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">➜  src javap Tips.class</div><div class="line">Compiled from <span class="string">"Tips.java"</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Tips</span> <span class="keyword">extends</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">Enum</span>&lt;<span class="title">Tips</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Tips WIN;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Tips LOSE;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Tips[] values();</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Tips <span class="title">valueOf</span><span class="params">(java.lang.String)</span></span>;</div><div class="line">  <span class="keyword">public</span> java.lang.<span class="function">String <span class="title">toString</span><span class="params">()</span></span>;</div><div class="line">  <span class="keyword">static</span> &#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在看到了反编译的文件之后才算明白，所创建的枚举类型实例（且为final类型）继承自Java的Enum类，<br>而在内部的编译中，其实是遍历生成以所写内容命名的Tips类的实例，且生成的实例就能为final类型，不可继承，因为是static类型由Tips类所属，所以可以直接调用，比如：<code>Tips.WIN</code>.<br>因为重写了构造方法Tips(),并声明了私有变量tip，所以在生成实例的时候，初始化各个实例的tip为所传入的内容。然后重写toString方法，在调用的时候，返回tip。效果就是实现了，当然重写类的toString方法可能一般并不提倡，以为在JS里面也同样是要避免污染原型链的，这里应该是类似的。</p>
-<p>由于WIN（以WIN为例）实质上是Tips类的一个static的对象，为全局共有,当然可以给其创建封装新的接口，比如，<br>比如：<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getTip</span> <span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.tip;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>需要注意的一点是，这个getTip方法是属于实例的还是属于class的？也就是说他是类方法还是实例方法？<br>再来反编译一下：<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">➜  src javap Tips.class</div><div class="line">Compiled from <span class="string">"Tips.java"</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Tips</span> <span class="keyword">extends</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">Enum</span>&lt;<span class="title">Tips</span>&gt; </span>&#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Tips WIN;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Tips LOSE;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> Tips[] values();</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Tips <span class="title">valueOf</span><span class="params">(java.lang.String)</span></span>;</div><div class="line">  <span class="keyword">public</span> java.lang.<span class="function">String <span class="title">toString</span><span class="params">()</span></span>;</div><div class="line">  <span class="keyword">public</span> java.lang.<span class="function">String <span class="title">getTip</span><span class="params">()</span></span>;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(java.lang.String[])</span></span>;</div><div class="line">  <span class="keyword">static</span> &#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>因为在JS里构造函数中所写的方法，是属于实例的，即每初始化一个实例对象就会重新声明一个属于该对象的重名方法。浪费了内存。想要使其共享，就要将函数写到prototype上，所以在这里想了一下，不过在查了一些东西之后发现，这里的方法，即使并未写在构造函数里面，只要是非静态方法其就是实例方法。。似乎在JS和JAVA中，构造函数的概念及作用并不完全相同。与JS中使用工厂模式初始化的对象相比，JAVA中的类与JS的构造函数来对比更为合适一些。</p>
-<h3 id="Enum抽象类常见方法"><a href="#Enum抽象类常见方法" class="headerlink" title="Enum抽象类常见方法"></a>Enum抽象类常见方法</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">方法</th>
-<th style="text-align:left">返回类型</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">compareTo(E o)</td>
-<td style="text-align:left">int</td>
-<td style="text-align:left">比较此枚举与指定对象的顺序</td>
-</tr>
-<tr>
-<td style="text-align:left">equals(Object other)</td>
-<td style="text-align:left">boolean</td>
-<td style="text-align:left">当指定对象等于此枚举常量时，返回 true。</td>
-</tr>
-<tr>
-<td style="text-align:left">name()</td>
-<td style="text-align:left">String</td>
-<td style="text-align:left">返回此枚举常量的名称，在其枚举声明中对其进行声明</td>
-</tr>
-<tr>
-<td style="text-align:left">ordinal()</td>
-<td style="text-align:left">int</td>
-<td style="text-align:left">返回枚举常量的序数（它在枚举声明中的位置，其中初始常量序数为零）</td>
-</tr>
-<tr>
-<td style="text-align:left">toString()</td>
-<td style="text-align:left">String</td>
-<td style="text-align:left">返回枚举常量的名称，它包含在声明中</td>
-</tr>
-<tr>
-<td style="text-align:left">getDeclaringClass()</td>
-<td style="text-align:left">Class&lt;?&gt;</td>
-<td style="text-align:left">返回与此枚举常量的枚举类型相对应的 Class 对象</td>
-</tr>
-</tbody>
-</table>
-<p>大概就是这样叭🚀</p>
+        <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>Vue实现数据绑定的方法是采用数据劫持解和发布者-订阅者的方法，通过Objec.defineProperty()来劫持各个属性的setter和getter在数据变动的时候，触发相应的监听回调。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li>实现一个监听器Observer，对数据对象的所有属性进行监听，如有变动拿到新值并且通知订阅者</li>
+<li>实现一个指令解析器，对各个元素节点的指令进行扫描解析，根据指令模板替换数据，以及绑定相应函数</li>
+<li>实现一个Watcher连接Observer和Compile的桥梁，订阅并受到每个属性变动的通知，执行绑定的相应回调函数，更新视图</li>
+<li>mvvm入口函数</li>
+</ol>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h3><p>这里通过Object.defineProperty()来给属性添加getter和setter（其实这里可以使用proxy来实现）<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">let</span> data = &#123;<span class="attr">name</span>:<span class="string">"xiaoming"</span>&#125;</div><div class="line">observe(data)</div><div class="line">data.name = <span class="string">"faker"</span> <span class="comment">// </span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">observe</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">  <span class="keyword">if</span>(!data||<span class="keyword">typeof</span> data!==<span class="string">'object'</span>)&#123;<span class="keyword">return</span>;&#125;</div><div class="line">  <span class="built_in">Object</span>.keys(data).forEach(</div><div class="line">    (key)=&gt;&#123;defineReactive(data,key,data[key])&#125;</div><div class="line">  )</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data,key,val</span>)</span>&#123;</div><div class="line">  object(val);</div><div class="line">  <span class="built_in">Object</span>.defineProperty(data,key,&#123;</div><div class="line">    enumerable:<span class="literal">true</span>,</div><div class="line">    configurable:<span class="literal">false</span>,</div><div class="line">    get:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;<span class="keyword">return</span> val&#125;,</div><div class="line">    set:<span class="function"><span class="keyword">function</span> (<span class="params">newVal</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;val&#125;</span>----&gt;<span class="subst">$&#123;newVal&#125;</span>`</span>)</div><div class="line">      val = newVal</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>现在已经实现了监听数据变化，之后便是如何通知订阅者，接下来要实现一个消息订阅器，我们这里维护一个数组来收集订阅者，数据变动触发notify，再调用订阅者的update方法：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">data,key,val</span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> dep = <span class="keyword">new</span> Dep()</div><div class="line">  object(val);</div><div class="line">  <span class="built_in">Object</span>.defineProperty(data,key,&#123;</div><div class="line">    enumerable:<span class="literal">true</span>,</div><div class="line">    configurable:<span class="literal">false</span>,</div><div class="line">    get:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;<span class="keyword">return</span> val&#125;,</div><div class="line">    set:<span class="function"><span class="keyword">function</span> (<span class="params">newVal</span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;val&#125;</span>----&gt;<span class="subst">$&#123;newVal&#125;</span>`</span>)</div><div class="line">      val = newVal</div><div class="line">      dep.notify()</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dep</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.subs = []</div><div class="line">&#125;</div><div class="line">Dep.prototype.addSub = <span class="function"><span class="keyword">function</span> (<span class="params">sub</span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.subs.push(sub)</div><div class="line">&#125;</div><div class="line">Dep.prototype.notify = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.subs.foreach(<span class="function">(<span class="params">sub</span>)=&gt;</span>&#123;sub.update()&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接下来就是怎么向订阅器添加订阅者，上面的思路整理中我们已经明确订阅者应该是Watcher, 而且var dep = new Dep();是在 defineReactive方法内部定义的，所以想通过dep添加订阅者，就必须要在闭包内操作，所以我们可以在    getter里面动手脚：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="built_in">Object</span>.defineProperty(data,key,&#123;</div><div class="line">    get:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">      		<span class="comment">// 由于需要在闭包内添加watcher，所以通过Dep定义一个全局target属性，暂存watcher, 添加完移除</span></div><div class="line">      Dep.target&amp;&amp;dep.addDep(Dep.target)</div><div class="line">      <span class="keyword">return</span> val</div><div class="line">    &#125;,    </div><div class="line">  &#125;)</div><div class="line">  </div><div class="line">  <span class="comment">// watcher.js</span></div><div class="line">  Watcher.prototype=&#123;</div><div class="line">    get:<span class="function"><span class="keyword">function</span>(<span class="params">key</span>)</span>&#123;</div><div class="line">      Dep.target = <span class="keyword">this</span></div><div class="line">      <span class="keyword">this</span>.value = data[key]</div><div class="line">      Dep.target = <span class="literal">null</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -470,7 +425,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JAVA/" rel="tag"># JAVA</a>
+            <a href="/tags/JS-Vue/" rel="tag"># -JS -Vue</a>
           
         </div>
       
@@ -483,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/13/heightInHtml/" rel="next" title="聊一聊前端各种宽高左右">
-                <i class="fa fa-chevron-left"></i> 聊一聊前端各种宽高左右
+              <a href="/2018/07/16/dont-know-JS4/" rel="next" title="我不知道的JavaScript<四>：原型">
+                <i class="fa fa-chevron-left"></i> 我不知道的JavaScript<四>：原型
               </a>
             
           </div>
@@ -492,10 +447,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/23/seriouslyJavascript/" rel="prev" title="Serious JavaScript">
-                Serious JavaScript <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -685,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#说点废话"><span class="nav-number">1.</span> <span class="nav-text">说点废话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JAVA的枚举类型"><span class="nav-number">2.</span> <span class="nav-text">JAVA的枚举类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enum抽象类常见方法"><span class="nav-number">3.</span> <span class="nav-text">Enum抽象类常见方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-number">1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Observer"><span class="nav-number">3.1.</span> <span class="nav-text">Observer</span></a></li></ol></li></ol></div>
             
 
           </div>
