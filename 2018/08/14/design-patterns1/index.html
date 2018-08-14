@@ -97,18 +97,18 @@
 
 
 
-<meta name="description" content="JS中的内存模型JS基本类型与栈JS基本类型已经很清楚了：null、undefined、String、Number、Boolean JS中的这些基础类型，有固定的大小，一般会保存在栈中（闭包除外），由系统自动分配内存空间，基础数据类型都是按值访问。 JS引用类型与堆其他语言不同，JS的引用数据类型，比如数组Array，它们值的大小是不固定的。引用数据类型的值是保存在堆内存中的对象。JS不允许直接访">
+<meta name="description" content="For fun ，For love">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS的内存管理">
-<meta property="og:url" content="http://stan1812.github.io/2018/06/06/JS-memary-mannager/index.html">
+<meta property="og:title" content="漫谈JavaScript设计模式&lt;一&gt;">
+<meta property="og:url" content="http://stan1812.github.io/2018/08/14/design-patterns1/index.html">
 <meta property="og:site_name" content="An Amazing World">
-<meta property="og:description" content="JS中的内存模型JS基本类型与栈JS基本类型已经很清楚了：null、undefined、String、Number、Boolean JS中的这些基础类型，有固定的大小，一般会保存在栈中（闭包除外），由系统自动分配内存空间，基础数据类型都是按值访问。 JS引用类型与堆其他语言不同，JS的引用数据类型，比如数组Array，它们值的大小是不固定的。引用数据类型的值是保存在堆内存中的对象。JS不允许直接访">
+<meta property="og:description" content="For fun ，For love">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-06T05:02:47.014Z">
+<meta property="og:updated_time" content="2018-08-14T14:53:18.155Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS的内存管理">
-<meta name="twitter:description" content="JS中的内存模型JS基本类型与栈JS基本类型已经很清楚了：null、undefined、String、Number、Boolean JS中的这些基础类型，有固定的大小，一般会保存在栈中（闭包除外），由系统自动分配内存空间，基础数据类型都是按值访问。 JS引用类型与堆其他语言不同，JS的引用数据类型，比如数组Array，它们值的大小是不固定的。引用数据类型的值是保存在堆内存中的对象。JS不允许直接访">
+<meta name="twitter:title" content="漫谈JavaScript设计模式&lt;一&gt;">
+<meta name="twitter:description" content="For fun ，For love">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://stan1812.github.io/2018/06/06/JS-memary-mannager/"/>
+  <link rel="canonical" href="http://stan1812.github.io/2018/08/14/design-patterns1/"/>
 
 
 
 
 
-  <title>JS的内存管理 | An Amazing World</title>
+  <title>漫谈JavaScript设计模式<一> | An Amazing World</title>
   
 
 
@@ -300,7 +300,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://stan1812.github.io/2018/06/06/JS-memary-mannager/">
+    <link itemprop="mainEntityOfPage" href="http://stan1812.github.io/2018/08/14/design-patterns1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shady">
@@ -317,7 +317,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JS的内存管理</h1>
+          <h1 class="post-title" itemprop="name headline">漫谈JavaScript设计模式<一></h1>
         
 
         <div class="post-meta">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T12:10:57+08:00">
-                2018-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-14T22:52:03+08:00">
+                2018-08-14
               </time>
             
 
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,474
+                  0
                 </span>
               
 
@@ -377,7 +377,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  1
                 </span>
               
             </div>
@@ -398,30 +398,7 @@
       
 
       
-        <h3 id="JS中的内存模型"><a href="#JS中的内存模型" class="headerlink" title="JS中的内存模型"></a>JS中的内存模型</h3><h4 id="JS基本类型与栈"><a href="#JS基本类型与栈" class="headerlink" title="JS基本类型与栈"></a>JS基本类型与栈</h4><p>JS基本类型已经很清楚了：null、undefined、String、Number、Boolean</p>
-<p>JS中的这些基础类型，有固定的大小，一般会保存在栈中（闭包除外），由系统自动分配内存空间，基础数据类型都是按值访问。</p>
-<h4 id="JS引用类型与堆"><a href="#JS引用类型与堆" class="headerlink" title="JS引用类型与堆"></a>JS引用类型与堆</h4><p>其他语言不同，JS的引用数据类型，比如数组Array，它们值的大小是不固定的。引用数据类型的值是保存在堆内存中的对象。JS不允许直接访问堆内存中的位置，因此我们不能直接操作对象的堆内存空间。在操作对象时，实际上是在操作对象的引用而不是实际的对象。因此，引用类型的值都是按引用访问的。这里的引用，我们可以粗浅地理解为保存在栈内存中的一个地址，该地址与堆内存的实际值相关联。</p>
-<h3 id="内存的生命周期"><a href="#内存的生命周期" class="headerlink" title="内存的生命周期"></a>内存的生命周期</h3><p> JS环境中分配的内存一般有如下生命周期：</p>
-<ul>
-<li>内存分配：当我们申明变量、函数、对象的时候，系统会自动为他们分配内存</li>
-<li>内存使用：即读写内存，也就是使用变量、函数等</li>
-<li>内存回收：使用完毕，由垃圾回收自动回收不再使用的内存</li>
-</ul>
-<p>在所有语言中第一和第二部分都很清晰。最后一步在底层语言中很清晰，但是在像JavaScript 等上层语言中，这一步是隐藏的、透明的。</p>
-<p>分配和内存使用部分不再说了</p>
-<h4 id="内存的回收"><a href="#内存的回收" class="headerlink" title="内存的回收"></a>内存的回收</h4><p>大多数内存管理的问题都在这个阶段。在这里最艰难的任务是找到“所分配的内存确实已经不再需要了”。它往往要求开发人员来确定在程序中哪一块内存不再需要并且释放它。</p>
-<p>高级语言解释器嵌入了“垃圾回收器”，来跟踪内存的分配和使用，当分配的内存不再使用时，自动释放它。但是这只能是一个近似的过程，因为要知道是否仍然需要某块内存是无法判定的（无法通过某种算法解决）</p>
-<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><p>JS中目前有两种垃圾回收的比较通用的算法</p>
-<h4 id="引用计数垃圾收集"><a href="#引用计数垃圾收集" class="headerlink" title="引用计数垃圾收集"></a>引用计数垃圾收集</h4><p>这是最简单的垃圾收集算法。此算法把“对象是否不再需要”简化定义为“对象有没有其他对象引用到它”。如果没有引用指向该对象（零引用），对象将被垃圾回收机制回收。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123; </div><div class="line">  a: &#123;</div><div class="line">    b:<span class="number">2</span></div><div class="line">  &#125;</div><div class="line">&#125;; </div><div class="line"><span class="comment">// 两个对象被创建，一个作为另一个的属性被引用，另一个被分配给变量o</span></div><div class="line"><span class="comment">// 很显然，没有一个可以被垃圾收集</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> o2 = o; <span class="comment">// o2变量是第二个对“这个对象”的引用</span></div><div class="line"></div><div class="line">o = <span class="number">1</span>;      <span class="comment">// 现在，“这个对象”的原始引用o被o2替换了</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> oa = o2.a; <span class="comment">// 引用“这个对象”的a属性</span></div><div class="line"><span class="comment">// 现在，“这个对象”有两个引用了，一个是o2，一个是oa</span></div><div class="line"></div><div class="line">o2 = <span class="string">"yo"</span>; <span class="comment">// 最初的对象现在已经是零引用了</span></div><div class="line">           <span class="comment">// 他可以被垃圾回收了</span></div><div class="line">           <span class="comment">// 然而它的属性a的对象还在被oa引用，所以还不能回收</span></div><div class="line"></div><div class="line">oa = <span class="literal">null</span>; <span class="comment">// a属性的那个对象现在也是零引用了</span></div><div class="line">           <span class="comment">// 它可以被垃圾回收了</span></div></pre></td></tr></table></figure></p>
-<p>限制：循环引用</p>
-<p>该算法有个限制：无法处理循环引用。在下面的例子中，两个对象被创建，并互相引用，形成了一个循环。它们被调用之后不会离开函数作用域，所以它们已经没有用了，可以被回收了。然而，引用计数算法考虑到它们互相都有至少一次引用，所以它们不会被回收<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> o = &#123;&#125;;</div><div class="line">  <span class="keyword">var</span> o2 = &#123;&#125;;</div><div class="line">  o.a = o2; <span class="comment">// o 引用 o2</span></div><div class="line">  o2.a = o; <span class="comment">// o2 引用 o</span></div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="string">"boom!"</span>;</div><div class="line">&#125;</div><div class="line">f();</div></pre></td></tr></table></figure></p>
-<h5 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h5><p>IE 6, 7 使用引用计数方式对 DOM 对象进行垃圾回收。该方式常常造成对象被循环引用时内存发生泄漏：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> div;</div><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  div = <span class="built_in">document</span>.getElementById(<span class="string">"myDivElement"</span>);</div><div class="line">  div.circularReference = div;</div><div class="line">  div.lotsOfData = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10000</span>).join(<span class="string">"*"</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>在上面的例子里，myDivElement 这个 DOM 元素里的 circularReference 属性引用了 myDivElement，造成了循环引用。如果该属性没有显示移除或者设为 null，引用计数式垃圾收集器将总是且至少有一个引用，并将一直保持在内存里的 DOM 元素，即使其从DOM 树中删去了。如果这个 DOM 元素拥有大量的数据 (如上的 lotsOfData 属性)，而这个数据占用的内存将永远不会被释放。</p>
-<h4 id="标记清除算法"><a href="#标记清除算法" class="headerlink" title="标记清除算法"></a>标记清除算法</h4><p>现代的浏览器已经不再使用引用计数算法了。现代浏览器通用的大多是基于标记清除算法的某些改进算法，总体思想都是一致的。</p>
-<p>标记清除算法将“不再使用的对象”定义为“无法达到的对象”。简单来说，就是从根部（在JS中就是全局对象）出发定时扫描内存中的对象。凡是能从根部到达的对象，都是还需要使用的。那些无法由根部出发触及到的对象被标记为不再使用，稍后进行回收。</p>
-<p>从这个概念可以看出，无法触及的对象包含了没有引用的对象这个概念（没有任何引用的对象也是无法触及的对象）。但反之未必成立。</p>
-<p>根据这个概念，上面的例子可以正确被垃圾回收处理了。当div与其时间处理函数不能再从全局对象出发触及的时候，垃圾回收器就会标记并回收这两个对象。</p>
-
+        
       
     </div>
     
@@ -451,8 +428,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/23/seriouslyJavascript/" rel="next" title="Serious JavaScript">
-                <i class="fa fa-chevron-left"></i> Serious JavaScript
+              <a href="/2018/08/05/esayMVVM/" rel="next" title="理解Vue数据绑定">
+                <i class="fa fa-chevron-left"></i> 理解Vue数据绑定
               </a>
             
           </div>
@@ -460,10 +437,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/14/mini-redux/" rel="prev" title="从头实现一个mini Redux">
-                从头实现一个mini Redux <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -515,17 +488,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/../../imgs/album.jpg"
@@ -643,22 +607,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS中的内存模型"><span class="nav-number">1.</span> <span class="nav-text">JS中的内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS基本类型与栈"><span class="nav-number">1.1.</span> <span class="nav-text">JS基本类型与栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS引用类型与堆"><span class="nav-number">1.2.</span> <span class="nav-text">JS引用类型与堆</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存的生命周期"><span class="nav-number">2.</span> <span class="nav-text">内存的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存的回收"><span class="nav-number">2.1.</span> <span class="nav-text">内存的回收</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收"><span class="nav-number">3.</span> <span class="nav-text">垃圾回收</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#引用计数垃圾收集"><span class="nav-number">3.1.</span> <span class="nav-text">引用计数垃圾收集</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实例："><span class="nav-number">3.1.1.</span> <span class="nav-text">实例：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标记清除算法"><span class="nav-number">3.2.</span> <span class="nav-text">标记清除算法</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
