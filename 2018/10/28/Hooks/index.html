@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#7e868b">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="-JS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="An Amazing World" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/imgs/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="在看了React Hooks的文档之后，本英语渣渣竟然突然有了想要翻译一下这篇文档的冲动，于是就首次尝试翻译一篇英文文档,原文Hooks at a Glance Hooks是一个React中的新提案，他可以让你在不使用Class的情况下使用state和其他的React特性。Hooks 目前已经发布在 v16.7.0 alpha 版本，且正在开放的RFC讨论。 Hooks是向后兼容的，这篇文档将向有">
+<meta name="keywords" content="-JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hooks at a Glance">
+<meta property="og:url" content="http://stan1812.github.io/2018/10/28/Hooks/index.html">
+<meta property="og:site_name" content="An Amazing World">
+<meta property="og:description" content="在看了React Hooks的文档之后，本英语渣渣竟然突然有了想要翻译一下这篇文档的冲动，于是就首次尝试翻译一篇英文文档,原文Hooks at a Glance Hooks是一个React中的新提案，他可以让你在不使用Class的情况下使用state和其他的React特性。Hooks 目前已经发布在 v16.7.0 alpha 版本，且正在开放的RFC讨论。 Hooks是向后兼容的，这篇文档将向有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-28T05:39:22.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hooks at a Glance">
+<meta name="twitter:description" content="在看了React Hooks的文档之后，本英语渣渣竟然突然有了想要翻译一下这篇文档的冲动，于是就首次尝试翻译一篇英文文档,原文Hooks at a Glance Hooks是一个React中的新提案，他可以让你在不使用Class的情况下使用state和其他的React特性。Hooks 目前已经发布在 v16.7.0 alpha 版本，且正在开放的RFC讨论。 Hooks是向后兼容的，这篇文档将向有">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":20,"offset_float":20,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://stan1812.github.io/2018/10/28/Hooks/"/>
+
+
+
+
+
+  <title>Hooks at a Glance | An Amazing World</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?025f21eff557784535f6b192c5c1265a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">An Amazing World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端小学生的神奇世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about-me/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stan1812.github.io/2018/10/28/Hooks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shady">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/../../imgs/album.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="An Amazing World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hooks at a Glance</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-28T11:54:43+08:00">
+                2018-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,970
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在看了React Hooks的文档之后，本英语渣渣竟然突然有了想要翻译一下这篇文档的冲动，于是就首次尝试翻译一篇英文文档,原文<a href="https://reactjs.org/docs/hooks-overview.html" target="_blank" rel="external">Hooks at a Glance</a></p>
+<p>Hooks是一个React中的新提案，他可以让你在不使用Class的情况下使用state和其他的React特性。Hooks 目前已经发布在 v16.7.0 alpha 版本，且正在开放的<a href="https://github.com/reactjs/rfcs/pull/68" target="_blank" rel="external">RFC</a>讨论。</p>
+<p>Hooks是向后兼容的，这篇文档将向有经验的React开发者提供一个概览。</p>
+<h2 id="📌-State-Hook"><a href="#📌-State-Hook" class="headerlink" title="📌 State Hook"></a>📌 State Hook</h2><p>这是一个计数器的例子，点击按钮，数字加一。<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Example</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// Declare a new state variable, which we'll call "count"</span></div><div class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;p&gt;You clicked &#123;count&#125; times&lt;<span class="regexp">/p&gt;</span></div><div class="line"><span class="regexp">      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;</span></div><div class="line"><span class="regexp">        Click me</span></div><div class="line"><span class="regexp">      &lt;/</span>button&gt;</div><div class="line">    &lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">  );</span></div><div class="line"><span class="regexp">&#125;</span></div></pre></td></tr></table></figure></p>
+<p>在这里，<code>useState</code>是一个Hook(我们稍后会讨论它是什么意思)，我们在一个函数式组件中调用它来添加一些内部的状态。React<br>将在重新渲染间保留此状态，<code>useState</code>返回一个pair:包含了当前的状态值和一个可以用来更新该值的函数。你可以在一个事件监听器或者其他地方调用这个函数。它和Class中的<code>setState</code>是类似的，不过他没把新旧状态合并在一起。（稍后会有例子来比较在使用State Hooks时useState和this.state的差异）</p>
+<p>useState只有一个参数作为他的初始状态，在上面的例子中，这个参数是0，因为计数器从0开始。请注意，和this.state不同的是，这里的state不一定非要是一个对象——你要是想那也行。初始状态只在首次渲染时使用。</p>
+<h3 id="声明多个状态变量"><a href="#声明多个状态变量" class="headerlink" title="声明多个状态变量"></a>声明多个状态变量</h3><p>你可以在一个组件中多次使用State Hook<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ExampleWithManyStates</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// Declare multiple state variables!</span></div><div class="line">  <span class="keyword">const</span> [age, setAge] = useState(<span class="number">42</span>);</div><div class="line">  <span class="keyword">const</span> [fruit, setFruit] = useState(<span class="string">'banana'</span>);</div><div class="line">  <span class="keyword">const</span> [todos, setTodos] = useState([&#123; <span class="attr">text</span>: <span class="string">'Learn Hooks'</span> &#125;]);</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>数组解构语法允许我们为通过调用useState声明的状态变量赋予不同的名称,这些名字并不是useState这个API的一部分，相反，React假定如果多次调用useState，就在每次渲染期间以相同的顺序执行。我们稍后会讨论这什么时候有用。</p>
+<h3 id="但到底什么是Hook呢？"><a href="#但到底什么是Hook呢？" class="headerlink" title="但到底什么是Hook呢？"></a>但到底什么是Hook呢？</h3><p>Hooks 是一个React 函数组件内一类特殊的函数（通常以 “use” 开头，比如 “useState”），使开发者能够在 function component 里 ‘hook in’ state 和 life-cycles，以及使用 custom hook 复用业务逻辑。Hooks在Class组件中不能使用-这使得你可以在不写Class的情况下使用React（我们不建议您在一夜之间重写现有组件，但如果您愿意，可以开始在新组件中使用Hook。）<br>React提供了一些像useState这样的内置Hook。你还可以创建custom Hook以在不同组件之间重用有状态行为。我们先来看看内置的Hooks。</p>
+<h2 id="⚡️-Effect-Hook"><a href="#⚡️-Effect-Hook" class="headerlink" title="⚡️ Effect Hook"></a>⚡️ Effect Hook</h2><p>你之前可能在React组件执行数据获取，订阅或手动更改DOM。我们称这种操作为“side effects”因为它们会影响其他的组件，并且不会在渲染期间就完成。</p>
+<p>Effect Hook：<code>useEffect</code>为函数组件增添了执行side effects的能力。它与React Class中的componentDidMount，componentDidUpdate和componentWillUnmount具有相同的用途，但统一为单个API。 （我们将在使用Effect Hook时显示将useEffect与这些方法进行比较的示例。）</p>
+<p>举个栗子，这个组件在React更新DOM之后设置文档标题 </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Example</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</div><div class="line">  <span class="comment">// Similar to componentDidMount and componentDidUpdate:</span></div><div class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="comment">// Update the document title using the browser API</span></div><div class="line">    <span class="built_in">document</span>.title = <span class="string">`You clicked <span class="subst">$&#123;count&#125;</span> times`</span>;</div><div class="line">  &#125;);</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;p&gt;You clicked &#123;count&#125; times&lt;<span class="regexp">/p&gt;</span></div><div class="line"><span class="regexp">      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;</span></div><div class="line"><span class="regexp">        Click me</span></div><div class="line"><span class="regexp">      &lt;/</span>button&gt;</div><div class="line">    &lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">  );</span></div><div class="line"><span class="regexp">&#125;</span></div></pre></td></tr></table></figure>
+<p>当你调用useEffect时，相当于告诉了React在刷新对DOM的更改后再运行你的“effect”函数。Effects是声明在Component内的，所以有权访问组件的props和state。默认情况下，React在每次render都会调用effects，包括第一次render。（我们将更多地讨论使用<a href="https://reactjs.org/docs/hooks-effect.html" target="_blank" rel="external">Effect Hook</a>和class中的lifecycles进行比较。）</p>
+<p>Effects还可以通过返回函数指定如何“清理”它们。例如，这个组件使用Effect来订阅朋友的在线状态，并通过取消订阅来清理：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;useState,useEffect&#125; <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">FriendStatus</span>(<span class="params">props</span>)</span>&#123;</div><div class="line">  <span class="keyword">const</span> [isOnline,setIsOnline] = useState(<span class="literal">null</span>)</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">handleStatusChange</span>(<span class="params">status</span>)</span>&#123;</div><div class="line">    setIsOnline(status.isOnline)</div><div class="line">  &#125;</div><div class="line">  useEffects(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">      ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);</div><div class="line">    &#125;;</div><div class="line">  &#125;)</div><div class="line">  <span class="keyword">if</span>(isOnline === <span class="literal">null</span>)&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'loading'</span></div><div class="line">  &#125;</div><div class="line">   <span class="keyword">return</span> isOnline ? <span class="string">'Online'</span> :<span class="string">'Offline'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这个例子中，React会在组件unmount时，以及在由于后续渲染而重新运行effects之前取消订阅ChatAPI（你也可以告诉React<a href="https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects" target="_blank" rel="external">跳过重新订阅</a>如果我们传给ChatAPI的props.friend.id没有变的话）</p>
+<p>就像·useState·一样，你可以在一个Component中多次使用effect<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">FriendStatusWithCounter</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</div><div class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">document</span>.title = <span class="string">`You clicked <span class="subst">$&#123;count&#125;</span> times`</span>;</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">const</span> [isOnline, setIsOnline] = useState(<span class="literal">null</span>);</div><div class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">handleStatusChange</span>(<span class="params">status</span>) </span>&#123;</div><div class="line">    setIsOnline(status.isOnline);</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// ...</span></div></pre></td></tr></table></figure></p>
+<p>Hooks允许您通过哪些部分相关（例如添加和删除订阅）来组织组件中的side effects，而不是基于生命周期方法强制拆分。<br>您可以在这个页面上了解有关useEffect的更多信息：<a href="https://reactjs.org/docs/hooks-effect.html" target="_blank" rel="external">Using the Effect Hook</a>。</p>
+<h2 id="✌️-Rules-of-Hooks"><a href="#✌️-Rules-of-Hooks" class="headerlink" title="✌️ Rules of Hooks"></a>✌️ Rules of Hooks</h2><p>Hooks是JavaScript函数，但它们强加了两个额外的规则：</p>
+<ul>
+<li>只能在顶层调用Hooks。不要在循环，条件或嵌套函数中调用Hook。</li>
+<li>仅从React函数组件中调用Hooks。不要从常规JavaScript函数中调用Hook。 （还有另一个有效的地方叫Hooks - 你自己的定制Hooks。我们马上就会了解它们。）</li>
+</ul>
+<p>我们提供了一个<a href="https://www.npmjs.com/package/eslint-plugin-react-hooks" target="_blank" rel="external">linter插件</a>来自动执行这些规则。这些规则最初可能看起来有限或令人困惑，但它们对于使Hooks运行良好至关重要。</p>
+<h2 id="💡-Custom-Hooks"><a href="#💡-Custom-Hooks" class="headerlink" title="💡 Custom Hooks"></a>💡 Custom Hooks</h2><p>有时，我们希望在组件之间重用一些有状态逻辑。以往，这个问题有两种流行的解决方案：HOC和render props。Custom Hook可以做到这些，并且让你不需往组件树添加更多的组件。<br> 在前面，我们介绍了一个调用useState和useEffect Hooks的FriendStatus组件来订阅朋友的在线状态。假设我们还希望在另一个组件中重用此订阅逻辑：<br> 首先，我们将这个逻辑提取到一个名为useFriendStatus的自定义Hook中：<br> <figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"> <span class="keyword">import</span> &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">useFriendStatus</span>(<span class="params">friendID</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> [isOnline, setIsOnline] = useState(<span class="literal">null</span>);</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">handleStatusChange</span>(<span class="params">status</span>) </span>&#123;</div><div class="line">    setIsOnline(status.isOnline);</div><div class="line">  &#125;</div><div class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);</div><div class="line">    &#125;;</div><div class="line">  &#125;);</div><div class="line">  <span class="keyword">return</span> isOnline;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p> 它将friendID作为参数，并返回我们的朋友是否在线。<br> 现在我们可以在组件中使用它：<br> <figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">FriendStatus</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> isOnline = useFriendStatus(props.friend.id);</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (isOnline === <span class="literal">null</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'Loading...'</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> isOnline ? <span class="string">'Online'</span> : <span class="string">'Offline'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">FriendListItem</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> isOnline = useFriendStatus(props.friend.id);</div><div class="line">  <span class="keyword">return</span> (</div><div class="line">    &lt;li style=&#123;&#123; <span class="attr">color</span>: isOnline ? <span class="string">'green'</span> : <span class="string">'black'</span> &#125;&#125;&gt;</div><div class="line">      &#123;props.friend.name&#125;</div><div class="line">    &lt;<span class="regexp">/li&gt;</span></div><div class="line"><span class="regexp">  );</span></div><div class="line"><span class="regexp">&#125;</span></div></pre></td></tr></table></figure></p>
+<p> 这些组件的状态是完全独立的。Hooks是重用有状态逻辑的一种方式，而不是状态本身。事实上，每次调用Hook都有一个完全隔离的state - 所以你甚至可以在一个组件中使用相同的自定义Hook两次。<br> Custom Hooks更像是一种约定而非功能,如果一个函数的名字以‘use’开头，把那个且他调用了其他的Hooks 我们称他为custom Hook 。useSomething命名约定也是linter插件在使用了hooks的代码中查找bug的原理。<br> 您可以编写自定义Hook，涵盖各种用例，如表单处理，动画，声明性订阅，计时器，可能还有更多我们没有考虑过的。我们很高兴看到React社区提出的定制Hooks。</p>
+<h2 id="🔌-Other-Hooks"><a href="#🔌-Other-Hooks" class="headerlink" title="🔌 Other Hooks"></a>🔌 Other Hooks</h2><p>您可能会发现一些不太常用的内置Hook很有用。例如，useContext允许您订阅React上下文而不引入嵌套：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Example</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> locale = useContext(LocaleContext);</div><div class="line">  <span class="keyword">const</span> theme = useContext(ThemeContext);</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>useReducer允许您使用reducer管理复杂组件的本地状态：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Todos</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> [todos, dispatch] = useReducer(todosReducer);</div><div class="line">  <span class="comment">// ...</span></div></pre></td></tr></table></figure></p>
+<p>这只是React 官网中关于Hooks的一篇大概的介绍，更加详细的使用文档，可以在官方文档中获得：<a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="external">HOOKS(Proposal)</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"># -JS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/25/Burning/" rel="next" title="燃烧">
+                <i class="fa fa-chevron-left"></i> 燃烧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/../../imgs/album.jpg"
+               alt="Shady" />
+          <p class="site-author-name" itemprop="name">Shady</p>
+           
+              <p class="site-description motion-element" itemprop="description">For fun ，For love</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/ || archive">
+            
+                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/stan1812" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:2314980309@qq.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/2314980309_stan" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://instagram.com/be_drammer" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                    
+                      Instagram
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=86 height=86 src="http://music.163.com/outchain/player?type=2&id=29734857&auto=0&height=66"></iframe>
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#📌-State-Hook"><span class="nav-number">1.</span> <span class="nav-text">📌 State Hook</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明多个状态变量"><span class="nav-number">1.1.</span> <span class="nav-text">声明多个状态变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#但到底什么是Hook呢？"><span class="nav-number">1.2.</span> <span class="nav-text">但到底什么是Hook呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#⚡️-Effect-Hook"><span class="nav-number">2.</span> <span class="nav-text">⚡️ Effect Hook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#✌️-Rules-of-Hooks"><span class="nav-number">3.</span> <span class="nav-text">✌️ Rules of Hooks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#💡-Custom-Hooks"><span class="nav-number">4.</span> <span class="nav-text">💡 Custom Hooks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#🔌-Other-Hooks"><span class="nav-number">5.</span> <span class="nav-text">🔌 Other Hooks</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+
+   
+  </aside>
+ 
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 &mdash; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shady</span>
+
+  
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
