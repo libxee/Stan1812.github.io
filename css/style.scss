@@ -122,12 +122,12 @@ a:active {
 .content {
     height: auto;
     float: right;
-    width: 75%;
+    width: 70%;
     margin-top: 60px;
 }
 
 .page-top {
-    width: 75%;
+    width: 70%;
     position: fixed;
     right: 0;
     z-index: 3;
@@ -181,7 +181,7 @@ a:active {
 }
 
 .sidebar {
-    width: 25%;
+    width: 30%;
     -webkit-background-size: cover;
     background-size: cover;
     background-color: #fff;
@@ -712,8 +712,9 @@ a.btn {
         line-height: 1.6;
     }
     .content {
-        margin-top: 420px;
+        margin-top: 70px;
         width: 100%;
+        overflow: hidden;
         z-index: 2;
         position: absolute;
     }

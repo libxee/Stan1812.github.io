@@ -1,0 +1,2356 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Shady">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Shady">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="Thoughts, stories  and  ideas">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>【译】micor services · Libx&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Libx.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">【译】micor services</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Libx.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            【译】micor services
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "技术">技术</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">11,253</span>阅读时长: <span class="post-count reading-time">39 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/03/05</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="MicorServices"><a href="#MicorServices" class="headerlink" title="MicorServices"></a>MicorServices</h1><blockquote>
+<p>原文：MicorServices by Martin FLower <a href="https://martinfowler.com/articles/microservices.html" target="_blank" rel="external">原文</a><br>翻译： libx</p>
+</blockquote>
+<h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><p>有关这个新的技术架构术语的定义：<br>“微服务架构”这个术语最近几年横空出世，来描述一种特定的软件设计方法：以若干组可以独立部署的服务进行软件应用系统的设计。虽然这种架构风格还没有较为准确的定义，但其在下述方面还是存在一定的共性：即围绕业务功能的组织、自动化部署、端点智能、和在编程语言和数据方面进行去中心化的控制。</p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a><em>目录</em></h3><ul>
+<li><em>微服务体系结构的特征</em><ul>
+<li><em>通过服务（Services）的组件化（Componentization）</em></li>
+<li><em>围绕业务功能来组织团队</em></li>
+<li>‘做产品’而非’做项目’</li>
+<li><em>智能终端和傻瓜管道</em></li>
+<li><em>去中心化治理技术</em></li>
+<li><em>数据去中心化</em></li>
+<li><em>基础设施自动化</em></li>
+<li><em>容错设计</em></li>
+<li><em>演进式设计</em></li>
+</ul>
+</li>
+<li><em>微服务是未来的趋势吗?</em></li>
+</ul>
+<p>“微服务”– 这是在软件架构这条拥挤的大街上出现的又一个新词。虽然我们自然会倾向用轻蔑的眼光忽略这些东西，但是他所描述的软件系统风格，越来越吸引我们的注意。在过去几年中，我们可以看到许多项目开始使用这种风格，以至于我们身边的同事在构建企业级的应用时，会把它认为是一种理所应当的默认开发形式。但很不幸的是：微服务风格到底是什么，应该怎么开发，详细的理论描述却并不多。</p>
+<p>简而言之：微服务架构风格【1】，就像是把一个单独的应用程序开发为一组小的服务来开发的方法。每个小服务都在自己的进程中运行，并且使用轻量级机制（通常是http的api）来进行通信。这些服务是围绕着业务功能构建的，可以通过完全自动化的部署机制进行独立的部署。这些服务的集中管理很少，可能使用不同的编程语言，使用不同的数据存储技术。</p>
+<blockquote>
+<p><em> 我的微服务资源指南提供了关于微服务的最佳文章、书籍、视频、和博客的链接。</em></p>
+</blockquote>
+<p>为了开始解释微服务风格，将其与单块（monolithic）风格进行比较是很有必要的：一个单块应用系统是以一个单个单元的方式来构建的。企业应用系统通常包括三个重要部分：:客户端用户界面(由在用户机器上的浏览器中运行的HTML页面和javascript组成)、数据库(由插入到公共(通常是关系的)数据库管理系统中的许多表组成)和服务器端应用程序。服务器端应用程序将处理HTTP请求、执行域逻辑、从数据库检索和更新数据，并选择和填充要发送到浏览器的HTML视图。这个服务器端应用程序是一个整体——逻辑可执行的[2]。对系统的任何更改都涉及到构建和部署服务器端应用程序的新版本。</p>
+<p>这样的单块服务是构建这样一个系统的很自然的方式。处理请求的所有逻辑都在单个进程中运行，可以使用语言层面的基本特性来把程序划分类、函数、和命名空间。你可以小心的在开发人员身边运行和测试应用程序，并且通过部署管道来确定能够正确的测试更改并且将其部署到生产环境。通过在LB后面运行多个实例，可以水平的扩展整体。</p>
+<p>单片应用程序可以获得成功，但是人们越来越对它们感到失望——尤其是越来越多的应用程序被部署到云上。更改周期被捆绑在一起——对应用程序的一小部分进行更改，需要重新构建和部署整个整体。随着时间的推移，通常很难保持一个良好的模块结构，这使得某个更改的影响范围越来越大，很难控制在某个模块内。当对系统进行扩展时，不得不扩展整个应用系统，而不能仅扩展该系统中需要更多资源的那些部分。<br><img src="https://cdn.nlark.com/yuque/0/2020/png/153970/1583303549619-28b4e20a-05e7-48b7-b061-fe2cc8f0927c.png#align=left&amp;display=inline&amp;height=456&amp;name=sketch.png&amp;originHeight=520&amp;originWidth=850&amp;size=69171&amp;status=done&amp;style=none&amp;width=746" alt="sketch.png"></p>
+<p>单块应用和微服务</p>
+<p>这些问题导致了微服务架构风格的诞生：将应用程序构建为服务套件（一组服务）。除了服务是可以独立部署和可扩展之外。每个服务还提供了一个可靠的模块边界。甚至能够允许使用不同的编程语言来编写不同的服务，这些服务也能够被不同的团队来管理。</p>
+<p>我们并不认为微服务风格是创新的。他的根源至少可以追述到Unix的设计原则。但是我们认为确实没有足够多的人在考虑使用微服务架构，如果加以使用，很多软件在开发起来会好很多。</p>
+<h2 id="微服务体系结构的特性"><a href="#微服务体系结构的特性" class="headerlink" title="微服务体系结构的特性"></a>微服务体系结构的特性</h2><p>虽然我们还不能说微服务体系结构风格有一个正式的定义，但是我们可以尝试去描述我们所看到的符合这个标签的体系结构的共同特征。与任何概述公共特征的定义一样，并非所有微服务体系结构都具有所有特征，但我们确实希望大多数微服务体系结构都具有大多数特征。虽然我们作者一直是这个相当松散的社区的活跃成员，但我们的意图是尝试描述我们在自己的工作和我们所知道的团队的类似工作中看到的内容。特别需要指出的是，我们并不会制定一些大家都需要遵循的微服务的定义。</p>
+<h3 id="通过服务（Services）的组件化（Componentization）"><a href="#通过服务（Services）的组件化（Componentization）" class="headerlink" title="通过服务（Services）的组件化（Componentization）"></a>通过服务（Services）的组件化（Componentization）</h3><p>自从我们开始涉足软件行业以来，大家都有一种把组件连接在一起来构建系统的愿望，就像我们为您在现实世界看到的东西一样。在过去的几十年里，我们可以看到相当大的进步，一些公共软件库是大多数编程语言平台的组成部分。</p>
+<p>在讨论组件时，我们会遇到关于组件定义的难题。我们的定义是：组件是一个可以独立更换和升级的软件单元。</p>
+<p>微服务架构也会使用软件库，但组件化软件的主要方式是把它拆分成服务。我们把库（libraries）定义为组件，这些组件被链接到程序，并通过内存中函数调用（in-memory function calls）来调用，而服务（services ）是进程外组件（out-of-process components），他们利用某个机制通信，比如 WebService 请求，或远程过程调用（remote procedure call）。组件和服务在很多面向对象编程中是不同的概念。</p>
+<p>以使用服务而不是组件库来实现组件化的主要原因是：服务可以独立部署。如果应用程序【4】是由一个在单个进程中的多个软件库组成，那么对其任何一个组件进行修改，都需要重新部署整个应用系统。但是如果把应用程序分解为多个服务，那就可以预期到单个服务的更改，并且只需要重新部署该服务。这并不是绝对的，一些更改可能也会更改接口，需要多个服务进行协调。但是良好的微服务体系结构的目标是通过内聚服务边界和演化机制来最小化这些接口。</p>
+<p>使用服务作为组件的另一个结果是更显式的组件接口。大多数语言都没有定义显示发布接口的良好机制。通常，通常情况下，这样的接口仅仅是文档声明和团队纪律，来避免客户端破坏组件的封装，从而导致组件间出现过度紧密的耦合。通过使用显式的远程调用机制，服务能更容易地避免这种情况发生。</p>
+<p>使用这样的服务也确实有不足之处。比起进程内的调用，远程调用的成本更加昂贵，因此远程调用API必须是粗粒度的，而使用粗粒度的API通常会更困难。如果你需要更改组件之间的职责分配，则此类行为的改动会更加难以实现。</p>
+<p>近似情况下，我们可以观察到服务映射到运行时流程，但这只是第一个近似情况。一个服务可能包含多个总是一起开发和部署的进程，例如一个应用程序流程和一个只由该服务使用的数据库。</p>
+<h3 id="围绕“业务功能”组织团队"><a href="#围绕“业务功能”组织团队" class="headerlink" title="围绕“业务功能”组织团队"></a><strong>围绕“业务功能”组织团队</strong></h3><p>**在考虑将大型应用程序分割成多个部分时，管理层通常关注于技术层，从而导致组建UI团队、服务器端团队和数据库团队。当团队沿着这些线分开时，即使是简单的变更也会导致跨团队的项目需要时间和预算的批准。聪明的团队将围绕这一问题进行优化，并选择两害相权取其轻——只需将逻辑应用到他们能够访问的任何应用程序中。换句话说，逻辑无处不在。这是康威定律[5]的一个例子。</p>
+<blockquote>
+<p><em>任何设计（广义上的）系统的组织，都会产生这样一个设计，即该设计的结构与该组织的沟通结构相一致。</em><br>                                            ——梅尔文•康威（Melvyn Conway）, 1967年</p>
+</blockquote>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/153970/1583306945599-ab9daf67-8bd5-49d7-b2a7-52fbbe9493f8.png#align=left&amp;display=inline&amp;height=463&amp;name=conways-law.png&amp;originHeight=463&amp;originWidth=560&amp;size=58182&amp;status=done&amp;style=none&amp;width=560" alt="conways-law.png"></p>
+<p>图二：Conway’s Law在起作用</p>
+<p>微服务的划分方法是不同的，它根据业务能力将服务组织起来。此类服务采用该业务领域软件的宽堆栈实现，包括用户界面、持久存储和任何外部协作。因此，团队是跨功能的，包括开发所需的全部技能:用户体验、数据库和项目管理。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/153970/1583306950775-8785e0bf-6085-4667-a558-2f06144d5156.png#align=left&amp;display=inline&amp;height=430&amp;name=PreferFunctionalStaffOrganization.png&amp;originHeight=430&amp;originWidth=748&amp;size=78854&amp;status=done&amp;style=none&amp;width=748" alt="PreferFunctionalStaffOrganization.png"><br>图3:由团队边界加强的服务边界</p>
+<p>以上述方式来组织团队的公司是www.comparethemarket.com。跨职能团队负责构建和运维每个产品，而每个产品被拆分为多个独立的服务，彼此通过一个消息总线来通信。</p>
+<blockquote>
+<p>一个微服务应该有多大？<br>虽然“微服务”已经成为这种体系结构风格的一个流行名称，但它的名称确实导致了对服务大小的关注，以及关于什么构成“微”的争论。在与微服务从业人员的对话中，我们看到了各种规模的服务。据报道，最大尺寸的披萨符合亚马逊的概念，即两个披萨团队(即整个团队可以吃两个披萨)：不超过12人。在规模较小的情况下，我们已经看到了一个6人的团队将支持6个服务。<br>这就引出了一个问题:在这个规模范围内是否存在足够大的差异，以至于不应该将每12人服务和每人服务的规模集中在一个微服务标签下。目前我们认为最好将它们组合在一起，但随着我们进一步探索这种风格，我们当然有可能改变主意。</p>
+</blockquote>
+<p>有一个这样组织的一个公司是www.comparethemarket.com。跨功能团队负责构建和操作每个产品，每个产品被分解为许多通过消息总线进行通信的单个服务。</p>
+<p>大型单片应用程序也可以围绕业务功能进行模块化，尽管这并常见。当然，我们会敦促大型团队构建一个独立的应用程序，并将其按照业务线进行划分。这里的主要问题是，它们往往是围绕着太多的上下文来组织的。如果一个整体跨越了许多这样的模块边界，那么团队中的个别成员就很难将它们放入他们的短期记忆中。此外，我们看到，模块化的路线需要大量的纪律执行。服务组件必需的更显式的分离使得保持团队边界清晰更容易。</p>
+<h3 id="“做产品”而非”做项目”"><a href="#“做产品”而非”做项目”" class="headerlink" title="“做产品”而非”做项目”"></a>“做产品”而非”做项目”</h3><p>我们看到的大多数应用程序开发工作都使用项目模型: 其中的目标是交付一些软件，然后认为这些软件已经完成。完成之后，软件将被移交给维护团队，而构建它的项目团队将被解散。</p>
+<p>微服务的支持者倾向于避免这种模式，他们更倾向于认为一个团队应该在其整个生命周期内拥有一个产品。这一点来自Amazon的“谁构建，谁运行”的概念，在这个概念中，开发团队对生产中的软件承担全部责任。这将使开发人员与他们的软件在生产中的行为进行日常联系，并增加与用户的联系，因为他们必须承担一部分支持工作。</p>
+<p>这样的’产品’心态，是与业务能力联系在一起的。他不是将软件视为一组要完成的功能，而是将其视为一种持续的关系：软件如何帮助其用户持续增强业务能力。</p>
+<p>同样的方法也可以用于单片应用程序，但是较小粒度的服务可以更容易地在服务开发人员和他们的用户之间创建个人关系。</p>
+<h3 id="“智能端点”与“傻瓜管道”"><a href="#“智能端点”与“傻瓜管道”" class="headerlink" title="“智能端点”与“傻瓜管道”"></a><strong>“智能端点”与“傻瓜管道”</strong></h3><p>当在不同的进程之间构建通信结构时，已经有了许多产品和方法，来强调将大量的智能特性纳入通信机制本身。一个典型例子就是“企业服务总线”(Enterprise Service Bus, ESB)。ESB产品经常包括高度智能的工具，来进行消息的路由、编制(choreography)、转换，并应用业务规则。</p>
+<p>微服务社区主张采用另一种做法：智能端点(smart endpoints)和傻瓜管道(dumb pipes)。采用单独的业务逻辑，表现的更像经典Unix意义上的过滤器一样，接受请求、处理业务逻辑、返回响应。它们更喜欢简单的REST风格，而不是复杂的协议，如WS或者BPEL或者集中式框架。</p>
+<blockquote>
+<p>Microservices和SOA</p>
+<p>当我们谈到微服务时，一个常见的问题是：这是否是我们十年前看到的面向服务的体系结构(SOA)。这一点是有讨论价值的，因为微服务风格与一些SOA倡导者所支持的非常相似。然而，问题在于SOA有着太多不同的东西，而且大多数时候我们遇到的所谓的“SOA”与我们在这里描述的风格有很大的不同，这通常是由于对用于集成单一应用程序的esb的关注。</p>
+<p>特别是我们已经看到这么多糟糕的实现面向服务——从倾向于隐藏复杂性在ESB的[6],多年的计划失败,数以百万计的成本和交付没有价值,集中治理模式,积极抑制变化,有时很难看到过去的这些问题。</p>
+<p>当然，微服务社区中使用的许多技术都来自于在大型组织中集成服务的开发人员的经验。容忍阅读器模式就是一个例子。使用web的努力是有贡献的，使用简单的协议是从这些经验中得到的另一种方法——一种远离中心标准的反应，坦率地说，已经达到了令人惊叹的复杂性。(任何时候你需要一个本体论来管理你的本体论，你知道你有大麻烦了。)&gt;<br>SOA的这种常见表现已经导致一些微服务倡导者完全拒绝了SOA的标签，尽管其他人认为微服务是SOA[7]的一种形式，可能是正确的面向服务。不管怎样，SOA意味着如此不同的东西，这一事实意味着有一个更明确定义这种体系结构风格的术语是有价值的。</p>
+</blockquote>
+<p>微服务最常用的两种协议是：带有资源API的HTTP“请求－响应”协议，和轻量级的消息发送协议[6]。对于前一种协议的最佳表述是：</p>
+<blockquote>
+<p>善于利用网络，而不是限制（Be of the web, not behind the web）。<br>——Ian Robinson</p>
+</blockquote>
+<p>微服务团队使用的是构建万维网时所使用的原则和协议（并且在很大程度上，这些原则和协议也是在构建Unix系统时所使用的）。那些被使用过的HTTP资源，通常能被开发或运维人员轻易地缓存起来。</p>
+<p>第二种常用的方法是通过轻量级消息总线进行消息传递。基础设施的选择通常是傻瓜型的(仅仅像是充当消息路由器)——简单的实现如RabbitMQ或ZeroMQ，除了提供一个可靠的异步机制以外不需要做其他的事情——主要的功能只存在于生产和消费的端点中，也即在各个服务中。</p>
+<p>在一个单块系统中，组件是在一个进程中执行的，它们之间的通信是通过方法调用或函数调用进行的。把一个庞然大物变成微服务的最大问题在于改变通信模式。从内存中方法调用到RPC的简单转换会导致通信混乱，性能不佳。相反，您需要将细粒度的通信替换为粗粒度的方法</p>
+<h3 id="去中心化治理技术"><a href="#去中心化治理技术" class="headerlink" title="去中心化治理技术"></a>去中心化治理技术</h3><p>集中化治理的后果之一酒是在单一技术平台上标准化的趋势。经验表明，这种方法是有局限性的——不是所有的问题都是钉子，也不是所有的解决方案都是锤子。我们更喜欢使用正确的工具来完成工作，虽然单块程序可以在一定程度上利用不同的语言，但这并不常见。</p>
+<p>如果能将单块应用的的组件拆分成多个服务，那么在构建每个组件时都有选择不同技术栈的机会。您想使用Node.js来建立一个简单的报告页面吗?就去做吧。一个近实时组件的c++ ?很好。您想要交换一个不同风格的数据库，以更好地适应一个组件的读取行为吗?可以重建。</p>
+<p>当然，可以做并不意味着应该这样，但是以微服务来拆分系统意味着您有这个选项。</p>
+<p>相比使用业界常见的技术，构建微服务的团队更喜欢采用不同的方法。与其使用一组写在纸上的定义标准，他们更喜欢开发一些有用的工具，并且让其他开发者能够使用。这些工具通常源自于微服务实施过程中，并与更广泛的组共享，但不完全使用内部开源模型。现在git和github已经成为事实上的版本控制系统的选择，开源实践在企业内部也变得越来越普遍。</p>
+<p>Netflix就是遵循这一理念的一个很好的例子。共享有用的、最重要的、经过实战测试的代码，能鼓励其他开发人员以类似的方式解决类似的问题，如果需要，也可以选择不同的方法。共享库往往集中在数据存储、进程间通信以及基础设施自动化等常见问题上。</p>
+<p>微服务社区中，成本问题特别引人注意。这并不是说，社区不认为服务交互的价值。相反，正是因为发现到它的价值。这使得他们在寻找各种方法来解决它们。如<a href="http://martinfowler.com/bliki/TolerantReader.html" target="_blank" rel="external">Tolearant Reader</a>和<a href="http://martinfowler.com/articles/consumerDrivenContracts.html" target="_blank" rel="external">Consumer-Driven Contracts</a>这样的设计模式就经常被微服务使用。模式通常应用于微服务。这些援助服务合同是独立发展的。作为构建的一部分执行消费者驱动的契约可以增强开发团队的信心，并提供关于所依赖的服务是否正常运行的快速反馈。 实际上，我们了解到澳大利亚有一个团队利用<a href="http://martinfowler.com/articles/consumerDrivenContracts.html" target="_blank" rel="external">Consumer-Driven Contracts</a>模式来推动新服务的构建。他们使用简单的工具来定义服务的契约。在编写新服务的代码之前，这就成为自动构建的一部分。然后，服务只构建到满足契约的那一点上——这是在构建新软件时避免“YAGNI”[9]困境的一种优雅方法。这些技术和围绕它们发展起来的工具通过减少服务之间的时间耦合来限制对中央契约管理的需求。</p>
+<p>或许，亚马逊(Amazon)普及的“构建it /运行it”(build it / run it)精神，才是去中心化治理的顶点。团队对他们构建的软件的所有方面负责，包括24/7的软件操作。这种级别的责任下放绝对不是常态，但我们确实看到越来越多的公司将责任推给开发团队。Netflix是另一家采纳了这种精神的公司【11】。在编写代码时，每天凌晨3点被寻呼机叫醒无疑是关注代码质量的强大动力。这些想法与传统的集中式治理模型相去甚远。</p>
+<h3 id="数据管理去中心化"><a href="#数据管理去中心化" class="headerlink" title="数据管理去中心化"></a>数据管理去中心化</h3><p>去中心化地管理数据，其表现形式多种多样。在最抽象的层次上来看，这意味着各个系统对客观世界所构建的概念模型，将各不相同。这是大型企业进行系统集成时的常见问题，客户的销售视角和将与支持者的视角不同。有些在sales视图中称为customers的东西可能根本不会出现在support视图中。这样做可能会有不同的属性和具有微妙不同语义的公共属性。</p>
+<p>这个问题在应用程序之间很常见，但也可能发生在应用程序内部，特别是当应用程序被划分为单独的组件时。考虑这个问题的一个有用方法是领域驱动的有界上下文设计概念。DDD将一个复杂的域划分为多个有界的上下文，并映射出它们之间的关系。此过程对于单片和微服务体系结构都很有用，但是服务和上下文边界之间存在一种自然的关联，这有助于澄清，并且正如我们在业务功能一节中所描述的那样，这种关联加强了分离。</p>
+<blockquote>
+<p><strong>“实战检验”的标准与“强制执行”的标准</strong></p>
+<p>微服务团队倾向于避开由企业架构组制定的严格执行的标准，而乐于使用甚至宣传使用开放标准，如HTTP、ATOM和其他微格式，这有点矛盾。<br>关键的区别在于标准是如何制定和如何执行的。像IETF这样的组织管理的标准只有在更广泛的世界中有几个实时实现的情况下才会成为标准，而且这些标准通常来自成功的开源项目。<br>这些标准与企业世界中的许多标准截然不同，企业世界中的许多标准通常是由最近几乎没有编程经验或过度受供应商影响的团队开发的。</p>
+</blockquote>
+<p>如同在概念模型上进行去中心化的决策一样，微服务也在数据存储上进行去中心化的决策。尽管各个单块应用更愿意在逻辑上各自使用一个单独的数据库来持久化数据，但企业通常更喜欢跨一系列应用程序使用单个数据库——其中许多决策是由供应商围绕许可的商业模型驱动的。微服务更喜欢让每个服务管理自己的数据库，要么是相同数据库技术的不同实例，要么是完全不同的数据库系统——这种方法称为多语言持久性。您可以在一个整体中使用polyglot持久性，但是它在微服务中出现得更频繁。<br><img src="https://cdn.nlark.com/yuque/0/2020/png/153970/1583309411779-73fc4e35-8543-42cc-af62-5e31942080f7.png#align=left&amp;display=inline&amp;height=430&amp;name=PreferFunctionalStaffOrganization.png&amp;originHeight=430&amp;originWidth=748&amp;size=78854&amp;status=done&amp;style=none&amp;width=748" alt="PreferFunctionalStaffOrganization.png"><br>将数据的责任分散到各个微服务上对管理更新有一定的影响。处理更新的常用方法是在更新多个资源时使用事务来保证一致性。这种方法通常用于单块系统。</p>
+<p>使用这样的事务有助于保持一致性，但会带来重大的时间耦合，这在多个服务之间是有问题的。众所周知，分布式事务是非常难以实现的，因此微服务体系结构强调服务之间的无事务协调，明确地认识到一致性可能只是要求数据最终的一致性，并且一致性问题是通过补偿操作来处理的。</p>
+<p>对于许多开发团队来说，选择以这种方式管理数据的不一致性是一个新的挑战，但它通常与业务实践相匹配。通常，企业处理一定程度的不一致性是为了快速响应需求，同时使用某种反转过程来处理错误。只要修复错误的成本小于在更大的一致性下丢失业务的成本，这种权衡就是值得的。</p>
+<h3 id="“基础设施”自动化"><a href="#“基础设施”自动化" class="headerlink" title="“基础设施”自动化"></a>“基础设施”自动化</h3><p>基础设施自动化技术在过去几年里有了巨大的发展——特别是云计算和AWS的发展降低了构建、部署和运行微服务的操作复杂性。</p>
+<p>许多使用微服务构建的产品或系统都是由具有丰富的持续交付和持续集成经验的团队构建的。以这种方式构建软件的团队广泛使用了基础设施自动化技术。<img src="https://cdn.nlark.com/yuque/0/2020/png/153970/1583309671166-32d0800c-ffff-4973-ad21-67b657bade25.png#align=left&amp;display=inline&amp;height=200&amp;name=basic-pipeline.png&amp;originHeight=200&amp;originWidth=667&amp;size=46005&amp;status=done&amp;style=none&amp;width=667" alt="basic-pipeline.png"></p>
+<p>图5: basic build pipeline</p>
+<p>因为这不是一篇关于持续交付的文章，所以我们在这里只关注几个关键特性。我们希望尽可能地确信我们的软件能够正常工作，因此我们运行了大量的自动化测试。工作软件的升级意味着我们将自动部署到每个新环境。</p>
+<blockquote>
+<p>让做正确的事情变得容易</p>
+<p>作为持续交付和部署的结果，我们发现自动化程度提高的一个副作用是创建了有用的工具来帮助开发人员和操作人员。用于创建人工制品、管理代码库、支持简单服务或添加标准监视和日志记录的工具现在非常常见。网络上最好的例子可能是Netflix的一套开源工具，但也有其他的，包括我们广泛使用的Dropwizard。</p>
+</blockquote>
+<p>一个单块应用程序将会在这些环境中非常随意地构建、测试和发布。事实证明，一旦你打算为一个整体实现生产路径的自动化，那么部署更多的应用程序就不再那么可怕了。请记住，CD的目标之一是让部署变得乏味，因此无论它是一个还是三个应用程序，只要它仍然是乏味的，[12]都没有关系。</p>
+<p>我们看到一些团队使用广泛的基础设施自动化的另一个领域是在生产中管理微服务。与我们上面的断言不同，只要部署是乏味的，那么单体和微服务之间就没有那么大的差别，每种服务的操作环境都可能是截然不同的。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/153970/1583309902866-fcb33a9a-f3dc-4c9e-bbeb-8b937782f3c6.png#align=left&amp;display=inline&amp;height=363&amp;name=micro-deployment.png&amp;originHeight=363&amp;originWidth=778&amp;size=52116&amp;status=done&amp;style=none&amp;width=778" alt="micro-deployment.png"><br>图6:模块部署通常是不同的</p>
+<h3 id="容错设计"><a href="#容错设计" class="headerlink" title="容错设计"></a>容错设计</h3><p>将服务作为组件使用的一个结果是：需要将应用程序设计为能够容忍服务的失败。如果供应商不可用，任何服务调用都可能失败，客户端必须尽可能优雅地响应。与单块应用的设计相比，这是一个劣势，因为它引入了额外的复杂性来处理它。其结果是，微服务团队不断地反思服务故障如何影响用户体验。Netflix的测试工具Simian Army会在工作日中会导致服务甚至数据中心出现故障，来测试应用程序的弹性和监控。</p>
+<p>由于服务可能在任何时候出现故障，因此能够快速检测故障并在可能的情况下自动恢复服务非常重要。微服务应用程序非常强调应用程序的实时监控，检查体系结构元素(数据库每秒获得多少请求)和业务相关指标(例如每分钟接收多少订单)。语义监视可以提供出错的早期预警系统，从而触发开发团队进行跟踪和调查。</p>
+<p>这对于微服务体系结构尤其重要，因为微服务对编排和事件协作的偏好会导致紧急行为。虽然许多权威人士对偶发事件的价值持积极态度，但事实是，突发性为有时可能是一件坏事。对于快速发现不良的紧急行为是至关重要的，这样才能对其进行修复。</p>
+<blockquote>
+<p>被认为有害的同步调用<br>任何时候，只要服务之间有大量的同步调用，就会遇到停机的乘法效应。简单地说，这就是系统的停机时间变成各个组件停机时间的产物的时候。您面临一个选择，是异步调用还是管理停机时间。在www.guardian.co.uk，他们在新平台上实现了一个简单的规则——每个用户请求一个同步调用;而在Netflix，他们重新设计的平台API已经在API结构中构建了异步性。</p>
+</blockquote>
+<p>单块系统可以被建造得像微服务一样透明——事实上，它们应该是透明的。不同之处在于，您绝对需要知道在不同进程中运行的服务何时断开连接。如果库在相同的过程中，这种透明性就不太可能有用。</p>
+<p>微服务团队希望看到每个单独服务的复杂监视和日志设置，比如显示显示/关闭状态的仪表板以及各种操作和业务相关的度量。关于断路器状态、电流吞吐量和延迟的详细信息都是我们经常遇到的例子。</p>
+<h3 id="演进式设计"><a href="#演进式设计" class="headerlink" title="演进式设计"></a>演进式设计</h3><p>微服务的实践者，通常来自于演进式设计的背景，并将服务分解看作是使应用程序开发人员能够控制其应用程序中的更改而不减慢更改的进一步工具。控制变更并不一定意味着减少变更——通过正确的态度和工具，可以对软件进行频繁、快速和控制良好的变更。</p>
+<p>当试图将一个软件系统分解成多个组件时，就会面临着如何分割这些组件的决定——决定分割应用程序时所依据的原则是什么?组件的关键属性是独立替换和可升级性[13]的概念——这意味着我们要寻找这些点，集想象着在不影响其协作者的情况下重写组件。实际上，许多微服务团队会更进一步，他们会明确给出许多服务会被废弃的预期，而不是守着这些服务做长期的演进。</p>
+<p>卫报网站是一个很好的例子，它被设计和构建为一个单块系统，但一直在朝着微服务的方向发展。单体仍然是网站的核心，但他们更喜欢通过使用单体的API构建微服务来增加新功能。这种方法对于本质上是临时的特性(比如处理体育赛事的专门页面)特别方便。使用快速开发语言可以快速地将网站的这一部分整合在一起，并在活动结束后将其删除。我们在一家金融机构看到过类似的做法，为了抓住市场机会而增加新服务，但几个月甚至几周后就放弃了。</p>
+<p>这种强调可替换性的特点，是模块化设计普遍原则的一个特例，即通过”变化模式”[14]来驱动模块化。您希望将同时更改的内容保存在同一个模块中。一个系统中很少变化的部分应该放在在不同的服务中，以区别那些正经历着大量变化的服务。如果您发现自己反复地同时更改两个服务，那么就说明应该合并它们。</p>
+<p>将组件放入服务为更细粒度的发布计划提供了机会。对于一个整体来说，任何更改都需要对整个应用程序进行完整的构建和部署。但是，对于微服务，您只需要重新部署您修改的服务。这可以简化和加速发布过程。缺点是您必须担心某个服务的更改会破坏其使用者。传统的集成方法是尝试使用版本控制来处理这个问题，但是在微服务世界中，倾向于只使用版本控制作为最后的手段。我们可以通过设计服务来尽可能地容忍其供应商的更改，从而避免大量的版本控制。</p>
+<h2 id="微服务是未来的趋势吗"><a href="#微服务是未来的趋势吗" class="headerlink" title="微服务是未来的趋势吗?"></a>微服务是未来的趋势吗?</h2><blockquote>
+<p>Microservice权衡<br>许多开发团队发现微服务体系结构风格是一种优于单一体系结构的方法。但是其他的团队发现他们是一个生产力消耗的负担。与任何建筑风格一样，微服务也带来了成本和收益。为了做出明智的选择，你必须理解这些并将它们应用到你的特定环境中。<br>由马丁 2015年7月1日</p>
+</blockquote>
+<p>我们写这篇文章的主要目的是解释微服务的主要思想和原则。通过花时间来做这件事，我们清楚地认为微服务体系结构风格是一个重要的思想——一个值得企业应用程序认真考虑的思想。我们最近已经构建了几个使用这种风格的系统，并且了解了其他使用过并喜欢这种方法的人。</p>
+<p>据我们所知，在某种程度上引领这种建筑风格的公司包括亚马逊(Amazon)、Netflix、《卫报》(the Guardian)、英国政府数字服务公司realestate.com.au、Forward和comparethemarket.com。2013年的会议上到处都是公司转向微服务的例子，包括Travis CI。此外，有许多组织长期以来一直在做我们称之为微服务的事情，但从未使用过这个名称。(这通常被称为SOA——尽管正如我们所说，SOA有许多相互矛盾的形式。[15])</p>
+<p>尽管有这些积极的经验，但是，我们并不认为微服务是软件架构的未来方向。虽然到目前为止，我们的经验与单片应用程序相比是积极的，但我们意识到，没有足够的时间让我们做出充分的判断。</p>
+<p>通常，您的架构决策的真正后果只在您做出它们的几年后才显现出来。我们曾经看到过这样的项目:一个优秀的团队，带着对模块化的强烈渴望，构建了一个经过多年衰落的整体架构。许多人认为，微服务不太可能出现这种衰退，因为服务边界是明确的，而且很难修补。然而，直到我们看到足够多的系统和足够长的时间，我们才能真正评估微服务体系结构的成熟程度。</p>
+<p>当然，我们有理由认为微服务的成熟程度会很低。在任何组件化的努力中，成功取决于软件在多大程度上适合于组件。很难确定组件边界的确切位置。进化式设计认识到获得正确边界的困难，从而认识到重构它们的重要性。但是，如果您的组件是带有远程通信的服务，那么重构要比使用进程内库困难得多。跨服务边界移动代码是困难的，任何接口更改都需要在参与者之间进行协调，需要添加向后兼容层，测试也变得更加复杂。</p>
+<p>我们的同事山姆·纽曼(Sam Newman) 2014年的大部分时间都在写一本书，这本书捕捉了我们构建微服务的经验。如果你想更深入地研究这个话题，这应该是你的下一步。</p>
+<p>另一个问题是，如果组件不能干净地组合，那么您所做的就是将复杂性从组件内部转移到组件之间的连接上。这不仅仅是将复杂性转移，它还将复杂性转移到一个不那么明确和难以控制的地方。当您查看一个小的、简单的组件的内部，而忽略了服务之间混乱的连接时，很容易认为情况会更好。</p>
+<p>最后，还有团队技能的因素。新技术往往被更熟练的团队采用。但是，对于技术更熟练的团队来说更有效的技术不一定适用于技术较差的团队。我们已经看到了很多不太熟练的团队构建混乱的单体架构的例子，但是我们需要时间来了解当这种混乱发生在微服务上时会发生什么。一个糟糕的团队总是会创造出一个糟糕的系统——很难判断微服务在这种情况下是减少了混乱还是使它变得更糟。</p>
+<p>我们听到的一个合理的观点是，不应该从微服务体系结构开始。相反，从一个整体开始，保持它的模块化，一旦这个整体成为一个问题，就把它分割成微服务。(尽管这个建议并不理想，因为良好的进程内接口通常不是良好的服务接口。)</p>
+<p>因此，我们怀着谨慎的乐观态度来写这篇文章。到目前为止，我们已经对微服务风格有了足够的了解，我们觉得这是一条值得走的路。我们不能确定我们将在哪里结束，但是软件开发的挑战之一是，您只能根据当前必须提供的不完善的信息做出决策。</p>
+<h2 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h2><p>1: 2011年5月，威尼斯附近的一个软件架构师研讨会上讨论了“微服务”这个术语，以描述参与者所看到的一种共同的架构风格，他们中的许多人最近都在探索这种风格。2012年5月，该组织决定将“微服务”作为最合适的名称。2012年3月，James在Krakow的第33届微服务课程(Java, Unix方式)上提出了一些想法，并将其作为一个案例进行了研究，当时Fred George也是这样做的。Netflix的Adrian Cockcroft将这种方法描述为“细粒度的SOA”，正如本文中提到的其他许多人—Joe Walnes、Daniel Terhorst-North、Evan Botcher和Graham Tackley—一样，在web范围内开创了这种风格。</p>
+<p>2: Unix社区使用monolith这个术语已经有一段时间了。它出现在Unix编程艺术中，用来描述变得太大的系统。</p>
+<p>3:许多面向对象的设计人员，包括我们自己在内，在领域驱动设计的意义上使用术语服务对象来表示一个对象，该对象执行一个不与实体绑定的重要过程。这与我们在本文中使用“服务”是一个不同的概念。遗憾的是，“服务”这个词有两个含义，我们不得不忍受一词多义的情况。</p>
+<p>4:我们认为应用程序是一个社会结构，它将代码库、功能组和资金体绑定在一起。原文可以在梅尔文·康威的网站上找到。他说:我们不得不提到Jim Webber说的ESB代表“令人震惊的意大利面盒子”。</p>
+<p>7: Netflix明确了这个链接——直到最近才把他们的架构风格称为细粒度的SOA。</p>
+<p>8:在极端情况下，组织经常转向二进制协议——例如protobufs。使用这些技术的系统仍然表现出智能端点、哑管道的特点，并且以透明度换取规模。大多数的网站和绝大多数的企业都不需要做这样的权衡——透明度可以是一个巨大的胜利。</p>
+<p>9：“YAGNI”或“您不需要它”是XP的原则，并告诫您在知道需要它们之前不要添加特性。</p>
+<p>10:我们有点不相信所谓的单一语言——为了在今天的web上构建系统，您可能需要了解JavaScript和XHTML、CSS、您选择的服务器端语言、SQL和ORM方言。不是单一的语言，但你知道我们的意思。</p>
+<p>11：在2013年11月的Flowcon大会上，Adrian Cockcroft特别提到了“开发者自助服务”和“开发者运行他们写的东西”(原文如此)。</p>
+<p>12：我们在这里有点不礼貌。显然，在更复杂的拓扑中部署更多的服务要比部署单一的实体更困难。幸运的是，模式降低了这种复杂性——但是在工具上的投资仍然是必须的。</p>
+<p>13:事实上，Daniel Terhorst-North将这种风格称为可替换的组件架构，而不是微服务。因为这似乎是针对后者的一个子集，我们更喜欢后者。</p>
+<p>14：Kent Beck强调这是他在实现模式中的设计原则之一。</p>
+<p>15: SOA并不是这段历史的根源。我记得当SOA这个术语在本世纪初出现时，人们说“我们已经做了很多年了”。有一种观点认为，这种风格的根源在于COBOL程序在早期企业计算中通过数据文件进行通信的方式。从另一个角度来看，可以认为微服务与Erlang编程模型是一回事，但应用于企业应用程序上下文。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li><a href="http://blogs.msdn.com/b/clemensv/" target="_blank" rel="external">Clemens Vasters’ blog on cloud at microsoft</a></li>
+<li><a href="http://davidmorgantini.blogspot.com/2013/08/micro-services-introduction.htm" target="_blank" rel="external">David Morgantini’s introduction to the topic on his blog</a></li>
+<li><a href="http://12factor.net/" target="_blank" rel="external">12 factor apps from Heroku</a></li>
+<li><a href="https://www.gov.uk/design-principles" target="_blank" rel="external">UK Government Digital Service design principles</a></li>
+<li><a href="http://jimmynilsson.com/blog/" target="_blank" rel="external">Jimmy Nilsson’s blog</a><a href="http://www.infoq.com/articles/CCC-Jimmy-Nilsson" target="_blank" rel="external">and article on infoq about Cloud Chunk Computing</a></li>
+<li><a href="http://alistair.cockburn.us/Hexagonal+architecture" target="_blank" rel="external">Alistair Cockburn on Hexagonal architectures</a></li>
+</ul>
+<p>Books</p>
+<ul>
+<li><a href="https://www.amazon.com/gp/product/0978739213?ie=UTF8&amp;tag=martinfowlerc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0978739213" target="_blank" rel="external">Release it</a></li>
+<li><a href="https://www.amazon.com/gp/product/0596805829?ie=UTF8&amp;tag=martinfowlerc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0596805829" target="_blank" rel="external">Rest in practice</a></li>
+<li><a href="https://pages.apigee.com/web-api-design-ebook.html" target="_blank" rel="external">Web API Design (free ebook)</a>. Brian Mulloy, Apigee.</li>
+<li><a href="https://www.amazon.com/gp/product/0321200683?ie=UTF8&amp;tag=martinfowlerc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0321200683" target="_blank" rel="external">Enterprise Integration Patterns</a></li>
+<li><a href="https://www.amazon.com/gp/product/0131429019?ie=UTF8&amp;tag=martinfowlerc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0131429019" target="_blank" rel="external">Art of unix programming</a></li>
+<li><a href="https://www.amazon.com/gp/product/0321503627?ie=UTF8&amp;tag=martinfowlerc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0321503627" target="_blank" rel="external">Growing Object Oriented Software, Guided by Tests</a></li>
+<li><a href="https://www.amazon.com/gp/product/0198293755?ie=UTF8&amp;tag=martinfowlerc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0198293755" target="_blank" rel="external">The Modern Firm: Organizational Design for Performance and Growth</a></li>
+<li><a href="https://www.amazon.com/gp/product/0321601912?ie=UTF8&amp;tag=martinfowlerc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0321601912" target="_blank" rel="external">Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation</a></li>
+<li><a href="https://www.amazon.com/gp/product/0321125215?ie=UTF8&amp;tag=martinfowlerc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0321125215" target="_blank" rel="external">Domain-Driven Design: Tackling Complexity in the Heart of Software</a></li>
+</ul>
+<p>Presentations</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=qVyt3qQ_7TA" target="_blank" rel="external">Architecture without Architects</a>. Erik Doernenburg.</li>
+<li><a href="http://www.infoq.com/presentations/soa-without-esb" target="_blank" rel="external">Does my bus look big in this?</a>. Jim Webber and Martin Fowler, QCon 2008</li>
+<li><a href="http://www.infoq.com/presentations/webber-guerilla-soa" target="_blank" rel="external">Guerilla SOA</a>. Jim Webber, 2006</li>
+<li><a href="http://vimeo.com/43659070" target="_blank" rel="external">Patterns of Effective Delivery</a>. Daniel Terhorst-North, 2011.</li>
+<li><a href="http://www.slideshare.net/adrianco" target="_blank" rel="external">Adrian Cockcroft’s slideshare channel</a>.</li>
+<li><a href="http://vimeo.com/28608667" target="_blank" rel="external">Hydras and Hypermedia</a>. Ian Robinson, JavaZone 2010</li>
+<li><a href="https://martinfowler.com/articles/microservices.html" target="_blank" rel="external">Justice will take a million intricate moves</a>. Leonard Richardson, Qcon 2008.</li>
+<li><a href="http://vimeo.com/74452550" target="_blank" rel="external">Java, the UNIX way</a>. James Lewis, JavaZone 2012</li>
+<li><a href="http://yow.eventer.com/yow-2012-1012/micro-services-architecture-by-fred-george-1286" target="_blank" rel="external">Micro services architecture</a>. Fred George, YOW! 2012</li>
+<li><a href="http://gotocon.com/video#18" target="_blank" rel="external">Democratising attention data at guardian.co.uk</a>. Graham Tackley, GOTO Aarhus 2013</li>
+<li><a href="http://gotocon.com/video#6" target="_blank" rel="external">Functional Reactive Programming with RxJava</a>. Ben Christensen, GOTO Aarhus 2013 (registration required).</li>
+<li><a href="http://www.infoq.com/presentations/Breaking-the-Monolith" target="_blank" rel="external">Breaking the Monolith</a>. Stefan Tilkov, May 2012.</li>
+</ul>
+<p>Papers</p>
+<ul>
+<li>L. Lamport, “The Implementation of Reliable Distributed Multiprocess Systems”, 1978 http:// research.microsoft.com/en-us/um/people/lamport/pubs/implementation.pdf</li>
+<li>L. Lamport, R. Shostak, M. Pease, “The Byzantine Generals Problem”, 1982 (available at) http:// www.cs.cornell.edu/courses/cs614/2004sp/papers/lsp82.pdf</li>
+<li>R.T. Fielding, “Architectural Styles and the Design of Network-based Software Architectures”, 2000 <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm" target="_blank" rel="external">http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm</a></li>
+<li>E. A. Brewer, “Towards Robust Distributed Systems”, 2000 <a href="http://www.cs.berkeley.edu/" target="_blank" rel="external">http://www.cs.berkeley.edu/</a> ~brewer/cs262b-2004/PODC-keynote.pdf</li>
+<li>E. Brewer, “CAP Twelve Years Later: How the ‘Rules’ Have Changed”, 2012, http:// www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed</li>
+</ul>
+
+    </article>
+    <!-- license  -->
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/03/04/computational-ads/" title= "《计算广告》阅读笔记(在线广告市场与背景)">
+                    <div class="prevTitle">《计算广告》阅读笔记(在线广告市场与背景)</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:libx.cc@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/stan1812" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/example_qr.png" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MicorServices"><span class="toc-number">1.</span> <span class="toc-text">MicorServices</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#微服务"><span class="toc-number">1.0.1.</span> <span class="toc-text">微服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#目录"><span class="toc-number">1.0.2.</span> <span class="toc-text">目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微服务体系结构的特性"><span class="toc-number">1.1.</span> <span class="toc-text">微服务体系结构的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#通过服务（Services）的组件化（Componentization）"><span class="toc-number">1.1.1.</span> <span class="toc-text">通过服务（Services）的组件化（Componentization）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#围绕“业务功能”组织团队"><span class="toc-number">1.1.2.</span> <span class="toc-text">围绕“业务功能”组织团队</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“做产品”而非”做项目”"><span class="toc-number">1.1.3.</span> <span class="toc-text">“做产品”而非”做项目”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“智能端点”与“傻瓜管道”"><span class="toc-number">1.1.4.</span> <span class="toc-text">“智能端点”与“傻瓜管道”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#去中心化治理技术"><span class="toc-number">1.1.5.</span> <span class="toc-text">去中心化治理技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据管理去中心化"><span class="toc-number">1.1.6.</span> <span class="toc-text">数据管理去中心化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#“基础设施”自动化"><span class="toc-number">1.1.7.</span> <span class="toc-text">“基础设施”自动化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容错设计"><span class="toc-number">1.1.8.</span> <span class="toc-text">容错设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#演进式设计"><span class="toc-number">1.1.9.</span> <span class="toc-text">演进式设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微服务是未来的趋势吗"><span class="toc-number">1.2.</span> <span class="toc-text">微服务是未来的趋势吗?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#脚注"><span class="toc-number">1.3.</span> <span class="toc-text">脚注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-number">1.4.</span> <span class="toc-text">引用</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 71
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span><a class="archive-post-title" href= "/2020/03/05/micor-services/" >【译】micor services</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/04</span><a class="archive-post-title" href= "/2020/03/04/computational-ads/" >《计算广告》阅读笔记(在线广告市场与背景)</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/21</span><a class="archive-post-title" href= "/2019/12/21/2019/" >2019-我想和这个世界谈谈</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2019/12/12/puppeteer/" >Puppeteer优化实录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/06</span><a class="archive-post-title" href= "/2019/10/06/video-tech/" >直播技术初探</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/30</span><a class="archive-post-title" href= "/2019/06/30/Junior/" >大三一年</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/09</span><a class="archive-post-title" href= "/2019/06/09/backschool/" >回校见闻录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/02</span><a class="archive-post-title" href= "/2019/06/02/internship/" >跑路实习不完全指东西南北-信工篇</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/30</span><a class="archive-post-title" href= "/2019/05/30/clean-code/" >代码整洁之道-阅读笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/18</span><a class="archive-post-title" href= "/2019/05/18/zhai/" >宅与创造力</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/11</span><a class="archive-post-title" href= "/2019/05/11/hadoop-map-reduce/" >MapReduce概念整理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2019/04/19/design/" >译：7 Practical Tips for Cheating at Design</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2019/03/12/wildcard/" >wildcard是个啥</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience/" >前端、设计、用户体验</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience-engineering/" >前端、设计、用户体验</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/28</span><a class="archive-post-title" href= "/2018/10/28/Hooks/" >Hooks at a Glance</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/2018/10/25/movie-buring/" >燃烧</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/24</span><a class="archive-post-title" href= "/2018/10/24/meta-programming/" >元编程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/10</span><a class="archive-post-title" href= "/2018/10/10/CoCo/" >CoCo</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/15</span><a class="archive-post-title" href= "/2018/09/15/proxy-reflect/" >Proxy & Rreflect</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/05</span><a class="archive-post-title" href= "/2018/08/05/esay-mvvm/" >理解Vue数据绑定</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/16</span><a class="archive-post-title" href= "/2018/07/16/dont-know-JS4/" >我不知道的JavaScript<四>：原型</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/15</span><a class="archive-post-title" href= "/2018/07/15/dont-know-JS3/" >我不知道的JavaScript<三>：this</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span><a class="archive-post-title" href= "/2018/07/13/dont-konw-js/" >我不知道的JavaScript<二>：闭包</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/12</span><a class="archive-post-title" href= "/2018/07/12/dont-konw-js1/" >我不知道的JavaScript<一>：作用域</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/14</span><a class="archive-post-title" href= "/2018/06/14/mini-redux/" >从头实现一个mini Redux</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/06</span><a class="archive-post-title" href= "/2018/06/06/JS-memary-mannager/" >JS的内存管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/23</span><a class="archive-post-title" href= "/2018/04/23/seriouslyJavascript/" >Serious JavaScript</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/14</span><a class="archive-post-title" href= "/2018/04/14/java-enum/" >JAVA 枚举类型的一些理解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2018/04/13/heightInHtml/" >聊一聊前端各种宽高左右</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/14</span><a class="archive-post-title" href= "/2018/02/14/learn-koa/" >小程序<宜墨>开发小记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/24</span><a class="archive-post-title" href= "/2018/01/24/wechatapp/" >微信小程序之不完全胡乱指东西南北</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/13</span><a class="archive-post-title" href= "/2018/01/13/parcel/" >初探parcel📦</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/12</span><a class="archive-post-title" href= "/2018/01/12/Crontab/" >Crontab略解🎉</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2018/01/02/sorts/" >几种排序</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/30</span><a class="archive-post-title" href= "/2017/12/30/2017/" >2017总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/23</span><a class="archive-post-title" href= "/2017/12/23/Xmas/" >Merry Xmas</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2017/12/15/why-am-i-so-laji/" >我为何如此垃圾</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/19</span><a class="archive-post-title" href= "/2017/11/19/js-logical-operators/" >JS运算符和类型转换</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span><a class="archive-post-title" href= "/2017/11/06/JSOO/" >JS中的各种继承</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2017/10/17/struct-def/" >浅析struct</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/17</span><a class="archive-post-title" href= "/2017/10/17/event-loop/" >Javascript事件循环机制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2017/09/24/someFeelings/" >有点不爽</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2017/09/10/masql-learning2/" >MySQL Learning 2</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/08</span><a class="archive-post-title" href= "/2017/09/08/mysql-learning/" >MySQL Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/04</span><a class="archive-post-title" href= "/2017/09/04/JS-depth1/" >JS深浅拷贝</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2017/08/30/js-variable/" >如何监听js中变量的变化</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/25</span><a class="archive-post-title" href= "/2017/08/25/mysenior/" >大一一年</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/20</span><a class="archive-post-title" href= "/2017/08/20/vue-lifecycle/" >Vue2.0生命周期以及生命周期钩子</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/13</span><a class="archive-post-title" href= "/2017/08/13/vuex/" >VUe全家桶之VueX</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/11</span><a class="archive-post-title" href= "/2017/08/11/vue-resource/" >Vue全家桶之Vue-resource</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/11</span><a class="archive-post-title" href= "/2017/08/11/vue-router/" >Vue全家桶之Vue-router</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/11</span><a class="archive-post-title" href= "/2017/08/11/vue-/" >初探Vue</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/19</span><a class="archive-post-title" href= "/2017/06/19/generate-an-image-by-canvas/" >Generate an image by canvas</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/01</span><a class="archive-post-title" href= "/2017/06/01/movie-master/" >一代宗师</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/20</span><a class="archive-post-title" href= "/2017/05/20/think-05-20/" >近期总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2017/05/12/canvas-learn/" >Canvas学习：save & restore</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span><a class="archive-post-title" href= "/2017/05/03/json/" >Json的一些总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/03</span><a class="archive-post-title" href= "/2017/05/03/hello-world/" >Hello Hexo</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span><a class="archive-post-title" href= "/2017/05/01/how-broswer-works/" >浏览器内部工作原理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/01</span><a class="archive-post-title" href= "/2017/05/01/css-animate/" >高性能 CSS3 动画</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/30</span><a class="archive-post-title" href= "/2017/04/30/animatecss-reading/" >animate.css源码阅读小结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/23</span><a class="archive-post-title" href= "/2017/04/23/week-17-04-23/" >一周总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/13</span><a class="archive-post-title" href= "/2017/04/13/20loading2/" >20个loading动画继续更新</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2017/04/12/think-4-12/" >近期学习的若干反思</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/01</span><a class="archive-post-title" href= "/2017/04/01/20loading3/" >20个loading小动画//二</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/26</span><a class="archive-post-title" href= "/2017/03/26/20loading1/" >20个loading小动画|不定时更新</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2017/03/25/css-fun/" >CSS实现有趣的小部件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/25</span><a class="archive-post-title" href= "/2017/03/25/css-fun2/" >CSS3实现文字流光效果</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2017/03/24/fe-leran/" >初学前端的一些体会</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2017/03/23/vps-blog/" >腾讯云搭建个人博客</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="Think"><span class="iconfont-archer">&#xe606;</span>Think</span>
+    
+        <span class="sidebar-tag-name" data-tags="生活"><span class="iconfont-archer">&#xe606;</span>生活</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="-JS"><span class="iconfont-archer">&#xe606;</span>-JS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
+    
+        <span class="sidebar-tag-name" data-tags="技术"><span class="iconfont-archer">&#xe606;</span>技术</span>
+    
+        <span class="sidebar-tag-name" data-tags="JS"><span class="iconfont-archer">&#xe606;</span>JS</span>
+    
+        <span class="sidebar-tag-name" data-tags="Canvas"><span class="iconfont-archer">&#xe606;</span>Canvas</span>
+    
+        <span class="sidebar-tag-name" data-tags="Design"><span class="iconfont-archer">&#xe606;</span>Design</span>
+    
+        <span class="sidebar-tag-name" data-tags="-JS -Vue"><span class="iconfont-archer">&#xe606;</span>-JS -Vue</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="blog"><span class="iconfont-archer">&#xe606;</span>blog</span>
+    
+        <span class="sidebar-tag-name" data-tags="JAVA"><span class="iconfont-archer">&#xe606;</span>JAVA</span>
+    
+        <span class="sidebar-tag-name" data-tags="浏览器"><span class="iconfont-archer">&#xe606;</span>浏览器</span>
+    
+        <span class="sidebar-tag-name" data-tags="NodeJS"><span class="iconfont-archer">&#xe606;</span>NodeJS</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySQL"><span class="iconfont-archer">&#xe606;</span>MySQL</span>
+    
+        <span class="sidebar-tag-name" data-tags="React"><span class="iconfont-archer">&#xe606;</span>React</span>
+    
+        <span class="sidebar-tag-name" data-tags="工具"><span class="iconfont-archer">&#xe606;</span>工具</span>
+    
+        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
+    
+        <span class="sidebar-tag-name" data-tags="-技术"><span class="iconfont-archer">&#xe606;</span>-技术</span>
+    
+        <span class="sidebar-tag-name" data-tags="教程"><span class="iconfont-archer">&#xe606;</span>教程</span>
+    
+        <span class="sidebar-tag-name" data-tags="Vue"><span class="iconfont-archer">&#xe606;</span>Vue</span>
+    
+        <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="技术"><span class="iconfont-archer">&#xe60a;</span>技术</span>
+    
+        <span class="sidebar-category-name" data-categories="感悟"><span class="iconfont-archer">&#xe60a;</span>感悟</span>
+    
+        <span class="sidebar-category-name" data-categories="生活"><span class="iconfont-archer">&#xe60a;</span>生活</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Shady"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
