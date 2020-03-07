@@ -359,6 +359,39 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2017/04/13/20loading2/" >
+            
+                <span>20个loading动画继续更新</span>
+        </a>
+        <div class="abstract-content">
+            继续更新此处添加图片
+这是个漏斗的加载动画，在初看到这个效果时我认为是用一些手段实现连贯的效果，但是看了源码后发现他的处理方式非常的巧妙，所以这里来实现一下。
+动画并非是一直旋转并且top流下，bottom充满。等到top转到下部执行bottom的动画，bottom。。。而是在整个rotatehoder的动画前90%不动，后10%转动180，之后迅速归回原位在视觉上形成连贯的视觉效果。
+大致可以分析得到，主题的内容是由上下·两个部分来组成，中间利用伪元素来将两端连接起来即是中间的颈。在外层用一个div来控制整体的转动，然后分别用top和bottom伪类的动画来控制sand的“流动”。
+在...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/04/13</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "CSS">CSS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2017/04/12/think-4-12/" >
             
                 <span>近期学习的若干反思</span>
@@ -1895,66 +1928,9 @@ XAMPP是一个功能强大的建站集...
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 71
+        Total : 72
         </div>
         <!-- search  -->
         
@@ -1970,12 +1946,17 @@ XAMPP是一个功能强大的建站集...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">03/07</span><a class="archive-post-title" href= "/2020/03/07/computational-ads-1/" >《计算广告》阅读笔记(计算广告基础)</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">03/05</span><a class="archive-post-title" href= "/2020/03/05/micor-services/" >【译】micor services</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/04</span><a class="archive-post-title" href= "/2020/03/04/computational-ads/" >《计算广告》阅读笔记(在线广告市场与背景)</a>
+            <span class="archive-post-date">03/04</span><a class="archive-post-title" href= "/2020/03/04/computational-ads/" >《计算广告》阅读笔记(在线广告综述)</a>
         </li>
     
     
@@ -2044,12 +2025,12 @@ XAMPP是一个功能强大的建站集...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience/" >前端、设计、用户体验</a>
+            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience-engineering/" >前端、设计、用户体验</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience-engineering/" >前端、设计、用户体验</a>
+            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience/" >前端、设计、用户体验</a>
         </li>
     
     
@@ -2355,23 +2336,23 @@ XAMPP是一个功能强大的建站集...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
-    
         <span class="sidebar-tag-name" data-tags="Think"><span class="iconfont-archer">&#xe606;</span>Think</span>
     
         <span class="sidebar-tag-name" data-tags="生活"><span class="iconfont-archer">&#xe606;</span>生活</span>
+    
+        <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="-JS"><span class="iconfont-archer">&#xe606;</span>-JS</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="技术"><span class="iconfont-archer">&#xe606;</span>技术</span>
     
-        <span class="sidebar-tag-name" data-tags="-JS"><span class="iconfont-archer">&#xe606;</span>-JS</span>
-    
         <span class="sidebar-tag-name" data-tags="JS"><span class="iconfont-archer">&#xe606;</span>JS</span>
     
-        <span class="sidebar-tag-name" data-tags="Canvas"><span class="iconfont-archer">&#xe606;</span>Canvas</span>
-    
         <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
+    
+        <span class="sidebar-tag-name" data-tags="Canvas"><span class="iconfont-archer">&#xe606;</span>Canvas</span>
     
         <span class="sidebar-tag-name" data-tags="Design"><span class="iconfont-archer">&#xe606;</span>Design</span>
     
@@ -2379,27 +2360,27 @@ XAMPP是一个功能强大的建站集...
     
         <span class="sidebar-tag-name" data-tags="blog"><span class="iconfont-archer">&#xe606;</span>blog</span>
     
-        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
-    
         <span class="sidebar-tag-name" data-tags="JAVA"><span class="iconfont-archer">&#xe606;</span>JAVA</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
     
         <span class="sidebar-tag-name" data-tags="浏览器"><span class="iconfont-archer">&#xe606;</span>浏览器</span>
     
         <span class="sidebar-tag-name" data-tags="NodeJS"><span class="iconfont-archer">&#xe606;</span>NodeJS</span>
     
-        <span class="sidebar-tag-name" data-tags="MySQL"><span class="iconfont-archer">&#xe606;</span>MySQL</span>
-    
         <span class="sidebar-tag-name" data-tags="React"><span class="iconfont-archer">&#xe606;</span>React</span>
+    
+        <span class="sidebar-tag-name" data-tags="MySQL"><span class="iconfont-archer">&#xe606;</span>MySQL</span>
     
         <span class="sidebar-tag-name" data-tags="工具"><span class="iconfont-archer">&#xe606;</span>工具</span>
     
-        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
-    
         <span class="sidebar-tag-name" data-tags="-技术"><span class="iconfont-archer">&#xe606;</span>-技术</span>
     
-        <span class="sidebar-tag-name" data-tags="教程"><span class="iconfont-archer">&#xe606;</span>教程</span>
+        <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
     
         <span class="sidebar-tag-name" data-tags="Vue"><span class="iconfont-archer">&#xe606;</span>Vue</span>
+    
+        <span class="sidebar-tag-name" data-tags="教程"><span class="iconfont-archer">&#xe606;</span>教程</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

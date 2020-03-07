@@ -22,7 +22,7 @@
     <meta name="description" content="Thoughts, stories  and  ideas">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>初探parcel📦 · Libx&#39;s Studio</title>
+    <title>《计算广告》阅读笔记(计算广告基础) · Libx&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Libx.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">初探parcel📦</a>
+                <a href="#" class="post-name">《计算广告》阅读笔记(计算广告基础)</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            初探parcel📦
+            《计算广告》阅读笔记(计算广告基础)
             <!-- 404 -->
             
         </h1>
@@ -266,20 +266,18 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "技术">技术</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "工具">工具</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Reading">Reading</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">903</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">734</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/01/13</span>
+                    <span class="post-intro-time">2020/03/07</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -403,60 +401,39 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>在期末复习的一个难受的下午，也就是现在，我突然想起了之前看到的号称零配置且最快的前端打包神器：Parcel，于是我放下数字逻辑。准备看看这货到底什么样。</p>
-<p>github地址：<a href="https://github.com/parcel-bundler/parcel" target="_blank" rel="external">https://github.com/parcel-bundler/parcel</a></p>
-<p>首先想要吐槽一下。。Parcel图标确实是不怎么好看哈哈。一个纸箱子。。不过可以说是直接了当的展示出了他的功能。打包嘛。</p>
-<h3 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h3><p>先来官网瞅一瞅（说的确实挺厉害的）</p>
+        <h1 id="在线广告市场与背景"><a href="#在线广告市场与背景" class="headerlink" title="在线广告市场与背景"></a>在线广告市场与背景</h1><h2 id="Capter2-计算广告基础"><a href="#Capter2-计算广告基础" class="headerlink" title="Capter2 计算广告基础"></a>Capter2 计算广告基础</h2><h3 id="广告有效性原理"><a href="#广告有效性原理" class="headerlink" title="广告有效性原理"></a>广告有效性原理</h3><p>按照方便计算广告讨论的原则，用一个三段式信息传递模型来解剖广告有物理上产生到最终转化行为的全过程</p>
+<p>广告效果产生过程：</p>
+<h4 id="选择（selection）"><a href="#选择（selection）" class="headerlink" title="选择（selection）"></a>选择（selection）</h4><h5 id="曝光（exposure）"><a href="#曝光（exposure）" class="headerlink" title="曝光（exposure）"></a>曝光（exposure）</h5><p>广告物理上展现出来的过程。</p>
 <blockquote>
-<p>🚀 极速打包时间<br>Parcel 使用 worker 进程去启用多核编译。同时有文件系统缓存，即使在重启构建后也能快速再编译。</p>
-<p>📦 将你所有的资源打包<br>Parcel 具备开箱即用的对 JS, CSS, HTML, 文件 及更多的支持，而且不需要插件。</p>
-<p>🐠 自动转换<br>如若有需要，Babel, PostCSS, 和PostHTML甚至 node_modules 包会被用于自动转换代码.</p>
-<p>✂️ 零配置代码分拆<br>使用动态 import() 语法, Parcel 将你的输出文件束(bundles)分拆，因此你只需要在初次加载时加载你所需要的代码。</p>
-<p>🔥 热模块替换<br>Parcel 无需配置，在开发环境的时候会自动在浏览器内随着你的代码更改而去更新模块。</p>
-<p>🚨 友好的错误日志<br>当遇到错误时，Parcel 会输出 语法高亮的代码片段，帮助你定位问题</p>
+<p>位置为王，曝光的有效性对最终结果的影响往往远远高于其他因素。</p>
 </blockquote>
-<p>官网还提供了这样一个比较</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">打包工具</th>
-<th style="text-align:left">时间</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">browserify</td>
-<td style="text-align:left">22.98s</td>
-</tr>
-<tr>
-<td style="text-align:left">webpack</td>
-<td style="text-align:left">20.71s</td>
-</tr>
-<tr>
-<td style="text-align:left">parcel</td>
-<td style="text-align:left">9.98s</td>
-</tr>
-<tr>
-<td style="text-align:left">parcel - with cache</td>
-<td style="text-align:left">2.64s</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>基于一个合理大小的应用，包含1726个模块， 6.5M 未压缩大小. 在一台有4个物理 CPU 的 2016 MacBook Pro 上构建。</p>
+<h5 id="关注（attention）"><a href="#关注（attention）" class="headerlink" title="关注（attention）"></a>关注（attention）</h5><p>受众从物理上接触到广告到仪式上注意到他的过程。但曝光不一定意味着有效的关注。<br>几个原则：</p>
+<ol>
+<li>不要打断用户的任务，这是上下文相关的广告推送的原理基础。</li>
+<li>明确传达向用户推送此广告的原因。</li>
+<li>内容符合用户的兴趣或需求。</li>
+</ol>
+<h4 id="解释（interpretation）"><a href="#解释（interpretation）" class="headerlink" title="解释（interpretation）"></a>解释（interpretation）</h4><h5 id="理解（comprehensive）"><a href="#理解（comprehensive）" class="headerlink" title="理解（comprehensive）"></a>理解（comprehensive）</h5><p>用户关注到了广告的内容也不一定代表能理解广告传达的信息。<br>几个原则：</p>
+<ol>
+<li>广告内容要在用户能理解的具体兴趣范围内（精准的受众定向的重要行）</li>
+<li>与关注程度相匹配的理解门槛。</li>
+</ol>
+<h5 id="接受（acceptence）"><a href="#接受（acceptence）" class="headerlink" title="接受（acceptence）"></a>接受（acceptence）</h5><p>理解了广告的信息，并不一定代表他认可这些信息。<br>几个原则：</p>
+<ol>
+<li>广告的上下文环境</li>
+<li>让合适的广告出现在合适的媒体上（广告安全）</li>
+</ol>
+<h4 id="态度（attitude）"><a href="#态度（attitude）" class="headerlink" title="态度（attitude）"></a>态度（attitude）</h4><h5 id="保持（retention）"><a href="#保持（retention）" class="headerlink" title="保持（retention）"></a>保持（retention）</h5><p>长久的记忆</p>
+<h5 id="决策（decision）"><a href="#决策（decision）" class="headerlink" title="决策（decision）"></a>决策（decision）</h5><p>广告的最终作用是带来用户的转化行为.</p>
+<p>越靠前的阶段，效果的改善对点击率的贡献越大；越靠后的阶段，效果的改善，对转化率的贡献越大。当然几个阶段的划分也绝非孤立和绝对的。</p>
+<h3 id="互联网广告的技术特点"><a href="#互联网广告的技术特点" class="headerlink" title="互联网广告的技术特点"></a>互联网广告的技术特点</h3><h4 id="技术和计算导向"><a href="#技术和计算导向" class="headerlink" title="技术和计算导向"></a>技术和计算导向</h4><p>数字媒体使在线广告可以进行精准的受众定向，技术又使得广告决策和交易朝着计算驱动的方向发展。</p>
+<h4 id="效果的可衡量性"><a href="#效果的可衡量性" class="headerlink" title="效果的可衡量性"></a>效果的可衡量性</h4><p>日志和数据</p>
+<h4 id="创意和投放方式的标准化"><a href="#创意和投放方式的标准化" class="headerlink" title="创意和投放方式的标准化"></a>创意和投放方式的标准化</h4><p>驱动力：受众定向和程序购买。</p>
+<h4 id="媒体概念的多样化"><a href="#媒体概念的多样化" class="headerlink" title="媒体概念的多样化"></a>媒体概念的多样化</h4><p>web2.0 和互联网普及。<br>举个例子：越接近转化的媒体上的广告会有更高的 ROI，但这也离<strong>引导潜在客户</strong>的目的就越远。所以在从需求方看在线广告时，应该注重各种媒体的配合效果，从<strong>整合营销</strong>的角度去审视和优化整体效果.</p>
+<h4 id="数据驱动的投放决策"><a href="#数据驱动的投放决策" class="headerlink" title="数据驱动的投放决策"></a>数据驱动的投放决策</h4><p>收集用户行为数据和广告反馈数据，对数据的深入加工和利用</p>
+<h3 id="计算广告的核心问题"><a href="#计算广告的核心问题" class="headerlink" title="计算广告的核心问题"></a>计算广告的核心问题</h3><blockquote>
+<p>计算广告的核心问题，是为一系列用户与环境的组合找到最合适的广告投放策略以优化整体广告活动的利润。</p>
 </blockquote>
-<p>相比的话，确实是相当的快，而且二次打包简直要起飞。。</p>
-<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">先安装（当然你也可以使用yarn）</div><div class="line">mkdir parceltest &amp;&amp; <span class="built_in">cd</span> parceltest &amp;&amp; npm install parcel-bundler --save</div></pre></td></tr></table></figure>
-<p>文档中说的是Parcel 可以使用任何类型的文件作为入口，但是最好还是使用 HTML 或 JavaScript 文件。如果在 HTML 中使用相对路径引入主要的 JavaScript 文件，Parcel 也将会对它进行处理将其替换为相对于输出文件的 URL 地址。</p>
-<p>然后，创建一个 index.html 和 index.js 文件。<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">touch index.html &amp;&amp; touch index.js</div></pre></td></tr></table></figure></p>
-<p>index.html<br><figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>index.js<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">"hello parcel"</span>);</div></pre></td></tr></table></figure></p>
-<p>Parcel 内置了一个当你改变文件时能够自动重新构建应用的开发服务器，而且为了实现快速开发，该开发服务器支持热模块替换。在package.json指出即可：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="string">"scripts"</span>:&#123;</div><div class="line">  <span class="string">"start"</span>:<span class="string">"parcel index.html"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>然后，npm start<br>现在在浏览器中打开 <a href="http://localhost:1234/。也可以使用" target="_blank" rel="external">http://localhost:1234/。也可以使用</a> -p <port number=""> 选项覆盖默认的端口。<br>确实很快。<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">built <span class="keyword">in</span> 16ms</div></pre></td></tr></table></figure></port></p>
-<p>此外支持零配置代码拆分，也是挺舒服的。</p>
-<p>至于sass，babel什么的，文档说的看起来于是相当的易于安装，基本无配置。支持TS，貌似还支持vue的组件和react的组件。</p>
-<p>不过目前就看了这么多，边看文档，边简单的测试，边写这个小体验。只是接触了最基础的东西，总体给人的感觉是很轻，很快。很友好。不过据说webpack 4.0也要加入默认配置（可怜我webapck 3.0都不怎么会用。。）不知道parcel能不能真的火起来。不过一些小项目尝尝鲜还是没有问题的叭。</p>
-<p>复习实在无聊，来看下这个东西还是很解闷的。。就先这么多吧，，复习要紧复习要紧。。</p>
 
     </article>
     <!-- license  -->
@@ -465,17 +442,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/01/24/wechatapp/" title= "微信小程序之不完全胡乱指东西南北">
-                    <div class="nextTitle">微信小程序之不完全胡乱指东西南北</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2018/01/12/Crontab/" title= "Crontab略解🎉">
-                    <div class="prevTitle">Crontab略解🎉</div>
+                <a href= "/2020/03/05/micor-services/" title= "【译】micor services">
+                    <div class="prevTitle">【译】micor services</div>
                 </a>
             
         </li>
@@ -598,7 +570,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简介："><span class="toc-number">1.</span> <span class="toc-text">简介：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始"><span class="toc-number">2.</span> <span class="toc-text">开始</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#在线广告市场与背景"><span class="toc-number">1.</span> <span class="toc-text">在线广告市场与背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Capter2-计算广告基础"><span class="toc-number">1.1.</span> <span class="toc-text">Capter2 计算广告基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#广告有效性原理"><span class="toc-number">1.1.1.</span> <span class="toc-text">广告有效性原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#选择（selection）"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">选择（selection）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#曝光（exposure）"><span class="toc-number">1.1.1.1.1.</span> <span class="toc-text">曝光（exposure）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#关注（attention）"><span class="toc-number">1.1.1.1.2.</span> <span class="toc-text">关注（attention）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#解释（interpretation）"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">解释（interpretation）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#理解（comprehensive）"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">理解（comprehensive）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#接受（acceptence）"><span class="toc-number">1.1.1.2.2.</span> <span class="toc-text">接受（acceptence）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#态度（attitude）"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">态度（attitude）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#保持（retention）"><span class="toc-number">1.1.1.3.1.</span> <span class="toc-text">保持（retention）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#决策（decision）"><span class="toc-number">1.1.1.3.2.</span> <span class="toc-text">决策（decision）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#互联网广告的技术特点"><span class="toc-number">1.1.2.</span> <span class="toc-text">互联网广告的技术特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#技术和计算导向"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">技术和计算导向</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果的可衡量性"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">效果的可衡量性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创意和投放方式的标准化"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">创意和投放方式的标准化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#媒体概念的多样化"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">媒体概念的多样化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据驱动的投放决策"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">数据驱动的投放决策</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#计算广告的核心问题"><span class="toc-number">1.1.3.</span> <span class="toc-text">计算广告的核心问题</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
