@@ -361,26 +361,25 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/28/Hooks/" >
+        <a class="abstract-title" href = "/2018/10/24/meta-programming/" >
             
-                <span>Hooks at a Glance</span>
+                <span>元编程</span>
         </a>
         <div class="abstract-content">
-            在看了React Hooks的文档之后，本英语渣渣竟然突然有了想要翻译一下这篇文档的冲动，于是就首次尝试翻译一篇英文文档,原文Hooks at a Glance
-Hooks是一个React中的新提案，他可以让你在不使用Class的情况下使用state和其他的React特性。Hooks 目前已经发布在 v16.7.0 alpha 版本，且正在开放的RFC讨论。
-Hooks是向后兼容的，这篇文档将向有经验的React开发者提供一个概览。
-📌 State Hook这是一个计数器的例子，点击按钮，数字加一。import &#123; useState &#125; from 'react';f...
+            在1024这一天，先开个坑叭。
+什么是原编程（Mata Programming）很早之前就接触了元编程的一些东西，但是并没有什么很好的理解，只是觉得这个名字好牛逼，很玄幻🐸。主要还是在实际的coding中并没有直接的感触，最近又看到了相关的概念所以来简单的写点东西。
+不准确的翻译在《你不知道的JS-ES6与未来》有这样的解释：元编程是针对程序本身的行为进行操作的编程。换句话说，它是为你程序的编程而进行的编程。 是的，很拗口。也有更详细些的这样的解释：元编程（笼统地说）是所有关于一门语言的底层机制，而不是数据建模或者业务逻辑那些高级抽象。如果程序可以被描述为 “制作程序”，元编程就能被描...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/28</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/24</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "-JS">-JS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
     
 </div>
             
@@ -393,25 +392,250 @@ Hooks是向后兼容的，这篇文档将向有经验的React开发者提供一�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/10/10/CoCo/" >
+        <a class="abstract-title" href = "/2018/09/15/proxy-reflect/" >
             
-                <span>CoCo</span>
+                <span>Proxy &amp; Rreflect</span>
         </a>
         <div class="abstract-content">
-            一篇感觉非常有意思的文章转载一下。转载自@doodlewind
-内存寻梦环游记：一个变量的三重死亡内存的世界小 u 身高 64 位，是内存世界 number 家族里的一名浮点数变量。因为小 u 身体的二进制第一位是 0，所以按照 IEEE 754 标准，大家都把她当做女孩子来看待。她第 2 位到第 11 位的阶码并不够大，使得她看起来小巧玲珑；而她剩下的 52 个小数位十分精致，这样工作的时候和她打交道的变量舍入误差都很小，所以大家都很喜欢她。
-小 u 每天的工作，是在内存世界里和其他的变量打交道，计算出有用的结果去造福人类世界。平时，在函数调用结束以后，小 u 就可以下班回到她在源代码...
+            Proxy：更好的对象处理Proxy概述Proxy 用来修改某些操作的默认行为，等同于在语言层面进行修改，属于一种元编程的：对编程语言进行编程。
+顾名思义，Proxy的原意即是代理，Proxy 可以理解为在目标对象前架设一个拦截层，外界对该对象的访问都经过这层拦截，因此提供了一种机制来对外界的访问进行过滤和改写。先来看一个示例：let obj = new Proxy(&#123;&#125;,&#123;  get:function(target,key,receiver)&#123;    console.log(`getting $&#123;key&#125;`)    retur...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/10/10</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/09/15</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "-JS">-JS</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/07/13/dont-konw-js/" >
+            
+                <span>我不知道的JavaScript&lt;二&gt;：闭包</span>
+        </a>
+        <div class="abstract-content">
+            上篇梳理了作用域的相关基础知识，要理解闭包，作用域是相当重要的一环。闭包一直以来总是一个会出现些怪异问题的东西，之所以怪异是因为自己还是没有理解透彻，这次就来梳理一下闭包的相关问题。
+闭包在JS中的地位可以说是相当重要的了，总是会在各种论坛博客上面看到各种前辈们所写的关于闭包的解析，自己也是似懂非懂，总以为自己懂了，然后偶然间突然想起来要问问自己却又说不出个所以然。所以现在就来系统的阐述一下。
+何为闭包我们从前辈的总结中得到这样一个定义：当函数可以记住并且访问所在的词法作用域时，就产生了闭包，即使函数是在当前作用域之外执行。
+先来看一个例子：function foo ()&#123;  ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/13</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/07/12/dont-konw-js1/" >
+            
+                <span>我不知道的JavaScript&lt;一&gt;：作用域</span>
+        </a>
+        <div class="abstract-content">
+            一直以来对于JS总是有一些一知半解的东西，因为这个假期没有留校，也还没有去找实习，就当给自己一些“私人时间”来对之前不求甚解的东西来梳理一遍吧。
+一、作用域所有语言都有作用域，这是一种语言的基本功能之一，就是能够存储变量的值，并且能够在之后对之进行访问和修改，也正是因为这种存储和访问变量的能力将状态带给了程序。要将变量引入程序就带来了相应的其他问题，怎么存，如何找到他们。相应的就需要一套规则来存储变量，并且之后可以方便的找到这些变量，这套规则就是作用域了。
+1.1 编译虽然JS是一门脚本语言，但是他也是一门“编译语言”，与传统C，JAVA等不同的是，他并非是提前编译的，而是在运行时进行编...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/12</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/06/14/mini-redux/" >
+            
+                <span>从头实现一个mini Redux</span>
+        </a>
+        <div class="abstract-content">
+            
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/14</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "React">React</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/06/06/JS-memary-mannager/" >
+            
+                <span>JS的内存管理</span>
+        </a>
+        <div class="abstract-content">
+            JS中的内存模型JS基本类型与栈JS基本类型已经很清楚了：null、undefined、String、Number、Boolean
+JS中的这些基础类型，有固定的大小，一般会保存在栈中（闭包除外），由系统自动分配内存空间，基础数据类型都是按值访问。
+JS引用类型与堆其他语言不同，JS的引用数据类型，比如数组Array，它们值的大小是不固定的。引用数据类型的值是保存在堆内存中的对象。JS不允许直接访问堆内存中的位置，因此我们不能直接操作对象的堆内存空间。在操作对象时，实际上是在操作对象的引用而不是实际的对象。因此，引用类型的值都是按引用访问的。这里的引用，我们可以粗浅地理解为保存在栈内存中...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/06/06</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/04/23/seriouslyJavascript/" >
+            
+                <span>Serious JavaScript</span>
+        </a>
+        <div class="abstract-content">
+            众所周知，JavaScript是一门非常严谨的语言。
+比如：
+
+
+
+
+
+
+
+
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/23</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2018/04/13/heightInHtml/" >
+            
+                <span>聊一聊前端各种宽高左右</span>
+        </a>
+        <div class="abstract-content">
+            引言之前对DOM接口中各种height，height，scrollHeight，clientHeight，clientWidth等等概念有大概的了解，但是在想理清其概念的时候却发现了挺多的问题，概念有些模糊，在翻了写文档做了些测试之后来写一篇总结。
+Main
+
+
+
+offset
+scroll
+client
+
+
+
+
+Height
+
+
+Left
+
+
+Top
+
+
+Width
+
+
+
+offset
+offsetleft:margin  + padding
+
+offsettop:margin + padding;
+
+offsetwidth:本身的宽度+内边距左右+边框左右;
+
+offsetHeigh...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/04/13</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "HTML">HTML</a>
     
 </div>
             
@@ -419,6 +643,10 @@ Hooks是向后兼容的，这篇文档将向有经验的React开发者提供一�
     </article>
     
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/tags/JS/page/2/">2</a><a class="page-number" href="/tags/JS/page/3/">3</a><a class="extend next" rel="next" href="/tags/JS/page/2/">NEXT ></a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -1558,9 +1786,70 @@ Hooks是向后兼容的，这篇文档将向有经验的React开发者提供一�
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 71
+        Total : 74
         </div>
         <!-- search  -->
         
@@ -1573,6 +1862,21 @@ Hooks是向后兼容的，这篇文档将向有经验的React开发者提供一�
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2020/06/29/the-night-before-leave/" >写于离开的前夜</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2020/06/08/dart-event-loop/" >浅析Dart事件循环机制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2020/06/07/first-flutter/" >Flutter初探</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1650,12 +1954,12 @@ Hooks是向后兼容的，这篇文档将向有经验的React开发者提供一�
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience/" >前端、设计、用户体验</a>
+            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience-engineering/" >前端、设计、用户体验</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience-engineering/" >前端、设计、用户体验</a>
+            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience/" >前端、设计、用户体验</a>
         </li>
     
     
@@ -1961,31 +2265,33 @@ Hooks是向后兼容的，这篇文档将向有经验的React开发者提供一�
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Think"><span class="iconfont-archer">&#xe606;</span>Think</span>
-    
-        <span class="sidebar-tag-name" data-tags="生活"><span class="iconfont-archer">&#xe606;</span>生活</span>
-    
         <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="-JS"><span class="iconfont-archer">&#xe606;</span>-JS</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="技术"><span class="iconfont-archer">&#xe606;</span>技术</span>
     
+        <span class="sidebar-tag-name" data-tags="Think"><span class="iconfont-archer">&#xe606;</span>Think</span>
+    
+        <span class="sidebar-tag-name" data-tags="生活"><span class="iconfont-archer">&#xe606;</span>生活</span>
+    
         <span class="sidebar-tag-name" data-tags="JS"><span class="iconfont-archer">&#xe606;</span>JS</span>
-    
-        <span class="sidebar-tag-name" data-tags="-JS"><span class="iconfont-archer">&#xe606;</span>-JS</span>
-    
-        <span class="sidebar-tag-name" data-tags="Canvas"><span class="iconfont-archer">&#xe606;</span>Canvas</span>
     
         <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
     
+        <span class="sidebar-tag-name" data-tags="Canvas"><span class="iconfont-archer">&#xe606;</span>Canvas</span>
+    
         <span class="sidebar-tag-name" data-tags="Design"><span class="iconfont-archer">&#xe606;</span>Design</span>
     
-        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+        <span class="sidebar-tag-name" data-tags="-JS -Vue"><span class="iconfont-archer">&#xe606;</span>-JS -Vue</span>
     
         <span class="sidebar-tag-name" data-tags="blog"><span class="iconfont-archer">&#xe606;</span>blog</span>
     
-        <span class="sidebar-tag-name" data-tags="-JS -Vue"><span class="iconfont-archer">&#xe606;</span>-JS -Vue</span>
+        <span class="sidebar-tag-name" data-tags="JAVA"><span class="iconfont-archer">&#xe606;</span>JAVA</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
     
         <span class="sidebar-tag-name" data-tags="浏览器"><span class="iconfont-archer">&#xe606;</span>浏览器</span>
     
@@ -1996,8 +2302,6 @@ Hooks是向后兼容的，这篇文档将向有经验的React开发者提供一�
         <span class="sidebar-tag-name" data-tags="MySQL"><span class="iconfont-archer">&#xe606;</span>MySQL</span>
     
         <span class="sidebar-tag-name" data-tags="工具"><span class="iconfont-archer">&#xe606;</span>工具</span>
-    
-        <span class="sidebar-tag-name" data-tags="JAVA"><span class="iconfont-archer">&#xe606;</span>JAVA</span>
     
         <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
     

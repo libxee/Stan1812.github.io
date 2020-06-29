@@ -373,6 +373,110 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2017/09/04/JS-depth1/" >
+            
+                <span>JS深浅拷贝</span>
+        </a>
+        <div class="abstract-content">
+            对JS的深浅拷贝比较常用的方法来做一下总结。
+代码来说话举个例子就差不多能懂这两个东西是什么了：
+let me =&#123;  'name':'xiaoming',  'age':'18',  'girlFriend':null,  'skill':&#123;    'eat':true    'sleep':true,    'hitBeans':true  &#125;&#125;
+这是一个比较典型一点的对象，现在然后来做一下测试：function shallowCopy(src) &#123;  let dst = &#123;&#125;;  for (let prop in...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/09/04</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/08/30/js-variable/" >
+            
+                <span>如何监听js中变量的变化</span>
+        </a>
+        <div class="abstract-content">
+            原生JS监听变量的变化今天在刷知乎的时候遇到了这样的一个问题:如何侦听JS中变量的变化首先想到的是在Vue中的数据绑定，但是上车时间不长，是直接拿来用的。。并不知道实现原理，想了又想，没有好的解决方案。看到有大佬的答案后依然很迷，遂google一番，总结一下。
+几种解决方案：ES5的getter与setter主要使用的是：Object.defineProperty(obj, prop, descriptor)
+ 参数 ：
+
+obj 需要被操作的目标对象
+prop 目标对象需要定义或修改的属性的名称。
+descriptor 将被定义或修改的属性的描述符。
+
+返回值 :
+
+被传递给函数的对象...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/30</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2017/08/25/mysenior/" >
+            
+                <span>大一一年</span>
+        </a>
+        <div class="abstract-content">
+            “愿中国青年都摆脱冷气，只是向上走，不必听自暴自弃者流的话。能做事的做事，能发声的发声。有一分热，发一分光，就令萤火一般，也可以在黑暗里发一点光，不必等候炬火。此后如竟没有炬火：我便是唯一的光。”
+这是我现在最喜欢的一句话。
+今天是8月25号，已经在家躺尸了20天，再有一周就要结束这个暑假，回到学校，正式成为大二的了。想要写点东西。
+
+高考考爆炸之后，来了南昌大学，江西，一个跟河南一样被国家遗忘的地方。学了计算机专业，曾经想要成为一个伟大科研人员为人类造福的梦想就此正式破灭，想着成为一个程序员造福自己和家人也是很好。梦想的专业是航空航天相关，现在想起来，还好高考考得爆炸，不然学了这些，以...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/08/25</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Think">Think</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2017/08/20/vue-lifecycle/" >
             
                 <span>Vue2.0生命周期以及生命周期钩子</span>
@@ -525,117 +629,10 @@ Vue-resource在使用中其实可以使用Jquery来代替，Vue-resours与Vue并
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/06/19/generate-an-image-by-canvas/" >
-            
-                <span>Generate an image by canvas</span>
-        </a>
-        <div class="abstract-content">
-            嗯，很久没写东西了，是的，我们考完了试，这个辣鸡小项目基本上也算是完成了，按照惯例，对于这个垃圾小项目来总结点东西。
-项目的 Github 地址在这里 ，在线预览地址在这里
-因为在学习Canvas就想做些有意思的东西
-这是一个类似于网上流传的很多的那种输入汉字然后自动生成表情包的小东西，然后就想要来试一下
-最终将实现的功能：最终实现的功能大概有这些：
-
-用户可以自由上传图片，自由编辑文字内容，并选择插入文字的位置
-下载生成的图片
-原笔迹的书写
-图片下载寒酸的裁剪功能
-几种图片滤镜：黑白，负片以及更多
-
-
-上传图片上传图片在这里使用的是HTML5中的filereader来实现的，将图片以D...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/06/19</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JS">JS</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/06/01/movie-master/" >
-            
-                <span>一代宗师</span>
-        </a>
-        <div class="abstract-content">
-            很久没有写过东西了，一代宗师，看的时候总觉得有些压抑。
-人最大的限制就是忘记，忘记之前的教训，忘记之前的经验，忘记痛苦，忘记灾难。对于整个历史来说，或许，忘记，或者说，遗忘，也让很多好的东西遗失在历史中，不知所踪，无处所寻。
-人们总是会有些电光火花突然出现在脑海中，但转瞬即逝，或许在下一秒就被丢在脑后，不知道人们为此失去了多少好东西。对个人来说，可能失去的就是是对自身的一些遗憾，但对于整个人类来说，不知道失去了多少好东西，或许更多的神之一手也会时不时多出现几次吧。
-现在虽然也会有很多人在做一些记录，记录自己，记录生活，但是终归是少数，若所有人都能记录，或许这是一个更美好的世界吧。
-扯了很...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/06/01</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "生活">生活</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2017/05/20/think-05-20/" >
-            
-                <span>近期总结</span>
-        </a>
-        <div class="abstract-content">
-            今天晚上在家园开了最后一次开发部的例会，大三的学长们（还有大四的佛爷）讲了很多，讲了关于自身的发展家园的后续的发展，然后大家都说了一点在家园以来的一些体会，虽然进入家园才只有大概并不长的一段时间，但是家园带给我的东西，可以说是很巨大的了吧。
-然后就是这一个学期也快要结束了，这个学年也要结束了在学生会也待了一年，一年来网维的学姐们给了我很大的帮助，虽然大二可能因为我想要挤出更多的时间来写代码而不再留在网维部。（扯得有点多。。又不是写大一的总结。。）
-回归正题
-最近这一周的话主要是开了一个个人的github小项目。https://github.com/Stan1812/Generate-an...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/05/20</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Think">Think</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/page/6/">< PREV</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">NEXT ></a>
+        <a class="extend prev" rel="prev" href="/page/6/">< PREV</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">NEXT ></a>
     </nav>
     
 </main>
@@ -1854,9 +1851,70 @@ Vue-resource在使用中其实可以使用Jquery来代替，Vue-resours与Vue并
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 71
+        Total : 74
         </div>
         <!-- search  -->
         
@@ -1869,6 +1927,21 @@ Vue-resource在使用中其实可以使用Jquery来代替，Vue-resours与Vue并
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2020/06/29/the-night-before-leave/" >写于离开的前夜</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2020/06/08/dart-event-loop/" >浅析Dart事件循环机制</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2020/06/07/first-flutter/" >Flutter初探</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1946,12 +2019,12 @@ Vue-resource在使用中其实可以使用Jquery来代替，Vue-resours与Vue并
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience/" >前端、设计、用户体验</a>
+            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience-engineering/" >前端、设计、用户体验</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience-engineering/" >前端、设计、用户体验</a>
+            <span class="archive-post-date">01/05</span><a class="archive-post-title" href= "/2019/01/05/experience/" >前端、设计、用户体验</a>
         </li>
     
     
@@ -2257,31 +2330,33 @@ Vue-resource在使用中其实可以使用Jquery来代替，Vue-resours与Vue并
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Think"><span class="iconfont-archer">&#xe606;</span>Think</span>
-    
-        <span class="sidebar-tag-name" data-tags="生活"><span class="iconfont-archer">&#xe606;</span>生活</span>
-    
         <span class="sidebar-tag-name" data-tags="CSS"><span class="iconfont-archer">&#xe606;</span>CSS</span>
+    
+        <span class="sidebar-tag-name" data-tags="-JS"><span class="iconfont-archer">&#xe606;</span>-JS</span>
     
         <span class="sidebar-tag-name" data-tags="Linux"><span class="iconfont-archer">&#xe606;</span>Linux</span>
     
         <span class="sidebar-tag-name" data-tags="技术"><span class="iconfont-archer">&#xe606;</span>技术</span>
     
+        <span class="sidebar-tag-name" data-tags="Think"><span class="iconfont-archer">&#xe606;</span>Think</span>
+    
+        <span class="sidebar-tag-name" data-tags="生活"><span class="iconfont-archer">&#xe606;</span>生活</span>
+    
         <span class="sidebar-tag-name" data-tags="JS"><span class="iconfont-archer">&#xe606;</span>JS</span>
-    
-        <span class="sidebar-tag-name" data-tags="-JS"><span class="iconfont-archer">&#xe606;</span>-JS</span>
-    
-        <span class="sidebar-tag-name" data-tags="Canvas"><span class="iconfont-archer">&#xe606;</span>Canvas</span>
     
         <span class="sidebar-tag-name" data-tags="Reading"><span class="iconfont-archer">&#xe606;</span>Reading</span>
     
+        <span class="sidebar-tag-name" data-tags="Canvas"><span class="iconfont-archer">&#xe606;</span>Canvas</span>
+    
         <span class="sidebar-tag-name" data-tags="Design"><span class="iconfont-archer">&#xe606;</span>Design</span>
     
-        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+        <span class="sidebar-tag-name" data-tags="-JS -Vue"><span class="iconfont-archer">&#xe606;</span>-JS -Vue</span>
     
         <span class="sidebar-tag-name" data-tags="blog"><span class="iconfont-archer">&#xe606;</span>blog</span>
     
-        <span class="sidebar-tag-name" data-tags="-JS -Vue"><span class="iconfont-archer">&#xe606;</span>-JS -Vue</span>
+        <span class="sidebar-tag-name" data-tags="JAVA"><span class="iconfont-archer">&#xe606;</span>JAVA</span>
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
     
         <span class="sidebar-tag-name" data-tags="浏览器"><span class="iconfont-archer">&#xe606;</span>浏览器</span>
     
@@ -2292,8 +2367,6 @@ Vue-resource在使用中其实可以使用Jquery来代替，Vue-resours与Vue并
         <span class="sidebar-tag-name" data-tags="MySQL"><span class="iconfont-archer">&#xe606;</span>MySQL</span>
     
         <span class="sidebar-tag-name" data-tags="工具"><span class="iconfont-archer">&#xe606;</span>工具</span>
-    
-        <span class="sidebar-tag-name" data-tags="JAVA"><span class="iconfont-archer">&#xe606;</span>JAVA</span>
     
         <span class="sidebar-tag-name" data-tags="数据结构"><span class="iconfont-archer">&#xe606;</span>数据结构</span>
     
